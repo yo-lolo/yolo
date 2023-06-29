@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="head_layout_height">60dp</dimen>
+    <dimen name="state_bar_height">25dp</dimen>
+    <dimen name="dimen_search_view_radius">17dp</dimen>
+    <dimen name="text_18">12sp</dimen>
+</resources>

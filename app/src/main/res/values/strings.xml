@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="problem_desc"><font color='#EE1919'>*</font><font color='#3C3C3C'>问题反馈</font></string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="comment_submit_textView">#2E81FA</color>
+    <color name="comment_submit_none_textView">#888888</color>
+
+    <color name="color_theme">#ff008aff</color>
+
+    <color name="color_3c3c3c">#3c3c3c</color>
+    <color name="color_FFFFFF">#ffffff</color>
+    <color name="color_E3E4E6">#E3E4E6</color>
+    <color name="color_search_view_bg">#fff2f3f5</color>
+    <color name="color_f2f3f5">#fff2f3f5</color>
+    <color name="color_888">#ff888888</color>
+    <color name="color_e7e7e7">#ffe7e7e7</color>
+    <color name="color_activity_bg">#f9f9f9</color>
+    <color name="color_0090ff">#0090FF</color>
+    <color name="color_0093FF">#0093FF</color>
+    <color name="color_65A7FF">#65A7FF</color>
+    <color name="color_ececec">#ECECEC</color>
+    <color name="color_E2EFFF">#E2EFFF</color>
+    <color name="star_on">#2E81FA</color>
+    <color name="star_off">#D9DADC</color>
+</resources>
