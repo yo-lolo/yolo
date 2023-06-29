@@ -42,5 +42,8 @@ class MineFragment : BaseFragment() {
         homeBinding.goSetting.setOnClickListener {
             findNavController().navigate(R.id.goSettingFragment)
         }
+        homeBinding.goFeedback.setOnClickListener {
+            findNavController().navigate(R.id.goFeedbackFragment)
+        }
     }
 }

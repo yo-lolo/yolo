@@ -272,7 +272,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/go_Feedback_backup"
+            android:id="@+id/go_feedback"
             style="@style/appMineLayout">
 
             <ImageView
