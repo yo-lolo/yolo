@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="33dp"
+    android:layout_marginRight="13dp"
+    android:background="@drawable/search_stub_view_bg"
+    android:drawableLeft="@mipmap/icon_search_view"
+    android:drawablePadding="7dp"
+    android:gravity="center_vertical"
+    android:paddingLeft="13dp"
+    android:hint="输入关键词搜索"
+    android:textColor="@color/color_888"
+    android:textSize="@dimen/text_18" />

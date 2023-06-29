@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_edit"
+    android:layout_width="match_parent"
+    android:layout_height="33dp"
+    android:layout_marginRight="13dp"
+    android:background="@drawable/search_stub_view_bg"
+    android:drawableRight="@mipmap/icon_search_view"
+    android:drawablePadding="7dp"
+    android:gravity="center_vertical"
+    android:hint="输入关键词搜索"
+    android:paddingLeft="13dp"
+    android:imeOptions="actionSearch"
+    android:paddingRight="13dp"
+    android:singleLine="true"
+    android:textColor="@color/color_3c3c3c"
+    android:textColorHint="@color/color_888"
+    android:textSize="@dimen/text_18" />

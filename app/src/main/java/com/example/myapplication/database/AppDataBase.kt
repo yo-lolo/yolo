@@ -1,5 +1,10 @@
 package com.example.myapplication.database
 
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.example.myapplication.database.Dao.ApkInfoDao
+import com.example.myapplication.database.entity.ApkInfo
+
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
  * @ProjectName : My Application
@@ -12,5 +17,11 @@ package com.example.myapplication.database
  * @UpdateDate : 2023/6/29 11:29
  * @UpdateRemark : 更新说明
  */
-class AppDataBase {
+@Database(
+    entities = [ApkInfo::class],
+    version = 1,
+    exportSchema = false
+)
+abstract class AppDataBase : RoomDatabase() {
+    abstract fun apkInfoDao(): ApkInfoDao
 }
