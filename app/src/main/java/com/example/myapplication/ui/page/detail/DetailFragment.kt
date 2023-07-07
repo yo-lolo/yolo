@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.databinding.FragmentLoginBinding
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -20,11 +21,20 @@ import com.ctq.sphone.market.base.BaseFragment
  */
 class DetailFragment : BaseFragment() {
 
+    lateinit var binding : FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    ): View {
+        binding = FragmentLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        init(view)
+        return view
     }
+
+    fun init(view: View){
+
+    }
+
 }
