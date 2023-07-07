@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLoginBinding
+import com.example.myapplication.databinding.FragmentRegisterBinding
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -21,13 +24,13 @@ import com.example.myapplication.databinding.FragmentLoginBinding
  */
 class DetailFragment : BaseFragment() {
 
-    lateinit var binding : FragmentLoginBinding
+    lateinit var binding: FragmentRegisterBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLoginBinding.inflate(layoutInflater)
+        binding = FragmentRegisterBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
         return view
