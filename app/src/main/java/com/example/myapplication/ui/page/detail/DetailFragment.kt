@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.databinding.FragmentDetailBinding
 import com.example.myapplication.databinding.FragmentLoginBinding
 import com.example.myapplication.databinding.FragmentRegisterBinding
 
@@ -24,20 +27,44 @@ import com.example.myapplication.databinding.FragmentRegisterBinding
  */
 class DetailFragment : BaseFragment() {
 
-    lateinit var binding: FragmentRegisterBinding
+    lateinit var binding: FragmentDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRegisterBinding.inflate(layoutInflater)
+        binding = FragmentDetailBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
         return view
     }
 
-    fun init(view: View){
+    fun init(view: View) {
+        binding.includeHead.headLayout.apply {
+            setTitle("Title UnKnow")
+            setBackListener {
+                findNavController().popBackStack()
+            }
+        }
+        val titles = listOf("ONCE", "TWICE")
+        val fragments = listOf(DetailOneFragment(), DetailTwoFragment())
 
+        binding.viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
+            override fun getCount(): Int {
+                return titles.size
+            }
+
+            override fun getItem(position: Int): Fragment {
+                return fragments[position]
+            }
+
+            override fun getPageTitle(position: Int): CharSequence? {
+                return titles[position]
+            }
+
+        }
+
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 
 }
