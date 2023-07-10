@@ -38,6 +38,10 @@
         android:name="com.example.myapplication.ui.page.register.RegisterFragment"
         android:label="RegisterFragment" />
     <fragment
+        android:id="@+id/managerFragment"
+        android:name="com.example.myapplication.ui.page.manager.ManagerFragment"
+        android:label="ManagerFragment" />
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -76,5 +80,8 @@
     <action
         android:id="@+id/goRegisterFragment"
         app:destination="@id/registerFragment" />
+    <action
+        android:id="@+id/goManagerFragment"
+        app:destination="@id/managerFragment" />
 
 </navigation>

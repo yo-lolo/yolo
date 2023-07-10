@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginHorizontal="30dp"
         android:orientation="vertical">
 
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:textSize="15dp"
-                android:hint="6-14位字符(数字/字母/符号)"
+                android:hint="6-14位字符(数字/字母)"
                 android:maxLength="20"
                 android:maxLines="1"
                 android:inputType="textPassword" />

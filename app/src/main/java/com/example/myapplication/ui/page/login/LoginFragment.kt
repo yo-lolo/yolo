@@ -40,6 +40,9 @@ class LoginFragment : BaseFragment() {
         binding.registerBt.setOnClickListener {
             findNavController().navigate(R.id.goRegisterFragment)
         }
+        binding.managerLoginBt.setOnClickListener {
+            findNavController().navigate(R.id.goManagerFragment)
+        }
         binding.loginBt.setOnClickListener {
             //Todo 验证登录信息 用户信息初始化
             findNavController().navigate(R.id.goHomeFragment)

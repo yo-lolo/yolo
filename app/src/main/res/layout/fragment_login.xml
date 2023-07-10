@@ -107,15 +107,34 @@
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/login_bt"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@drawable/login_button_bg"
-            android:text="登录"
-            android:textColor="@color/color_FFFFFF"
-            android:textSize="20dp" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/login_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/login_button_bg"
+                android:text="用户登录"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/manager_login_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_button_bg"
+                android:text="管理员登录"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="16dp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/register_bt"
@@ -135,15 +154,15 @@
             android:layout_marginTop="70dp"
             android:text="@string/forget_pass_text"
             android:textColor="@color/color_888"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <RadioButton
             android:id="@+id/agree_protocol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:textSize="13dp"
-            android:text="@string/agree_protocol_text" />
+            android:text="@string/agree_protocol_text"
+            android:textSize="13dp" />
     </LinearLayout>
 
 </LinearLayout>
