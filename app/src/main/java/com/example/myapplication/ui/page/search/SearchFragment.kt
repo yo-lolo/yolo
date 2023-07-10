@@ -72,7 +72,7 @@ class SearchFragment : BaseFragment() {
 
         viewBinding.appsRecyclew.apply {
             layoutManager = LinearLayoutManager(context)
-            //adapter
+            adapter =  EmptyViewAdapter(searchListAdapter)
         }
 
         viewBinding.recommentApps.apply {

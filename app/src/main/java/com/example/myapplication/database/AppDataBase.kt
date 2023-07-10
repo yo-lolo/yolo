@@ -3,7 +3,9 @@ package com.example.myapplication.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.myapplication.database.Dao.ApkInfoDao
+import com.example.myapplication.database.Dao.UserDao
 import com.example.myapplication.database.entity.ApkInfo
+import com.example.myapplication.database.entity.User
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -18,10 +20,11 @@ import com.example.myapplication.database.entity.ApkInfo
  * @UpdateRemark : 更新说明
  */
 @Database(
-    entities = [ApkInfo::class],
+    entities = [ApkInfo::class, User::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDataBase : RoomDatabase() {
     abstract fun apkInfoDao(): ApkInfoDao
+    abstract fun userDao(): UserDao
 }

@@ -30,6 +30,14 @@
         android:name="com.example.myapplication.ui.page.feedback.FeedbackFragment"
         android:label="FeedbackFragment" />
     <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myapplication.ui.page.login.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.myapplication.ui.page.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -62,6 +70,11 @@
     <action
         android:id="@+id/goFeedbackFragment"
         app:destination="@id/feedbackFragment" />
-
+    <action
+        android:id="@+id/goLoginFragment"
+        app:destination="@id/loginFragment" />
+    <action
+        android:id="@+id/goRegisterFragment"
+        app:destination="@id/registerFragment" />
 
 </navigation>

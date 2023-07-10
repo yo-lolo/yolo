@@ -5,13 +5,28 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/comm_head_layout" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="18dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/apps_recyclew"
+        <include
+            android:id="@+id/include"
+            layout="@layout/comm_head_layout" />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="HOME DESIGN"
+            android:textSize="30dp" />
+    </RelativeLayout>
+
 
 </LinearLayout>

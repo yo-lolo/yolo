@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLoginBinding
 
 /**
@@ -34,6 +36,14 @@ class LoginFragment : BaseFragment() {
     }
 
     fun init(view: View){
+
+        binding.registerBt.setOnClickListener {
+            findNavController().navigate(R.id.goRegisterFragment)
+        }
+        binding.loginBt.setOnClickListener {
+            //Todo 验证登录信息 用户信息初始化
+            findNavController().navigate(R.id.goHomeFragment)
+        }
 
     }
 
