@@ -33,7 +33,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/app_icon_image_bg"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/app_icon" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                         android:id="@+id/feedback_appName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxAPP"
+                        android:text="自定义SELF APP"
                         android:textColor="#3C3C3C"
                         android:textSize="13dp" />
 
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="这里是对xxAPP的一段描述"
+                        android:text="THIS IS A DESCRIBE FOR APP"
                         android:textColor="#888888"
                         android:textSize="10dp" />
                 </LinearLayout>
