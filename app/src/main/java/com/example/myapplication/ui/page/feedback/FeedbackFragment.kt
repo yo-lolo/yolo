@@ -76,10 +76,10 @@ class FeedbackFragment : BaseFragment() {
 
         binding.feedbackSubmit.setOnClickListener {
             val pictureItems = binding.imageDisplayView.getPhotos().filter { !it.isNullOrBlank() }
-
             feedbackViewModel.onSubmit(pictureItems)
-
         }
+
+
 
     }
 

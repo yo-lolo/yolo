@@ -16,10 +16,16 @@ import com.blankj.utilcode.util.ToastUtils
  * @UpdateDate : 2023/6/29 17:25
  * @UpdateRemark : 更新说明
  */
-class FeedbackViewModel : ViewModel(){
+class FeedbackViewModel : ViewModel() {
 
+    var type = MutableLiveData(-1)
+    val desc = MutableLiveData("")
 
     fun onSubmit(pictureItems: List<String>) {
+
+    }
+
+    fun typeChange() {
 
     }
 }
