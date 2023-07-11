@@ -36,7 +36,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="40dp"
+        android:background="@color/color_FFFFFF"
+        android:paddingHorizontal="40dp"
         android:orientation="vertical">
 
 
@@ -50,11 +51,11 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="20dp"
                 android:src="@mipmap/login_number_icon" />
 
             <View
-                android:layout_width="2px"
+                android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="12dp"
                 android:layout_marginRight="20dp"
@@ -83,11 +84,11 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="20dp"
                 android:src="@mipmap/login_pass_icon" />
 
             <View
-                android:layout_width="2px"
+                android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="12dp"
                 android:layout_marginRight="20dp"
