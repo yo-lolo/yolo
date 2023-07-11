@@ -41,7 +41,7 @@ class DetailFragment : BaseFragment() {
 
     fun init(view: View) {
         binding.includeHead.headLayout.apply {
-            setTitle("Title UnKnow")
+            setTitle("ONE IN A MILLION")
             setBackListener {
                 findNavController().popBackStack()
             }

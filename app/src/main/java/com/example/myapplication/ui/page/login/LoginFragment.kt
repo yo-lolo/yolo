@@ -43,6 +43,7 @@ class LoginFragment : BaseFragment() {
             findNavController().navigate(R.id.goRegisterFragment)
         }
         binding.managerLoginBt.setOnClickListener {
+            //
             ActivityUtils.startActivity(ManageActivity::class.java)
         }
         binding.loginBt.setOnClickListener {

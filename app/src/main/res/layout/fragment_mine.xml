@@ -52,7 +52,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/go_install_management"
+            android:id="@+id/go_collect"
             style="@style/appMineLayout">
 
             <ImageView
@@ -127,7 +127,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/go_uninstall_management"
+            android:id="@+id/go_history"
             style="@style/appMineLayout">
 
             <ImageView
@@ -164,7 +164,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/package_management"
+            android:id="@+id/go_comment"
             style="@style/appMineLayout">
 
             <ImageView
