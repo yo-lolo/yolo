@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_market_home"
+    app:startDestination="@id/managerFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.myapplication.ui.page.search.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myapplication.ui.page.login.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.myapplication.ui.page.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/managerFragment"
+        android:name="com.example.myapplication.ui.page.manager.ManageFragment"
+        android:label="ManagerFragment" />
+
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.myapplication.ui.page.manager.AdminFragment"
+        android:label="AdminFragment" />
+
+
+
+    <action
+        android:id="@+id/goSearchFragment"
+        app:destination="@id/searchFragment" />
+    <action
+        android:id="@+id/goLoginFragment"
+        app:destination="@id/loginFragment" />
+    <action
+        android:id="@+id/goRegisterFragment"
+        app:destination="@id/registerFragment" />
+    <action
+        android:id="@+id/goManagerFragment"
+        app:destination="@id/managerFragment" />
+    <action
+        android:id="@+id/goAdminFragment"
+        app:destination="@id/adminFragment" />
+
+</navigation>

@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ActivityUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLoginBinding
+import com.example.myapplication.ui.page.manager.ManageActivity
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -41,7 +43,7 @@ class LoginFragment : BaseFragment() {
             findNavController().navigate(R.id.goRegisterFragment)
         }
         binding.managerLoginBt.setOnClickListener {
-            findNavController().navigate(R.id.goManagerFragment)
+            ActivityUtils.startActivity(ManageActivity::class.java)
         }
         binding.loginBt.setOnClickListener {
             //Todo 验证登录信息 用户信息初始化

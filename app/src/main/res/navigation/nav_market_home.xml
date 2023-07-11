@@ -39,8 +39,9 @@
         android:label="RegisterFragment" />
     <fragment
         android:id="@+id/managerFragment"
-        android:name="com.example.myapplication.ui.page.manager.ManagerFragment"
+        android:name="com.example.myapplication.ui.page.manager.ManageFragment"
         android:label="ManagerFragment" />
+
     <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
