@@ -41,7 +41,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
@@ -67,7 +67,10 @@ dependencies {
 
     // 图片加载库
     implementation("io.coil-kt:coil:2.2.2")
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
     // 多功能工具库 https://github.com/Blankj/AndroidUtilCode
     implementation 'com.blankj:utilcodex:1.31.1'
+
+    implementation 'com.youth.banner:banner:1.4.9'
 }
