@@ -16,6 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -30,11 +31,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs = ['-Xjvm-default=all-compatibility']
     }
     viewBinding {
-        enabled = true
-    }
-    dataBinding {
         enabled = true
     }
 }
@@ -51,20 +50,24 @@ dependencies {
     // 动画资源：https://lottiefiles.com、https://icons8.com/animated-icons
     implementation 'com.airbnb.android:lottie:4.1.0'
 
+    // Kotlin 导航栏
     def nav_version = "2.5.3"
-    // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+    // 沉浸式状态栏
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.1'
-    def room_version = "2.4.1"
 
+    // Room数据库
+    def room_version = "2.4.1"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"
 
+    // 图片加载库
     implementation("io.coil-kt:coil:2.2.2")
 
+    // 多功能工具库 https://github.com/Blankj/AndroidUtilCode
     implementation 'com.blankj:utilcodex:1.31.1'
 }

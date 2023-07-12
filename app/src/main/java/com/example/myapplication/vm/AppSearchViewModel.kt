@@ -2,6 +2,7 @@ package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.ApkInfo
 
 /**

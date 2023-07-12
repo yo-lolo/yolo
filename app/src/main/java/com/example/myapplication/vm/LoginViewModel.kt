@@ -2,6 +2,7 @@ package com.example.myapplication.vm
 
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.base.BaseViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -15,14 +16,16 @@ import androidx.lifecycle.ViewModel
  * @UpdateDate : 2023/7/11 15:57
  * @UpdateRemark : 更新说明
  */
-class LoginViewModel : ViewModel() {
+class LoginViewModel : BaseViewModel() {
 
 
     /**
      * 检查用户登录信息
      */
     fun checkLogin(number: Int, pass: String) {
+        launchSafe {
 
+        }
     }
 
     /**

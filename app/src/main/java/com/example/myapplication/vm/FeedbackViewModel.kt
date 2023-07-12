@@ -3,6 +3,7 @@ package com.example.myapplication.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.base.BaseViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -16,7 +17,7 @@ import com.blankj.utilcode.util.ToastUtils
  * @UpdateDate : 2023/6/29 17:25
  * @UpdateRemark : 更新说明
  */
-class FeedbackViewModel : ViewModel() {
+class FeedbackViewModel : BaseViewModel() {
 
     var type = MutableLiveData(-1)
     val desc = MutableLiveData("")

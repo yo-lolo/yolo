@@ -7,9 +7,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
+import com.example.myapplication.base.BaseActivity
 import com.example.myapplication.databinding.ActivityManageBinding
 
-class ManageActivity : AppCompatActivity() {
+class ManageActivity : BaseActivity() {
 
     private lateinit var binding : ActivityManageBinding
     private lateinit var navController: NavController

@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
+import com.example.myapplication.base.BaseActivity
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivityMarketBinding
 
@@ -23,7 +24,7 @@ import com.example.myapplication.databinding.ActivityMarketBinding
  * @UpdateDate : 2023/7/7 16:37
  * @UpdateRemark : 更新说明
  */
-class MarketActivity : AppCompatActivity() {
+class MarketActivity : BaseActivity() {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMarketBinding

@@ -6,18 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.PermissionUtils
+import com.example.myapplication.base.BaseActivity
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.MarketActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
 
@@ -39,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             )
         ) {
             /**
-             *
+             * 权限check完成后 执行如下： 1.通过自动登录标识 判断是否要进入登录界面
              */
             ActivityUtils.startActivity(MarketActivity::class.java)
             finish()
@@ -87,6 +83,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = MainActivity::class.java.simpleName
+        val TAG: String = MainActivity::class.java.simpleName
     }
 }

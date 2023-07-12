@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.PagerAdapter
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.ui.page.detail.DetailOneFragment
+import com.example.myapplication.ui.page.detail.DetailTwoFragment
 import com.example.myapplication.view.HeadLayout
 import com.example.myapplication.view.SearchStubView
 
