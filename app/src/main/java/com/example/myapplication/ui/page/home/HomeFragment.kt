@@ -52,9 +52,10 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun init(view: View) {
-        val context = view.context
-        val navController = findNavController()
-        initSearchBar(context, binding.include.headLayout, navController)
+
+        binding.textSearch.setOnClickListener {
+            findNavController().navigate(R.id.goSearchFragment)
+        }
 
         // 轮播图片集合
         val images = listOf(
@@ -97,18 +98,4 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    /**
-     * 初始化搜索栏
-     */
-    private fun initSearchBar(
-        context: Context,
-        headLayout: HeadLayout,
-        navController: NavController
-    ) {
-        val searchStubView = SearchStubView(context)
-        headLayout.bindLeftView(searchStubView)
-        searchStubView.setOnClickListener {
-            navController.navigate(R.id.goSearchFragment)
-        }
-    }
 }

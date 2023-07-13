@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_FFFFFF"
-        android:paddingHorizontal="40dp"
+        android:paddingHorizontal="30dp"
         android:orientation="vertical">
 
 
@@ -46,6 +46,7 @@
             android:layout_height="50dp"
             android:background="@drawable/viewgroup_bg"
             android:gravity="center_vertical"
+            android:elevation="3dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -77,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
+            android:elevation="3dp"
             android:background="@drawable/viewgroup_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -152,16 +154,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="140dp"
             android:text="@string/forget_pass_text"
+            android:padding="5dp"
             android:textColor="@color/color_888"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
         <RadioButton
             android:id="@+id/agree_protocol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:text="@string/agree_protocol_text"
             android:textSize="13dp" />
     </LinearLayout>

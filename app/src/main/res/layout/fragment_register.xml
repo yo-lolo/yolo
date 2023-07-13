@@ -20,6 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:elevation="3dp"
             android:background="@drawable/viewgroup_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -53,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
+            android:elevation="3dp"
             android:background="@drawable/viewgroup_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -88,6 +90,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/viewgroup_bg"
+            android:elevation="3dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
