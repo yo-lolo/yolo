@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
         android:text="安装和更新"
         android:textColor="#3C3C3C"
         android:textSize="12sp" />

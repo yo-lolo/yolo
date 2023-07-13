@@ -12,7 +12,7 @@ import com.example.myapplication.databinding.ActivityManageBinding
 
 class ManageActivity : BaseActivity() {
 
-    private lateinit var binding : ActivityManageBinding
+    private lateinit var binding: ActivityManageBinding
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,12 @@ class ManageActivity : BaseActivity() {
         setContentView(view)
     }
 
+    /**
+     * 初始化导航栏
+     */
     private fun initNav() {
+        // 初始化导航宿主NavHostFragment 有相关联的导航图
+        // 相关文章 https://developer.android.google.cn/guide/navigation/navigation-getting-started?hl=zh-cn
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_manage_fragment) as NavHostFragment
         navController = navHostFragment.navController

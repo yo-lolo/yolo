@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
@@ -56,6 +56,7 @@ class HomeFragment : BaseFragment() {
         val navController = findNavController()
         initSearchBar(context, binding.include.headLayout, navController)
 
+        // 轮播图片集合
         val images = listOf(
             "https://c-ssl.duitang.com/uploads/blog/202102/06/20210206215858_cf107.jpg",
             "https://c-ssl.dtstatic.com/uploads/item/201902/10/20190210213858_uwecj.thumb.1000_0.jpg",
@@ -65,32 +66,40 @@ class HomeFragment : BaseFragment() {
         )
 
         binding.banner.apply {
-            setDelayTime(2000)
-            isAutoPlay(true)  //
-            setImages(images)
-            setImageLoader(GlideImageLoader())
-            outlineProvider = object : ViewOutlineProvider(){
+            setDelayTime(2000) //设置轮播间隔时间
+            isAutoPlay(true)  // 设置是否为自动轮播
+            setImages(images) //设置图片网址或地址的集合
+            setImageLoader(GlideImageLoader()) //设置图片加载器
+            setBannerAnimation(com.youth.banner.Transformer.Default) //设置轮播的动画效果，内含多种特效
+            outlineProvider = object : ViewOutlineProvider() {
                 override fun getOutline(view: View?, outline: Outline?) {
-                    outline!!.setRoundRect(0,0,view!!.width,view!!.height, 20F)
+                    // 对父布局进行裁剪 设置圆角radius
+                    outline!!.setRoundRect(0, 0, view!!.width, view.height, 20F)
                 }
             }
             clipToOutline = true
-            start()
+            start() // 开始轮播
         }
 
+        // 轮播图的监听方法
         binding.banner.setOnBannerListener {
             Toast.makeText(activity, "你点击了TWICE的第${it}张轮播图", Toast.LENGTH_SHORT).show()
         }
 
     }
 
-
+    /**
+     * 自定义的图片加载器
+     */
     class GlideImageLoader : ImageLoader() {
         override fun displayImage(context: Context?, path: Any?, imageView: ImageView?) {
             Glide.with(context).load(path).error(R.mipmap.icon_empty).into(imageView)
         }
     }
 
+    /**
+     * 初始化搜索栏
+     */
     private fun initSearchBar(
         context: Context,
         headLayout: HeadLayout,

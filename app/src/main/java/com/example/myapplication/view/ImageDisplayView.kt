@@ -60,12 +60,12 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
 
     fun setData(data: MutableList<String>) {
         imageDisplayAdapter.list = data
-        imageDisplayAdapter.notifyDataSetChanged()
+        notifyData()
     }
 
     fun addData(uri: String) {
         imageDisplayAdapter.list.add(uri)
-        imageDisplayAdapter.notifyDataSetChanged()
+        notifyData()
     }
 
     fun getPhotos(): MutableList<String> {
@@ -75,22 +75,33 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
     fun dialog(position: Int) {
         PromptUseCase().removeImagePrompt {
             list.removeAt(position)
-            imageDisplayAdapter.notifyDataSetChanged()
+            notifyData()
         }
     }
 
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //打开图片
+        // 判断结果和请求码是否正确 再判断数据是否为空
         if (resultCode == AppCompatActivity.RESULT_OK && requestCode == AppConfig.IMAGE_OPEN) {
             if (data != null) {
+                // 解析数据
                 val uri = data.data
                 val photoPath = UriUtils.uri2File(uri).absolutePath
+                // 将图片路径添加到集合中
                 list.add(list.size - 1, photoPath)
+                // 配置适配器的数据
                 imageDisplayAdapter.list = getPhotos()
-                imageDisplayAdapter.notifyDataSetChanged()
+                // 刷新
+                notifyData()
             }
         }
+    }
+
+    /**
+     * 适配器内容改变时 刷新每个item的内容
+     */
+    private fun notifyData(){
+        imageDisplayAdapter.notifyDataSetChanged()
     }
 
 

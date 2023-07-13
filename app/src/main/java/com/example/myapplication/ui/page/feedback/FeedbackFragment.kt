@@ -34,14 +34,12 @@ import com.example.myapplication.vm.FeedbackViewModel
 class FeedbackFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFeedbackBinding
-    private var appId: String = ""
 
     private val feedbackViewModel by viewModels<FeedbackViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentFeedbackBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
@@ -49,12 +47,13 @@ class FeedbackFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentFeedbackBinding.inflate(layoutInflater)
         val view = binding.root
         initView(view)
         return view
     }
 
-    fun initView(view: View) {
+    private fun initView(view: View) {
 
         binding.include.headLayout.apply {
             setBackgroundResource(R.color.color_activity_bg)
@@ -79,10 +78,12 @@ class FeedbackFragment : BaseFragment() {
             feedbackViewModel.onSubmit(pictureItems)
         }
 
-
-
     }
 
+    /**
+     * 打开相册选择图片
+     * 调用startActivityForResult方法向系统选择器请求数据 第二个参数是请求码
+     */
     private fun openPhoto() {
         if (binding.imageDisplayView.getPhotos().size > 5) {
             Toast.makeText(context, "最多添加5张图片", Toast.LENGTH_SHORT).show()
@@ -95,6 +96,9 @@ class FeedbackFragment : BaseFragment() {
         }
     }
 
+    /**
+     * 解析系统选择器返回的结果
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         binding.imageDisplayView.onActivityResult(requestCode, resultCode, data)
     }

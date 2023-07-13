@@ -37,6 +37,7 @@ class MarketActivity : BaseActivity() {
     }
 
     private fun initNav() {
+        // Navigation相关文章 https://developer.android.google.cn/guide/navigation/navigation-getting-started?hl=zh-cn
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController

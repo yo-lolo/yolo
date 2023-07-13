@@ -72,5 +72,6 @@ dependencies {
     // 多功能工具库 https://github.com/Blankj/AndroidUtilCode
     implementation 'com.blankj:utilcodex:1.31.1'
 
+    // 轮播图
     implementation 'com.youth.banner:banner:1.4.9'
 }

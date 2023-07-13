@@ -28,7 +28,7 @@ class AdminFragment : Fragment() {
         return view
     }
 
-    fun initView(view: View){
+    private fun initView(view: View){
         binding.include.headLayout.apply {
             setTitle("管理员")
         }

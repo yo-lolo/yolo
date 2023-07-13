@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment() {
             findNavController().navigate(R.id.goRegisterFragment)
         }
         binding.managerLoginBt.setOnClickListener {
-            //
+            //TODO 管理员登录信息验证
             ActivityUtils.startActivity(ManageActivity::class.java)
         }
         binding.loginBt.setOnClickListener {

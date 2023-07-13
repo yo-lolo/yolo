@@ -16,33 +16,38 @@
             layout="@layout/comm_head_layout" />
     </LinearLayout>
 
-    <com.youth.banner.Banner
-        android:id="@+id/banner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="20dp"
-        android:clickable="true"
-        android:background="@drawable/problem_type_layout_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal">
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/problem_type_layout_bg"
+                android:clickable="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="HOME DESIGN"
-            android:textSize="30dp" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:gravity="center_horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="HOME DESIGN"
+                    android:textSize="30dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
