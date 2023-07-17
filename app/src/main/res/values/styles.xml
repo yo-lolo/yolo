@@ -79,4 +79,10 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="footButton" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/candy_r</item>
+        <item name="android:textColorSecondary">@color/color_888</item>
+    </style>
+
+
 </resources>

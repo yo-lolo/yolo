@@ -13,11 +13,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.viewpager.widget.PagerAdapter
+import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.ui.adapter.TwiceListAdapter
 import com.example.myapplication.ui.page.detail.DetailOneFragment
 import com.example.myapplication.ui.page.detail.DetailTwoFragment
 import com.example.myapplication.view.HeadLayout
@@ -39,6 +44,7 @@ import com.youth.banner.loader.ImageLoader
 class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private var twiceListAdapter = TwiceListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,7 +90,13 @@ class HomeFragment : BaseFragment() {
 
         // 轮播图的监听方法
         binding.banner.setOnBannerListener {
-            Toast.makeText(activity, "你点击了TWICE的第${it}张轮播图", Toast.LENGTH_SHORT).show()
+            ToastUtils.showShort("你点击了TWICE的第${it + 1}张轮播图")
+        }
+
+        // 初始化Recycler
+        binding.twiceList.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = twiceListAdapter
         }
 
     }

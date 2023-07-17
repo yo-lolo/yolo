@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="45dp"
     android:background="@mipmap/icon_mark_home_bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="45dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,36 +26,38 @@
             android:paddingLeft="13dp"
             android:textColorHint="#ffbfbfbf" />
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
-            android:elevation="3dp"
-            android:layout_marginTop="20dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
-            android:background="@drawable/problem_type_layout_bg"
-            android:clickable="true" />
+            android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:gravity="center_horizontal">
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/problem_type_layout_bg"
+                android:clickable="true"
+                android:elevation="3dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="HOME DESIGN"
-                android:textSize="30dp" />
-        </RelativeLayout>
+                android:layout_marginTop="10dp"
+                android:text="成员"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/twice_list"
+                android:background="@drawable/todo_list_item_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 

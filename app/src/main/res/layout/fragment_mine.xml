@@ -34,12 +34,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="编辑资料"
+            android:background="@drawable/type_button_false_bg"
             android:paddingVertical="5dp"
-            android:paddingHorizontal="10dp"
-            android:background="@drawable/edit_text_bg"
+            android:paddingHorizontal="16dp"
+            android:text="编辑资料"
             android:layout_marginLeft="100dp"
-            android:layout_marginTop="18dp"/>
+            android:layout_marginTop="18dp"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +61,7 @@
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
-                android:background="@mipmap/favorite_icon"
+                android:background="@mipmap/collect"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,7 +136,7 @@
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
-                android:background="@mipmap/time_icon"
+                android:background="@mipmap/history"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -172,7 +173,7 @@
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
-                android:background="@mipmap/shopping_icon"
+                android:background="@mipmap/comments"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -210,7 +211,7 @@
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
-                android:background="@mipmap/setting_icon"
+                android:background="@mipmap/setting"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -247,7 +248,7 @@
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
-                android:background="@mipmap/feedback_icon"
+                android:background="@mipmap/feedback"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
