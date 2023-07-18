@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
@@ -19,10 +20,8 @@ import com.example.myapplication.repos.UserStoreRepository
  * @UpdateDate : 2023/6/29 11:31
  * @UpdateRemark : 更新说明
  */
-class MainApplication : Application() {
 
-    private lateinit var userStoreRepository: UserStoreRepository
-    private lateinit var appDataBase: AppDataBase
+class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -30,14 +29,7 @@ class MainApplication : Application() {
     }
 
     fun init(context: Context) {
-        appDataBase = createDb()
-        userStoreRepository = UserStoreRepository(UserTaskImp(appDataBase))
+        DataManager.init(context)
     }
 
-    private fun createDb(): AppDataBase {
-        return Room.databaseBuilder(
-            this,
-            AppDataBase::class.java, "database-my"
-        ).build()
-    }
 }

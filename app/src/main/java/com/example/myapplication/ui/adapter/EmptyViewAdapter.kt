@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterEmptyViewBinding
+import com.example.myapplication.util.GlideImageLoader
 
 
 class EmptyViewAdapter<T : RecyclerView.Adapter<V>, V : RecyclerView.ViewHolder>(private val adapter: T) :
@@ -60,11 +62,12 @@ class EmptyViewAdapter<T : RecyclerView.Adapter<V>, V : RecyclerView.ViewHolder>
 
     class ViewHolder(
         parent: ViewGroup,
-        val viewBinding: AdapterEmptyViewBinding = AdapterEmptyViewBinding.inflate(
+        private val viewBinding: AdapterEmptyViewBinding = AdapterEmptyViewBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
     ) : RecyclerView.ViewHolder(viewBinding.root) {
         init {
+            // GlideImageLoader().displayImage(viewBinding.root.context,R.drawable.loading,viewBinding.emptyImage)
         }
     }
 }

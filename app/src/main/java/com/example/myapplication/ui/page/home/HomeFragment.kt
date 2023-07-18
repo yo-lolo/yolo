@@ -1,33 +1,20 @@
 package com.example.myapplication.ui.page.home
 
-import android.content.Context
 import android.graphics.Outline
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import androidx.viewpager.widget.PagerAdapter
 import com.blankj.utilcode.util.ToastUtils
-import com.bumptech.glide.Glide
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.ui.adapter.TwiceListAdapter
-import com.example.myapplication.ui.page.detail.DetailOneFragment
-import com.example.myapplication.ui.page.detail.DetailTwoFragment
-import com.example.myapplication.view.HeadLayout
-import com.example.myapplication.view.SearchStubView
-import com.youth.banner.loader.ImageLoader
+import com.example.myapplication.util.GlideImageLoader
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -99,15 +86,8 @@ class HomeFragment : BaseFragment() {
             adapter = twiceListAdapter
         }
 
-    }
+        GlideImageLoader().displayImage(context, R.drawable.world, binding.imageTest)
 
-    /**
-     * 自定义的图片加载器
-     */
-    class GlideImageLoader : ImageLoader() {
-        override fun displayImage(context: Context?, path: Any?, imageView: ImageView?) {
-            Glide.with(context).load(path).error(R.mipmap.icon_empty).into(imageView)
-        }
     }
 
 }

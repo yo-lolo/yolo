@@ -42,9 +42,6 @@ class DetailFragment : BaseFragment() {
     fun init(view: View) {
         binding.includeHead.headLayout.apply {
             setTitle("ONE IN A MILLION")
-            setBackListener {
-                findNavController().popBackStack()
-            }
         }
         val titles = listOf("ONCE", "TWICE")
         val fragments = listOf(DetailOneFragment(), DetailTwoFragment())

@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentRegisterBinding
+import com.example.myapplication.vm.RegisterViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -23,7 +25,9 @@ import com.example.myapplication.databinding.FragmentRegisterBinding
  */
 class RegisterFragment : BaseFragment() {
 
-    lateinit var binding : FragmentRegisterBinding
+    lateinit var binding: FragmentRegisterBinding
+    private val viewModel by viewModels<RegisterViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +47,20 @@ class RegisterFragment : BaseFragment() {
                 findNavController().popBackStack()
             }
         }
+
+        binding.registerBt.setOnClickListener {
+            val number = binding.numberEdit.text.toString().trim()
+            val pass = binding.passEdit.text.toString().trim()
+            val pass2 = binding.passAgainEdit.text.toString().trim()
+            viewModel.register(number, pass, pass2)
+        }
+
+        viewModel.registerType.observe(viewLifecycleOwner){
+            if (it){
+                findNavController().navigate(R.id.goLoginFragment)
+            }
+        }
+
     }
 
 }

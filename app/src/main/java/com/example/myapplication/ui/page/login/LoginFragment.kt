@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ActivityUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLoginBinding
 import com.example.myapplication.ui.page.manager.ManageActivity
+import com.example.myapplication.vm.LoginViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -25,7 +27,9 @@ import com.example.myapplication.ui.page.manager.ManageActivity
  */
 class LoginFragment : BaseFragment() {
 
-    lateinit var binding : FragmentLoginBinding
+    lateinit var binding: FragmentLoginBinding
+    private val viewModel by viewModels<LoginViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +41,7 @@ class LoginFragment : BaseFragment() {
         return view
     }
 
-    fun init(view: View){
+    fun init(view: View) {
 
         binding.registerBt.setOnClickListener {
             findNavController().navigate(R.id.goRegisterFragment)
@@ -48,7 +52,15 @@ class LoginFragment : BaseFragment() {
         }
         binding.loginBt.setOnClickListener {
             //Todo 验证登录信息 用户信息初始化
-            findNavController().navigate(R.id.goHomeFragment)
+            val number = binding.numberEdit.text.toString().trim()
+            val pass = binding.passEdit.text.toString().trim()
+            viewModel.checkLogin(number.toInt(), pass)
+        }
+
+        viewModel.loginType.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigate(R.id.goHomeFragment)
+            }
         }
 
     }
