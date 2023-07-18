@@ -7,10 +7,30 @@
     android:layout_gravity="center"
     android:gravity="center">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ONCE"
-        android:textSize="30dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/once_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="31dp"
+            android:backgroundTint="@color/candy_r"
+            app:backgroundTint="@color/candy_r"
+            android:src="@mipmap/float_add_bt"
+            android:tint="@color/candy_y"
+            app:rippleColor="@color/candy_r" />
+    </RelativeLayout>
+
+
 </LinearLayout>
