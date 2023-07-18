@@ -34,15 +34,15 @@ class UserTaskImp(
         return userDao.getUsers()
     }
 
-    override fun queryUserByNumber(number: Int): User {
+    override fun queryUserByNumber(number: Long): User {
         return userDao.queryUserByNumber(number)
     }
 
-    override fun deleteUserByNumber(number: Int) {
+    override fun deleteUserByNumber(number: Long) {
         userDao.deleteUserByNumber(number)
     }
 
-    override fun updatePass(number: Int, pass: String) {
+    override fun updatePass(number: Long, pass: String) {
         userDao.updatePass(number, pass)
     }
 }

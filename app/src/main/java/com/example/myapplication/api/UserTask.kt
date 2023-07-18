@@ -37,15 +37,15 @@ interface UserTask {
     /**
      * 通过号码查询某个用户信息
      */
-    fun queryUserByNumber(number: Int): User
+    fun queryUserByNumber(number: Long): User
 
     /**
      * 通过号码删除某个用户
      */
-    fun deleteUserByNumber(number: Int)
+    fun deleteUserByNumber(number: Long)
 
     /**
      * 通过号码更新用户的密码
      */
-    fun updatePass(number: Int, pass: String)
+    fun updatePass(number: Long, pass: String)
 }

@@ -32,11 +32,11 @@ interface UserDao {
     fun getUsers(): List<User>
 
     @Query("select * from User where number = :number ")
-    fun queryUserByNumber(number: Int): User
+    fun queryUserByNumber(number: Long): User
 
     @Query("delete from User where number = :number")
-    fun deleteUserByNumber(number: Int)
+    fun deleteUserByNumber(number: Long)
 
     @Query("update user set pass = :pass where number = :number")
-    fun updatePass(number: Int, pass: String)
+    fun updatePass(number: Long, pass: String)
 }

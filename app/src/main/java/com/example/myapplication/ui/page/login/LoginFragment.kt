@@ -48,13 +48,19 @@ class LoginFragment : BaseFragment() {
         }
         binding.managerLoginBt.setOnClickListener {
             //TODO 管理员登录信息验证
-            ActivityUtils.startActivity(ManageActivity::class.java)
+            val (number, pass) = numberAndPass()
+            viewModel.checkAdminLogin(number, pass)
         }
         binding.loginBt.setOnClickListener {
-            //Todo 验证登录信息 用户信息初始化
-            val number = binding.numberEdit.text.toString().trim()
-            val pass = binding.passEdit.text.toString().trim()
-            viewModel.checkLogin(number.toInt(), pass)
+            //Todo 用户信息初始化
+            val (number, pass) = numberAndPass()
+            viewModel.checkLogin(number, pass)
+        }
+
+        viewModel.adminLoginType.observe(viewLifecycleOwner) {
+            if (it) {
+                ActivityUtils.startActivity(ManageActivity::class.java)
+            }
         }
 
         viewModel.loginType.observe(viewLifecycleOwner) {
@@ -63,6 +69,12 @@ class LoginFragment : BaseFragment() {
             }
         }
 
+    }
+
+    private fun numberAndPass(): Pair<String, String> {
+        val number = binding.numberEdit.text.toString().trim()
+        val pass = binding.passEdit.text.toString().trim()
+        return number to pass
     }
 
 }

@@ -43,21 +43,21 @@ class UserStoreRepository(private val userTaskImp: UserTaskImp) {
     /**
      * 通过号码查询某个用户信息
      */
-    suspend fun queryUserByNumber(number: Int): User = withContext(Dispatchers.IO) {
+    suspend fun queryUserByNumber(number: Long): User = withContext(Dispatchers.IO) {
         return@withContext userTaskImp.queryUserByNumber(number)
     }
 
     /**
      * 通过号码删除某个用户
      */
-    suspend fun deleteUserByNumber(number: Int) = withContext(Dispatchers.IO) {
+    suspend fun deleteUserByNumber(number: Long) = withContext(Dispatchers.IO) {
         return@withContext userTaskImp.deleteUserByNumber(number)
     }
 
     /**
      * 通过号码更新用户的密码
      */
-    suspend fun updatePass(number: Int, pass: String) = withContext(Dispatchers.IO) {
+    suspend fun updatePass(number: Long, pass: String) = withContext(Dispatchers.IO) {
         return@withContext userTaskImp.updatePass(number, pass)
     }
 }

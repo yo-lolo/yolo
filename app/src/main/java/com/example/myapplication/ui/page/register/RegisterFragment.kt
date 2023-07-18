@@ -10,6 +10,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentRegisterBinding
 import com.example.myapplication.vm.RegisterViewModel
+import kotlinx.coroutines.delay
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd

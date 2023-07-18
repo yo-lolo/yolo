@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class User(
     @PrimaryKey
-    var number: Int,
+    var number: Long,
     var pass: String,
     var isLogin : Boolean = false
 ) {
