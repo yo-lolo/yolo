@@ -10,7 +10,7 @@
     tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
 
     <LinearLayout
-        android:layout_width="260dp"
+        android:layout_width="280dp"
         android:layout_height="100dp"
         android:paddingHorizontal="15dp"
         android:orientation="vertical">
@@ -33,10 +33,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:gravity="center"
+            android:layout_gravity="right"
             android:orientation="horizontal">
 
             <TextView
@@ -51,9 +52,9 @@
                 android:textSize="15sp" />
 
             <View
-                android:layout_width="0dp"
+                android:layout_width="1px"
                 android:layout_height="15dp"
-                android:layout_marginHorizontal="45dp"
+                android:layout_marginHorizontal="15dp"
                 android:background="@color/color_E3E4E6" />
 
             <TextView

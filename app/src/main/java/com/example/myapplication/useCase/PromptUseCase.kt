@@ -85,7 +85,7 @@ class PromptUseCase() {
         }
         alertDialog.show()
         alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-        alertDialog.window!!.decorView.setPadding(60, 0, 60, 0)
+        alertDialog.window!!.decorView.setPadding(70, 0, 70, 0)
 
     }
 }

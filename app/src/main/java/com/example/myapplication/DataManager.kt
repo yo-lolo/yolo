@@ -6,6 +6,10 @@ import androidx.room.Room
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.imp.UserTaskImp
 import com.example.myapplication.repos.UserStoreRepository
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -31,6 +35,7 @@ object DataManager {
         this.context = context
         appDataBase = createDb()
         userStoreRepository = UserStoreRepository(UserTaskImp(appDataBase!!))
+        initSmartRefresh()
     }
 
     private fun createDb(): AppDataBase {
@@ -38,5 +43,19 @@ object DataManager {
             context,
             AppDataBase::class.java, "database-my"
         ).build()
+    }
+
+    private fun initSmartRefresh() {
+        // 设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context?, layout: RefreshLayout ->
+            // 全局设置主题颜色
+            layout.setPrimaryColorsId(android.R.color.transparent, R.color.candy_r)
+            ClassicsHeader(context)
+        }
+        // 设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context: Context?, layout: RefreshLayout ->
+            //指定为经典Footer，默认是 BallPulseFooter
+            ClassicsFooter(context).setDrawableSize(20f)
+        }
     }
 }

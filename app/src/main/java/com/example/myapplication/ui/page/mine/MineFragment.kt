@@ -39,6 +39,7 @@ class MineFragment : BaseFragment() {
     }
 
     fun init(view: View){
+
         homeBinding.userName.setOnClickListener {
             findNavController().navigate(R.id.goLoginFragment)
         }

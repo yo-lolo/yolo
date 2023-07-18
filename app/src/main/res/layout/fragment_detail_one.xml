@@ -7,6 +7,7 @@
     android:layout_gravity="center"
     android:gravity="center">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,9 +27,9 @@
             android:layout_marginEnd="22dp"
             android:layout_marginBottom="31dp"
             android:backgroundTint="@color/candy_r"
-            app:backgroundTint="@color/candy_r"
             android:src="@mipmap/float_add_bt"
             android:tint="@color/candy_y"
+            app:backgroundTint="@color/candy_r"
             app:rippleColor="@color/candy_r" />
     </RelativeLayout>
 
