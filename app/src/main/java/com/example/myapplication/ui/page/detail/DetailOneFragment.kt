@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.page.detail
 
+import android.app.VoiceInteractor.Prompt
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ActivityUtils
@@ -18,11 +20,14 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDetailOneBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.OnceListAdapter
+import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.vm.DetailOneViewModel
 
 class DetailOneFragment : BaseFragment() {
 
     private lateinit var binding: FragmentDetailOneBinding
     private var onceListAdapter = OnceListAdapter()
+    private val viewModel by viewModels<DetailOneViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,12 @@ class DetailOneFragment : BaseFragment() {
         binding.fab.setOnClickListener {
             initAddOnceView()
         }
+        onceListAdapter.deleteListener = { position, data ->
+            PromptUseCase().deletePrompt(data) {
+                onceListAdapter.list.removeAt(position)
+                notifyData()
+            }
+        }
     }
 
     /**
@@ -69,7 +80,13 @@ class DetailOneFragment : BaseFragment() {
         var descCount = customView.findViewById<TextView>(R.id.desc_count)
         var onceOk = customView.findViewById<TextView>(R.id.once_ok)
         onceOk.setOnClickListener {
-            ToastUtils.showShort("添加Once")
+            val name = onceName.text.toString().trim()
+            val desc = onceDesc.text.toString().trim()
+            onceListAdapter.list.add(name)
+            notifyData()
+            val flat = viewModel.insertOnce(name, desc)
+            if (flat)
+                alertDialog.dismiss()
         }
         onceCancel.setOnClickListener {
             alertDialog.dismiss()
@@ -77,5 +94,13 @@ class DetailOneFragment : BaseFragment() {
         onceDesc.doOnTextChanged { text, _, _, _ ->
             descCount.text = "${text!!.length}/100"
         }
+    }
+
+
+    /**
+     * 刷新适配器数据
+     */
+    private fun notifyData() {
+        onceListAdapter.notifyDataSetChanged()
     }
 }

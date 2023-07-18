@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.databinding.LayoutOnceListItemBinding
-import com.example.myapplication.databinding.LayoutTwiceListItemBinding
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -21,14 +20,28 @@ import com.example.myapplication.util.layoutInflater
  */
 class OnceListAdapter : RecyclerView.Adapter<OnceListAdapter.OnceListViewHolder>() {
 
-    var list = listOf("yolo","ray","lisa","jessica","kay","v","jack","krystal","victory","luna","amber","a-lin")
+    var list = mutableListOf(
+        "yolo",
+        "ray",
+        "lisa",
+        "jessica",
+        "kay",
+        "v",
+        "jack",
+        "krystal",
+        "victory",
+        "luna",
+        "amber",
+        "a-lin"
+    )
+    var deleteListener: (Int, String) -> Unit = { _, _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnceListViewHolder {
         return OnceListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: OnceListViewHolder, position: Int) {
-        holder.setData(position, list[position])
+        holder.setData(position, list[position], deleteListener)
     }
 
     override fun getItemCount(): Int {
@@ -46,11 +59,16 @@ class OnceListAdapter : RecyclerView.Adapter<OnceListAdapter.OnceListViewHolder>
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(position: Int, data: String) {
+        fun setData(
+            position: Int,
+            data: String,
+            deleteListener: (Int, String) -> Unit
+        ) {
             binding.onceName.text = data
             binding.descText.text = "这里是对${data}的一段描述".repeat(2)
-            binding.onceItem.setOnClickListener {
-                ToastUtils.showShort("确定要删掉${data}吗?")
+            binding.onceItem.setOnLongClickListener {
+                deleteListener.invoke(position, data)
+                true
             }
         }
     }

@@ -1,9 +1,14 @@
 package com.example.myapplication.useCase
 
 import android.app.AlertDialog
+import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
+import android.widget.TextView
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.R
+import com.example.myapplication.util.layoutInflater
 
 
 /**
@@ -20,58 +25,17 @@ import com.blankj.utilcode.util.ToastUtils
  */
 class PromptUseCase() {
 
-    fun deleteTodoPrompt(block: () -> Unit) {
-        prompt("确定删除此待办事项？", {
+    fun deletePrompt(data: String, block: () -> Unit) {
+        prompt("确定要删掉${data}吗?") {
             block.invoke()
-        })
+        }
     }
 
-
-    fun deleteAllAPkFilePrompt(block: () -> Unit) {
-        prompt("确定清理全部安装包？", {
-            block.invoke()
-        })
-    }
-
-    fun deleteAPkFilePrompt(apkName: String, block: () -> Unit) {
-        prompt("确定清理${apkName}应用的安装包？", {
-            block.invoke()
-        })
-    }
-
-    fun removeDownloadTaskPrompt(apkName: String, block: () -> Unit) {
-        prompt("确定删除${apkName}的下载任务？", {
-            block.invoke()
-        })
-    }
-
-    fun igoreUpdatePrompt(apkName: String, block: () -> Unit) {
-        prompt("确定忽略${apkName}的更新？", {
-            block.invoke()
-        })
-    }
 
     fun removeImagePrompt(block: () -> Unit) {
-        prompt("确认移除已添加图片吗？", {
+        prompt("确认移除已添加图片吗？") {
             block.invoke()
-        })
-    }
-
-    fun uninstallAppsPrompt(appNames: List<String>, block: () -> Unit) {
-        if (appNames.isEmpty()) {
-            ToastUtils.showShort("至少勾选一个应用")
-            return
         }
-
-        prompt("确定删除${appNames.size}个应用？", {
-            block.invoke()
-        })
-    }
-
-    fun uninstallAppPrompt(appName: String, block: () -> Unit) {
-        prompt("是否卸载${appName}？", {
-            block.invoke()
-        })
     }
 
     private fun prompt(
@@ -98,19 +62,30 @@ class PromptUseCase() {
 
     private fun prompt(
         message: String,
-        mPositiveButtonListener: () -> Unit,
-        mNegativeButtonListener: () -> Unit = {}
+        mPositiveButtonListener: () -> Unit
     ) {
+
         val context = ActivityUtils.getTopActivity()
-        AlertDialog.Builder(context)
-            .setMessage(message)
-            .setPositiveButton("确定") { _, _ ->
-                mPositiveButtonListener.invoke()
-            }
-            .setNegativeButton("取消") { _, _ ->
-                mNegativeButtonListener.invoke()
-            }
+        val customView = context.layoutInflater().inflate(R.layout.normal_alert_layout, null, false)
+
+        val alertDialog = AlertDialog.Builder(context)
+            .setView(customView)
+            .setCancelable(false)
             .create()
-            .show()
+        val alertOk = customView.findViewById<TextView>(R.id.alert_ok)
+        val alertCancel = customView.findViewById<TextView>(R.id.alert_cancel)
+        val alertDesc = customView.findViewById<TextView>(R.id.alert_desc)
+        alertDesc.text = message
+        alertOk.setOnClickListener {
+            mPositiveButtonListener.invoke()
+            alertDialog.dismiss()
+        }
+        alertCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.show()
+        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        alertDialog.window!!.decorView.setPadding(60, 0, 60, 0)
+
     }
 }
