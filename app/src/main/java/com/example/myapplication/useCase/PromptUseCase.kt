@@ -38,6 +38,12 @@ class PromptUseCase() {
         }
     }
 
+    fun exitLoginPrompt(block: () -> Unit) {
+        prompt("确定要退出登录吗?") {
+            block.invoke()
+        }
+    }
+
     private fun prompt(
         view: View,
         mPositiveButtonListener: () -> Unit,

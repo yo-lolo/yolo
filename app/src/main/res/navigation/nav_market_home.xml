@@ -41,6 +41,10 @@
         android:id="@+id/managerFragment"
         android:name="com.example.myapplication.ui.page.manager.ManageFragment"
         android:label="ManagerFragment" />
+    <fragment
+        android:id="@+id/pAPFragment"
+        android:name="com.example.myapplication.ui.page.setting.PAPFragment"
+        android:label="PAPFragment" />
 
     <fragment
         android:id="@+id/appDetailFragment"
@@ -84,5 +88,8 @@
     <action
         android:id="@+id/goManagerFragment"
         app:destination="@id/managerFragment" />
+    <action
+        android:id="@+id/goPAPFragment"
+        app:destination="@id/pAPFragment" />
 
 </navigation>

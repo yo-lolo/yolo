@@ -19,10 +19,6 @@ import java.util.IdentityHashMap
 object AppConfig {
 
 
-    val AUTO_UPDATE_METHOD_LIST = arrayOf("仅WLAN下", "仅移动网络下", "所有网络下")
-    val AUTO_UPDATE_METHOD_LIST_CODE = arrayOf("1", "2", "3")
-    val APP_REMIND_METHOD_LIST = arrayOf("每次都提醒", "仅一次", "从不")
-    val APP_REMIND_METHOD_LIST_CODE = arrayOf("1", "2", "3")
     const val phoneNumber: Long = 15755949344
     const val IMAGE_OPEN = 0xff
 

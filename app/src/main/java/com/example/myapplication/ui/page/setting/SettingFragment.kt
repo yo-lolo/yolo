@@ -1,6 +1,8 @@
 package com.example.myapplication.ui.page.setting
 
 import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,8 +11,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.databinding.FragmentSettingBinding
+import com.example.myapplication.useCase.PromptUseCase
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -50,24 +54,34 @@ class SettingFragment : BaseFragment() {
                 findNavController().popBackStack()
             }
         }
-        binding.autoUpdateApk.setOnClickListener {
-
+        binding.manageApp.setOnClickListener {
+            startActivity(Intent().apply {
+                action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+                data = Uri.parse("package:${context?.packageName}")
+            })
         }
 
-        binding.downloadRemindSetting.setOnClickListener {
-
+        binding.appPermission.setOnClickListener {
+            //TODO 权限查看
+            ToastUtils.showShort("权限查看")
         }
-        binding.updateNotificationSwitch.setOnCheckedChangeListener { _, isChecked ->
-
+        binding.msgNotify.setOnCheckedChangeListener { _, isChecked ->
+            //TODO 消息提醒
+            ToastUtils.showShort("消息提醒")
         }
-        binding.msgNotificationSwitch.setOnCheckedChangeListener { _, isChecked ->
-
+        binding.userProtocol.setOnClickListener {
+            PAPFragment.goPAPFragment(findNavController(),"file:///android_asset/userProtocol.html")
         }
-        binding.checkoutUpdate.setOnClickListener {
-            //TODO 检查更新
+        binding.privacyPolicy.setOnClickListener {
+            PAPFragment.goPAPFragment(findNavController(),"file:///android_asset/privacyPolicy.html")
         }
         binding.settingsAbout.setOnClickListener {
             //TODO 关于
+            ToastUtils.showShort("关于")
+        }
+        binding.exitLogin.setOnClickListener {
+            //TODO 退出登录
+            PromptUseCase().exitLoginPrompt { ToastUtils.showShort("退出登录") }
         }
     }
 
