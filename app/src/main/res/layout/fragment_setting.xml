@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
-            android:text="管理和权限"
+            android:text="应用管理"
             android:textColor="#3C3C3C"
             android:textSize="12sp" />
 
@@ -31,7 +31,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/manage_app"
+                android:id="@+id/app_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="15dp"
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:text="应用管理"
+                    android:text="应用信息"
                     android:textColor="#3C3C3C"
                     android:textSize="13sp" />
 

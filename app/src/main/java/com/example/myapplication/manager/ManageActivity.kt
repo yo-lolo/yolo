@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.page.manager
+package com.example.myapplication.manager
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

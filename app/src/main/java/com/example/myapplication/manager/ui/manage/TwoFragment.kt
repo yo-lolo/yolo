@@ -1,16 +1,16 @@
-package com.example.myapplication.ui.page.manager
+package com.example.myapplication.manager.ui.manage
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.databinding.FragmentOneBinding
+import com.example.myapplication.databinding.FragmentTwoBinding
 
 
-class OneFragment : BaseFragment() {
+class TwoFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentOneBinding
+    private lateinit var binding : FragmentTwoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class OneFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOneBinding.inflate(layoutInflater)
+        binding = FragmentTwoBinding.inflate(layoutInflater)
         return binding.root
     }
 

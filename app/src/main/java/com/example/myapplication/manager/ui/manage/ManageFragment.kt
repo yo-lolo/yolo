@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.page.manager
+package com.example.myapplication.manager.ui.manage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.databinding.FragmentManagerTestBinding
+import com.example.myapplication.manager.ui.manage.FourFragment
+import com.example.myapplication.manager.ui.manage.OneFragment
+import com.example.myapplication.manager.ui.manage.ThreeFragment
+import com.example.myapplication.manager.ui.manage.TwoFragment
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
@@ -39,15 +40,28 @@ class MineFragment : BaseFragment() {
     }
 
     fun init(view: View){
-
-        homeBinding.userName.setOnClickListener {
-            findNavController().navigate(R.id.goLoginFragment)
-        }
-        homeBinding.goSetting.setOnClickListener {
-            findNavController().navigate(R.id.goSettingFragment)
-        }
-        homeBinding.goFeedback.setOnClickListener {
-            findNavController().navigate(R.id.goFeedbackFragment)
+        homeBinding.apply {
+            userName.setOnClickListener {
+                findNavController().navigate(R.id.goLoginFragment)
+            }
+            mineEdit.setOnClickListener {
+                ToastUtils.showShort("还没做呢，别点我啦")
+            }
+            goCollect.setOnClickListener {
+                ToastUtils.showShort("还没做呢，别点我啦")
+            }
+            goHistory.setOnClickListener {
+                ToastUtils.showShort("还没做呢，别点我啦")
+            }
+            goComment.setOnClickListener {
+                ToastUtils.showShort("还没做呢，别点我啦")
+            }
+            goSetting.setOnClickListener {
+                findNavController().navigate(R.id.goSettingFragment)
+            }
+            goFeedback.setOnClickListener {
+                findNavController().navigate(R.id.goFeedbackFragment)
+            }
         }
     }
 }

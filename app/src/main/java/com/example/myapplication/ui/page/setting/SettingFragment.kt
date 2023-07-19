@@ -54,7 +54,7 @@ class SettingFragment : BaseFragment() {
                 findNavController().popBackStack()
             }
         }
-        binding.manageApp.setOnClickListener {
+        binding.appMsg.setOnClickListener {
             startActivity(Intent().apply {
                 action = "android.settings.APPLICATION_DETAILS_SETTINGS"
                 data = Uri.parse("package:${context?.packageName}")
@@ -70,10 +70,16 @@ class SettingFragment : BaseFragment() {
             ToastUtils.showShort("消息提醒")
         }
         binding.userProtocol.setOnClickListener {
-            PAPFragment.goPAPFragment(findNavController(),"file:///android_asset/userProtocol.html")
+            PAPFragment.goPAPFragment(
+                findNavController(),
+                "file:///android_asset/userProtocol.html"
+            )
         }
         binding.privacyPolicy.setOnClickListener {
-            PAPFragment.goPAPFragment(findNavController(),"file:///android_asset/privacyPolicy.html")
+            PAPFragment.goPAPFragment(
+                findNavController(),
+                "file:///android_asset/privacyPolicy.html"
+            )
         }
         binding.settingsAbout.setOnClickListener {
             //TODO 关于

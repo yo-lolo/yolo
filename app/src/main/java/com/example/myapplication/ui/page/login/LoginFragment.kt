@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLoginBinding
-import com.example.myapplication.ui.page.manager.ManageActivity
+import com.example.myapplication.manager.ManageActivity
 import com.example.myapplication.vm.LoginViewModel
 
 /**
