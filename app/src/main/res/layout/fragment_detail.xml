@@ -15,9 +15,10 @@
         android:layout_height="40dp"
         app:tabGravity="center"
         app:tabIndicator="@drawable/tab_indicator"
+        app:tabIndicatorColor="@color/candy_r"
         app:tabIndicatorFullWidth="false"
         app:tabMinWidth="100dp"
-        app:tabSelectedTextColor="@color/color_theme"
+        app:tabSelectedTextColor="@color/candy_r"
         app:tabTextColor="@color/color_3c3c3c" />
 
     <androidx.viewpager.widget.ViewPager

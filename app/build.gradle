@@ -75,8 +75,11 @@ dependencies {
     // 轮播图
     implementation 'com.youth.banner:banner:1.4.9'
 
-    //1.1.0 androidx 版本
+    //1.1.0 androidx 版本 刷新布局
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-x'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-x'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }

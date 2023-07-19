@@ -23,6 +23,7 @@
         android:layout_height="64dp"
         android:background="@android:color/white"
         android:elevation="5dp"
+        android:theme="@style/managerFootButton"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:menu="@menu/menu_manage_bottom_nav" />

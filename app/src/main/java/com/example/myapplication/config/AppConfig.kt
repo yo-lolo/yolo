@@ -2,6 +2,7 @@ package com.example.myapplication.config
 
 import android.content.Context
 import java.io.File
+import java.util.IdentityHashMap
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -22,9 +23,13 @@ object AppConfig {
     val AUTO_UPDATE_METHOD_LIST_CODE = arrayOf("1", "2", "3")
     val APP_REMIND_METHOD_LIST = arrayOf("每次都提醒", "仅一次", "从不")
     val APP_REMIND_METHOD_LIST_CODE = arrayOf("1", "2", "3")
-    val IMAGE_OPEN = 0xff
+    const val phoneNumber: Long = 15755949344
+    const val IMAGE_OPEN = 0xff
 
-    //反馈类型, 1、应用市场问题反馈，2、APP问题反馈
-    val FEED_BACK_TYPE_SYS = 1
-    val FEED_BACK_TYPE_APP = 2
+    //枚举反馈类型, 1、质量问题，2、使用问题 3、其他
+    enum class FeedbackType(typeId: String, desc: String) {
+        QA_TYPE("1", "质量问题"),
+        USE_TYPE("2", "使用问题"),
+        OTHER_TYPE("3", "其他"),
+    }
 }

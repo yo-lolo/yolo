@@ -2,9 +2,11 @@ package com.example.myapplication.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.myapplication.database.Dao.ApkInfoDao
-import com.example.myapplication.database.Dao.UserDao
+import com.example.myapplication.database.dao.ApkInfoDao
+import com.example.myapplication.database.dao.FeedbackDao
+import com.example.myapplication.database.dao.UserDao
 import com.example.myapplication.database.entity.ApkInfo
+import com.example.myapplication.database.entity.FeedbackInfo
 import com.example.myapplication.database.entity.User
 
 /**
@@ -20,11 +22,12 @@ import com.example.myapplication.database.entity.User
  * @UpdateRemark : 更新说明
  */
 @Database(
-    entities = [ApkInfo::class, User::class],
+    entities = [ApkInfo::class, User::class, FeedbackInfo::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDataBase : RoomDatabase() {
     abstract fun apkInfoDao(): ApkInfoDao
     abstract fun userDao(): UserDao
+    abstract fun feedbackDao(): FeedbackDao
 }

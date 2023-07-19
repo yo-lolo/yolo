@@ -1,9 +1,19 @@
 package com.example.myapplication.vm
 
+import android.text.format.Time
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.config.AppConfig
+import com.example.myapplication.database.entity.FeedbackInfo
+import com.example.myapplication.util.JsonUtil
+import com.example.myapplication.util.TimeUtil
+import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -19,14 +29,37 @@ import com.example.myapplication.base.BaseViewModel
  */
 class FeedbackViewModel : BaseViewModel() {
 
-    var type = MutableLiveData(-1)
-    val desc = MutableLiveData("")
+    val commentSuccess = MutableLiveData(false)
+    var type = MutableLiveData("0")
+    private val feedbackStoreRepository = DataManager.feedbackStoreRepository
 
-    fun onSubmit(pictureItems: List<String>) {
-
+    fun onSubmit(pictureItems: List<String>, desc: String) {
+        val jsonPicture = JsonUtil.toJson(pictureItems)
+        if (!type.value.equals("0") && desc.isNotEmpty() && pictureItems.isNotEmpty()) {
+            launchSafe {
+                kotlin.runCatching {
+                    feedbackStoreRepository.insertFeedBack(
+                        FeedbackInfo(
+                            AppConfig.phoneNumber,
+                            type.value!!,
+                            desc,
+                            TimeUtil.getCurrentTime(TimeUtil.dateFormatYMDHMS),
+                            jsonPicture
+                        )
+                    )
+                }.onSuccess {
+                    ToastUtils.showShort("反馈成功")
+                    commentSuccess.value = true
+                }.onFailure {
+                    ToastUtils.showShort("反馈失败")
+                }
+            }
+        } else {
+            ToastUtils.showShort("请完成反馈填写")
+        }
     }
 
-    fun typeChange() {
-
+    fun typeChange(typeId: String) {
+        type.value = typeId
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication.database.Dao
+package com.example.myapplication.database.dao
 
 import androidx.room.*
 import com.example.myapplication.database.entity.ApkInfo

@@ -11,7 +11,7 @@
 
             <corners android:radius="4dp" />
 
-            <solid android:color="@color/color_theme" />
+            <solid android:color="@color/candy_r" />
 
         </shape>
     </item>

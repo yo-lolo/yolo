@@ -81,7 +81,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/feedback_pType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -103,12 +102,10 @@
                         android:id="@+id/quality_problem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
                         android:background="@drawable/type_button_false_bg"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="4dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="4dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:tag="1"
                         android:text="质量问题"
                         android:textColor="#ff3c3c3c"
                         android:textSize="10sp" />
@@ -117,13 +114,12 @@
                         android:id="@+id/use_problem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginHorizontal="7dp"
                         android:background="@drawable/type_button_false_bg"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="4dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="4dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
                         android:text="使用问题"
+                        android:tag="2"
                         android:textColor="#ff3c3c3c"
                         android:textSize="10sp" />
 
@@ -131,13 +127,11 @@
                         android:id="@+id/other_problem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
                         android:background="@drawable/type_button_false_bg"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="4dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="4dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
                         android:text="其他"
+                        android:tag="3"
                         android:textColor="#ff3c3c3c"
                         android:textSize="10sp" />
                 </LinearLayout>

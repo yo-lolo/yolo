@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.room.Room
 import com.example.myapplication.database.AppDataBase
+import com.example.myapplication.imp.FeedbackTaskImp
 import com.example.myapplication.imp.UserTaskImp
+import com.example.myapplication.repos.FeedbackStoreRepository
 import com.example.myapplication.repos.UserStoreRepository
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -29,12 +31,14 @@ object DataManager {
 
     lateinit var context: Context
     lateinit var userStoreRepository: UserStoreRepository
+    lateinit var feedbackStoreRepository: FeedbackStoreRepository
     private var appDataBase: AppDataBase? = null
 
     fun init(context: Context) {
         this.context = context
         appDataBase = createDb()
         userStoreRepository = UserStoreRepository(UserTaskImp(appDataBase!!))
+        feedbackStoreRepository = FeedbackStoreRepository(FeedbackTaskImp(appDataBase!!))
         initSmartRefresh()
     }
 

@@ -2,7 +2,7 @@ package com.example.myapplication.imp
 
 import com.example.myapplication.api.UserTask
 import com.example.myapplication.database.AppDataBase
-import com.example.myapplication.database.Dao.UserDao
+import com.example.myapplication.database.dao.UserDao
 import com.example.myapplication.database.entity.User
 
 /**

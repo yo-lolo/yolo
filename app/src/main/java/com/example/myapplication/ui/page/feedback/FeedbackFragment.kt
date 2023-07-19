@@ -46,7 +46,7 @@ class FeedbackFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFeedbackBinding.inflate(layoutInflater)
         val view = binding.root
         initView(view)
@@ -75,9 +75,50 @@ class FeedbackFragment : BaseFragment() {
 
         binding.feedbackSubmit.setOnClickListener {
             val pictureItems = binding.imageDisplayView.getPhotos().filter { !it.isNullOrBlank() }
-            feedbackViewModel.onSubmit(pictureItems)
+            val detail = binding.feedbackPDetail.text.toString().trim()
+            feedbackViewModel.onSubmit(pictureItems, detail)
         }
 
+        binding.apply {
+            qualityProblem.setOnClickListener {
+                feedbackViewModel.typeChange(it.tag as String)
+            }
+            useProblem.setOnClickListener {
+                feedbackViewModel.typeChange(it.tag as String)
+            }
+            otherProblem.setOnClickListener {
+                feedbackViewModel.typeChange(it.tag as String)
+            }
+        }
+
+        feedbackViewModel.type.observe(viewLifecycleOwner) {
+            changeStyle(it)
+        }
+
+        feedbackViewModel.commentSuccess.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().popBackStack()
+            }
+        }
+
+    }
+
+    /**
+     * 实现单选问题类型，点击改变组件样式
+     */
+    private fun changeStyle(data: String) {
+        binding.qualityProblem.apply {
+            setBackgroundResource(if (data == this.tag) R.drawable.type_button_true_bg else R.drawable.type_button_false_bg)
+            setTextColor(resources.getColor(if (data == this.tag) R.color.color_e7e7e7 else R.color.color_3c3c3c))
+        }
+        binding.useProblem.apply {
+            setBackgroundResource(if (data == this.tag) R.drawable.type_button_true_bg else R.drawable.type_button_false_bg)
+            setTextColor(resources.getColor(if (data == this.tag) R.color.color_e7e7e7 else R.color.color_3c3c3c))
+        }
+        binding.otherProblem.apply {
+            setBackgroundResource(if (data == this.tag) R.drawable.type_button_true_bg else R.drawable.type_button_false_bg)
+            setTextColor(resources.getColor(if (data == this.tag) R.color.color_e7e7e7 else R.color.color_3c3c3c))
+        }
     }
 
     /**

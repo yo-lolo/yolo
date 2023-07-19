@@ -84,5 +84,10 @@
         <item name="android:textColorSecondary">@color/color_888</item>
     </style>
 
+    <style name="managerFootButton" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/color_theme</item>
+        <item name="android:textColorSecondary">@color/color_888</item>
+    </style>
+
 
 </resources>
