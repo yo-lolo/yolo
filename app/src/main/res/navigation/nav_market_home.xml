@@ -39,7 +39,7 @@
         android:label="RegisterFragment" />
     <fragment
         android:id="@+id/managerFragment"
-        android:name="com.example.myapplication.manager.ui.manage.ManageFragment"
+        android:name="com.example.myapplication.admin.ManageFragment"
         android:label="ManagerFragment" />
     <fragment
         android:id="@+id/pAPFragment"

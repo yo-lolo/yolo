@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="280dp"
-        android:layout_height="400dp"
+        android:layout_height="320dp"
         android:orientation="vertical">
 
         <TextView
@@ -24,156 +24,222 @@
             android:textSize="19sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingLeft="28dp"
-            android:paddingRight="20dp">
+            android:paddingBottom="10dp"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:text="昵称"
-                    android:textColor="@color/color_3c3c3c"
-                    android:textSize="12sp" />
-
-                <EditText
-                    android:id="@+id/mine_name"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/normal_stroke_bg"
-                    android:gravity="start"
-                    android:hint="昵称"
-                    android:maxLength="10"
-                    android:padding="5dp"
-                    android:singleLine="true"
-                    android:textSize="10sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="10dp"
+                        android:layout_marginRight="6dp"
+                        android:background="@color/candy_r" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:text="昵称："
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                <TextView
+                    <TextView
+                        android:id="@+id/mine_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="YoLo"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="52dp"
+                    android:background="@color/color_e7e7e7" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:text="电话号码"
-                    android:layout_marginVertical="5dp"
-                    android:textColor="@color/color_3c3c3c"
-                    android:textSize="12sp" />
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/mine_number"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="10dp"
+                            android:layout_marginRight="6dp"
+                            android:background="@color/candy_r" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="个性签名："
+                            android:textColor="@color/color_3c3c3c"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/mine_personal_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
+                        tools:text="无事小神仙"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="52dp"
+                    android:background="@color/color_e7e7e7" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/normal_stroke_bg"
-                    android:hint="15755949344"
-                    android:maxLength="10"
-                    android:padding="5dp"
-                    android:textSize="10sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="10dp"
+                        android:layout_marginRight="6dp"
+                        android:background="@color/candy_r" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:text="电话号码："
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                <TextView
+                    <TextView
+                        android:id="@+id/mine_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="15755949344"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="52dp"
+                    android:background="@color/color_e7e7e7" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:text="地址"
-                    android:layout_marginVertical="5dp"
-                    android:textColor="@color/color_3c3c3c"
-                    android:textSize="12sp" />
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/mine_address"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="10dp"
+                            android:layout_marginRight="6dp"
+                            android:background="@color/candy_r" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="个人地址："
+                            android:textColor="@color/color_3c3c3c"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/mine_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
+                        tools:text="安徽省合肥市高新区科大国盾量子产业园"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="52dp"
+                    android:background="@color/color_e7e7e7" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/normal_stroke_bg"
-                    android:hint="mine_address"
-                    android:maxLength="30"
-                    android:padding="5dp"
-                    android:textSize="10sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="10dp"
+                        android:layout_marginRight="6dp"
+                        android:background="@color/candy_r" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:text="注册时间："
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/mine_register_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="2022年10月21日"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
+        </ScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:text="个性签名"
-                    android:layout_marginVertical="5dp"
-                    android:textColor="@color/color_3c3c3c"
-                    android:textSize="12sp" />
-
-                <EditText
-                    android:id="@+id/mine_sign"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/normal_stroke_bg"
-                    android:hint="mine_sign"
-                    android:maxLength="10"
-                    android:padding="5dp"
-                    android:singleLine="true"
-                    android:textSize="10sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:text="注册时间"
-                    android:layout_marginVertical="5dp"
-                    android:textColor="@color/color_3c3c3c"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/register_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/normal_stroke_bg"
-                    android:hint="mine_sign"
-                    android:maxLength="10"
-                    android:padding="5dp"
-                    android:singleLine="true"
-                    android:textSize="10sp" />
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -212,6 +278,8 @@
 
         </LinearLayout>
     </LinearLayout>
+
+
 
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.myapplication.manager.ui.manage
+package com.example.myapplication.admin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.admin.ui.manage.FourFragment
+import com.example.myapplication.admin.ui.manage.OneFragment
+import com.example.myapplication.admin.ui.manage.ThreeFragment
+import com.example.myapplication.admin.ui.manage.TwoFragment
 import com.example.myapplication.databinding.FragmentManagerTestBinding
-import com.example.myapplication.manager.ui.manage.FourFragment
-import com.example.myapplication.manager.ui.manage.OneFragment
-import com.example.myapplication.manager.ui.manage.ThreeFragment
-import com.example.myapplication.manager.ui.manage.TwoFragment
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -45,7 +45,7 @@ class ManageFragment : BaseFragment() {
     }
 
     private fun initView(view: View) {
-        val titles = listOf("CHEER UP", "FEEL SPECIAL", "GO HARD", "T T")
+        val titles = listOf("用户", "FEEL SPECIAL", "GO HARD", "T T")
         val fragments = listOf(OneFragment(), TwoFragment(), ThreeFragment(), FourFragment())
 
         binding.viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager) {

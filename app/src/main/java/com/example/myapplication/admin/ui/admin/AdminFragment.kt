@@ -1,4 +1,4 @@
-package com.example.myapplication.manager.ui.admin
+package com.example.myapplication.admin.ui.admin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

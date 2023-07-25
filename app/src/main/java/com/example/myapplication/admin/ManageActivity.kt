@@ -1,6 +1,5 @@
-package com.example.myapplication.manager
+package com.example.myapplication.admin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController

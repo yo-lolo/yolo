@@ -18,12 +18,12 @@
         android:label="RegisterFragment" />
     <fragment
         android:id="@+id/managerFragment"
-        android:name="com.example.myapplication.manager.ui.manage.ManageFragment"
+        android:name="com.example.myapplication.admin.ManageFragment"
         android:label="ManagerFragment" />
 
     <fragment
         android:id="@+id/adminFragment"
-        android:name="com.example.myapplication.manager.ui.admin.AdminFragment"
+        android:name="com.example.myapplication.admin.ui.admin.AdminFragment"
         android:label="AdminFragment" />
 
 

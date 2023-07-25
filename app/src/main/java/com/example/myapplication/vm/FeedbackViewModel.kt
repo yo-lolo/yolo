@@ -1,10 +1,6 @@
 package com.example.myapplication.vm
 
-import android.text.format.Time
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
@@ -12,8 +8,6 @@ import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.FeedbackInfo
 import com.example.myapplication.util.JsonUtil
 import com.example.myapplication.util.TimeUtil
-import java.text.SimpleDateFormat
-import java.util.concurrent.TimeUnit
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -43,7 +37,7 @@ class FeedbackViewModel : BaseViewModel() {
                             AppConfig.phoneNumber,
                             type.value!!,
                             desc,
-                            TimeUtil.getCurrentTime(TimeUtil.dateFormatYMDHMS),
+                            TimeUtil.getCurrentTime(),
                             jsonPicture
                         )
                     )

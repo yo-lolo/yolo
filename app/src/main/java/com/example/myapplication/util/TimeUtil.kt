@@ -31,4 +31,9 @@ object TimeUtil {
         return TimeUtils.getNowString(SimpleDateFormat(format))
     }
 
+    @SuppressLint("SimpleDateFormat")
+    fun getCurrentTime(): String {
+        return TimeUtils.getNowString(SimpleDateFormat(dateFormatYMDHMS))
+    }
+
 }
