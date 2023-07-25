@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/color_FFFFFF"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <View
+    <LinearLayout
+        android:id="@+id/head_linear"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/state_bar_height" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/head_layout_height">
-
-        <FrameLayout
-            android:id="@+id/left_container"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true" />
+            android:layout_height="@dimen/state_bar_height" />
 
-        <FrameLayout
-            android:id="@+id/center_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/head_layout_height">
 
-        <FrameLayout
-            android:id="@+id/right_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            <FrameLayout
+                android:id="@+id/left_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
 
-    </RelativeLayout>
+            <FrameLayout
+                android:id="@+id/center_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <FrameLayout
+                android:id="@+id/right_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
 </LinearLayout>

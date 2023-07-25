@@ -47,6 +47,11 @@
         android:label="PAPFragment" />
 
     <fragment
+        android:id="@+id/messFragment"
+        android:name="com.example.myapplication.ui.page.mess.MessageFragment"
+        android:label="MessageFragment" />
+
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -64,6 +69,9 @@
     <action
         android:id="@+id/goMineFragment"
         app:destination="@id/mineFragment" />
+    <action
+        android:id="@+id/goMessFragment"
+        app:destination="@id/messFragment" />
     <action
         android:id="@+id/goDetailFragment"
         app:destination="@id/detailFragment" />

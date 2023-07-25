@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.myapplication.R
 
@@ -35,6 +36,8 @@ class HeadLayout @JvmOverloads constructor(
     //右边容器
     private var rightContainer: FrameLayout
 
+    private var headLinear: LinearLayout
+
     //默认组件
     private var backIcon: ImageView? = null
     private var titleText: TextView? = null
@@ -45,6 +48,11 @@ class HeadLayout @JvmOverloads constructor(
         leftContainer = findViewById(R.id.left_container)
         centerContainer = findViewById(R.id.center_container)
         rightContainer = findViewById(R.id.right_container)
+        headLinear =  findViewById(R.id.head_linear)
+    }
+
+    fun setHeadLayoutColor(){
+        headLinear.setBackgroundResource(R.color.color_FFFFFF)
     }
 
     fun setTitle(resId: Int) {

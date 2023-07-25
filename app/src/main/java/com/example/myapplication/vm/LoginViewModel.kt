@@ -46,17 +46,17 @@ class LoginViewModel : BaseViewModel() {
                             loginType.value = true
 
                         } else {
-                            loginType.value = false
                             ToastUtils.showShort("密码错误，请重试")
                         }
                     } else {
-                        loginType.value = false
                         ToastUtils.showShort("不存在该用户")
                     }
                 }.onFailure {
                     Log.e("yolo", it.toString())
                 }
             }else{
+                //TODO 测试使用
+                loginType.value = true
                 ToastUtils.showShort("用户名密码不能为空")
             }
         }
@@ -73,10 +73,11 @@ class LoginViewModel : BaseViewModel() {
                     delay(1000)
                     adminLoginType.value = true
                 } else {
-                    adminLoginType.value = false
                     ToastUtils.showShort("用户名密码错误")
                 }
             } else {
+                //TODO 测试使用
+                adminLoginType.value = true
                 ToastUtils.showShort("用户名密码不能为空")
             }
         }
