@@ -43,7 +43,7 @@ class RegisterFragment : BaseFragment() {
     fun init(view: View) {
         binding.includeHead.headLayout.apply {
             setTitle("注册")
-            setBackgroundResource(R.color.app_color)
+            setBackgroundResource(R.color.color_FFFFFF)
             setBackListener() {
                 findNavController().popBackStack()
             }
@@ -56,8 +56,8 @@ class RegisterFragment : BaseFragment() {
             viewModel.register(number, pass, pass2)
         }
 
-        viewModel.registerType.observe(viewLifecycleOwner){
-            if (it){
+        viewModel.registerType.observe(viewLifecycleOwner) {
+            if (it) {
                 findNavController().navigate(R.id.goLoginFragment)
             }
         }

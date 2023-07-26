@@ -3,9 +3,7 @@ package com.example.myapplication.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
-import com.example.myapplication.R
 import com.example.myapplication.databinding.LayoutFriendListItemBinding
-import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -35,13 +33,14 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
         "中电信干饭群"
     )
     var deleteListener: (Int, String) -> Unit = { _, _ -> }
+    var goChatListener: (String) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
         return FriendListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: FriendListViewHolder, position: Int) {
-        holder.setData(position, list[position], deleteListener)
+        holder.setData(position, list[position], deleteListener, goChatListener)
     }
 
     override fun getItemCount(): Int {
@@ -62,7 +61,8 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
         fun setData(
             position: Int,
             data: String,
-            deleteListener: (Int, String) -> Unit
+            deleteListener: (Int, String) -> Unit,
+            goChatListener: (String) -> Unit
         ) {
             binding.friendName.text = data
             binding.friendLastMess.text = "这里是对${data}的一段描述".repeat(2)
@@ -71,6 +71,9 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
                 ToastUtils.showShort("你想干嘛")
                 deleteListener.invoke(position, data)
                 true
+            }
+            binding.friendItem.setOnClickListener {
+                goChatListener.invoke(data)
             }
         }
     }

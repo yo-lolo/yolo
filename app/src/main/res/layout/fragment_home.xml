@@ -12,24 +12,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_search"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginHorizontal="13dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/home_search_bg"
-            android:drawableLeft="@mipmap/icon_home_search"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:hint="请输入关键字搜索"
-            android:paddingLeft="13dp"
-            android:textColorHint="#ffbfbfbf" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="10dp"
             android:orientation="vertical">
 
             <com.youth.banner.Banner
@@ -42,6 +28,7 @@
                 android:elevation="3dp" />
 
             <LinearLayout
+                android:id="@+id/go_news"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -52,23 +39,25 @@
                     android:id="@+id/image_test"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp" />
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="成员"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:drawableRight="@mipmap/icon_more"
+                    android:text="兔国要闻"
+                    android:textColor="@color/color_3c3c3c"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/twice_list"
+                android:id="@+id/news_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/todo_list_item_bg" />
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
 

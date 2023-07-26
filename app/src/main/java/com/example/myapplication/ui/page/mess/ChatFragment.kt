@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.databinding.FragmentMessBinding
+import com.example.myapplication.R
+import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.FriendListAdapter
 
@@ -24,12 +28,15 @@ import com.example.myapplication.ui.adapter.FriendListAdapter
  * @UpdateDate : 2023/7/25 17:36
  * @UpdateRemark : 更新说明
  */
-class MessageFragment : BaseFragment() {
+class ChatFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentMessBinding
+    private lateinit var binding: FragmentChatBinding
     private val friendListAdapter = FriendListAdapter()
+    var name: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        name = arguments?.getString("data")
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         super.onCreate(savedInstanceState)
     }
 
@@ -38,7 +45,7 @@ class MessageFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMessBinding.inflate(layoutInflater)
+        binding = FragmentChatBinding.inflate(layoutInflater)
         initView()
         return binding.root
     }
@@ -46,20 +53,24 @@ class MessageFragment : BaseFragment() {
 
     fun initView() {
         binding.include.headLayout.apply {
-            setTitle("信息")
-        }
-        val linearLayoutManager = object : LinearLayoutManager(context) {
-            override fun canScrollVertically(): Boolean {
-                return false
-            }
-        }
-        binding.friendList.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = EmptyViewAdapter(friendListAdapter)
+            setTitle(name!!)
+            setBackListener { findNavController().popBackStack() }
+            setMenuListener { ToastUtils.showShort("这里是菜单") }
         }
 
-        friendListAdapter.goChatListener = {
-            ChatFragment.goChatFragment(findNavController(), it)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    companion object {
+        fun goChatFragment(navController: NavController, data: String) {
+            val args = Bundle().apply {
+                putString("data", data)
+            }
+            navController.navigate(R.id.goChatFragment, args)
         }
     }
 }

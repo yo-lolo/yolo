@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/back_image"
+    android:id="@+id/menu_image"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:paddingVertical="10dp"
     android:paddingHorizontal="13dp"
-    android:src="@mipmap/icon_back" />
+    android:src="@mipmap/more_icon" />

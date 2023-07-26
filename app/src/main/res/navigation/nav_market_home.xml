@@ -34,6 +34,10 @@
         android:name="com.example.myapplication.ui.page.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.myapplication.ui.page.home.NewsFragment"
+        android:label="NewsFragment" />
+    <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.myapplication.ui.page.register.RegisterFragment"
         android:label="RegisterFragment" />
@@ -50,6 +54,11 @@
         android:id="@+id/messFragment"
         android:name="com.example.myapplication.ui.page.mess.MessageFragment"
         android:label="MessageFragment" />
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.myapplication.ui.page.mess.ChatFragment"
+        android:label="ChatFragment" />
 
     <fragment
         android:id="@+id/appDetailFragment"
@@ -99,5 +108,11 @@
     <action
         android:id="@+id/goPAPFragment"
         app:destination="@id/pAPFragment" />
+    <action
+        android:id="@+id/goNewsFragment"
+        app:destination="@id/newsFragment" />
+    <action
+        android:id="@+id/goChatFragment"
+        app:destination="@id/chatFragment" />
 
 </navigation>

@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
-import com.example.myapplication.ui.adapter.TwiceListAdapter
+import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.util.GlideImageLoader
 
 /**
@@ -31,7 +30,7 @@ import com.example.myapplication.util.GlideImageLoader
 class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private var twiceListAdapter = TwiceListAdapter()
+    private var newsListAdapter = NewsListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,10 +44,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun init(view: View) {
-
-        binding.textSearch.setOnClickListener {
-            findNavController().navigate(R.id.goSearchFragment)
-        }
 
         // 轮播图片集合
         val images = listOf(
@@ -80,10 +75,24 @@ class HomeFragment : BaseFragment() {
             ToastUtils.showShort("你点击了TWICE的第${it + 1}张轮播图")
         }
 
+        // 设置RecyclerView在垂直状态下不滑动
+        var linearlayoutManager: LinearLayoutManager = object : LinearLayoutManager(context) {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
         // 初始化Recycler
-        binding.twiceList.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = twiceListAdapter
+        binding.newsList.apply {
+            layoutManager = linearlayoutManager
+            adapter = newsListAdapter
+        }
+
+        // TODO 过滤掉不是今天的 只展示两条数据
+        newsListAdapter.list = listOf("1", "2", "3").filter { it.isNotEmpty() }.take(2)
+        newsListAdapter.notifyDataSetChanged()
+
+        binding.goNews.setOnClickListener {
+            findNavController().navigate(R.id.goNewsFragment)
         }
 
         GlideImageLoader().displayImage(context, R.drawable.world, binding.imageTest)

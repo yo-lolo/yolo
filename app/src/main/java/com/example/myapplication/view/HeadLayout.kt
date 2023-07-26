@@ -40,6 +40,7 @@ class HeadLayout @JvmOverloads constructor(
 
     //默认组件
     private var backIcon: ImageView? = null
+    private var menuIcon: ImageView? = null
     private var titleText: TextView? = null
 
     init {
@@ -73,6 +74,14 @@ class HeadLayout @JvmOverloads constructor(
             backIcon = leftContainer.findViewById(R.id.back_image)
         }
         backIcon?.setOnClickListener(listener)
+    }
+
+    fun setMenuListener(listener: OnClickListener){
+        if (menuIcon == null) {
+            bindView(rightContainer, R.layout.layout_head_menu)
+            menuIcon = rightContainer.findViewById(R.id.menu_image)
+        }
+        menuIcon?.setOnClickListener(listener)
     }
 
     fun bindLeftView(childView: View) {
