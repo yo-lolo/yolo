@@ -21,7 +21,13 @@ data class User(
     @PrimaryKey
     var number: Long,
     var pass: String,
-    var isLogin : Boolean = false
+    var time: Long,
+    var isLogin: Boolean = false,
+    var neck: String = "MoMo",
+    var image: String = "",
+    var date: String = "",
+    var sex: String = "",
+    var address: String = ""
 ) {
 
 }

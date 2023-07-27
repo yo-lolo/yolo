@@ -18,10 +18,10 @@ import androidx.room.PrimaryKey
 @Entity
 data class NewsInfo(
     val number: Long,
-    val author: String,
     val time: Long,
     val tag: String,
     val type: String,
+    val title : String,
     val content: String
 ) {
     @PrimaryKey(autoGenerate = true)

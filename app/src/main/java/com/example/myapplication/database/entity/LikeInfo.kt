@@ -17,7 +17,10 @@ import androidx.room.PrimaryKey
  */
 
 @Entity
-data class LikeInfo(val number: Long, val newsId: Long) {
+data class LikeInfo(
+    val number: Long,
+    val newsId: Long
+) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 }

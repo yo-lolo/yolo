@@ -37,7 +37,7 @@ class FeedbackViewModel : BaseViewModel() {
                             AppConfig.phoneNumber,
                             type.value!!,
                             desc,
-                            TimeUtil.getCurrentTime(),
+                            TimeUtil.getCurrentMill(),
                             jsonPicture
                         )
                     )

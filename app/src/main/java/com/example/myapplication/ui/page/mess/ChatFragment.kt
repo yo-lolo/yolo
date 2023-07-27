@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +14,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentChatBinding
-import com.example.myapplication.ui.adapter.EmptyViewAdapter
-import com.example.myapplication.ui.adapter.FriendListAdapter
+import com.example.myapplication.ui.adapter.ChatListAdapter
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -31,7 +31,7 @@ import com.example.myapplication.ui.adapter.FriendListAdapter
 class ChatFragment : BaseFragment() {
 
     private lateinit var binding: FragmentChatBinding
-    private val friendListAdapter = FriendListAdapter()
+    private val chatListAdapter = ChatListAdapter()
     var name: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +56,14 @@ class ChatFragment : BaseFragment() {
             setTitle(name!!)
             setBackListener { findNavController().popBackStack() }
             setMenuListener { ToastUtils.showShort("这里是菜单") }
+        }
+        binding.chatContent.doOnTextChanged { text, start, before, count ->
+            binding.chatSubmit.visibility = if (text!!.isNotEmpty()) View.VISIBLE else View.GONE
+        }
+
+        binding.chatList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = chatListAdapter
         }
 
     }

@@ -1,7 +1,9 @@
 package com.example.myapplication.util
 
 import android.annotation.SuppressLint
+import com.airbnb.lottie.L
 import com.blankj.utilcode.util.TimeUtils
+import java.sql.Time
 import java.text.SimpleDateFormat
 
 /**
@@ -34,6 +36,32 @@ object TimeUtil {
     @SuppressLint("SimpleDateFormat")
     fun getCurrentTime(): String {
         return TimeUtils.getNowString(SimpleDateFormat(dateFormatYMDHMS))
+    }
+
+    fun getCurrentMill(): Long {
+        return TimeUtils.getNowMills()
+    }
+
+    fun isToday(mills: Long): Boolean {
+        return TimeUtils.isToday(mills)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun millis2String(mills: Long, dateFormat: String): String {
+        return TimeUtils.millis2String(mills, SimpleDateFormat(dateFormat))
+    }
+
+    /**
+     * 如果小于 1 秒钟内，显示刚刚
+     * 如果在 1 分钟内，显示 XXX秒前
+     * 如果在 1 小时内，显示 XXX分钟前
+     * 如果在 1 小时外的今天内，显示今天15:32
+     * 如果是昨天的，显示昨天15:32
+     * 其余显示，2016-10-15
+     * 时间不合法的情况全部日期和时间信息，如星期六 十月 27 14:21:20 CST 2007
+     */
+    fun getFriendlyTimeSpanByNow(mills: Long): String {
+        return TimeUtils.getFriendlyTimeSpanByNow(mills)
     }
 
 }

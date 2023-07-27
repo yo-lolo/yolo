@@ -22,7 +22,7 @@ data class FeedbackInfo(
     val phoneNumber: Long,
     val type: String,
     val desc: String,
-    val time: String,
+    val time: Long,
     val pictureItems: String
 ) {
     @PrimaryKey(autoGenerate = true)

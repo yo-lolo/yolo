@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.imp.FeedbackTaskImp
@@ -61,5 +62,14 @@ object DataManager {
             //指定为经典Footer，默认是 BallPulseFooter
             ClassicsFooter(context).setDrawableSize(20f)
         }
+    }
+
+    fun layoutManagerNotScroll(): LinearLayoutManager {
+        var linearlayoutManager: LinearLayoutManager = object : LinearLayoutManager(context) {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        return linearlayoutManager
     }
 }

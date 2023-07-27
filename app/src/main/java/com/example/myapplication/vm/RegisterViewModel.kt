@@ -3,10 +3,12 @@ package com.example.myapplication.vm
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.User
+import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -35,7 +37,7 @@ class RegisterViewModel : BaseViewModel() {
                     var phoneNumber = number.toLong()
                     if (pass == pass2 && pass.length in 6..14) {
                         kotlin.runCatching {
-                            userStoreRepository.insertUser(User(phoneNumber, pass))
+                            userStoreRepository.insertUser(User(phoneNumber, pass, TimeUtil.getCurrentMill()))
                         }.onFailure {
                             registerType.value = false
                             ToastUtils.showShort("注册失败，请重试")

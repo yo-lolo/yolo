@@ -21,6 +21,7 @@ open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // 沉浸式状态栏
         ImmersionBar.with(this)
             .statusBarDarkFont(
                 true,
