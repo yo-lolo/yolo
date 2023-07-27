@@ -37,4 +37,6 @@ class MessageViewModel : BaseViewModel() {
             chats.value = testStoreRepository.getChats(AppConfig.phoneNumber, friendNumber)
         }
     }
+
+
 }

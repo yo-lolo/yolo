@@ -25,7 +25,7 @@ data class ChatInfo(
     val time: Long,
     val content: String,
     val is_read: Boolean = false
-) {
+) :java.io.Serializable{
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 }

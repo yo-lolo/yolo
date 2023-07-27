@@ -60,7 +60,12 @@ class ChatFragment : BaseFragment() {
         binding.include.headLayout.apply {
             setTitle(friend?.friendNumber.toString())
             setBackListener { findNavController().popBackStack() }
-            setMenuListener { ToastUtils.showShort("这里是菜单") }
+            setMenuListener {
+                ChatDetailFragment.goChatDetailFragment(
+                    friend!!,
+                    findNavController()
+                )
+            }
         }
         binding.chatContent.doOnTextChanged { text, start, before, count ->
             binding.chatSubmit.visibility = if (text!!.isNotEmpty()) View.VISIBLE else View.GONE
@@ -71,7 +76,7 @@ class ChatFragment : BaseFragment() {
             adapter = chatListAdapter
         }
 
-        viewModel.chats.observe(viewLifecycleOwner){
+        viewModel.chats.observe(viewLifecycleOwner) {
             chatListAdapter.list = it
             chatListAdapter.notifyDataSetChanged()
         }

@@ -29,4 +29,7 @@ interface ChatDao {
 
     @Query("select * from ChatInfo where number = :number or :friendNumber and friendNumber = :number or :friendNumber order by time asc")
     fun getChatsById(number: Long, friendNumber: Long): List<ChatInfo>
+
+    @Query("select Max(time) from ChatInfo where id = :id")
+    fun lastChatTime(id: Long): Long
 }

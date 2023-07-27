@@ -67,6 +67,7 @@ class MessageFragment : BaseFragment() {
             friendListAdapter.notifyDataSetChanged()
         }
 
+
         friendListAdapter.goChatListener = {
             ChatFragment.goChatFragment(findNavController(), it)
         }

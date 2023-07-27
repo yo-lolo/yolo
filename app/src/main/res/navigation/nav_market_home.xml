@@ -61,6 +61,11 @@
         android:label="ChatFragment" />
 
     <fragment
+        android:id="@+id/chatDetailFragment"
+        android:name="com.example.myapplication.ui.page.mess.ChatDetailFragment"
+        android:label="ChatDetailFragment" />
+
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -114,5 +119,8 @@
     <action
         android:id="@+id/goChatFragment"
         app:destination="@id/chatFragment" />
+    <action
+        android:id="@+id/goChatDetailFragment"
+        app:destination="@id/chatDetailFragment" />
 
 </navigation>
