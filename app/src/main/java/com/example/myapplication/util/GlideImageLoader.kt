@@ -43,7 +43,7 @@ class GlideImageLoader : ImageLoader() {
     }
 
     fun displayImageWithRadius(path: Any?, imageView: ImageView?) {
-        Glide.with(DataManager.context).load(path).error(R.mipmap.icon_empty).into(imageView)
+        Glide.with(DataManager.context).load(path).error(R.mipmap.touxiang).into(imageView)
     }
 
     fun displayLocalFile(context: Context?, path: Any?, imageView: ImageView?) {

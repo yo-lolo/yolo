@@ -18,16 +18,15 @@ import androidx.room.PrimaryKey
  */
 @Entity
 data class User(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     var number: Long,
     var pass: String,
     var time: Long,
-    var isLogin: Boolean = false,
     var neck: String = "MoMo",
+    var address: String = "",
+    var sign: String = "",
     var image: String = "",
-    var date: String = "",
-    var sex: String = "",
-    var address: String = ""
+    var isLogin: Boolean = false
 ) {
 
 }

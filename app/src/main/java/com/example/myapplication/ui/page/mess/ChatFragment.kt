@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.ui.adapter.ChatListAdapter
+import com.example.myapplication.vm.MessageViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -32,11 +35,13 @@ class ChatFragment : BaseFragment() {
 
     private lateinit var binding: FragmentChatBinding
     private val chatListAdapter = ChatListAdapter()
-    var name: String? = null
+    val viewModel by viewModels<MessageViewModel>()
+    var friend: FriendInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        name = arguments?.getString("data")
+        friend = arguments?.getSerializable("friend") as FriendInfo
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        viewModel.initChats(friend!!.friendNumber)
         super.onCreate(savedInstanceState)
     }
 
@@ -53,7 +58,7 @@ class ChatFragment : BaseFragment() {
 
     fun initView() {
         binding.include.headLayout.apply {
-            setTitle(name!!)
+            setTitle(friend?.friendNumber.toString())
             setBackListener { findNavController().popBackStack() }
             setMenuListener { ToastUtils.showShort("这里是菜单") }
         }
@@ -66,6 +71,11 @@ class ChatFragment : BaseFragment() {
             adapter = chatListAdapter
         }
 
+        viewModel.chats.observe(viewLifecycleOwner){
+            chatListAdapter.list = it
+            chatListAdapter.notifyDataSetChanged()
+        }
+
     }
 
     override fun onResume() {
@@ -74,9 +84,9 @@ class ChatFragment : BaseFragment() {
     }
 
     companion object {
-        fun goChatFragment(navController: NavController, data: String) {
+        fun goChatFragment(navController: NavController, friend: FriendInfo) {
             val args = Bundle().apply {
-                putString("data", data)
+                putSerializable("friend", friend)
             }
             navController.navigate(R.id.goChatFragment, args)
         }

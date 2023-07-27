@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.databinding.FragmentMessBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.FriendListAdapter
+import com.example.myapplication.vm.MessageViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -28,6 +30,7 @@ class MessageFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMessBinding
     private val friendListAdapter = FriendListAdapter()
+    val viewModel by viewModels<MessageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class MessageFragment : BaseFragment() {
     ): View {
         binding = FragmentMessBinding.inflate(layoutInflater)
         initView()
+        viewModel.initData()
         return binding.root
     }
 
@@ -56,6 +60,11 @@ class MessageFragment : BaseFragment() {
         binding.friendList.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = EmptyViewAdapter(friendListAdapter)
+        }
+
+        viewModel.friends.observe(viewLifecycleOwner) {
+            friendListAdapter.list = it
+            friendListAdapter.notifyDataSetChanged()
         }
 
         friendListAdapter.goChatListener = {

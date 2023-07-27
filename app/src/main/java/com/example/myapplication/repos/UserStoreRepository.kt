@@ -60,4 +60,12 @@ class UserStoreRepository(private val userTaskImp: UserTaskImp) {
     suspend fun updatePass(number: Long, pass: String) = withContext(Dispatchers.IO) {
         return@withContext userTaskImp.updatePass(number, pass)
     }
+
+    /**
+     * 通过号码更新用户信息
+     */
+    suspend fun updateUserInfo(number: Long, neck: String, address: String, sign: String) =
+        withContext(Dispatchers.IO) {
+            return@withContext userTaskImp.updateUserInfo(number, neck, address, sign)
+        }
 }

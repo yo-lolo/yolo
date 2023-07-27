@@ -38,4 +38,7 @@ interface UserDao {
 
     @Query("update user set pass = :pass where number = :number")
     fun updatePass(number: Long, pass: String)
+
+    @Query("update user set neck = :neck and address = :address and sign = :sign where number = :number")
+    fun updateUserInfo(number: Long, neck: String, address: String, sign: String)
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNewsBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.NewsListAdapter
+import com.example.myapplication.vm.HomeViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -29,6 +31,7 @@ class NewsFragment : BaseFragment() {
 
     private var newsListAdapter = NewsListAdapter()
     private lateinit var binding: FragmentNewsBinding
+    val viewModel by viewModels<HomeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,7 @@ class NewsFragment : BaseFragment() {
     ): View {
         binding = FragmentNewsBinding.inflate(layoutInflater)
         initView()
+        viewModel.initData()
         return binding.root
     }
 
@@ -59,6 +63,12 @@ class NewsFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = EmptyViewAdapter(newsListAdapter)
         }
+
+        viewModel.news.observe(viewLifecycleOwner){
+            newsListAdapter.list = it
+            newsListAdapter.notifyDataSetChanged()
+        }
+
 
     }
 }

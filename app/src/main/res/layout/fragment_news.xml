@@ -37,7 +37,8 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="- -"/>
+            android:textColor="@color/color_888"
+            android:text="-   已经到底啦！  -"/>
     </LinearLayout>
 
 

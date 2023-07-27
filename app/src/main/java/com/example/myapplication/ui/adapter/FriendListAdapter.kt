@@ -3,7 +3,9 @@ package com.example.myapplication.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.LayoutFriendListItemBinding
+import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -20,20 +22,9 @@ import com.example.myapplication.util.layoutInflater
  */
 class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewHolder>() {
 
-    var list = mutableListOf(
-        "不开兴和没头脑",
-        "LZ公司交流群",
-        "Yolo",
-        "三人行",
-        "MXM平台开发群",
-        "BU1知识群",
-        "守正物业INTEGRITY SERVICE",
-        "魔仙堡",
-        "舅妈",
-        "中电信干饭群"
-    )
-    var deleteListener: (Int, String) -> Unit = { _, _ -> }
-    var goChatListener: (String) -> Unit = { }
+    var list: List<FriendInfo> = listOf()
+    var deleteListener: (Int, FriendInfo) -> Unit = { _, _ -> }
+    var goChatListener: (FriendInfo) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
         return FriendListViewHolder(parent)
@@ -60,20 +51,19 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
 
         fun setData(
             position: Int,
-            data: String,
-            deleteListener: (Int, String) -> Unit,
-            goChatListener: (String) -> Unit
+            friend: FriendInfo,
+            deleteListener: (Int, FriendInfo) -> Unit,
+            goChatListener: (FriendInfo) -> Unit
         ) {
-            binding.friendName.text = data
-            binding.friendLastMess.text = "这里是对${data}的一段描述".repeat(2)
-            binding.lastMessTime.text = "18:00"
+            binding.friendName.text = friend.friendNumber.toString()
+            binding.friendLastMess.text = "这里是Last Mess"
+            binding.lastMessTime.text = TimeUtil.getFriendlyTimeSpanByNow(friend.time)
             binding.friendItem.setOnLongClickListener {
-                ToastUtils.showShort("你想干嘛")
-                deleteListener.invoke(position, data)
+                // TODO
                 true
             }
             binding.friendItem.setOnClickListener {
-                goChatListener.invoke(data)
+                goChatListener.invoke(friend)
             }
         }
     }

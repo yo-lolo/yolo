@@ -48,4 +48,9 @@ interface UserTask {
      * 通过号码更新用户的密码
      */
     fun updatePass(number: Long, pass: String)
+
+    /**
+     *  通过号码更新用户信息
+     */
+    fun updateUserInfo(number: Long,neck: String, address: String, sign: String)
 }

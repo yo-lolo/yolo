@@ -26,7 +26,8 @@ object TimeUtil {
     var dateFormatYMDHMS = "yyyy-MM-dd HH:mm:ss"
     var dateFormatYMD = "yyyy-MM-dd"
     var dateFormatYMDHMSCN = "yyyy年MM月dd日 HH时mm分ss秒"
-    var dateFormatYMDCN = "yyyy年MM月dd日"
+    var dateFormatYMDHM_CN = "yyyy年MM月dd日 HH时mm分"
+    var dateFormatYMD_CN = "yyyy年MM月dd日"
 
     @SuppressLint("SimpleDateFormat")
     fun getCurrentTime(format: String): String {
@@ -47,7 +48,7 @@ object TimeUtil {
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun millis2String(mills: Long, dateFormat: String): String {
+    fun millis2String(mills: Long, dateFormat: String = dateFormatYMDHMS): String {
         return TimeUtils.millis2String(mills, SimpleDateFormat(dateFormat))
     }
 

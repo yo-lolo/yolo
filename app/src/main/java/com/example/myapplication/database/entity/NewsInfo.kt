@@ -21,8 +21,9 @@ data class NewsInfo(
     val time: Long,
     val tag: String,
     val type: String,
-    val title : String,
-    val content: String
+    val title: String,
+    val content: String,
+    val image: String = ""
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

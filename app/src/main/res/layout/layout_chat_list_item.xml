@@ -28,12 +28,13 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/left_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:paddingHorizontal="3dp"
                 android:textColor="@color/color_dbdbdb"
-                android:text="2022.10.21 18:35"
+                tools:text="2022.10.21 18:35"
                 android:textSize="10dp" />
 
             <TextView
@@ -70,12 +71,13 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/right_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:paddingHorizontal="3dp"
                 android:textColor="@color/color_dbdbdb"
-                android:text="2022.10.21 18:35"
+                tools:text="2022.10.21 18:35"
                 android:textSize="10dp" />
 
             <TextView

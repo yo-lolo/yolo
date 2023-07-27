@@ -2,17 +2,24 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.myapplication.database.AppDataBase
+import com.example.myapplication.database.entity.ChatInfo
+import com.example.myapplication.database.entity.FriendInfo
+import com.example.myapplication.database.entity.NewsInfo
+import com.example.myapplication.database.entity.User
 import com.example.myapplication.imp.FeedbackTaskImp
 import com.example.myapplication.imp.UserTaskImp
 import com.example.myapplication.repos.FeedbackStoreRepository
+import com.example.myapplication.repos.TestStoreRepository
 import com.example.myapplication.repos.UserStoreRepository
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import kotlinx.coroutines.*
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -33,14 +40,22 @@ object DataManager {
     lateinit var context: Context
     lateinit var userStoreRepository: UserStoreRepository
     lateinit var feedbackStoreRepository: FeedbackStoreRepository
+    lateinit var testStoreRepository: TestStoreRepository
     private var appDataBase: AppDataBase? = null
+    val launchScope by lazy {
+        val exceptionHandler = CoroutineExceptionHandler { _, e -> Log.e("yolo", e.toString()) }
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO + exceptionHandler)
+        scope
+    }
 
     fun init(context: Context) {
         this.context = context
         appDataBase = createDb()
         userStoreRepository = UserStoreRepository(UserTaskImp(appDataBase!!))
         feedbackStoreRepository = FeedbackStoreRepository(FeedbackTaskImp(appDataBase!!))
+        testStoreRepository = TestStoreRepository(appDataBase!!)
         initSmartRefresh()
+        // initData()
     }
 
     private fun createDb(): AppDataBase {
@@ -72,4 +87,16 @@ object DataManager {
         }
         return linearlayoutManager
     }
+
+    private fun initData() {
+        launchScope.launch {
+            testStoreRepository.insertNews()
+            testStoreRepository.insertUser()
+            testStoreRepository.insertChat()
+            testStoreRepository.insertFriend()
+        }
+    }
+
+
+
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
@@ -14,6 +15,8 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.util.GlideImageLoader
+import com.example.myapplication.util.TimeUtil
+import com.example.myapplication.vm.HomeViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -31,6 +34,7 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private var newsListAdapter = NewsListAdapter()
+    val viewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +44,7 @@ class HomeFragment : BaseFragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
+        viewModel.initData()
         return view
     }
 
@@ -87,9 +92,10 @@ class HomeFragment : BaseFragment() {
             adapter = newsListAdapter
         }
 
-        // TODO 过滤掉不是今天的 只展示两条数据
-        newsListAdapter.list = listOf("1", "2", "3").filter { it.isNotEmpty() }.take(2)
-        newsListAdapter.notifyDataSetChanged()
+        viewModel.news.observe(viewLifecycleOwner) { news ->
+            newsListAdapter.list = news.filter { !TimeUtil.isToday(it.time) }.take(2)
+            newsListAdapter.notifyDataSetChanged()
+        }
 
         binding.goNews.setOnClickListener {
             findNavController().navigate(R.id.goNewsFragment)

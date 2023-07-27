@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.transform.RoundedCornersTransformation
 import coil.util.CoilUtils
 import com.example.myapplication.R
+import com.example.myapplication.config.AppConfig
+import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.databinding.LayoutChatListItemBinding
 import com.example.myapplication.databinding.LayoutImageItemBinding
 import com.example.myapplication.util.ImageUtil
+import com.example.myapplication.util.TimeUtil
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -27,7 +30,7 @@ import com.example.myapplication.util.ImageUtil
  */
 class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
 
-    var list = mutableListOf<String>("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+    var list: List<ChatInfo> = listOf()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder {
@@ -53,14 +56,18 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
     ) : RecyclerView.ViewHolder(binding.root) {
         fun setData(
             position: Int,
-            data: String
+            chat: ChatInfo
         ) {
-            if (position % 2 != 0){
-                binding.leftChat.visibility = View.VISIBLE
-                binding.rightChat.visibility = View.GONE
-            }else{
+            if (chat.sendTag == AppConfig.phoneNumber){
                 binding.leftChat.visibility = View.GONE
                 binding.rightChat.visibility = View.VISIBLE
+                binding.rightContent.text = chat.content
+                binding.rightTime.text = TimeUtil.getFriendlyTimeSpanByNow(chat.time)
+            }else{
+                binding.rightChat.visibility = View.GONE
+                binding.leftChat.visibility = View.VISIBLE
+                binding.leftContent.text = chat.content
+                binding.leftTime.text = TimeUtil.getFriendlyTimeSpanByNow(chat.time)
             }
         }
     }

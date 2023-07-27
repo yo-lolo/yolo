@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import android.view.ViewParent
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.LayoutNewsListItemBinding
 import com.example.myapplication.databinding.LayoutTwiceListItemBinding
+import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -23,7 +25,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>() {
 
-    var list = listOf("", "", "", "", "", "", "", "", "")
+    var list: List<NewsInfo> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
         return NewsListViewHolder(parent)
@@ -46,9 +48,12 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
         )
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(position: Int, data: String) {
-
+        fun setData(position: Int, news: NewsInfo) {
+            binding.newsAuthor.text = news.number.toString()
+            binding.newsTag.text = news.tag
+            binding.newsContent.text = news.content
+            binding.newsDate.text = TimeUtil.millis2String(news.time, TimeUtil.dateFormatYMD_CN)
+            binding.newsTitle.text = news.title
         }
-
     }
 }

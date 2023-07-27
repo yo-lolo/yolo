@@ -45,4 +45,8 @@ class UserTaskImp(
     override fun updatePass(number: Long, pass: String) {
         userDao.updatePass(number, pass)
     }
+
+    override fun updateUserInfo(number: Long, neck: String, address: String, sign: String) {
+        userDao.updateUserInfo(number, neck, address, sign)
+    }
 }

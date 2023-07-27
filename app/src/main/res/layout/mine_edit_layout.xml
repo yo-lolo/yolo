@@ -11,23 +11,22 @@
 
     <LinearLayout
         android:layout_width="280dp"
-        android:layout_height="320dp"
+        android:layout_height="330dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/mine_image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginVertical="20dp"
-            android:text="MINE EDIT"
-            android:textColor="@color/color_3c3c3c"
-            android:textSize="19sp"
-            android:textStyle="bold" />
+            android:src="@mipmap/touxiang"
+            app:riv_corner_radius="5dp" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:paddingBottom="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,11 +55,12 @@
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/mine_name"
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/mine_neck"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="YoLo"
+                        android:background="@null"
+                        android:hint="请输入昵称"
                         android:textColor="@color/color_3c3c3c"
                         android:textSize="12sp" />
 
@@ -73,14 +73,100 @@
                     android:layout_marginLeft="52dp"
                     android:background="@color/color_e7e7e7" />
 
+
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="10dp"
+                        android:layout_marginRight="6dp"
+                        android:background="@color/candy_r" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:text="账号："
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/mine_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp"
+                        tools:text="15755949344" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="52dp"
+                    android:background="@color/color_e7e7e7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="10dp"
+                            android:layout_marginRight="6dp"
+                            android:background="@color/candy_r" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="地址："
+                            android:textColor="@color/color_3c3c3c"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/mine_address"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="请输入地址"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="52dp"
+                    android:background="@color/color_e7e7e7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -102,108 +188,22 @@
                     </LinearLayout>
 
 
-                    <TextView
+                    <EditText
                         android:id="@+id/mine_personal_sign"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="2dp"
-                        tools:text="无事小神仙"
-                        android:textColor="@color/color_3c3c3c"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginLeft="52dp"
-                    android:background="@color/color_e7e7e7" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="10dp"
-                        android:layout_marginRight="6dp"
-                        android:background="@color/candy_r" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="4dp"
-                        android:text="电话号码："
-                        android:textColor="@color/color_3c3c3c"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/mine_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="15755949344"
-                        android:textColor="@color/color_3c3c3c"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginLeft="52dp"
-                    android:background="@color/color_e7e7e7" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_height="10dp"
-                            android:layout_marginRight="6dp"
-                            android:background="@color/candy_r" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="4dp"
-                            android:text="个人地址："
-                            android:textColor="@color/color_3c3c3c"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:id="@+id/mine_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="2dp"
-                        tools:text="安徽省合肥市高新区科大国盾量子产业园"
+                        android:background="@null"
+                        android:hint="请输入个性签名"
                         android:textColor="@color/color_3c3c3c"
                         android:textSize="12sp" />
 
                 </LinearLayout>
 
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_marginVertical="10dp"
-                    android:layout_marginLeft="52dp"
+                    android:layout_marginLeft="75dp"
                     android:background="@color/color_e7e7e7" />
 
                 <LinearLayout
@@ -231,11 +231,18 @@
                         android:id="@+id/mine_register_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="2022年10月21日"
                         android:textColor="@color/color_3c3c3c"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        tools:text="2022年10月21日" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_e7e7e7" />
 
             </LinearLayout>
         </ScrollView>
@@ -278,8 +285,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
 
 
 </LinearLayout>
