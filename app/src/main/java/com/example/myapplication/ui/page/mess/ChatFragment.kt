@@ -1,23 +1,26 @@
 package com.example.myapplication.ui.page.mess
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.ui.adapter.ChatListAdapter
+import com.example.myapplication.util.SoftInputUtil
 import com.example.myapplication.vm.MessageViewModel
+
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -72,7 +75,7 @@ class ChatFragment : BaseFragment() {
         }
 
         binding.chatList.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = DataManager.layoutManagerNotScroll()
             adapter = chatListAdapter
         }
 
@@ -81,10 +84,19 @@ class ChatFragment : BaseFragment() {
             chatListAdapter.notifyDataSetChanged()
         }
 
+        binding.chatSubmit.setOnClickListener {
+            val content = binding.chatContent.text.toString().trim()
+            viewModel.insertChat(friend!!.friendNumber, content)
+            binding.chatContent.text.clear()
+        }
+
     }
 
-    override fun onResume() {
-        super.onResume()
+    /**
+     * @param root             最外层布局
+     * @param needToScrollView 要滚动的布局,就是说在键盘弹出的时候,你需要试图滚动上去的View,在键盘隐藏的时候,他又会滚动到原来的位置的布局
+     */
+    private fun controlKeyboardLayout(root: View, needToScrollView: View) {
 
     }
 

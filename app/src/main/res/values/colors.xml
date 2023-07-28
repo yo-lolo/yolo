@@ -12,6 +12,7 @@
 
     <color name="color_theme">#3399FF</color>
     <color name="color_theme_down">#d6ecfa</color>
+    <color name="color_lower_blue">#A1D6E2</color>
 
     <color name="color_3c3c3c">#3c3c3c</color>
     <color name="app_color">#13227a</color>

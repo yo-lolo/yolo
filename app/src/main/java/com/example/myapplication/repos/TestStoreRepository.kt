@@ -44,11 +44,8 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
     }
 
 
-    suspend fun insertChat() = withContext(Dispatchers.IO) {
-        appDataBase.ChatDao()
-            .insertChat(ChatInfo(15755949344, 19956596024, 15755949344, 1, "哎呦，不错哟"))
-        appDataBase.ChatDao()
-            .insertChat(ChatInfo(19956596024, 15755949344, 19956596024, 600000, "你也不错哟"))
+    suspend fun insertChat(chatInfo: ChatInfo) = withContext(Dispatchers.IO) {
+        appDataBase.ChatDao().insertChat(chatInfo)
     }
 
 

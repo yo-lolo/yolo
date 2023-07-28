@@ -6,6 +6,7 @@ import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
+import com.example.myapplication.util.TimeUtil
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -36,6 +37,25 @@ class MessageViewModel : BaseViewModel() {
         launchSafe {
             chats.value = testStoreRepository.getChats(AppConfig.phoneNumber, friendNumber)
         }
+    }
+
+    fun insertChat(friendNumber: Long, content: String) {
+        launchSafe {
+            testStoreRepository.insertChat(
+                ChatInfo(
+                    AppConfig.phoneNumber,
+                    friendNumber,
+                    AppConfig.phoneNumber,
+                    TimeUtil.getCurrentMill(),
+                    content
+                )
+            )
+            initChats(friendNumber)
+        }
+    }
+
+    private fun onRefresh() {
+        initData()
     }
 
 

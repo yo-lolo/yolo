@@ -42,6 +42,7 @@ class HeadLayout @JvmOverloads constructor(
     private var backIcon: ImageView? = null
     private var menuIcon: ImageView? = null
     private var titleText: TextView? = null
+    private var post: TextView? = null
 
     init {
         inflate(context, R.layout.layout_head_layout, this)
@@ -49,10 +50,10 @@ class HeadLayout @JvmOverloads constructor(
         leftContainer = findViewById(R.id.left_container)
         centerContainer = findViewById(R.id.center_container)
         rightContainer = findViewById(R.id.right_container)
-        headLinear =  findViewById(R.id.head_linear)
+        headLinear = findViewById(R.id.head_linear)
     }
 
-    fun setHeadLayoutColor(){
+    fun setHeadLayoutColor() {
         headLinear.setBackgroundResource(R.color.color_FFFFFF)
     }
 
@@ -76,12 +77,20 @@ class HeadLayout @JvmOverloads constructor(
         backIcon?.setOnClickListener(listener)
     }
 
-    fun setMenuListener(listener: OnClickListener){
+    fun setMenuListener(listener: OnClickListener) {
         if (menuIcon == null) {
             bindView(rightContainer, R.layout.layout_head_menu)
             menuIcon = rightContainer.findViewById(R.id.menu_image)
         }
         menuIcon?.setOnClickListener(listener)
+    }
+
+    fun setPostListener(listener: OnClickListener) {
+        if (post == null) {
+            bindView(rightContainer, R.layout.layout_head_post)
+            post = rightContainer.findViewById(R.id.post_text)
+        }
+        post?.setOnClickListener(listener)
     }
 
     fun bindLeftView(childView: View) {

@@ -73,6 +73,5 @@ class NewsFragment : BaseFragment() {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
 
-
     }
 }

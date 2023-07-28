@@ -2,7 +2,7 @@ package com.example.myapplication.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.database.entity.CommentInfo
+import com.example.myapplication.DataManager
 import com.example.myapplication.databinding.LayoutCommentListItemBinding
 import com.example.myapplication.util.layoutInflater
 
@@ -20,14 +20,17 @@ import com.example.myapplication.util.layoutInflater
  */
 class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListViewHolder>() {
 
-    var list = listOf<String>("","")
+    var list = listOf<String>("", "")
+
+    var addFriendListener: (Int) -> Unit = {}
+    var goCommentListener: () -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentListViewHolder {
         return CommentListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: CommentListViewHolder, position: Int) {
-        holder.setData(position, list[position])
+        holder.setData(position, list[position], goCommentListener)
     }
 
     override fun getItemCount(): Int {
@@ -35,15 +38,43 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
     }
 
     class CommentListViewHolder(
-        parent: ViewGroup,
+        var parent: ViewGroup,
         val binding: LayoutCommentListItemBinding = LayoutCommentListItemBinding.inflate(
             parent.context.layoutInflater(),
             parent,
             false
         )
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun setData(position: Int, commentInfo: String) {
+        var replyListAdapter = ReplyListAdapter()
+        fun setData(position: Int, commentInfo: String, goCommentListener: () -> Unit) {
 
+            binding.goComment.setOnClickListener {
+                goCommentListener.invoke()
+            }
+
+            if (position % 2 == 0) {
+                binding.replyList.apply {
+                    layoutManager = DataManager.layoutManagerNotScroll()
+                    adapter = replyListAdapter
+                }
+                replyListAdapter.list = listOf("你是谁？")
+                replyListAdapter.notifyDataSetChanged()
+                listRefresh()
+            } else {
+                binding.replyList.apply {
+                    layoutManager = DataManager.layoutManagerNotScroll()
+                    adapter = replyListAdapter
+                }
+                replyListAdapter.list = listOf("哈哈哈", "阿里嘎多")
+                replyListAdapter.notifyDataSetChanged()
+                listRefresh()
+            }
+
+
+        }
+
+        fun listRefresh() {
+            replyListAdapter.notifyDataSetChanged()
         }
     }
 

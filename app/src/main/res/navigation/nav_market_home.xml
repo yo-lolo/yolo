@@ -70,6 +70,11 @@
         android:label="ChatDetailFragment" />
 
     <fragment
+        android:id="@+id/postCommentFragment"
+        android:name="com.example.myapplication.ui.page.home.PostCommentFragment"
+        android:label="PostCommentFragment" />
+
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -128,5 +133,8 @@
     <action
         android:id="@+id/goChatDetailFragment"
         app:destination="@id/chatDetailFragment" />
+    <action
+        android:id="@+id/goPostCommentFragment"
+        app:destination="@id/postCommentFragment" />
 
 </navigation>
