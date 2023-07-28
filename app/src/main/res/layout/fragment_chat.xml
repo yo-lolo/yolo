@@ -19,56 +19,58 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.core.widget.NestedScrollView
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/chat_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp">
+            android:layout_height="match_parent">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </androidx.core.widget.NestedScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/color_f9f9f9"
             android:elevation="3dp"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/chat_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="36dp"
-                android:imeOptions="flagNoExtractUi"
-                android:windowSoftInputMode="adjustResize"
                 android:layout_marginVertical="7dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="10dp"
                 android:layout_toStartOf="@+id/chat_submit"
                 android:background="@drawable/normal_bg"
                 android:hint="请输入内容"
+                android:imeOptions="flagNoExtractUi"
+                android:minHeight="36dp"
                 android:paddingHorizontal="7dp"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:windowSoftInputMode="adjustResize" />
+
             <TextView
                 android:id="@+id/chat_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:gravity="center"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:background="@drawable/submmit_button_bg"
-                android:textColor="@color/color_FFFFFF"
                 android:layout_marginRight="9dp"
+                android:background="@drawable/submmit_button_bg"
+                android:gravity="center"
                 android:paddingHorizontal="14dp"
-                android:text="发送"/>
+                android:text="发送"
+                android:textColor="@color/color_FFFFFF"
+                android:visibility="gone" />
 
         </RelativeLayout>
     </RelativeLayout>
-
 
 
 </LinearLayout>

@@ -12,6 +12,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.KeyboardUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
@@ -45,6 +48,7 @@ class ChatFragment : BaseFragment() {
         friend = arguments?.getSerializable("friend") as FriendInfo
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         viewModel.initChats(friend!!.friendNumber)
+        KeyboardUtils.fixAndroidBug5497(requireActivity())
         super.onCreate(savedInstanceState)
     }
 
@@ -75,7 +79,7 @@ class ChatFragment : BaseFragment() {
         }
 
         binding.chatList.apply {
-            layoutManager = DataManager.layoutManagerNotScroll()
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = chatListAdapter
         }
 
@@ -90,13 +94,7 @@ class ChatFragment : BaseFragment() {
             binding.chatContent.text.clear()
         }
 
-    }
-
-    /**
-     * @param root             最外层布局
-     * @param needToScrollView 要滚动的布局,就是说在键盘弹出的时候,你需要试图滚动上去的View,在键盘隐藏的时候,他又会滚动到原来的位置的布局
-     */
-    private fun controlKeyboardLayout(root: View, needToScrollView: View) {
+        binding.chatRefresh.setFooterHeight(0f)
 
     }
 
