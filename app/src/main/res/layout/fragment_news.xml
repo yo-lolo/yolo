@@ -12,7 +12,7 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/comm_head_layout"/>
+            layout="@layout/comm_head_layout" />
 
         <TextView
             android:id="@+id/text_search"
@@ -27,19 +27,33 @@
             android:paddingLeft="13dp"
             android:textColorHint="#ffbfbfbf" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/news_list"
-            android:layout_marginTop="10dp"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/new_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_888"
-            android:text="-   已经到底啦！  -"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/news_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="50dp"
+                    android:gravity="center"
+                    android:text="-----     已经到底啦！     -----"
+                    android:textColor="#A4A4A4"
+                    android:textSize="11dp" />
+            </LinearLayout>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     </LinearLayout>
-
 
 </LinearLayout>

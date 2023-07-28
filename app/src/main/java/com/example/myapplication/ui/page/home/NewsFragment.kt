@@ -73,5 +73,6 @@ class NewsFragment : BaseFragment() {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
 
+        binding.newRefresh.setFooterHeight(0f)
     }
 }

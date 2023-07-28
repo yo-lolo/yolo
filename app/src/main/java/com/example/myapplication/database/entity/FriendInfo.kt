@@ -23,8 +23,10 @@ data class FriendInfo(
     val friendNumber: Long,
     val neck: String,
     val time: Long,
-    val image: String
-) : java.io.Serializable{
+    val image: String,
+    val isTop: Boolean = false,
+    val isNotify: Boolean = false
+) : java.io.Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 }
