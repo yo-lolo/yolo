@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:id="@+id/news_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -131,7 +132,7 @@
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="3dp"
                     android:text="标签"
-                    android:textColor="@color/color_dbdbdb"
+                    android:textColor="#A2A2A2"
                     android:textSize="11dp" />
             </LinearLayout>
 

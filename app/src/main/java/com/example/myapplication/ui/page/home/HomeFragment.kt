@@ -92,6 +92,10 @@ class HomeFragment : BaseFragment() {
             adapter = newsListAdapter
         }
 
+        newsListAdapter.goNewsDetailListener = {
+            NewsDetailFragment.goNewsDetailFragment(it, findNavController())
+        }
+
         viewModel.news.observe(viewLifecycleOwner) { news ->
             newsListAdapter.list = news.filter { !TimeUtil.isToday(it.time) }.take(2)
             newsListAdapter.notifyDataSetChanged()

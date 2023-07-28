@@ -69,6 +69,10 @@ class NewsFragment : BaseFragment() {
             newsListAdapter.notifyDataSetChanged()
         }
 
+        newsListAdapter.goNewsDetailListener = {
+            NewsDetailFragment.goNewsDetailFragment(it, findNavController())
+        }
+
 
     }
 }

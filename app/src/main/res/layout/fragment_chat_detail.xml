@@ -136,6 +136,6 @@
         android:gravity="center"
         android:text="删除好友"
         android:textColor="@color/candy_r"
-        android:textSize="16dp" />
+        android:textSize="18dp" />
 
 </LinearLayout>

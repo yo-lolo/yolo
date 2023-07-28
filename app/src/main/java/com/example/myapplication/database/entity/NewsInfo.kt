@@ -24,7 +24,7 @@ data class NewsInfo(
     val title: String,
     val content: String,
     val image: String = ""
-) {
+) : java.io.Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 }

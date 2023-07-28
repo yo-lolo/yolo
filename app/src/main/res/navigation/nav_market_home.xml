@@ -38,6 +38,10 @@
         android:name="com.example.myapplication.ui.page.home.NewsFragment"
         android:label="NewsFragment" />
     <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.example.myapplication.ui.page.home.NewsDetailFragment"
+        android:label="NewsDetailFragment" />
+    <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.myapplication.ui.page.register.RegisterFragment"
         android:label="RegisterFragment" />
@@ -74,7 +78,6 @@
             app:argType="string"
             app:nullable="false" />
     </fragment>
-
 
 
     <action
@@ -116,6 +119,9 @@
     <action
         android:id="@+id/goNewsFragment"
         app:destination="@id/newsFragment" />
+    <action
+        android:id="@+id/goNewsDetailFragment"
+        app:destination="@id/newsDetailFragment" />
     <action
         android:id="@+id/goChatFragment"
         app:destination="@id/chatFragment" />

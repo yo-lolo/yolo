@@ -1,13 +1,9 @@
 package com.example.myapplication.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.ViewParent
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.LayoutNewsListItemBinding
-import com.example.myapplication.databinding.LayoutTwiceListItemBinding
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
 
@@ -26,13 +22,14 @@ import com.example.myapplication.util.layoutInflater
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>() {
 
     var list: List<NewsInfo> = listOf()
+    var goNewsDetailListener: (NewsInfo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
         return NewsListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: NewsListViewHolder, position: Int) {
-        holder.setData(position, list[position])
+        holder.setData(position, list[position], goNewsDetailListener)
     }
 
     override fun getItemCount(): Int {
@@ -48,12 +45,15 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
         )
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(position: Int, news: NewsInfo) {
+        fun setData(position: Int, news: NewsInfo, goNewsDetailListener: (NewsInfo) -> Unit) {
             binding.newsAuthor.text = news.number.toString()
             binding.newsTag.text = news.tag
             binding.newsContent.text = news.content
             binding.newsDate.text = TimeUtil.millis2String(news.time, TimeUtil.dateFormatYMD_CN)
             binding.newsTitle.text = news.title
+            binding.newsItem.setOnClickListener {
+                goNewsDetailListener.invoke(news)
+            }
         }
     }
 }
