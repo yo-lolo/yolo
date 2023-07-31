@@ -28,10 +28,10 @@ import com.example.myapplication.util.JsonUtil
 class ChatDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentChatDetailBinding
-    var friend: FriendInfo? = null
+    var friend: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        friend = arguments?.getSerializable("friend") as FriendInfo
+        friend = arguments?.getLong("friendNumber")
         super.onCreate(savedInstanceState)
     }
 
@@ -54,11 +54,11 @@ class ChatDetailFragment : BaseFragment() {
 
     companion object {
         fun goChatDetailFragment(
-            friendInfo: FriendInfo,
+            friendNumber: Long,
             navController: NavController
         ) {
             val args = Bundle().apply {
-                putSerializable("friend", friendInfo)
+                putLong("friendNumber", friendNumber)
             }
             navController.navigate(R.id.goChatDetailFragment, args)
         }

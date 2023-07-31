@@ -40,16 +40,21 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
     }
 
 
-    suspend fun insertFriend(friendNumber: Long) = withContext(Dispatchers.IO) {
+    suspend fun insertFriend(friendNumber: Long, tag: Int = 0) = withContext(Dispatchers.IO) {
         return@withContext appDataBase.FriendDao()
             .insertFriend(
                 FriendInfo(
                     AppConfig.phoneNumber,
                     friendNumber,
                     TimeUtil.getCurrentMill(),
-                    ""
+                    "",
+                    tag
                 )
             )
+    }
+
+    suspend fun updateFriendTag(id: Long, tag: Int) = withContext(Dispatchers.IO) {
+        return@withContext appDataBase.FriendDao().updateFriendTag(id, tag)
     }
 
 

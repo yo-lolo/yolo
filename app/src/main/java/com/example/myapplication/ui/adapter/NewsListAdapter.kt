@@ -11,7 +11,7 @@ import com.example.myapplication.util.layoutInflater
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
  * @ProjectName : My Application
  * @Package : com.example.myapplication.ui.adapter
- * @ClassName : TwiceListAdapter
+ * @ClassName : NewsListAdapter
  * @Description : 文件描述
  * @Author : yulu
  * @CreateDate : 2023/7/17 9:55

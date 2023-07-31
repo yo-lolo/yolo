@@ -13,6 +13,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentMessBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.FriendListAdapter
+import com.example.myapplication.ui.adapter.MessListAdapter
 import com.example.myapplication.vm.MessageViewModel
 
 /**
@@ -30,7 +31,7 @@ import com.example.myapplication.vm.MessageViewModel
 class MessageFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMessBinding
-    private val friendListAdapter = FriendListAdapter()
+    private val messListAdapter = MessListAdapter()
     val viewModel by viewModels<MessageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,21 +61,20 @@ class MessageFragment : BaseFragment() {
         }
         binding.messList.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = EmptyViewAdapter(friendListAdapter)
-        }
-
-        viewModel.friends.observe(viewLifecycleOwner) { friends ->
-            friendListAdapter.list = friends.filter { it.tag != 1 }
-            friendListAdapter.notifyDataSetChanged()
+            adapter = EmptyViewAdapter(messListAdapter)
         }
 
 
-        friendListAdapter.goChatListener = {
+        messListAdapter.goChatListener = {
             ChatFragment.goChatFragment(findNavController(), it)
         }
 
         binding.goNewFriends.setOnClickListener {
             findNavController().navigate(R.id.goNewFriendsFragment)
+        }
+
+        binding.goFriends.setOnClickListener {
+            findNavController().navigate(R.id.goFriendsFragment)
         }
     }
 }

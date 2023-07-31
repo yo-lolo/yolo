@@ -9,13 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.DataManager
-import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentFriendBinding
-import com.example.myapplication.databinding.FragmentNewFriendsBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.FriendListAdapter
-import com.example.myapplication.ui.adapter.NewFriendListAdapter
+import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.vm.MessageViewModel
 
 /**
@@ -64,8 +61,12 @@ class FriendsFragment : BaseFragment() {
         }
 
         viewModel.friends.observe(viewLifecycleOwner) { friends ->
-            friendListAdapter.list = friends.filter { it.tag != 1 }
+            friendListAdapter.list = friends.filter { it.tag == 1 }
             friendListAdapter.notifyDataSetChanged()
+        }
+
+        friendListAdapter.goUserDetail = {
+            UserDetailFragment.goUserDetailFragment(it, findNavController())
         }
     }
 

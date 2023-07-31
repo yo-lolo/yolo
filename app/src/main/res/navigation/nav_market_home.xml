@@ -85,6 +85,16 @@
         android:label="NewFriendsFragment" />
 
     <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.myapplication.ui.page.mine.UserDetailFragment"
+        android:label="UserDetailFragment" />
+
+    <fragment
+        android:id="@+id/FriendsFragment"
+        android:name="com.example.myapplication.ui.page.mess.FriendsFragment"
+        android:label="FriendsFragment" />
+
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -153,5 +163,13 @@
     <action
         android:id="@+id/goAddNewsFragment"
         app:destination="@id/addNewsFragment" />
+    <action
+        android:id="@+id/goFriendsFragment"
+        app:destination="@id/FriendsFragment" />
+
+    <action
+        android:id="@+id/goUserDetailFragment"
+        app:destination="@id/userDetailFragment" />
+
 
 </navigation>

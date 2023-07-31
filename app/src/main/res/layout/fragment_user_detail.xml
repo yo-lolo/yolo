@@ -37,26 +37,29 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/user_detail_neck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MoMo"
                     android:textColor="@color/color_3c3c3c"
                     android:textSize="18dp" />
 
+
+
                 <TextView
-                    android:id="@+id/friend_neck"
+                    android:id="@+id/user_detail_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="电话号码：MoMo"
                     android:layout_marginTop="5dp"
-                    android:text="昵称：MoMo"
                     android:textColor="@color/color_888"
                     android:textSize="13dp" />
 
                 <TextView
-                    android:id="@+id/friend_number"
+                    android:id="@+id/user_detail_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="电话号码：MoMo"
+                    android:text="注册时间："
                     android:textColor="@color/color_888"
                     android:textSize="13dp" />
 

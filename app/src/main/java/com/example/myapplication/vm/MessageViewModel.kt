@@ -56,6 +56,19 @@ class MessageViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * 同意好友申请
+     * 1.将好友申请的tag更新为1
+     * 2.添加好友
+     */
+    fun agreeFriend(id: Long, number: Long) {
+        launchSafe {
+            testStoreRepository.insertFriend(number, 1)
+            testStoreRepository.updateFriendTag(id, 1)
+            onRefresh()
+        }
+    }
+
     private fun onRefresh() {
         initData()
     }

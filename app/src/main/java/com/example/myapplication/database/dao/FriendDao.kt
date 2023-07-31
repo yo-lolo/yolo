@@ -31,4 +31,7 @@ interface FriendDao {
 
     @Query("select * from FriendInfo where friendNumber = :friendNumber")
     fun getAllFriendRequests(friendNumber: Long): List<FriendInfo>
+
+    @Query("update FriendInfo set tag = :tag where id = :id")
+    fun updateFriendTag(id: Long, tag: Int)
 }

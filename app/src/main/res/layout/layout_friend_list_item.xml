@@ -7,75 +7,40 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/friend_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp">
+        android:gravity="center_vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="7dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/friend_icon"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="@mipmap/touxiang"
-                app:riv_corner_radius="5dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="12dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/friend_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    tools:text="好友名" />
-
-                <TextView
-                    android:id="@+id/friend_last_mess"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="18dp"
-                    android:singleLine="true"
-                    android:textColor="@color/color_dbdbdb"
-                    android:textSize="12dp"
-                    tools:text="最后一条信息内容" />
-            </LinearLayout>
-
-        </LinearLayout>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/friend_icon"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="10dp"
+            android:src="@mipmap/touxiang"
+            app:riv_corner_radius="5dp" />
 
         <TextView
-            android:id="@+id/last_mess_time"
+            android:id="@+id/friend_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
             android:singleLine="true"
-            android:textColor="@color/color_dbdbdb"
-            android:textSize="11dp"
-            tools:text="时间" />
-    </RelativeLayout>
+            android:layout_marginStart="10dp"
+            android:textColor="@color/color_3c3c3c"
+            android:textSize="17dp"
+            android:text="MoMo" />
 
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="3dp"
+        android:layout_marginLeft="62dp"
         android:background="@color/color_e7e7e7" />
 
 </LinearLayout>

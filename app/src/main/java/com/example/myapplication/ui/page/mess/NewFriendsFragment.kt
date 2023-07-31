@@ -8,11 +8,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
-import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNewFriendsBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
-import com.example.myapplication.ui.adapter.FriendListAdapter
 import com.example.myapplication.ui.adapter.NewFriendListAdapter
+import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.vm.MessageViewModel
 
 /**
@@ -63,6 +62,14 @@ class NewFriendsFragment : BaseFragment() {
         viewModel.newFriends.observe(viewLifecycleOwner) {
             newFriendsAdapter.list = it
             newFriendsAdapter.notifyDataSetChanged()
+        }
+
+        newFriendsAdapter.goUserDetail = {
+            UserDetailFragment.goUserDetailFragment(it, findNavController())
+        }
+
+        newFriendsAdapter.agreeFriendListener = { id, number ->
+            viewModel.agreeFriend(id, number)
         }
     }
 

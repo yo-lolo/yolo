@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.LayoutFriendListItemBinding
+import com.example.myapplication.databinding.LayoutMessListItemBinding
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
 
@@ -12,25 +13,26 @@ import com.example.myapplication.util.layoutInflater
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
  * @ProjectName : My Application
  * @Package : com.example.myapplication.ui.adapter
- * @ClassName : FriendListAdapter
+ * @ClassName : MessListAdapter
  * @Description : 文件描述
  * @Author : yulu
- * @CreateDate : 2023/7/18 10:10
+ * @CreateDate : 2023/7/31 14:35
  * @UpdateUser : yulu
- * @UpdateDate : 2023/7/18 10:10
+ * @UpdateDate : 2023/7/31 14:35
  * @UpdateRemark : 更新说明
  */
-class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewHolder>() {
+class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolder>() {
 
     var list: List<FriendInfo> = listOf()
-    var goUserDetail: (Long) -> Unit = { }
+    var deleteListener: (Int, FriendInfo) -> Unit = { _, _ -> }
+    var goChatListener: (FriendInfo) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
         return FriendListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: FriendListViewHolder, position: Int) {
-        holder.setData(list[position], goUserDetail)
+        holder.setData(position, list[position], deleteListener, goChatListener)
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +42,7 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
 
     class FriendListViewHolder(
         parent: ViewGroup,
-        val binding: LayoutFriendListItemBinding = LayoutFriendListItemBinding.inflate(
+        val binding: LayoutMessListItemBinding = LayoutMessListItemBinding.inflate(
             parent.context.layoutInflater(),
             parent,
             false
@@ -49,12 +51,20 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(
+            position: Int,
             friend: FriendInfo,
-            goUserDetail: (Long) -> Unit
+            deleteListener: (Int, FriendInfo) -> Unit,
+            goChatListener: (FriendInfo) -> Unit
         ) {
             binding.friendName.text = friend.friendNumber.toString()
+            binding.friendLastMess.text = "这里是Last Mess"
+            binding.lastMessTime.text = TimeUtil.getFriendlyTimeSpanByNow(friend.time)
+            binding.friendItem.setOnLongClickListener {
+                // TODO
+                true
+            }
             binding.friendItem.setOnClickListener {
-                goUserDetail.invoke(friend.friendNumber)
+                goChatListener.invoke(friend)
             }
         }
     }

@@ -42,12 +42,12 @@ class ChatFragment : BaseFragment() {
     private lateinit var binding: FragmentChatBinding
     private val chatListAdapter = ChatListAdapter()
     val viewModel by viewModels<MessageViewModel>()
-    var friend: FriendInfo? = null
+    var friendNumber: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        friend = arguments?.getSerializable("friend") as FriendInfo
+        friendNumber = arguments?.getLong("friendNumber")
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-        viewModel.initChats(friend!!.friendNumber)
+        viewModel.initChats(friendNumber!!)
         //fix:解决软键盘遮挡布局的问题
         KeyboardUtils.fixAndroidBug5497(requireActivity())
         super.onCreate(savedInstanceState)
@@ -66,11 +66,11 @@ class ChatFragment : BaseFragment() {
 
     fun initView() {
         binding.include.headLayout.apply {
-            setTitle(friend?.friendNumber.toString())
+            setTitle(friendNumber.toString())
             setBackListener { findNavController().popBackStack() }
             setMenuListener {
                 ChatDetailFragment.goChatDetailFragment(
-                    friend!!,
+                    friendNumber!!,
                     findNavController()
                 )
             }
@@ -91,7 +91,7 @@ class ChatFragment : BaseFragment() {
 
         binding.chatSubmit.setOnClickListener {
             val content = binding.chatContent.text.toString().trim()
-            viewModel.insertChat(friend!!.friendNumber, content)
+            viewModel.insertChat(friendNumber!!, content)
             binding.chatContent.text.clear()
         }
 
@@ -103,6 +103,13 @@ class ChatFragment : BaseFragment() {
         fun goChatFragment(navController: NavController, friend: FriendInfo) {
             val args = Bundle().apply {
                 putSerializable("friend", friend)
+            }
+            navController.navigate(R.id.goChatFragment, args)
+        }
+
+        fun goChatFragment(navController: NavController, friendNumber: Long) {
+            val args = Bundle().apply {
+                putLong("friendNumber", friendNumber)
             }
             navController.navigate(R.id.goChatFragment, args)
         }
