@@ -7,6 +7,7 @@ import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.util.TimeUtil
+import java.util.Comparator
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -26,12 +27,14 @@ class MessageViewModel : BaseViewModel() {
 
     var friends = MutableLiveData<List<FriendInfo>>()
     var chats = MutableLiveData<List<ChatInfo>>()
+    var chatFriends = MutableLiveData<List<ChatInfo>>()
     var newFriends = MutableLiveData<List<FriendInfo>>()
 
     fun initData() {
         launchSafe {
             friends.value = testStoreRepository.getFriends(AppConfig.phoneNumber)
             newFriends.value = testStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
+            chatFriends.value = testStoreRepository.getChatFriends(AppConfig.phoneNumber)
         }
     }
 

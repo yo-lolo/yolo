@@ -81,6 +81,11 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
             return@withContext appDataBase.ChatDao().getChatsById(number, friendNumber)
         }
 
+    suspend fun getChatFriends(number: Long): List<ChatInfo> =
+        withContext(Dispatchers.IO) {
+            return@withContext appDataBase.ChatDao().getChatFriends(number)
+        }
+
     suspend fun getUserById(number: Long): User =
         withContext(Dispatchers.IO) {
             return@withContext appDataBase.userDao().queryUserByNumber(number)

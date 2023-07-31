@@ -69,6 +69,11 @@ class MessageFragment : BaseFragment() {
             ChatFragment.goChatFragment(findNavController(), it)
         }
 
+        viewModel.chatFriends.observe(viewLifecycleOwner) {
+            messListAdapter.list = it
+            messListAdapter.notifyDataSetChanged()
+        }
+
         binding.goNewFriends.setOnClickListener {
             findNavController().navigate(R.id.goNewFriendsFragment)
         }

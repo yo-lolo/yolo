@@ -100,12 +100,6 @@ class ChatFragment : BaseFragment() {
     }
 
     companion object {
-        fun goChatFragment(navController: NavController, friend: FriendInfo) {
-            val args = Bundle().apply {
-                putSerializable("friend", friend)
-            }
-            navController.navigate(R.id.goChatFragment, args)
-        }
 
         fun goChatFragment(navController: NavController, friendNumber: Long) {
             val args = Bundle().apply {
