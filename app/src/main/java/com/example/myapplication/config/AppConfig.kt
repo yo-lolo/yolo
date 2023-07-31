@@ -19,6 +19,7 @@ import java.util.IdentityHashMap
 object AppConfig {
 
 
+    //const val phoneNumber: Long = 19956596024
     const val phoneNumber: Long = 15755949344
     const val IMAGE_OPEN = 0xff
 

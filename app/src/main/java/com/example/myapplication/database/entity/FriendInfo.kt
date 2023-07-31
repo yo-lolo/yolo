@@ -21,12 +21,14 @@ import com.google.gson.JsonParseException
 data class FriendInfo(
     val number: Long,
     val friendNumber: Long,
-    val neck: String,
     val time: Long,
     val image: String,
+    val tag: Int = 0,
     val isTop: Boolean = false,
     val isNotify: Boolean = false
 ) : java.io.Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
+
+    // tag: 0 ->未审核 1 ->同意 2 ->不同意
 }

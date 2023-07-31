@@ -48,6 +48,7 @@ class ChatFragment : BaseFragment() {
         friend = arguments?.getSerializable("friend") as FriendInfo
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         viewModel.initChats(friend!!.friendNumber)
+        //fix:解决软键盘遮挡布局的问题
         KeyboardUtils.fixAndroidBug5497(requireActivity())
         super.onCreate(savedInstanceState)
     }

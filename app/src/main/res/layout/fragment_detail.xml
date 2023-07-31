@@ -5,11 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/include_head"
-        layout="@layout/comm_head_layout" />
-
     <com.google.android.material.tabs.TabLayout
+        android:layout_marginTop="45dp"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -21,9 +18,28 @@
         app:tabSelectedTextColor="@color/candy_r"
         app:tabTextColor="@color/color_3c3c3c" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/color_theme"
+            android:src="@mipmap/float_add_bt"
+            android:tint="@color/color_FFFFFF"
+            app:backgroundTint="@color/color_theme"
+            app:rippleColor="@color/color_theme"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

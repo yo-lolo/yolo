@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
@@ -14,6 +15,7 @@ import com.example.myapplication.databinding.FragmentNewsDetailBinding
 import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.util.TimeUtil
+import com.example.myapplication.vm.NewsDetailViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -32,6 +34,7 @@ class NewsDetailFragment : BaseFragment() {
     private lateinit var binding: FragmentNewsDetailBinding
     private var commentListAdapter = CommentListAdapter()
     var newsInfo: NewsInfo? = null
+    private val viewModel by viewModels<NewsDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         newsInfo = arguments?.getSerializable("news") as NewsInfo
@@ -69,8 +72,12 @@ class NewsDetailFragment : BaseFragment() {
                 adapter = EmptyViewAdapter(commentListAdapter)
             }
 
-            commentListAdapter.goCommentListener={
+            commentListAdapter.goCommentListener = {
                 findNavController().navigate(R.id.goPostCommentFragment)
+            }
+
+            binding.addFriend.setOnClickListener {
+                viewModel.insertFriend(newsInfo!!.number)
             }
         }
 

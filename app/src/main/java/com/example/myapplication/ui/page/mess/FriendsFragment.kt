@@ -9,27 +9,30 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.DataManager
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentMessBinding
+import com.example.myapplication.databinding.FragmentFriendBinding
+import com.example.myapplication.databinding.FragmentNewFriendsBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.FriendListAdapter
+import com.example.myapplication.ui.adapter.NewFriendListAdapter
 import com.example.myapplication.vm.MessageViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
  * @ProjectName : My Application
  * @Package : com.example.myapplication.ui.page.mess
- * @ClassName : MessageFragment
+ * @ClassName : NewFriendsFragment
  * @Description : 文件描述
  * @Author : yulu
- * @CreateDate : 2023/7/25 17:36
+ * @CreateDate : 2023/7/31 11:26
  * @UpdateUser : yulu
- * @UpdateDate : 2023/7/25 17:36
+ * @UpdateDate : 2023/7/31 11:26
  * @UpdateRemark : 更新说明
  */
-class MessageFragment : BaseFragment() {
+class FriendsFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentMessBinding
+    private lateinit var binding: FragmentFriendBinding
     private val friendListAdapter = FriendListAdapter()
     val viewModel by viewModels<MessageViewModel>()
 
@@ -42,23 +45,20 @@ class MessageFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMessBinding.inflate(layoutInflater)
+        binding = FragmentFriendBinding.inflate(layoutInflater)
         initView()
-        viewModel.initData()
         return binding.root
     }
 
-
-    fun initView() {
+    private fun initView() {
         binding.include.headLayout.apply {
-            setTitle("信息")
-        }
-        val linearLayoutManager = object : LinearLayoutManager(context) {
-            override fun canScrollVertically(): Boolean {
-                return false
+            setTitle("我的好友")
+            setBackListener {
+                findNavController().popBackStack()
             }
         }
-        binding.messList.apply {
+
+        binding.friendList.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = EmptyViewAdapter(friendListAdapter)
         }
@@ -67,14 +67,10 @@ class MessageFragment : BaseFragment() {
             friendListAdapter.list = friends.filter { it.tag != 1 }
             friendListAdapter.notifyDataSetChanged()
         }
+    }
 
-
-        friendListAdapter.goChatListener = {
-            ChatFragment.goChatFragment(findNavController(), it)
-        }
-
-        binding.goNewFriends.setOnClickListener {
-            findNavController().navigate(R.id.goNewFriendsFragment)
-        }
+    override fun onResume() {
+        super.onResume()
+        viewModel.initData()
     }
 }

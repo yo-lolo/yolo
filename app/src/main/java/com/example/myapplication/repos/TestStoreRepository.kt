@@ -1,11 +1,13 @@
 package com.example.myapplication.repos
 
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.imp.UserTaskImp
+import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -38,9 +40,16 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
     }
 
 
-    suspend fun insertFriend() = withContext(Dispatchers.IO) {
+    suspend fun insertFriend(friendNumber: Long) = withContext(Dispatchers.IO) {
         return@withContext appDataBase.FriendDao()
-            .insertFriend(FriendInfo(15755949344, 19956596024, "MoMo", 22, ""))
+            .insertFriend(
+                FriendInfo(
+                    AppConfig.phoneNumber,
+                    friendNumber,
+                    TimeUtil.getCurrentMill(),
+                    ""
+                )
+            )
     }
 
 
@@ -56,6 +65,11 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
     suspend fun getFriends(number: Long): List<FriendInfo> = withContext(Dispatchers.IO) {
         return@withContext appDataBase.FriendDao().getFriendsById(number)
     }
+
+    suspend fun getAllFriendRequests(friendNumber: Long): List<FriendInfo> =
+        withContext(Dispatchers.IO) {
+            return@withContext appDataBase.FriendDao().getAllFriendRequests(friendNumber)
+        }
 
     suspend fun getChats(number: Long, friendNumber: Long): List<ChatInfo> =
         withContext(Dispatchers.IO) {

@@ -75,6 +75,16 @@
         android:label="PostCommentFragment" />
 
     <fragment
+        android:id="@+id/addNewsFragment"
+        android:name="com.example.myapplication.ui.page.home.AddNewsFragment"
+        android:label="AddNewsFragment" />
+
+    <fragment
+        android:id="@+id/newFriendsFragment"
+        android:name="com.example.myapplication.ui.page.mess.NewFriendsFragment"
+        android:label="NewFriendsFragment" />
+
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -136,5 +146,12 @@
     <action
         android:id="@+id/goPostCommentFragment"
         app:destination="@id/postCommentFragment" />
+
+    <action
+        android:id="@+id/goNewFriendsFragment"
+        app:destination="@id/newFriendsFragment" />
+    <action
+        android:id="@+id/goAddNewsFragment"
+        app:destination="@id/addNewsFragment" />
 
 </navigation>

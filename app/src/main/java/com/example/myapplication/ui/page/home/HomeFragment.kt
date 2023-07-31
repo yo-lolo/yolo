@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.util.GlideImageLoader
@@ -49,6 +50,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun init(view: View) {
+
+        binding.textPhone.text = AppConfig.phoneNumber.toString()
 
         // 轮播图片集合
         val images = listOf(
@@ -103,6 +106,10 @@ class HomeFragment : BaseFragment() {
 
         binding.goNews.setOnClickListener {
             findNavController().navigate(R.id.goNewsFragment)
+        }
+
+        binding.goAddNews.setOnClickListener {
+            findNavController().navigate(R.id.goAddNewsFragment)
         }
 
         GlideImageLoader().displayImage(context, R.drawable.world, binding.imageTest)

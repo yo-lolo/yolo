@@ -55,7 +55,7 @@ object DataManager {
         feedbackStoreRepository = FeedbackStoreRepository(FeedbackTaskImp(appDataBase!!))
         testStoreRepository = TestStoreRepository(appDataBase!!)
         initSmartRefresh()
-        // initData()
+        initData()
     }
 
     private fun createDb(): AppDataBase {
@@ -93,7 +93,6 @@ object DataManager {
         launchScope.launch {
             testStoreRepository.insertNews()
             testStoreRepository.insertUser()
-            testStoreRepository.insertFriend()
         }
     }
 

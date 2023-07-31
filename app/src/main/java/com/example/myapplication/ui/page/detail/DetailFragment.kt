@@ -40,10 +40,7 @@ class DetailFragment : BaseFragment() {
     }
 
     fun init(view: View) {
-        binding.includeHead.headLayout.apply {
-            setTitle("ONE IN A MILLION")
-        }
-        val titles = listOf("ONCE", "TWICE")
+        val titles = listOf("发现", "关注")
         val fragments = listOf(DetailOneFragment(), DetailTwoFragment())
 
         binding.viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager) {

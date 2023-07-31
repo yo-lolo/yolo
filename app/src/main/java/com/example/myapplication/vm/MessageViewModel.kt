@@ -26,10 +26,12 @@ class MessageViewModel : BaseViewModel() {
 
     var friends = MutableLiveData<List<FriendInfo>>()
     var chats = MutableLiveData<List<ChatInfo>>()
+    var newFriends = MutableLiveData<List<FriendInfo>>()
 
     fun initData() {
         launchSafe {
             friends.value = testStoreRepository.getFriends(AppConfig.phoneNumber)
+            newFriends.value = testStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
         }
     }
 

@@ -23,15 +23,20 @@
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/chat_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/edit_layout"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         <RelativeLayout
+            android:id="@+id/edit_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
