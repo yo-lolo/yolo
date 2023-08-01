@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.admin.ui.manage.FourFragment
-import com.example.myapplication.admin.ui.manage.OneFragment
-import com.example.myapplication.admin.ui.manage.ThreeFragment
-import com.example.myapplication.admin.ui.manage.TwoFragment
+import com.example.myapplication.admin.ui.manage.CommentFragment
+import com.example.myapplication.admin.ui.manage.UserFragment
+import com.example.myapplication.admin.ui.manage.NewsFragment
+import com.example.myapplication.admin.ui.manage.FeedbackFragment
 import com.example.myapplication.databinding.FragmentManagerTestBinding
 
 /**
@@ -45,8 +45,8 @@ class ManageFragment : BaseFragment() {
     }
 
     private fun initView(view: View) {
-        val titles = listOf("用户", "FEEL SPECIAL", "GO HARD", "T T")
-        val fragments = listOf(OneFragment(), TwoFragment(), ThreeFragment(), FourFragment())
+        val titles = listOf("用户", "反馈", "文章", "评论")
+        val fragments = listOf(UserFragment(), FeedbackFragment(), NewsFragment(), CommentFragment())
 
         binding.viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getCount(): Int {
@@ -57,7 +57,7 @@ class ManageFragment : BaseFragment() {
                 return fragments[position]
             }
 
-            override fun getPageTitle(position: Int): CharSequence? {
+            override fun getPageTitle(position: Int): CharSequence {
                 return titles[position]
             }
         }

@@ -23,14 +23,11 @@ import kotlinx.coroutines.launch
  */
 class UserDetailViewModel : BaseViewModel() {
     var userDetailInfo = MutableLiveData<User>()
-    var newFriend = MutableLiveData<FriendInfo>()
     private val userStoreRepository = DataManager.userStoreRepository
-    private val testStoreRepository = DataManager.testStoreRepository
 
     fun initUserInfo(number: Long) {
         viewModelScope.launch {
             userDetailInfo.value = userStoreRepository.queryUserByNumber(number)
-            newFriend.value = testStoreRepository.getNewFriendById(number)
         }
     }
 }

@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.databinding.FragmentTwoBinding
+import com.example.myapplication.databinding.FragmentFourBinding
 
 
-class TwoFragment : BaseFragment() {
+class CommentFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentTwoBinding
+    private lateinit var binding : FragmentFourBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class TwoFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTwoBinding.inflate(layoutInflater)
+        binding = FragmentFourBinding.inflate(layoutInflater)
         return binding.root
     }
 

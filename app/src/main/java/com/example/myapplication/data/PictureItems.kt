@@ -13,5 +13,5 @@ package com.example.myapplication.data
  * @UpdateRemark : 更新说明
  */
 data class PictureItems(
-    val pictureItems: List<String>
+    val pictureItems: String
 )

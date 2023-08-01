@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.database.entity.FeedbackInfo
 import com.example.myapplication.database.entity.User
 import kotlinx.coroutines.launch
 
@@ -19,13 +20,22 @@ import kotlinx.coroutines.launch
  * @UpdateDate : 2023/7/25 16:30
  * @UpdateRemark : 更新说明
  */
-class UserViewModel : BaseViewModel() {
+class ManageViewModel : BaseViewModel() {
 
     var userList = MutableLiveData<List<User>>()
+    var feedbacks = MutableLiveData<List<FeedbackInfo>>()
+    private val userStoreRepository = DataManager.userStoreRepository
+    private val testStoreRepository = DataManager.testStoreRepository
 
     fun initData() {
         viewModelScope.launch {
-            userList.value = DataManager.userStoreRepository.getUsers()
+            userList.value = userStoreRepository.getUsers()
+        }
+    }
+
+    fun initFeedbacks() {
+        viewModelScope.launch {
+            feedbacks.value = testStoreRepository.getFeedbacks()
         }
     }
 

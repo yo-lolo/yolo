@@ -22,7 +22,7 @@ import com.example.myapplication.util.layoutInflater
 class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendListViewHolder>() {
 
     var list: List<FriendInfo> = listOf()
-    var goUserDetail: (Long) -> Unit = { }
+    var goUserDetail: (Int, Long) -> Unit = { tag, number -> }
     var agreeFriendListener: (Long, Long) -> Unit = { id, number -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
@@ -51,7 +51,7 @@ class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendLis
         fun setData(
             position: Int,
             friend: FriendInfo,
-            goUserDetail: (Long) -> Unit,
+            goUserDetail: (Int, Long) -> Unit,
             agreeFriendListener: (Long, Long) -> Unit,
         ) {
             binding.friendName.text = friend.number.toString()
@@ -69,7 +69,7 @@ class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendLis
             }
 
             binding.friendItem.setOnClickListener {
-                goUserDetail.invoke(friend.number)
+                goUserDetail.invoke(friend.tag, friend.number)
             }
 
             binding.agreeFriend.setOnClickListener {

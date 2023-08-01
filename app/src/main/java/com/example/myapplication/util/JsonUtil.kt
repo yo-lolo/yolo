@@ -3,6 +3,7 @@ package com.example.myapplication.util
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import org.jetbrains.annotations.Nullable
+import java.lang.reflect.Type
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -36,6 +37,24 @@ object JsonUtil {
         }
         return null
     }
+
+
+    /**
+     * 解析Json字符串
+     * @param json Json字符串
+     * @param typeOfT 泛型类
+     * @param <T>
+     * @return
+    </T> */
+    fun <T> fromJson(json: String, typeOfT: Type): T? {
+        try {
+            return Gson().fromJson(json, typeOfT)
+        } catch (e: JsonParseException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
 
     /**
      * 把 单个指定类型的对象 转换为 JSON 字符串

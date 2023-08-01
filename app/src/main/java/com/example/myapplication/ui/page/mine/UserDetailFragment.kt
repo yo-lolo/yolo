@@ -30,11 +30,13 @@ class UserDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUserDetailBinding
     var number: Long? = null
+    var tag: Int? = null
     val viewModel by viewModels<UserDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         number = arguments?.getLong("number")
+        tag = arguments?.getInt("tag")!!
         viewModel.initUserInfo(number!!)
     }
 
@@ -57,9 +59,7 @@ class UserDetailFragment : BaseFragment() {
             setMenuListener {}
         }
 
-        viewModel.newFriend.observe(viewLifecycleOwner) {
-            binding.goChat.visibility = if (it.tag == 0) View.GONE else View.VISIBLE
-        }
+        binding.goChat.visibility = if (tag == 0) View.GONE else View.VISIBLE
 
         viewModel.userDetailInfo.observe(viewLifecycleOwner) {
             binding.userDetailNumber.text = "电话号码：${it.number.toString()}"
@@ -77,6 +77,15 @@ class UserDetailFragment : BaseFragment() {
         fun goUserDetailFragment(number: Long, navController: NavController) {
             var args = Bundle().apply {
                 putLong("number", number)
+                putInt("tag", 1)
+            }
+            navController.navigate(R.id.goUserDetailFragment, args)
+        }
+
+        fun goUserDetailFragment(tag: Int, number: Long, navController: NavController) {
+            var args = Bundle().apply {
+                putLong("number", number)
+                putInt("tag", tag)
             }
             navController.navigate(R.id.goUserDetailFragment, args)
         }

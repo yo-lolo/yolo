@@ -25,7 +25,10 @@
         android:id="@+id/adminFragment"
         android:name="com.example.myapplication.admin.ui.admin.AdminFragment"
         android:label="AdminFragment" />
-
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.myapplication.ui.page.mine.UserDetailFragment"
+        android:label="UserDetailFragment" />
 
 
     <action
@@ -43,5 +46,8 @@
     <action
         android:id="@+id/goAdminFragment"
         app:destination="@id/adminFragment" />
+    <action
+        android:id="@+id/goUserDetailFragment"
+        app:destination="@id/userDetailFragment" />
 
 </navigation>

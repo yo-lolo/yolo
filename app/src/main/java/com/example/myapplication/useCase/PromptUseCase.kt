@@ -99,7 +99,28 @@ class PromptUseCase() {
         alertDialog.show()
         alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         alertDialog.window!!.decorView.setPadding(70, 0, 70, 0)
+    }
 
+    fun promptBigImage(
+        path: String
+    ) {
+
+        val context = ActivityUtils.getTopActivity()
+        val customView = context.layoutInflater().inflate(R.layout.big_image_layout, null, false)
+
+        val alertDialog = AlertDialog.Builder(context)
+            .setView(customView)
+            .setCancelable(false)
+            .create()
+        val bigImage = customView.findViewById<ImageView>(R.id.big_image)
+        GlideImageLoader().displayLocalFile(path, bigImage)
+
+        bigImage.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.show()
+        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        alertDialog.window!!.decorView.setPadding(0, 30, 0, 50)
     }
 
     fun promptEdit(

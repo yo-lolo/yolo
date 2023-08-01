@@ -64,8 +64,8 @@ class NewFriendsFragment : BaseFragment() {
             newFriendsAdapter.notifyDataSetChanged()
         }
 
-        newFriendsAdapter.goUserDetail = {
-            UserDetailFragment.goUserDetailFragment(it, findNavController())
+        newFriendsAdapter.goUserDetail = { tag, number ->
+            UserDetailFragment.goUserDetailFragment(tag, number, findNavController())
         }
 
         newFriendsAdapter.agreeFriendListener = { id, number ->

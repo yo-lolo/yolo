@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.admin.adpter.UserListAdapter
-import com.example.myapplication.admin.vm.UserViewModel
+import com.example.myapplication.admin.vm.ManageViewModel
 import com.example.myapplication.databinding.FragmentOneBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 
 
-class OneFragment : BaseFragment() {
+class UserFragment : BaseFragment() {
 
     private lateinit var binding: FragmentOneBinding
     private val userListAdapter = UserListAdapter()
-    private val viewModel by viewModels<UserViewModel>()
+    private val viewModel by viewModels<ManageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

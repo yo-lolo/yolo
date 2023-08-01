@@ -36,6 +36,7 @@ import java.io.File
 class GlideImageLoader : ImageLoader() {
 
     val option = DefaultRequestOptions()
+    var context = DataManager.context
 
 
     override fun displayImage(context: Context?, path: Any?, imageView: ImageView?) {
@@ -43,12 +44,12 @@ class GlideImageLoader : ImageLoader() {
     }
 
     fun displayImageWithRadius(path: Any?, imageView: ImageView?) {
-        Glide.with(DataManager.context).load(path).error(R.mipmap.touxiang).into(imageView)
+        Glide.with(context).load(path).error(R.mipmap.touxiang).into(imageView)
     }
 
-    fun displayLocalFile(context: Context?, path: Any?, imageView: ImageView?) {
+    fun displayLocalFile(path: Any?, imageView: ImageView?) {
         val localPath = Uri.fromFile(File(path as String))
-        Glide.with(context).load(localPath).error(R.mipmap.icon_empty).into(imageView)
+        Glide.with(context).load(localPath).error(R.mipmap.touxiang).into(imageView)
     }
 
 

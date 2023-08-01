@@ -2,10 +2,7 @@ package com.example.myapplication.repos
 
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.AppDataBase
-import com.example.myapplication.database.entity.ChatInfo
-import com.example.myapplication.database.entity.FriendInfo
-import com.example.myapplication.database.entity.NewsInfo
-import com.example.myapplication.database.entity.User
+import com.example.myapplication.database.entity.*
 import com.example.myapplication.imp.UserTaskImp
 import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.Dispatchers
@@ -130,6 +127,11 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
     suspend fun getUserById(number: Long): User =
         withContext(Dispatchers.IO) {
             return@withContext appDataBase.userDao().queryUserByNumber(number)
+        }
+
+    suspend fun getFeedbacks(): List<FeedbackInfo> =
+        withContext(Dispatchers.IO) {
+            return@withContext appDataBase.feedbackDao().getAllFeedbacks()
         }
 
 
