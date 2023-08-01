@@ -58,12 +58,12 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
             position: Int,
             chat: ChatInfo
         ) {
-            if (chat.sendTag == AppConfig.phoneNumber){
+            if (chat.sendTag == AppConfig.phoneNumber) {
                 binding.leftChat.visibility = View.GONE
                 binding.rightChat.visibility = View.VISIBLE
                 binding.rightContent.text = chat.content
                 binding.rightTime.text = TimeUtil.getFriendlyTimeSpanByNow(chat.time)
-            }else{
+            } else {
                 binding.rightChat.visibility = View.GONE
                 binding.leftChat.visibility = View.VISIBLE
                 binding.leftContent.text = chat.content

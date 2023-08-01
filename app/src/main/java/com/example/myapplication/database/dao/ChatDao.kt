@@ -27,7 +27,7 @@ interface ChatDao {
     @Delete
     fun deleteChat(chatInfo: ChatInfo)
 
-    @Query("select * from ChatInfo where number = :number or :friendNumber and friendNumber = :number or :friendNumber order by time asc")
+    @Query("select * from ChatInfo where number in (:number,:friendNumber) and friendNumber in (:number,:friendNumber) order by time asc")
     fun getChatsById(number: Long, friendNumber: Long): List<ChatInfo>
 
     @Query("select * from ChatInfo where number = :number group by friendNumber")

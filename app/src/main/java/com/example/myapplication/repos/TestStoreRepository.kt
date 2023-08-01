@@ -27,25 +27,31 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
 
 
     suspend fun insertUser() = withContext(Dispatchers.IO) {
-        return@withContext appDataBase.userDao()
-            .insertUser(User(19956596024, "123456", 75555555541))
+        appDataBase.userDao()
+            .insertUser(User(11111111111, "123456", 1690789826637))
+        appDataBase.userDao()
+            .insertUser(User(22222222222, "123456", 1690789826637))
     }
 
 
     suspend fun insertNews() = withContext(Dispatchers.IO) {
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(19956596024, 1, "美食", "2", "世界上最美味的旋转小火锅", "没想好"))
+            .insertNews(NewsInfo(19956596024, 1, "美食", "2", "世界上最美味的旋转小火锅！", "没想好"))
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(15755949344, 1, "汽车", "2", "广汽集团裁员", "没想好"))
+            .insertNews(NewsInfo(15755949344, 1, "汽车", "2", "广汽集团", "没想好"))
+        appDataBase.NewsDao()
+            .insertNews(NewsInfo(11111111111, 1690789826637, "支付宝", "2", "支付宝额度提升啦！", "没想好"))
+        appDataBase.NewsDao()
+            .insertNews(NewsInfo(22222222222, 1690789826637, "微信", "2", "微信闪退怎么回事？", "没想好"))
     }
 
 
-    suspend fun insertFriend(friendNumber: Long, tag: Int = 0) = withContext(Dispatchers.IO) {
+    suspend fun insertFriend(authorNumber: Long, tag: Int = 0) = withContext(Dispatchers.IO) {
         return@withContext appDataBase.FriendDao()
             .insertFriend(
                 FriendInfo(
                     AppConfig.phoneNumber,
-                    friendNumber,
+                    authorNumber,
                     TimeUtil.getCurrentMill(),
                     "",
                     tag
@@ -58,8 +64,16 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
     }
 
 
-    suspend fun insertChat(chatInfo: ChatInfo) = withContext(Dispatchers.IO) {
-        appDataBase.ChatDao().insertChat(chatInfo)
+    suspend fun insertChat(friendNumber: Long, content: String) = withContext(Dispatchers.IO) {
+        appDataBase.ChatDao().insertChat(
+            ChatInfo(
+                AppConfig.phoneNumber,
+                friendNumber,
+                AppConfig.phoneNumber,
+                TimeUtil.getCurrentMill(),
+                content
+            )
+        )
     }
 
 
@@ -71,12 +85,17 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
         return@withContext appDataBase.FriendDao().getFriendsById(number)
     }
 
+    suspend fun getFriendById(authorNumber: Long): List<FriendInfo> = withContext(Dispatchers.IO) {
+        return@withContext appDataBase.FriendDao()
+            .getFriendById(AppConfig.phoneNumber, authorNumber)
+    }
+
     suspend fun getAllFriendRequests(friendNumber: Long): List<FriendInfo> =
         withContext(Dispatchers.IO) {
             return@withContext appDataBase.FriendDao().getAllFriendRequests(friendNumber)
         }
 
-    suspend fun getChats(number: Long, friendNumber: Long): List<ChatInfo> =
+    suspend fun getChatsById(number: Long, friendNumber: Long): List<ChatInfo> =
         withContext(Dispatchers.IO) {
             return@withContext appDataBase.ChatDao().getChatsById(number, friendNumber)
         }
@@ -90,4 +109,6 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
         withContext(Dispatchers.IO) {
             return@withContext appDataBase.userDao().queryUserByNumber(number)
         }
+
+
 }

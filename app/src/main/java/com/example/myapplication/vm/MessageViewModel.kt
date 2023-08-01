@@ -40,21 +40,13 @@ class MessageViewModel : BaseViewModel() {
 
     fun initChats(friendNumber: Long) {
         launchSafe {
-            chats.value = testStoreRepository.getChats(AppConfig.phoneNumber, friendNumber)
+            chats.value = testStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
         }
     }
 
     fun insertChat(friendNumber: Long, content: String) {
         launchSafe {
-            testStoreRepository.insertChat(
-                ChatInfo(
-                    AppConfig.phoneNumber,
-                    friendNumber,
-                    AppConfig.phoneNumber,
-                    TimeUtil.getCurrentMill(),
-                    content
-                )
-            )
+            testStoreRepository.insertChat(friendNumber, content)
             initChats(friendNumber)
         }
     }
@@ -63,17 +55,20 @@ class MessageViewModel : BaseViewModel() {
      * 同意好友申请
      * 1.将好友申请的tag更新为1
      * 2.添加好友
+     * 3.添加聊天 "我通过了你的朋友验证请求，现在我们可以开始聊天了"
      */
     fun agreeFriend(id: Long, number: Long) {
         launchSafe {
             testStoreRepository.insertFriend(number, 1)
             testStoreRepository.updateFriendTag(id, 1)
-            onRefresh()
+            testStoreRepository.insertChat(number, "我通过了你的朋友验证请求，现在我们可以开始聊天了")
+            onRefresh(number)
         }
     }
 
-    private fun onRefresh() {
+    private fun onRefresh(friendNumber: Long) {
         initData()
+        initChats(friendNumber)
     }
 
 
