@@ -45,13 +45,12 @@
                     android:textSize="18dp" />
 
 
-
                 <TextView
                     android:id="@+id/user_detail_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="电话号码：MoMo"
                     android:layout_marginTop="5dp"
+                    android:text="电话号码：MoMo"
                     android:textColor="@color/color_888"
                     android:textSize="13dp" />
 
@@ -79,51 +78,70 @@
             android:drawableRight="@mipmap/icon_more"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
+            android:text="文章"
+            android:textColor="@color/color_3c3c3c"
+            android:textSize="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/color_e7e7e7" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@mipmap/icon_more"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
             android:text="更多信息"
             android:textColor="@color/color_3c3c3c"
             android:textSize="16dp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/go_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_FFFFFF"
         android:layout_marginTop="10dp"
+        android:background="@color/color_FFFFFF"
         android:gravity="center"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:drawableLeft="@mipmap/gochat_icon"
-            android:gravity="center"
             android:drawablePadding="10dp"
+            android:gravity="center"
             android:paddingHorizontal="12dp"
             android:text="发消息"
-            android:textStyle="bold"
             android:textColor="#1a4a90"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/add_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_FFFFFF"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:background="@color/color_FFFFFF"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:gravity="center"
             android:drawablePadding="10dp"
+            android:gravity="center"
             android:paddingHorizontal="12dp"
             android:text="添加到好友"
-            android:textStyle="bold"
             android:textColor="#1a4a90"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

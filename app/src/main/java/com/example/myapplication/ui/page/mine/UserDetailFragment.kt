@@ -12,7 +12,6 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentUserDetailBinding
 import com.example.myapplication.ui.page.mess.ChatFragment
 import com.example.myapplication.util.TimeUtil
-import com.example.myapplication.vm.MineViewModel
 import com.example.myapplication.vm.UserDetailViewModel
 
 /**
@@ -56,6 +55,10 @@ class UserDetailFragment : BaseFragment() {
                 findNavController().popBackStack()
             }
             setMenuListener {}
+        }
+
+        viewModel.newFriend.observe(viewLifecycleOwner) {
+            binding.goChat.visibility = if (it.tag == 0) View.GONE else View.VISIBLE
         }
 
         viewModel.userDetailInfo.observe(viewLifecycleOwner) {

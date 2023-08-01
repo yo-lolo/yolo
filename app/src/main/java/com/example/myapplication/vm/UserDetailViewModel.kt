@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.config.AppConfig
+import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.User
 import kotlinx.coroutines.launch
 
@@ -21,11 +23,14 @@ import kotlinx.coroutines.launch
  */
 class UserDetailViewModel : BaseViewModel() {
     var userDetailInfo = MutableLiveData<User>()
+    var newFriend = MutableLiveData<FriendInfo>()
     private val userStoreRepository = DataManager.userStoreRepository
+    private val testStoreRepository = DataManager.testStoreRepository
 
     fun initUserInfo(number: Long) {
         viewModelScope.launch {
             userDetailInfo.value = userStoreRepository.queryUserByNumber(number)
+            newFriend.value = testStoreRepository.getNewFriendById(number)
         }
     }
 }

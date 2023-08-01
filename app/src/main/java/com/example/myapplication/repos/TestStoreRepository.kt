@@ -81,6 +81,9 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
         return@withContext appDataBase.NewsDao().getNews()
     }
 
+    /**
+     * 获取当前帐号所有的好友
+     */
     suspend fun getFriends(number: Long): List<FriendInfo> = withContext(Dispatchers.IO) {
         return@withContext appDataBase.FriendDao().getFriendsById(number)
     }
@@ -90,16 +93,35 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
             .getFriendById(AppConfig.phoneNumber, authorNumber)
     }
 
-    suspend fun getAllFriendRequests(friendNumber: Long): List<FriendInfo> =
+    /**
+     * 获取该账号的所有的好友请求
+     *
+     */
+    suspend fun getAllFriendRequests(number: Long): List<FriendInfo> =
         withContext(Dispatchers.IO) {
-            return@withContext appDataBase.FriendDao().getAllFriendRequests(friendNumber)
+            return@withContext appDataBase.FriendDao().getAllFriendRequests(number)
         }
 
+    /**
+     * 获取该账号的好友请求列表中的好友信息
+     */
+    suspend fun getNewFriendById(nFN: Long): FriendInfo =
+        withContext(Dispatchers.IO) {
+            return@withContext appDataBase.FriendDao()
+                .getNewFriendById(AppConfig.phoneNumber, nFN)
+        }
+
+    /**
+     * 获取两个账号之间的聊天记录
+     */
     suspend fun getChatsById(number: Long, friendNumber: Long): List<ChatInfo> =
         withContext(Dispatchers.IO) {
             return@withContext appDataBase.ChatDao().getChatsById(number, friendNumber)
         }
 
+    /**
+     * 获取该帐号所有的聊天好友
+     */
     suspend fun getChatFriends(number: Long): List<ChatInfo> =
         withContext(Dispatchers.IO) {
             return@withContext appDataBase.ChatDao().getChatFriends(number)

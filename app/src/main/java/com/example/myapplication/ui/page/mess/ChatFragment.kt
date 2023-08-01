@@ -21,6 +21,7 @@ import com.example.myapplication.R
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.ui.adapter.ChatListAdapter
+import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.util.SoftInputUtil
 import com.example.myapplication.vm.MessageViewModel
 
@@ -87,6 +88,10 @@ class ChatFragment : BaseFragment() {
         viewModel.chats.observe(viewLifecycleOwner) {
             chatListAdapter.list = it
             chatListAdapter.notifyDataSetChanged()
+        }
+
+        chatListAdapter.goUserDetailListener = {
+            UserDetailFragment.goUserDetailFragment(it, findNavController())
         }
 
         binding.chatSubmit.setOnClickListener {

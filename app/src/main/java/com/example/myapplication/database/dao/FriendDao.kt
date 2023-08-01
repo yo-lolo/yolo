@@ -32,6 +32,9 @@ interface FriendDao {
     @Query("select * from FriendInfo where number = :number and friendNumber= :friendNumber")
     fun getFriendById(number: Long, friendNumber: Long): List<FriendInfo>
 
+    @Query("select * from FriendInfo where number = :friendNumber and friendNumber= :number")
+    fun getNewFriendById(number: Long, friendNumber: Long): FriendInfo
+
     @Query("select * from FriendInfo where friendNumber = :friendNumber")
     fun getAllFriendRequests(friendNumber: Long): List<FriendInfo>
 

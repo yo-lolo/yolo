@@ -100,7 +100,7 @@ class HomeFragment : BaseFragment() {
         }
 
         viewModel.news.observe(viewLifecycleOwner) { news ->
-            newsListAdapter.list = news.filter { TimeUtil.isToday(it.time) }.take(2)
+            newsListAdapter.list = news.filter { !TimeUtil.isToday(it.time) }.take(2)
             newsListAdapter.notifyDataSetChanged()
         }
 

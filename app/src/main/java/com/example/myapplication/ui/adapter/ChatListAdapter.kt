@@ -31,7 +31,7 @@ import com.example.myapplication.util.TimeUtil
 class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
 
     var list: List<ChatInfo> = listOf()
-
+    var goUserDetailListener: (Long) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder {
         return ChatListViewHolder(parent)
@@ -40,7 +40,8 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
     override fun onBindViewHolder(holder: ChatListViewHolder, position: Int) {
         holder.setData(
             position,
-            list[position]
+            list[position],
+            goUserDetailListener
         )
     }
 
@@ -56,18 +57,25 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
     ) : RecyclerView.ViewHolder(binding.root) {
         fun setData(
             position: Int,
-            chat: ChatInfo
+            chat: ChatInfo,
+            goUserDetailListener: (Long) -> Unit
         ) {
             if (chat.sendTag == AppConfig.phoneNumber) {
                 binding.leftChat.visibility = View.GONE
                 binding.rightChat.visibility = View.VISIBLE
                 binding.rightContent.text = chat.content
                 binding.rightTime.text = TimeUtil.getFriendlyTimeSpanByNow(chat.time)
+                binding.rightIcon.setOnClickListener {
+                    goUserDetailListener.invoke(chat.sendTag)
+                }
             } else {
                 binding.rightChat.visibility = View.GONE
                 binding.leftChat.visibility = View.VISIBLE
                 binding.leftContent.text = chat.content
                 binding.leftTime.text = TimeUtil.getFriendlyTimeSpanByNow(chat.time)
+                binding.leftIcon.setOnClickListener{
+                    goUserDetailListener.invoke(chat.sendTag)
+                }
             }
         }
     }

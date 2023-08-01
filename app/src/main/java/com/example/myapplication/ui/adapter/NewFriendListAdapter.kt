@@ -55,17 +55,17 @@ class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendLis
             agreeFriendListener: (Long, Long) -> Unit,
         ) {
             binding.friendName.text = friend.number.toString()
-            if (friend.tag == 0) {
-                binding.agreeFriend.visibility = View.VISIBLE
-                binding.alreadyCheck.visibility = View.GONE
-            } else if (friend.tag == 1) {
-                binding.agreeFriend.visibility = View.GONE
-                binding.alreadyCheck.visibility = View.VISIBLE
-                binding.alreadyCheck.text = "已添加"
-            } else {
-                binding.agreeFriend.visibility = View.GONE
-                binding.alreadyCheck.visibility = View.VISIBLE
-                binding.alreadyCheck.text = "已拒绝"
+            when (friend.tag) {
+                0 -> {
+                    binding.agreeFriend.visibility = View.VISIBLE
+                    binding.alreadyCheck.visibility = View.GONE
+                }
+                1 -> {
+                    binding.agreeFriend.visibility = View.GONE
+                    binding.alreadyCheck.visibility = View.VISIBLE
+                    binding.alreadyCheck.text = "已添加"
+                }
+
             }
 
             binding.friendItem.setOnClickListener {

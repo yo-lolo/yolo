@@ -40,7 +40,13 @@ class MessageViewModel : BaseViewModel() {
 
     fun initChats(friendNumber: Long) {
         launchSafe {
-            chats.value = testStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+            // fix:给自己发送消息时的逻辑问题
+            if (AppConfig.phoneNumber != friendNumber) {
+                chats.value = testStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+                    .filter { it.friendNumber != it.number }
+            } else {
+                chats.value = testStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+            }
         }
     }
 
