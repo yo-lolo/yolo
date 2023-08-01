@@ -23,7 +23,8 @@ import java.util.Comparator
  */
 class MessageViewModel : BaseViewModel() {
 
-    private val testStoreRepository = DataManager.testStoreRepository
+    private val friendsStoreRepository = DataManager.friendsStoreRepository
+    private val chatStoreRepository = DataManager.chatStoreRepository
 
     var friends = MutableLiveData<List<FriendInfo>>()
     var chats = MutableLiveData<List<ChatInfo>>()
@@ -32,9 +33,9 @@ class MessageViewModel : BaseViewModel() {
 
     fun initData() {
         launchSafe {
-            friends.value = testStoreRepository.getFriends(AppConfig.phoneNumber)
-            newFriends.value = testStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
-            chatFriends.value = testStoreRepository.getChatFriends(AppConfig.phoneNumber)
+            friends.value = friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+            newFriends.value = friendsStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
+            chatFriends.value = chatStoreRepository.getChatFriends(AppConfig.phoneNumber)
         }
     }
 
@@ -42,17 +43,17 @@ class MessageViewModel : BaseViewModel() {
         launchSafe {
             // fix:给自己发送消息时的逻辑问题
             if (AppConfig.phoneNumber != friendNumber) {
-                chats.value = testStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+                chats.value = chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
                     .filter { it.friendNumber != it.number }
             } else {
-                chats.value = testStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+                chats.value = chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
             }
         }
     }
 
     fun insertChat(friendNumber: Long, content: String) {
         launchSafe {
-            testStoreRepository.insertChat(friendNumber, content)
+            chatStoreRepository.insertChat(friendNumber, content)
             initChats(friendNumber)
         }
     }
@@ -65,9 +66,9 @@ class MessageViewModel : BaseViewModel() {
      */
     fun agreeFriend(id: Long, number: Long) {
         launchSafe {
-            testStoreRepository.insertFriend(number, 1)
-            testStoreRepository.updateFriendTag(id, 1)
-            testStoreRepository.insertChat(number, "我通过了你的朋友验证请求，现在我们可以开始聊天了")
+            friendsStoreRepository.insertFriend(number, 1)
+            friendsStoreRepository.updateFriendTag(id, 1)
+            chatStoreRepository.insertChat(number, "我通过了你的朋友验证请求，现在我们可以开始聊天了")
             onRefresh(number)
         }
     }

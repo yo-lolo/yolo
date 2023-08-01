@@ -9,8 +9,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
-import com.example.myapplication.database.entity.ApkInfo
-import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.databinding.FragmentPapBinding
 
 /**

@@ -9,8 +9,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.database.entity.ApkInfo
-import com.example.myapplication.ui.page.detail.AppDetailFragment
 import com.example.myapplication.util.ImageUtil
 
 /**
@@ -26,7 +24,7 @@ import com.example.myapplication.util.ImageUtil
  * @UpdateRemark : 更新说明
  */
 class AppSeachAdapter : RecyclerView.Adapter<AppSeachAdapter.AppViewHodler>() {
-    var list = listOf<ApkInfo>()
+    var list = listOf<String>()
 
     var fragmentLifecycle: Lifecycle? = null
 
@@ -35,7 +33,7 @@ class AppSeachAdapter : RecyclerView.Adapter<AppSeachAdapter.AppViewHodler>() {
     }
 
     override fun onBindViewHolder(holder: AppViewHodler, position: Int) {
-        holder.setData(list[position], fragmentLifecycle!!)
+        holder.setData(fragmentLifecycle!!)
     }
 
     override fun getItemCount(): Int {
@@ -48,26 +46,16 @@ class AppSeachAdapter : RecyclerView.Adapter<AppSeachAdapter.AppViewHodler>() {
         )
     ) {
         val iconImage: ImageView = itemView.findViewById(R.id.icon_image)
-        val nameText: TextView = itemView.findViewById(R.id.name_text)
-        val descText: TextView = itemView.findViewById(R.id.desc_text)
-        val installButton: TextView = itemView.findViewById(R.id.install_button)
 
         fun setData(
-            apkInfo: ApkInfo,
             fragmentLifecycle: Lifecycle,
         ) {
             Log.e("abc", "setData: ")
             ImageUtil.displayAppIcon(iconImage, "")
-            nameText.text = apkInfo.desc
-            descText.text = apkInfo.desc
-
 
 
             itemView.setOnClickListener {
-                AppDetailFragment.goAppDetailFragment(
-                    itemView.findNavController(),
-                    apkInfo
-                )
+
             }
         }
 

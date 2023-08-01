@@ -19,12 +19,12 @@ import com.example.myapplication.database.entity.NewsInfo
  */
 class HomeViewModel : BaseViewModel() {
 
-    private val testStoreRepository = DataManager.testStoreRepository
+    private val newsStoreRepository = DataManager.newsStoreRepository
     var news = MutableLiveData<List<NewsInfo>>()
 
     fun initData() {
         launchSafe {
-            news.value = testStoreRepository.getNews()
+            news.value = newsStoreRepository.getNews()
         }
     }
 }

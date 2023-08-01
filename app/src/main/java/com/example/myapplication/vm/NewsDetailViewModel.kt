@@ -21,12 +21,13 @@ import com.example.myapplication.config.AppConfig
 class NewsDetailViewModel : BaseViewModel() {
 
     private val testStoreRepository = DataManager.testStoreRepository
+    private val friendsStoreRepository = DataManager.friendsStoreRepository
     var isFriend = MutableLiveData<Boolean>(false)
 
     fun insertFriend(authorNumber: Long) {
         launchSafe {
             kotlin.runCatching {
-                testStoreRepository.insertFriend(authorNumber)
+                friendsStoreRepository.insertFriend(authorNumber)
             }.onSuccess {
                 ToastUtils.showShort("等待好友验证")
             }
@@ -39,7 +40,7 @@ class NewsDetailViewModel : BaseViewModel() {
             if (AppConfig.phoneNumber == authorNumber) {
                 isFriend.value = true
             }
-            val friend = testStoreRepository.getFriendById(authorNumber)
+            val friend = friendsStoreRepository.getFriendById(authorNumber)
             if (friend.isNotEmpty()) {
                 isFriend.value = true
             }

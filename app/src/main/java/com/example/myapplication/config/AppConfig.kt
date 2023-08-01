@@ -19,10 +19,10 @@ import java.util.IdentityHashMap
 object AppConfig {
 
 
-    //const val phoneNumber: Long = 19956596024
-    const val phoneNumber: Long = 15755949344
-    //const val phoneNumber: Long = 11111111111
+    //const val phoneNumber: Long = 44444444444
     //const val phoneNumber: Long = 22222222222
+    const val phoneNumber: Long = 11111111111
+    //const val phoneNumber: Long = 33333333333
     const val IMAGE_OPEN = 0xff
 
     //枚举反馈类型, 1、质量问题，2、使用问题 3、其他

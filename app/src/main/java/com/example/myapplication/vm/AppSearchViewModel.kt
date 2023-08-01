@@ -2,8 +2,6 @@ package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.base.BaseViewModel
-import com.example.myapplication.database.entity.ApkInfo
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -27,7 +25,7 @@ class AppSearchViewModel : ViewModel() {
     /**
      * 查询结果
      */
-    val searchResult = MutableLiveData<List<ApkInfo>>()
+    val searchResult = MutableLiveData<List<String>>()
 
     fun searchApp(name: String) {
 

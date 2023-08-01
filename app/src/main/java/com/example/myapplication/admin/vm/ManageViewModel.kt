@@ -25,7 +25,7 @@ class ManageViewModel : BaseViewModel() {
     var userList = MutableLiveData<List<User>>()
     var feedbacks = MutableLiveData<List<FeedbackInfo>>()
     private val userStoreRepository = DataManager.userStoreRepository
-    private val testStoreRepository = DataManager.testStoreRepository
+    private val feedbackStoreRepository = DataManager.feedbackStoreRepository
 
     fun initData() {
         viewModelScope.launch {
@@ -35,7 +35,7 @@ class ManageViewModel : BaseViewModel() {
 
     fun initFeedbacks() {
         viewModelScope.launch {
-            feedbacks.value = testStoreRepository.getFeedbacks()
+            feedbacks.value = feedbackStoreRepository.getAllFeedbacks()
         }
     }
 

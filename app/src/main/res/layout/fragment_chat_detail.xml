@@ -26,14 +26,14 @@
             android:orientation="vertical">
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/chat_detail_icon"
+                android:id="@+id/user_icon"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@mipmap/touxiang"
                 app:riv_corner_radius="5dp" />
 
             <TextView
-                android:id="@+id/chat_detail_neck"
+                android:id="@+id/user_neck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"

@@ -11,6 +11,7 @@ import com.example.myapplication.R
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatDetailBinding
+import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.util.JsonUtil
 
 /**
@@ -28,10 +29,10 @@ import com.example.myapplication.util.JsonUtil
 class ChatDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentChatDetailBinding
-    var friend: Long? = null
+    var number: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        friend = arguments?.getLong("friendNumber")
+        number = arguments?.getLong("friendNumber")
         super.onCreate(savedInstanceState)
     }
 
@@ -49,6 +50,9 @@ class ChatDetailFragment : BaseFragment() {
         binding.include.headLayout.apply {
             setTitle("聊天详情")
             setBackListener { findNavController().popBackStack() }
+        }
+        binding.userIcon.setOnClickListener {
+            UserDetailFragment.goUserDetailFragment(number!!, findNavController())
         }
     }
 

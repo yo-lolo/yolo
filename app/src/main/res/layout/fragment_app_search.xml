@@ -8,14 +8,6 @@
         android:id="@+id/include"
         layout="@layout/comm_head_layout" />
 
-    <com.example.myapplication.view.AppDisplayView
-        android:id="@+id/recomment_apps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:padding="13dp"
-        android:visibility="gone" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/apps_recyclew"

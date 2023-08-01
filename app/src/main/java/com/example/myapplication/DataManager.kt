@@ -10,11 +10,8 @@ import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
-import com.example.myapplication.imp.FeedbackTaskImp
-import com.example.myapplication.imp.UserTaskImp
-import com.example.myapplication.repos.FeedbackStoreRepository
-import com.example.myapplication.repos.TestStoreRepository
-import com.example.myapplication.repos.UserStoreRepository
+import com.example.myapplication.imp.*
+import com.example.myapplication.repos.*
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
@@ -40,6 +37,9 @@ object DataManager {
     lateinit var context: Context
     lateinit var userStoreRepository: UserStoreRepository
     lateinit var feedbackStoreRepository: FeedbackStoreRepository
+    lateinit var chatStoreRepository: ChatStoreRepository
+    lateinit var friendsStoreRepository: FriendsStoreRepository
+    lateinit var newsStoreRepository: NewsStoreRepository
     lateinit var testStoreRepository: TestStoreRepository
     private var appDataBase: AppDataBase? = null
     val launchScope by lazy {
@@ -53,6 +53,9 @@ object DataManager {
         appDataBase = createDb()
         userStoreRepository = UserStoreRepository(UserTaskImp(appDataBase!!))
         feedbackStoreRepository = FeedbackStoreRepository(FeedbackTaskImp(appDataBase!!))
+        chatStoreRepository = ChatStoreRepository(ChatTaskImp(appDataBase!!))
+        friendsStoreRepository = FriendsStoreRepository(FriendTaskImp(appDataBase!!))
+        newsStoreRepository = NewsStoreRepository(NewsTaskImp(appDataBase!!))
         testStoreRepository = TestStoreRepository(appDataBase!!)
         initSmartRefresh()
         //initData()
@@ -60,8 +63,7 @@ object DataManager {
 
     private fun createDb(): AppDataBase {
         return Room.databaseBuilder(
-            context,
-            AppDataBase::class.java, "database-my"
+            context, AppDataBase::class.java, "database-my"
         ).build()
     }
 

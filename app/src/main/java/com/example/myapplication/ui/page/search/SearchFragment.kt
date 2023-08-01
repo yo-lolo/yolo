@@ -42,7 +42,7 @@ class SearchFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = FragmentAppSearchBinding.inflate(inflater)
         searchHeadBinding = LayoutSearchHeadBinding.inflate(inflater)
         initView()
@@ -73,13 +73,6 @@ class SearchFragment : BaseFragment() {
         viewBinding.appsRecyclew.apply {
             layoutManager = LinearLayoutManager(context)
             adapter =  EmptyViewAdapter(searchListAdapter)
-        }
-
-        viewBinding.recommentApps.apply {
-            setTitle("推荐应用")
-            setSubTitle("更多") {
-//                findNavController().navigate(R.id.goRecommentAppFragment)
-            }
         }
 
         /*searchHeadBinding.searchView.searchEditText.addTextChangedListener(afterTextChanged = { text ->

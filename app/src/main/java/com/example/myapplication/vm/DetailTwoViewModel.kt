@@ -1,12 +1,7 @@
 package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.base.BaseViewModel
-import com.example.myapplication.database.entity.ApkInfo
-import com.example.myapplication.useCase.AppListUseCase
-import kotlinx.coroutines.launch
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -27,7 +22,7 @@ class DetailTwoViewModel : BaseViewModel() {
     //单次下拉获取的数量
     private val limit = 10
     //app展示数据
-    val listData = MutableLiveData<List<ApkInfo>>()
+    val listData = MutableLiveData<List<String>>()
     //是否可以加载更多
     val canLoadMoreState = MutableLiveData(false)
 
@@ -45,18 +40,6 @@ class DetailTwoViewModel : BaseViewModel() {
     private fun getDataFromService() {
         launchSafe {
 
-            val apps = AppListUseCase().getTypeApks(
-                page = page.toString(),
-                limit = limit.toString()
-            )
-            canLoadMoreState.value = apps.size == limit
-
-            val data = mutableListOf<ApkInfo>()
-            if (page != 1 && listData.value != null) {
-                data.addAll(listData.value!!)
-            }
-            data.addAll(apps)
-            listData.value = data
         }
     }
 }
