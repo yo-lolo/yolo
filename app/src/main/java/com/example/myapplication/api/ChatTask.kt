@@ -38,4 +38,14 @@ interface ChatTask {
      * 获取该帐号所有的聊天好友
      */
     fun getChatFriends(number: Long): List<ChatInfo>
+
+    /**
+     * 获取两个账号之间的最后一条记录
+     */
+    fun getLastChatBT2(number: Long, friendNumber: Long): ChatInfo
+
+    /**
+     * 获取自己的的聊天记录
+     */
+    fun getChatsSelf(phoneNumber: Long): List<ChatInfo>
 }

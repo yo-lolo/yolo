@@ -53,10 +53,25 @@ class ChatStoreRepository(private val chatTaskImp: ChatTaskImp) {
         }
 
     /**
+     * 获取自己的的聊天记录
+     */
+    suspend fun getChatsSelf(): List<ChatInfo> =
+        withContext(Dispatchers.IO) {
+            return@withContext chatTaskImp.getChatsSelf(AppConfig.phoneNumber)
+        }
+
+    /**
      * 获取该帐号所有的聊天好友
      */
     suspend fun getChatFriends(number: Long): List<ChatInfo> = withContext(Dispatchers.IO) {
         return@withContext chatTaskImp.getChatFriends(number)
+    }
+
+    /**
+     * 获取两个账号之间的最后一条记录
+     */
+    suspend fun getLastChatBT2(number: Long): ChatInfo = withContext(Dispatchers.IO) {
+        return@withContext chatTaskImp.getLastChatBT2(number, AppConfig.phoneNumber)
     }
 
 }

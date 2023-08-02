@@ -38,4 +38,12 @@ class ChatTaskImp(
         return chatDao.getChatFriends(number)
     }
 
+    override fun getLastChatBT2(number: Long, friendNumber: Long): ChatInfo {
+        return chatDao.getLastChatBT2(number, friendNumber)
+    }
+
+    override fun getChatsSelf(phoneNumber: Long): List<ChatInfo> {
+        return chatDao.getChatsSelf(phoneNumber)
+    }
+
 }

@@ -30,6 +30,12 @@ interface ChatDao {
     @Query("select * from ChatInfo where number in (:number,:friendNumber) and friendNumber in (:number,:friendNumber) order by time asc")
     fun getChatsById(number: Long, friendNumber: Long): List<ChatInfo>
 
+    @Query("select * from ChatInfo where (number = :number and friendNumber =:friendNumber) or number = :friendNumber and friendNumber =:number order by time desc limit 1")
+    fun getLastChatBT2(number: Long, friendNumber: Long): ChatInfo
+
     @Query("select * from ChatInfo where number = :number group by friendNumber")
     fun getChatFriends(number: Long): List<ChatInfo>
+
+    @Query("select * from ChatInfo where number = :phoneNumber and friendNumber = :phoneNumber")
+    fun getChatsSelf(phoneNumber: Long): List<ChatInfo>
 }

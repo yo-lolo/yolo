@@ -6,8 +6,6 @@ import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
-import com.example.myapplication.util.TimeUtil
-import java.util.Comparator
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -28,14 +26,42 @@ class MessageViewModel : BaseViewModel() {
 
     var friends = MutableLiveData<List<FriendInfo>>()
     var chats = MutableLiveData<List<ChatInfo>>()
-    var chatFriends = MutableLiveData<List<ChatInfo>>()
     var newFriends = MutableLiveData<List<FriendInfo>>()
+
+    var friendTag1: MutableList<FriendInfo> = mutableListOf()
+    var resultMap = mutableMapOf<Long, List<String>>()
+    var chatFriendsMap = MutableLiveData<Map<Long, List<String>>>()
 
     fun initData() {
         launchSafe {
             friends.value = friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+            // 获取到已添加成功的好友列表
+            friendTag1 =
+                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == 1 }
+                    .toMutableList()
             newFriends.value = friendsStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
-            chatFriends.value = chatStoreRepository.getChatFriends(AppConfig.phoneNumber)
+            initMess()
+        }
+    }
+
+    private fun initMess() {
+        launchSafe {
+            // 1.获取本人的聊天记录 如果不为空 在信息展示的列表中加入本人号码
+            val chatSelf = chatStoreRepository.getChatsSelf()
+            val newList = friendTag1.map { it.friendNumber }.toMutableList()
+            if (chatSelf.isNotEmpty()) {
+                newList.add(AppConfig.phoneNumber)
+            }
+            // 2.在map映射中赋予resultMap的key与value key为对象的号码,value是一个List集合，包含了最后一条信息的时间和内容
+            newList.map { number ->
+                resultMap[number] = listOf(
+                    chatStoreRepository.getLastChatBT2(number).content,
+                    chatStoreRepository.getLastChatBT2(number).time.toString()
+                )
+            }
+            // 3.通过时间将Map进行排序
+            val mapSortByTime = resultMap.toList().sortedByDescending { it.second[1].toLong() }
+            chatFriendsMap.value = mapSortByTime.toMap()
         }
     }
 

@@ -22,6 +22,7 @@ class NewsDetailViewModel : BaseViewModel() {
 
     private val testStoreRepository = DataManager.testStoreRepository
     private val friendsStoreRepository = DataManager.friendsStoreRepository
+    private val chatStoreRepository = DataManager.chatStoreRepository
     var isFriend = MutableLiveData<Boolean>(false)
 
     fun insertFriend(authorNumber: Long) {
