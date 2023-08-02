@@ -58,19 +58,26 @@ class AddNewsFragment : BaseFragment() {
             }
         }
 
-        binding.newsSubmit.setOnClickListener {
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             val tagButton =
                 binding.root.findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId)
+            var tag = tagButton.text.toString().trim()
+            viewModel.refreshTag(tag)
+        }
+
+        binding.newsSubmit.setOnClickListener {
             val title = binding.newsTitle.text.toString().trim()
             val content = binding.newsContent.text.toString().trim()
-            val tag = if (binding.radioGroup.isClickable) tagButton.text.toString().trim() else ""
-            viewModel.onSubmit(title, content, tag)
+            viewModel.onSubmit(title, content)
         }
 
         binding.addImage.setOnClickListener {
             openPhoto()
         }
 
+        viewModel.newsPostState.observe(viewLifecycleOwner) {
+            if (it) findNavController().popBackStack()
+        }
 
     }
 

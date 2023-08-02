@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.NewsInfo
+import kotlinx.coroutines.delay
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -23,7 +24,9 @@ class HomeViewModel : BaseViewModel() {
 
     private val newsStoreRepository = DataManager.newsStoreRepository
     var news = MutableLiveData<List<NewsInfo>>()
-    var imagePath = MutableLiveData<String>("")
+    private var imagePath = MutableLiveData<String>("")
+    var tagText = MutableLiveData<String>("")
+    var newsPostState = MutableLiveData<Boolean>(false)
 
     fun initData() {
         launchSafe {
@@ -35,13 +38,24 @@ class HomeViewModel : BaseViewModel() {
         imagePath.value = path
     }
 
-    fun onSubmit(title: String, content: String, tag: String) {
-        if (title.isNotEmpty() && content.isNotEmpty() && tag.isNotEmpty()) {
+    fun refreshTag(tag: String) {
+        tagText.value = tag
+    }
+
+    fun onSubmit(title: String, content: String) {
+        if (title.isNotEmpty() && content.isNotEmpty() && tagText.value!!.isNotEmpty()) {
             launchSafe {
                 kotlin.runCatching {
-                    newsStoreRepository.insertNews(title, content, imagePath.value!!, tag)
+                    newsStoreRepository.insertNews(
+                        title,
+                        content,
+                        imagePath.value!!,
+                        tagText.value!!
+                    )
                 }.onSuccess {
                     ToastUtils.showShort("发布成功，待管理员审核")
+                    delay(1000)
+                    newsPostState.value = true
                 }
             }
         } else {
