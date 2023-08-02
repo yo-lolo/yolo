@@ -1,6 +1,8 @@
 package com.example.myapplication.vm
 
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
+import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.NewsInfo
@@ -21,10 +23,29 @@ class HomeViewModel : BaseViewModel() {
 
     private val newsStoreRepository = DataManager.newsStoreRepository
     var news = MutableLiveData<List<NewsInfo>>()
+    var imagePath = MutableLiveData<String>("")
 
     fun initData() {
         launchSafe {
-            news.value = newsStoreRepository.getNews()
+            news.value = newsStoreRepository.getNews().filter { it.type == 1 }
+        }
+    }
+
+    fun refreshPath(path: String) {
+        imagePath.value = path
+    }
+
+    fun onSubmit(title: String, content: String, tag: String) {
+        if (title.isNotEmpty() && content.isNotEmpty() && tag.isNotEmpty()) {
+            launchSafe {
+                kotlin.runCatching {
+                    newsStoreRepository.insertNews(title, content, imagePath.value!!, tag)
+                }.onSuccess {
+                    ToastUtils.showShort("发布成功，待管理员审核")
+                }
+            }
+        } else {
+            ToastUtils.showShort("请完成文章填写")
         }
     }
 }

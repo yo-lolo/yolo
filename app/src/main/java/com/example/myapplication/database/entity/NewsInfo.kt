@@ -20,7 +20,7 @@ data class NewsInfo(
     val number: Long,
     val time: Long,
     val tag: String,
-    val type: String,
+    val type: Int,
     val title: String,
     val content: String,
     val image: String = ""

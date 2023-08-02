@@ -82,12 +82,13 @@
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/news_image"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="55dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
                 android:maxWidth="75dp"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/touxiang"
                 app:riv_corner_radius="3dp" />
         </RelativeLayout>

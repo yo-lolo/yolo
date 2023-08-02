@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.LayoutNewsListItemBinding
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
 
@@ -51,6 +52,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
             binding.newsContent.text = news.content
             binding.newsDate.text = TimeUtil.millis2String(news.time, TimeUtil.dateFormatYMD_CN)
             binding.newsTitle.text = news.title
+            GlideImageLoader().displayLocalFile(news.image, binding.newsImage)
             binding.newsItem.setOnClickListener {
                 goNewsDetailListener.invoke(news)
             }

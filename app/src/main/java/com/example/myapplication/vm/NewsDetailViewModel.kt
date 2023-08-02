@@ -30,7 +30,7 @@ class NewsDetailViewModel : BaseViewModel() {
             kotlin.runCatching {
                 friendsStoreRepository.insertFriend(authorNumber)
             }.onSuccess {
-                ToastUtils.showShort("等待好友验证")
+                ToastUtils.showLong("已发送好友请求,等待好友验证")
             }
             initData(authorNumber)
         }
@@ -43,7 +43,9 @@ class NewsDetailViewModel : BaseViewModel() {
             }
             val friend = friendsStoreRepository.getFriendById(authorNumber)
             if (friend.isNotEmpty()) {
-                isFriend.value = true
+                if (friend[0].tag == 1){
+                    isFriend.value = true
+                }
             }
         }
     }

@@ -14,6 +14,7 @@ import com.example.myapplication.admin.adpter.FeedbacksAdapter
 import com.example.myapplication.admin.adpter.ImagesAdapter
 import com.example.myapplication.admin.vm.ManageViewModel
 import com.example.myapplication.databinding.FragmentTwoBinding
+import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.useCase.PromptUseCase
 
 
@@ -40,7 +41,7 @@ class FeedbackFragment : BaseFragment() {
     private fun initView() {
         binding.manageFeedbacks.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = feedbacksAdapter
+            adapter = EmptyViewAdapter(feedbacksAdapter)
         }
 
         viewModel.feedbacks.observe(viewLifecycleOwner) {

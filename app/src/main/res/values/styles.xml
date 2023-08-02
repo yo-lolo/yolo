@@ -89,5 +89,10 @@
         <item name="android:textColorSecondary">@color/color_888</item>
     </style>
 
+    <style name="myRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/color_e6e6e6</item>
+        <item name="colorControlActivated">@color/color_theme</item>
+    </style>
+
 
 </resources>

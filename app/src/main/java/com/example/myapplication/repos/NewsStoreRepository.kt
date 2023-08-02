@@ -1,7 +1,9 @@
 package com.example.myapplication.repos
 
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.imp.NewsTaskImp
+import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -23,8 +25,23 @@ class NewsStoreRepository(private val newsTaskImp: NewsTaskImp) {
     /**
      * 添加新闻
      */
-    suspend fun insertNews(newsInfo: NewsInfo): Long = withContext(Dispatchers.IO) {
-        return@withContext newsTaskImp.insertNews(newsInfo)
+    suspend fun insertNews(
+        title: String,
+        content: String,
+        path: String,
+        tag: String
+    ): Long = withContext(Dispatchers.IO) {
+        return@withContext newsTaskImp.insertNews(
+            NewsInfo(
+                AppConfig.phoneNumber,
+                TimeUtil.getCurrentMill(),
+                tag,
+                type = 0,
+                title,
+                content,
+                path,
+            )
+        )
     }
 
     /**
