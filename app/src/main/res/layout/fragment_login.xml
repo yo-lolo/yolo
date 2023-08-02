@@ -157,17 +157,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="100dp"
             android:text="@string/forget_pass_text"
             android:padding="5dp"
             android:textColor="@color/color_888"
             android:textSize="16dp" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/agree_protocol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:theme="@style/myRadioButton"
             android:text="@string/agree_protocol_text"
             android:textSize="13dp" />
     </LinearLayout>

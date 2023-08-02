@@ -137,11 +137,12 @@
             android:textColor="@color/color_FFFFFF"
             android:textSize="20dp" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/agree_protocol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:theme="@style/myRadioButton"
             android:text="@string/reg_agree_protocol_text"
             android:textSize="13dp" />
 

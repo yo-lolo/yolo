@@ -63,7 +63,7 @@ class AddNewsFragment : BaseFragment() {
                 binding.root.findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId)
             val title = binding.newsTitle.text.toString().trim()
             val content = binding.newsContent.text.toString().trim()
-            val tag = tagButton.text.toString().trim()
+            val tag = if (binding.radioGroup.isClickable) tagButton.text.toString().trim() else ""
             viewModel.onSubmit(title, content, tag)
         }
 

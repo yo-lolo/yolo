@@ -42,8 +42,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="5dp"
+            android:paddingStart="5dp"
             android:background="@color/color_FFFFFF"
             android:text="@string/tag_text"
             android:textColor="@color/color_3c3c3c" />
