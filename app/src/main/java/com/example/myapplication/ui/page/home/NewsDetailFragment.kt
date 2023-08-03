@@ -14,6 +14,7 @@ import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.FragmentNewsDetailBinding
 import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
+import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.vm.NewsDetailViewModel
 
@@ -62,6 +63,21 @@ class NewsDetailFragment : BaseFragment() {
         }
         binding.apply {
             newsDetailAuthor.text = newsInfo!!.number.toString()
+            newsAuthorIcon.setOnClickListener {
+                if (viewModel.isFriend.value!!) {
+                    UserDetailFragment.goUserDetailFragment(
+                        1,
+                        newsInfo!!.number,
+                        findNavController()
+                    )
+                } else {
+                    UserDetailFragment.goUserDetailFragment(
+                        0,
+                        newsInfo!!.number,
+                        findNavController()
+                    )
+                }
+            }
             newsDetailContent.text = newsInfo!!.content.repeat(500)
             newsDetailTag.text = newsInfo!!.tag
             newsDetailTime.text = TimeUtil.millis2String(newsInfo!!.time)
