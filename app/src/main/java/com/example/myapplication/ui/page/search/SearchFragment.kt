@@ -15,6 +15,7 @@ import com.example.myapplication.databinding.FragmentAppSearchBinding
 import com.example.myapplication.databinding.LayoutSearchHeadBinding
 import com.example.myapplication.ui.adapter.AppSeachAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
+import com.example.myapplication.util.SoftInputUtil
 import com.example.myapplication.vm.AppSearchViewModel
 
 /**

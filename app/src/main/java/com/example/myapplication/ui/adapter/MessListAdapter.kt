@@ -2,10 +2,6 @@ package com.example.myapplication.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ToastUtils
-import com.example.myapplication.database.entity.ChatInfo
-import com.example.myapplication.database.entity.FriendInfo
-import com.example.myapplication.databinding.LayoutFriendListItemBinding
 import com.example.myapplication.databinding.LayoutMessListItemBinding
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
@@ -24,8 +20,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolder>() {
 
-    var list: List<ChatInfo> = listOf()
-    var deleteListener: (Int, ChatInfo) -> Unit = { _, _ -> }
+    var list: Map<Long, List<String>> = mapOf()
     var goChatListener: (Long) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
@@ -33,7 +28,11 @@ class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolde
     }
 
     override fun onBindViewHolder(holder: FriendListViewHolder, position: Int) {
-        holder.setData(list[position], deleteListener, goChatListener)
+        holder.setData(
+            list.keys.toList()[position],
+            list[list.keys.toList()[position]]!!,
+            goChatListener
+        )
     }
 
     override fun getItemCount(): Int {
@@ -52,19 +51,19 @@ class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolde
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(
-            chat: ChatInfo,
-            deleteListener: (Int, ChatInfo) -> Unit,
+            number: Long,
+            contentAndTime: List<String>,
             goChatListener: (Long) -> Unit
         ) {
-            binding.friendName.text = chat.friendNumber.toString()
-            binding.friendLastMess.text = chat.content
-            binding.lastMessTime.text = TimeUtil.getFriendlyTimeSpanByNow(chat.time)
+            binding.friendName.text = number.toString()
+            binding.friendLastMess.text = contentAndTime[0]
+            binding.lastMessTime.text = TimeUtil.getFriendlyTimeSpanByNow(contentAndTime[1].toLong())
             binding.friendItem.setOnLongClickListener {
                 // TODO
                 true
             }
             binding.friendItem.setOnClickListener {
-                goChatListener.invoke(chat.friendNumber)
+                goChatListener.invoke(number)
             }
         }
     }

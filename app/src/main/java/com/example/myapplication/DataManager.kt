@@ -2,15 +2,19 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.example.myapplication.broadcastReceiver.EmergencyUnlockReceiver
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.imp.*
+import com.example.myapplication.notify.TestNotification
 import com.example.myapplication.repos.*
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -90,6 +94,18 @@ object DataManager {
         return linearlayoutManager
     }
 
+    /**
+     * 添加应急解锁按键监听
+     */
+    fun initNotifyListener(context: Context) {
+        context.registerReceiver(
+            EmergencyUnlockReceiver(context) {
+                TestNotification().showNotify()
+            },
+            IntentFilter().apply {
+                addAction(EmergencyUnlockReceiver.VOLUME_CHANGED_ACTION)
+            })
+    }
 
     private fun initData() {
         launchScope.launch {

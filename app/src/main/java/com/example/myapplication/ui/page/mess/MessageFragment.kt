@@ -12,7 +12,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentMessBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
-import com.example.myapplication.ui.adapter.TestMessListAdapter
+import com.example.myapplication.ui.adapter.MessListAdapter
 import com.example.myapplication.vm.MessageViewModel
 
 /**
@@ -30,7 +30,7 @@ import com.example.myapplication.vm.MessageViewModel
 class MessageFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMessBinding
-    private val messListAdapter = TestMessListAdapter()
+    private val messListAdapter = MessListAdapter()
     val viewModel by viewModels<MessageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

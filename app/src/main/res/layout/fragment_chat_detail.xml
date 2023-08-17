@@ -135,7 +135,7 @@
         android:background="@color/color_FFFFFF"
         android:gravity="center"
         android:text="删除好友"
-        android:textColor="@color/candy_r"
+        android:textColor="@color/color_red"
         android:textSize="18dp" />
 
 </LinearLayout>

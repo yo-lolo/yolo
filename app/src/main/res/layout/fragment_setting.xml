@@ -13,8 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="15dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,8 +34,8 @@
                 android:id="@+id/app_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -78,8 +78,8 @@
                 android:id="@+id/app_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -170,8 +170,8 @@
                 android:id="@+id/user_protocol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -203,8 +203,8 @@
                 android:id="@+id/privacy_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -236,8 +236,8 @@
                 android:id="@+id/settings_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -270,11 +270,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="7dp"
+                android:paddingVertical="10dp"
                 android:text="退 出 登 录"
-                android:textColor="@color/candy_r"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="@color/color_red"
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 
