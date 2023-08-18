@@ -1,6 +1,5 @@
 package com.example.myapplication.view
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
@@ -9,7 +8,7 @@ import android.view.VelocityTracker
 import android.view.ViewConfiguration
 import android.widget.LinearLayout
 import android.widget.Scroller
-import com.example.myapplication.R
+
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -30,72 +29,98 @@ class ScrollerLinearLayout @JvmOverloads constructor(
 ) :
     LinearLayout(context, attrs, defStyleAttr) {
 
-    private val mScroller = Scroller(context)
+    private val mScroller = Scroller(context)  // 用于实现View的弹性滑动
     private val mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
-    private var mVelocityTracker: VelocityTracker? = null
-
-    // 记录初始手指按下的坐标
+    private var mVelocityTracker: VelocityTracker? = null   // 速度追踪
+    private var intercept = false   // 拦截状态 初始值为不拦截
     private var lastX: Float = 0f
-    private var lastY: Float = 0f
+    private var lastY: Float = 0f  // 用来记录手指按下的初始坐标
+    private var expandWidth = 0   // View的展开的宽度
+    private var expandState = false   // View的展开状态
+    private val displayWidth =
+        context.applicationContext.resources.displayMetrics.widthPixels  // 屏幕宽度
 
-    private var expandWidth = 0
+    private var state = true
 
-    // 屏幕宽度
-    private val displayWidth = context.applicationContext.resources.displayMetrics.widthPixels
+    /**
+     * question 1: 在第一次初始化时 在事件分发中获取不到expandWidth 第二次初始化正常
+     * question 2: 滑动后点击事件对应不上
+     */
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         Log.e("yolo_charge", "onTouchEvent $event")
-        return super.onTouchEvent(event)
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                if (!expandState) {
+                    state = false
+                }
+            }
+            else -> {
+                state = true
+            }
+        }
+        invalidate()
+        return state
+    }
+
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        Log.e("yolo_hhh", "onInterceptTouchEvent Result : ${onInterceptTouchEvent(ev)}")
+        Log.e("yolo_hhh", "dispatchTouchEvent : $ev")
+        mVelocityTracker = VelocityTracker.obtain()
+        mVelocityTracker!!.addMovement(ev)
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         Log.e("yolo_charge", "onInterceptTouchEvent $ev")
-        mVelocityTracker = VelocityTracker.obtain()
-        mVelocityTracker!!.addMovement(ev)
         when (ev?.action) {
             MotionEvent.ACTION_DOWN -> {
                 lastX = ev.x
                 lastY = ev.y
+                // 处于展开状态且点击的位置不在扩展布局中 拦截点击事件
+                intercept = expandState && ev.x < (displayWidth - expandWidth)
             }
             MotionEvent.ACTION_MOVE -> {
-                test(ev)
+                // 当滑动的距离超过6 拦截点击事件
+                intercept = lastX - ev.x > 6
+                moveWithFinger(ev)
             }
             MotionEvent.ACTION_UP -> {
                 // 判断滑动距离是否超过布局的1/2
-                charge(ev)
+                chargeToRightPlace(ev)
+                intercept = false
             }
             MotionEvent.ACTION_CANCEL -> {
-                charge(ev)
+                chargeToRightPlace(ev)
+                intercept = false
             }
+            else -> intercept = false
         }
-        return super.onInterceptTouchEvent(ev)
+        return intercept
     }
 
 
-    private fun charge(ev: MotionEvent) {
+    private fun chargeToRightPlace(ev: MotionEvent) {
         val eventX = ev.x - lastX
 
         Log.e("yolo_charge", "该事件滑动的水平距离 $eventX")
         if (eventX < -(expandWidth / 4)) {
             smoothScrollTo(expandWidth, 0)
+            expandState = true
         } else {
+            expandState = false
             smoothScrollTo(0, 0)
         }
 
-
-//        // 回收内存
-//        mVelocityTracker?.apply {
-//            clear()
-//            recycle()
-//        }
+        // 回收内存
+        mVelocityTracker?.apply {
+            clear()
+            recycle()
+        }
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        Log.e("yolo", "dispatchTouchEvent $ev")
-        return super.dispatchTouchEvent(ev)
-    }
-
-    private fun test(event: MotionEvent) {
+    private fun moveWithFinger(event: MotionEvent) {
         //获得手指在水平方向上的坐标变化
         // 需要滑动的像素
         val mX = lastX - event.x
@@ -108,7 +133,9 @@ class ScrollerLinearLayout @JvmOverloads constructor(
 
     }
 
-    // 缓慢滚动到指定位置
+    /**
+     * 缓慢滚动到指定位置
+     */
     private fun smoothScrollTo(destX: Int, destY: Int) {
         val delta = destX - scrollX
         // 在多少ms内滑向destX
@@ -124,9 +151,10 @@ class ScrollerLinearLayout @JvmOverloads constructor(
         }
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         expandWidth = childViewWidth()
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        super.onLayout(changed, l, t, r, b)
+        onInterceptTouchEvent(null)
     }
 
     /**
