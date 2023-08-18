@@ -2,6 +2,7 @@ package com.example.myapplication.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.databinding.LayoutMessListItemBinding
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
@@ -58,12 +59,19 @@ class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolde
             binding.friendName.text = number.toString()
             binding.friendLastMess.text = contentAndTime[0]
             binding.lastMessTime.text = TimeUtil.getFriendlyTimeSpanByNow(contentAndTime[1].toLong())
-            binding.friendItem.setOnLongClickListener {
-                // TODO
+            binding.friendItem.setOnClickListener {
+                ToastUtils.showShort("聊天")
+//                goChatListener.invoke(number)
                 true
             }
-            binding.friendItem.setOnClickListener {
-                goChatListener.invoke(number)
+            binding.deleteItem.setOnClickListener {
+                ToastUtils.showShort("删除")
+            }
+            binding.deleteItem.setOnClickListener {
+                ToastUtils.showShort("置顶")
+            }
+            binding.deleteItem.setOnClickListener {
+                ToastUtils.showShort("标为未读")
             }
         }
     }

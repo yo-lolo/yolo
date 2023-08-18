@@ -7,14 +7,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.example.myapplication.view.ScrollerLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RelativeLayout
             android:id="@+id/friend_item"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingVertical="10dp">
@@ -74,15 +74,43 @@
                 tools:text="时间" />
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="80dp"
+        <LinearLayout
+            android:layout_width="240dp"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:background="@color/color_red"
-            android:textColor="@color/color_FFFFFF"
-            android:text="删除" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/unread_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_theme"
+                android:gravity="center"
+                android:text="标为未读"
+                android:textColor="@color/color_FFFFFF" />
+
+            <TextView
+                android:id="@+id/top_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_orange"
+                android:gravity="center"
+                android:text="置顶"
+                android:textColor="@color/color_FFFFFF" />
+
+            <TextView
+                android:id="@+id/delete_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="删除"
+                android:textColor="@color/color_FFFFFF" />
+        </LinearLayout>
+
+    </com.example.myapplication.view.ScrollerLinearLayout>
 
     <View
         android:layout_width="match_parent"
