@@ -60,17 +60,15 @@ class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolde
             binding.friendLastMess.text = contentAndTime[0]
             binding.lastMessTime.text = TimeUtil.getFriendlyTimeSpanByNow(contentAndTime[1].toLong())
             binding.friendItem.setOnClickListener {
-                ToastUtils.showShort("聊天")
-//                goChatListener.invoke(number)
-                true
+                goChatListener.invoke(number)
             }
             binding.deleteItem.setOnClickListener {
                 ToastUtils.showShort("删除")
             }
-            binding.deleteItem.setOnClickListener {
+            binding.topItem.setOnClickListener {
                 ToastUtils.showShort("置顶")
             }
-            binding.deleteItem.setOnClickListener {
+            binding.unreadItem.setOnClickListener {
                 ToastUtils.showShort("标为未读")
             }
         }

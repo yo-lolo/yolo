@@ -35,20 +35,15 @@ class ScrollerLinearLayout @JvmOverloads constructor(
     private var intercept = false   // 拦截状态 初始值为不拦截
     private var lastX: Float = 0f
     private var lastY: Float = 0f  // 用来记录手指按下的初始坐标
-    private var expandWidth = 0   // View的展开的宽度
+    private var expandWidth = 720   // View待展开的布局宽度
     private var expandState = false   // View的展开状态
     private val displayWidth =
         context.applicationContext.resources.displayMetrics.widthPixels  // 屏幕宽度
-
     private var state = true
 
-    /**
-     * question 1: 在第一次初始化时 在事件分发中获取不到expandWidth 第二次初始化正常
-     * question 2: 滑动后点击事件对应不上
-     */
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        Log.e("yolo_charge", "onTouchEvent $event")
+        Log.e(TAG, "onTouchEvent $event")
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 if (!expandState) {
@@ -59,31 +54,30 @@ class ScrollerLinearLayout @JvmOverloads constructor(
                 state = true
             }
         }
-        invalidate()
         return state
     }
 
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        Log.e("yolo_hhh", "onInterceptTouchEvent Result : ${onInterceptTouchEvent(ev)}")
-        Log.e("yolo_hhh", "dispatchTouchEvent : $ev")
+        Log.e(TAG, "onInterceptTouchEvent Result : ${onInterceptTouchEvent(ev)}")
+        Log.e(TAG, "dispatchTouchEvent : $ev")
         mVelocityTracker = VelocityTracker.obtain()
         mVelocityTracker!!.addMovement(ev)
         return super.dispatchTouchEvent(ev)
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        Log.e("yolo_charge", "onInterceptTouchEvent $ev")
+        Log.e(TAG, "onInterceptTouchEvent $ev")
         when (ev?.action) {
             MotionEvent.ACTION_DOWN -> {
-                lastX = ev.x
-                lastY = ev.y
+                lastX = ev.rawX
+                lastY = ev.rawY
                 // 处于展开状态且点击的位置不在扩展布局中 拦截点击事件
                 intercept = expandState && ev.x < (displayWidth - expandWidth)
             }
             MotionEvent.ACTION_MOVE -> {
-                // 当滑动的距离超过6 拦截点击事件
-                intercept = lastX - ev.x > 6
+                // 当滑动的距离超过10 拦截点击事件
+                intercept = lastX - ev.x > 10
                 moveWithFinger(ev)
             }
             MotionEvent.ACTION_UP -> {
@@ -100,17 +94,21 @@ class ScrollerLinearLayout @JvmOverloads constructor(
         return intercept
     }
 
-
+    /**
+     * 将布局修正到正确的位置
+     */
     private fun chargeToRightPlace(ev: MotionEvent) {
         val eventX = ev.x - lastX
 
-        Log.e("yolo_charge", "该事件滑动的水平距离 $eventX")
+        Log.e(TAG, "该事件滑动的水平距离 $eventX")
         if (eventX < -(expandWidth / 4)) {
             smoothScrollTo(expandWidth, 0)
             expandState = true
+            invalidate()
         } else {
             expandState = false
             smoothScrollTo(0, 0)
+            invalidate()
         }
 
         // 回收内存
@@ -118,18 +116,27 @@ class ScrollerLinearLayout @JvmOverloads constructor(
             clear()
             recycle()
         }
+        //清除状态
+        lastX = 0f
+        invalidate()
     }
 
+    /**
+     * 跟随手指移动
+     */
     private fun moveWithFinger(event: MotionEvent) {
         //获得手指在水平方向上的坐标变化
         // 需要滑动的像素
         val mX = lastX - event.x
+        Log.e("yolo", "mX : $mX lastX : $lastX  event.x : ${event.x}  expandWidth $expandWidth")
         if (mX > 0 && mX < expandWidth) {
+            Log.e("yolo", "mX : 滑动")
             scrollTo(mX.toInt(), 0)
         }
         // 获取当前水平方向的滑动速度
         mVelocityTracker!!.computeCurrentVelocity(500)
         val xVelocity = mVelocityTracker!!.xVelocity.toInt()
+        invalidate()
 
     }
 
@@ -141,6 +148,7 @@ class ScrollerLinearLayout @JvmOverloads constructor(
         // 在多少ms内滑向destX
         mScroller.startScroll(scrollX, 0, delta, 0, 600)
         invalidate()
+        translationY = 0f
     }
 
     // 流畅地滑动
@@ -153,8 +161,8 @@ class ScrollerLinearLayout @JvmOverloads constructor(
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         expandWidth = childViewWidth()
+        invalidate()
         super.onLayout(changed, l, t, r, b)
-        onInterceptTouchEvent(null)
     }
 
     /**
@@ -164,9 +172,11 @@ class ScrollerLinearLayout @JvmOverloads constructor(
         Log.e(TAG, "childCount ${this.childCount}")
         return if (this.childCount > 1) {
             val expandChild = this.getChildAt(1) as LinearLayout
-            expandWidth = expandChild.measuredWidth
+            if (expandChild.measuredWidth != 0){
+                expandWidth = expandChild.measuredWidth
+            }
             Log.e(TAG, "expandWidth $expandWidth")
-            expandChild.width
+            expandWidth
         } else
             0
     }

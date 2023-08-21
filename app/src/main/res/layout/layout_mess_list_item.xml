@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:id="@+id/friend_item"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingVertical="10dp">
@@ -79,31 +79,34 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
+            <Button
                 android:id="@+id/unread_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:background="@color/color_theme"
                 android:gravity="center"
                 android:text="标为未读"
                 android:textColor="@color/color_FFFFFF" />
 
-            <TextView
+            <Button
                 android:id="@+id/top_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:background="@color/color_orange"
                 android:gravity="center"
                 android:text="置顶"
                 android:textColor="@color/color_FFFFFF" />
 
-            <TextView
+            <Button
                 android:id="@+id/delete_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:background="@color/color_red"
                 android:gravity="center"
                 android:text="删除"
