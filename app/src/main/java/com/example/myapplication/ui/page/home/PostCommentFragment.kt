@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
@@ -47,7 +48,7 @@ class PostCommentFragment : BaseFragment() {
             findNavController().popBackStack()
         }
         binding.postButton.setOnClickListener {
-            ToastUtils.showShort("点我干嘛")
+            ToastUtils.showShort("发表评论啦")
         }
         binding.replyContentEdit.doOnTextChanged { text, _, _, _ ->
             if (text!!.isNotEmpty()) {
@@ -61,6 +62,20 @@ class PostCommentFragment : BaseFragment() {
                     isClickable = false
                 }
             }
+        }
+    }
+
+    companion object {
+        fun goPostCommentFragment(
+            newsId: Long,
+            navController: NavController,
+            commentId: Long = -1
+        ) {
+            var bundle = Bundle().apply {
+                putLong("newsId", newsId)
+                putLong("commentId", commentId)
+            }
+            navController.navigate(R.id.goPostCommentFragment, bundle)
         }
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
@@ -39,6 +40,13 @@ class FeedbackFragment : BaseFragment() {
     }
 
     private fun initView() {
+
+        binding.include.headLayout.apply {
+            setTitle("反馈")
+            setHeadLayoutColor()
+            setBackListener { findNavController().popBackStack() }
+        }
+
         binding.manageFeedbacks.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = EmptyViewAdapter(feedbacksAdapter)

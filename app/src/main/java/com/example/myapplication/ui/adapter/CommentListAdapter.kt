@@ -3,6 +3,7 @@ package com.example.myapplication.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DataManager
+import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.databinding.LayoutCommentListItemBinding
 import com.example.myapplication.util.layoutInflater
 
@@ -20,10 +21,10 @@ import com.example.myapplication.util.layoutInflater
  */
 class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListViewHolder>() {
 
-    var list = listOf<String>("", "")
+    var list = listOf<CommentInfo>()
 
     var addFriendListener: (Int) -> Unit = {}
-    var goCommentListener: () -> Unit = {}
+    var goCommentListener: (Long) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentListViewHolder {
         return CommentListViewHolder(parent)
@@ -46,10 +47,10 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
         )
     ) : RecyclerView.ViewHolder(binding.root) {
         var replyListAdapter = ReplyListAdapter()
-        fun setData(position: Int, commentInfo: String, goCommentListener: () -> Unit) {
+        fun setData(position: Int, commentInfo: CommentInfo, goCommentListener: (Long) -> Unit) {
 
             binding.goComment.setOnClickListener {
-                goCommentListener.invoke()
+                goCommentListener.invoke(commentInfo.id)
             }
 
             if (position % 2 == 0) {
@@ -73,7 +74,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
 
         }
 
-        fun listRefresh() {
+        private fun listRefresh() {
             replyListAdapter.notifyDataSetChanged()
         }
     }

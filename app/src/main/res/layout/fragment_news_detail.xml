@@ -151,15 +151,15 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="15dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="12dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="12dp"
                         android:text="全部评论"
                         android:textColor="@color/color_3c3c3c"
                         android:textSize="15dp" />
@@ -168,11 +168,24 @@
                         android:id="@+id/content_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginLeft="66dp"
+                        android:paddingVertical="12dp"
                         android:text="8"
                         android:textColor="@color/color_3c3c3c"
                         android:textSize="15dp" />
-                </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/post_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:paddingHorizontal="5dp"
+                        android:paddingVertical="12dp"
+                        android:text="发表评论"
+                        android:textColor="@color/color_theme"
+                        android:textSize="15dp" />
+
+                </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/comment_list"

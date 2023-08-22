@@ -35,7 +35,7 @@ class ScrollerLinearLayout @JvmOverloads constructor(
     private var intercept = false   // 拦截状态 初始值为不拦截
     private var lastX: Float = 0f
     private var lastY: Float = 0f  // 用来记录手指按下的初始坐标
-    private var expandWidth = 720   // View待展开的布局宽度
+    var expandWidth = 720   // View待展开的布局宽度 需要手动设置 3*dp
     private var expandState = false   // View的展开状态
     private val displayWidth =
         context.applicationContext.resources.displayMetrics.widthPixels  // 屏幕宽度
@@ -128,9 +128,7 @@ class ScrollerLinearLayout @JvmOverloads constructor(
         //获得手指在水平方向上的坐标变化
         // 需要滑动的像素
         val mX = lastX - event.x
-        Log.e("yolo", "mX : $mX lastX : $lastX  event.x : ${event.x}  expandWidth $expandWidth")
         if (mX > 0 && mX < expandWidth) {
-            Log.e("yolo", "mX : 滑动")
             scrollTo(mX.toInt(), 0)
         }
         // 获取当前水平方向的滑动速度

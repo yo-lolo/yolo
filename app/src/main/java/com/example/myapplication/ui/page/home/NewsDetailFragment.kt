@@ -88,6 +88,9 @@ class NewsDetailFragment : BaseFragment() {
                 layoutManager = DataManager.layoutManagerNotScroll()
                 adapter = EmptyViewAdapter(commentListAdapter)
             }
+            binding.postComment.setOnClickListener {
+                PostCommentFragment.goPostCommentFragment(newsInfo!!.id, findNavController())
+            }
 
             commentListAdapter.goCommentListener = {
                 findNavController().navigate(R.id.goPostCommentFragment)

@@ -25,6 +25,27 @@
         android:id="@+id/adminFragment"
         android:name="com.example.myapplication.admin.ui.admin.AdminFragment"
         android:label="AdminFragment" />
+
+    <fragment
+        android:id="@+id/NewsFragment"
+        android:name="com.example.myapplication.admin.ui.manage.NewsFragment"
+        android:label="NewsFragment" />
+    <fragment
+        android:id="@+id/FeedbackFragment"
+        android:name="com.example.myapplication.admin.ui.manage.FeedbackFragment"
+        android:label="FeedbackFragment" />
+    <fragment
+        android:id="@+id/NewsDetailFragment"
+        android:name="com.example.myapplication.admin.ui.manage.NewsDetailFragment"
+        android:label="NewsDetailFragment" />
+    <fragment
+        android:id="@+id/CommentFragment"
+        android:name="com.example.myapplication.admin.ui.manage.CommentFragment"
+        android:label="CommentFragment" />
+    <fragment
+        android:id="@+id/UserFragment"
+        android:name="com.example.myapplication.admin.ui.manage.UserFragment"
+        android:label="UserFragment" />
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="com.example.myapplication.ui.page.mine.UserDetailFragment"
@@ -49,5 +70,21 @@
     <action
         android:id="@+id/goUserDetailFragment"
         app:destination="@id/userDetailFragment" />
+    <action
+        android:id="@+id/goAdminNewsFragment"
+        app:destination="@id/NewsFragment" />
+    <action
+        android:id="@+id/goAdminFeedbackFragment"
+        app:destination="@id/FeedbackFragment" />
+    <action
+        android:id="@+id/goAdminNewsDetailFragment"
+        app:destination="@id/NewsDetailFragment" />
+    <action
+        android:id="@+id/goAdminCommentFragment"
+        app:destination="@id/CommentFragment" />
+    <action
+        android:id="@+id/goAdminUserFragment"
+        app:destination="@id/UserFragment" />
+
 
 </navigation>

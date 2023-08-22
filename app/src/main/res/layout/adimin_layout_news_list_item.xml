@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/todo_list_item_bg">
+
+    <com.example.myapplication.view.ScrollerLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/news_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/news_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:text="一定会执行的WorkManager！"
+                android:textColor="@color/color_3c3c3c"
+                android:textSize="14dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linear_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:layout_toStartOf="@+id/news_image"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/news_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="小鱼爱编程"
+                        android:textSize="11dp" />
+
+                    <TextView
+                        android:id="@+id/news_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2022年10月21日"
+                        android:textSize="11dp" />
+
+                    <TextView
+                        android:id="@+id/news_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程"
+                        android:textSize="11dp" />
+                </LinearLayout>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="65dp"
+                    android:layout_height="46dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:maxWidth="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/touxiang"
+                    app:riv_corner_radius="3dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/news_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="标签"
+                android:textSize="11dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/unread_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_theme"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="审核\n通过"
+                android:textColor="@color/color_FFFFFF" />
+
+            <Button
+                android:id="@+id/delete_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_red"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="审核\n失败"
+                android:textColor="@color/color_FFFFFF" />
+        </LinearLayout>
+    </com.example.myapplication.view.ScrollerLinearLayout>
+
+
+</LinearLayout>

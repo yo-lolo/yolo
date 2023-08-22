@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
@@ -12,6 +13,7 @@ import com.example.myapplication.admin.adpter.UserListAdapter
 import com.example.myapplication.admin.vm.ManageViewModel
 import com.example.myapplication.databinding.FragmentOneBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
+import kotlinx.coroutines.channels.ticker
 
 
 class UserFragment : BaseFragment() {
@@ -35,6 +37,12 @@ class UserFragment : BaseFragment() {
     }
 
     private fun initView(view: View) {
+
+        binding.include.headLayout.apply {
+            setTitle("用户")
+            setHeadLayoutColor()
+            setBackListener { findNavController().popBackStack() }
+        }
 
         binding.userList.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:orientation="vertical"
     android:gravity="center">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/comm_head_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/manage_feedbacks"

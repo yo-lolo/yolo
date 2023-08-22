@@ -79,36 +79,3 @@ class FeedbacksAdapter : RecyclerView.Adapter<FeedbacksAdapter.FeedbacksViewHold
     }
 }
 
-class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImagesViewHolder>() {
-
-    var list: List<String> = listOf()
-    var showBigImageListener: (String) -> Unit = {}
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {
-        return ImagesViewHolder(parent)
-    }
-
-    override fun onBindViewHolder(holder: ImagesViewHolder, position: Int) {
-        holder.setData(list[position], showBigImageListener)
-    }
-
-    override fun getItemCount(): Int {
-        return list.size
-    }
-
-    class ImagesViewHolder(
-        parent: ViewGroup,
-        val binding: LayoutManageImagesItemBinding = LayoutManageImagesItemBinding.inflate(
-            parent.context.layoutInflater(),
-            parent,
-            false
-        )
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun setData(data: String, showBigImageListener: (String) -> Unit) {
-            GlideImageLoader().displayLocalFile(data, binding.imageItem)
-            binding.imageItem.setOnClickListener {
-                showBigImageListener.invoke(data)
-            }
-        }
-    }
-}
