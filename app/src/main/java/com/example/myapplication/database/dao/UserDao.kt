@@ -4,7 +4,9 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.myapplication.database.entity.User
+import com.example.myapplication.database.entity.UserUpdate
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -39,6 +41,6 @@ interface UserDao {
     @Query("update user set pass = :pass where number = :number")
     fun updatePass(number: Long, pass: String)
 
-    @Query("update user set neck = :neck and address = :address and sign = :sign where number = :number")
-    fun updateUserInfo(number: Long, neck: String, address: String, sign: String)
+    @Update(entity = User::class)
+    fun updateUserInfo(userUpdate: UserUpdate)
 }

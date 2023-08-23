@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.admin.adpter.FilesAdapter
 import com.example.myapplication.admin.ui.manage.CommentFragment
@@ -51,7 +52,7 @@ class ManageFragment : BaseFragment() {
 
     private fun initView(view: View) {
         binding.files.apply {
-            layoutManager = GridLayoutManager(context, 3)
+            layoutManager = DataManager.GridLayoutManagerNotScroll(3)
             adapter = filesAdapter
         }
 

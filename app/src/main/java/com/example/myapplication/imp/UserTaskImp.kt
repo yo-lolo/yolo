@@ -4,6 +4,7 @@ import com.example.myapplication.api.UserTask
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.database.dao.UserDao
 import com.example.myapplication.database.entity.User
+import com.example.myapplication.database.entity.UserUpdate
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -46,7 +47,9 @@ class UserTaskImp(
         userDao.updatePass(number, pass)
     }
 
-    override fun updateUserInfo(number: Long, neck: String, address: String, sign: String) {
-        userDao.updateUserInfo(number, neck, address, sign)
+    override fun updateUserInfo(
+        number: Long, neck: String, address: String, sign: String, imagePath: String
+    ) {
+        userDao.updateUserInfo(UserUpdate(number, neck, address, sign, imagePath))
     }
 }

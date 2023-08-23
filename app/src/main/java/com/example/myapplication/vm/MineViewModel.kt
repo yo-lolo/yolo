@@ -7,7 +7,6 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.User
-import com.example.myapplication.useCase.PromptUseCase
 import kotlinx.coroutines.launch
 
 /**
@@ -26,6 +25,7 @@ class MineViewModel : BaseViewModel() {
 
     private val userStoreRepository = DataManager.userStoreRepository
     var user = MutableLiveData<User>()
+    var imagePath = MutableLiveData<String>("")
 
 
     fun initData() {
@@ -34,22 +34,21 @@ class MineViewModel : BaseViewModel() {
         }
     }
 
+    fun refreshPath(path: String) {
+        imagePath.value = path
+    }
 
-
-    fun promptEdit() {
-        initData()
+    fun updateUserEdit(neck: String, address: String, sign: String) {
         if (user.value != null) {
-            PromptUseCase().promptEdit(user.value!!) { neck, address, sign ->
-                viewModelScope.launch {
-                    kotlin.runCatching {
-                        userStoreRepository.updateUserInfo(
-                            AppConfig.phoneNumber, neck, address, sign
-                        )
-                    }.onFailure {
-                        ToastUtils.showShort("保存失败")
-                    }.onSuccess {
-                        ToastUtils.showShort("保存成功")
-                    }
+            viewModelScope.launch {
+                kotlin.runCatching {
+                    userStoreRepository.updateUserInfo(
+                        AppConfig.phoneNumber, neck, address, sign, imagePath.value!!
+                    )
+                }.onFailure {
+                    ToastUtils.showShort("保存失败")
+                }.onSuccess {
+                    ToastUtils.showShort("保存成功")
                 }
             }
         } else {

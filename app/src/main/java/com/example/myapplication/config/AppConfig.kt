@@ -26,6 +26,7 @@ object AppConfig {
     const val phoneNumber: Long = 33333333333
     const val IMAGE_OPEN = 0xff
     const val NEWS_IMAGE_OPEN = 1
+    const val USER_IMAGE_EDIT = 2
 
     //枚举反馈类型, 1、质量问题，2、使用问题 3、其他
     enum class FeedbackType(typeId: String, desc: String) {

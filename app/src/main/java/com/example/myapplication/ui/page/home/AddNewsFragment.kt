@@ -16,6 +16,7 @@ import com.blankj.utilcode.util.UriUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentAddNewsBinding
+import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.vm.HomeViewModel
 

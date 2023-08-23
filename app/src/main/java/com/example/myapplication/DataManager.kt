@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.myapplication.broadcastReceiver.EmergencyUnlockReceiver
@@ -92,6 +93,15 @@ object DataManager {
             }
         }
         return linearlayoutManager
+    }
+
+    fun GridLayoutManagerNotScroll(spanCount: Int): GridLayoutManager {
+        var gridLayoutManager: GridLayoutManager = object : GridLayoutManager(context, spanCount) {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        return gridLayoutManager
     }
 
     /**

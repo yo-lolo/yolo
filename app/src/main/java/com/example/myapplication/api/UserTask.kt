@@ -52,5 +52,5 @@ interface UserTask {
     /**
      *  通过号码更新用户信息
      */
-    fun updateUserInfo(number: Long,neck: String, address: String, sign: String)
+    fun updateUserInfo(number: Long, neck: String, address: String, sign: String, imagePath: String)
 }

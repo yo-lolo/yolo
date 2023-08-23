@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.UriUtils
@@ -41,7 +42,7 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
         viewBinding =
             LayoutImageDisplayViewBinding.inflate(LayoutInflater.from(context), this, true)
         viewBinding.displayImageRecyclew.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            layoutManager = GridLayoutManager(context, 4)
             adapter = imageDisplayAdapter
         }
 
@@ -55,6 +56,10 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
         imageDisplayAdapter.deleteImageListener = {
             //删除图片
             dialog(it)
+        }
+
+        imageDisplayAdapter.showImageListener = {
+            PromptUseCase().promptBigImage(it)
         }
     }
 
@@ -100,7 +105,7 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
     /**
      * 适配器内容改变时 刷新每个item的内容
      */
-    private fun notifyData(){
+    private fun notifyData() {
         imageDisplayAdapter.notifyDataSetChanged()
     }
 

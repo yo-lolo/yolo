@@ -100,6 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:paddingVertical="15dp"
             android:background="@color/color_FFFFFF"
             android:gravity="center">
 
@@ -107,8 +108,7 @@
                 android:id="@+id/image_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:scaleType="centerCrop"
+                android:scaleType="centerInside"
                 android:src="@mipmap/icon_image_add" />
         </LinearLayout>
 

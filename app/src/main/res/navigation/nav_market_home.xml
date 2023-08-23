@@ -95,6 +95,11 @@
         android:label="FriendsFragment" />
 
     <fragment
+        android:id="@+id/MineEditFragment"
+        android:name="com.example.myapplication.ui.page.mine.MineEditFragment"
+        android:label="MineEditFragment" />
+
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -171,5 +176,8 @@
         android:id="@+id/goUserDetailFragment"
         app:destination="@id/userDetailFragment" />
 
+    <action
+        android:id="@+id/goMineEditFragment"
+        app:destination="@id/MineEditFragment" />
 
 </navigation>

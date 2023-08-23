@@ -13,6 +13,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.R
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.MineEditLayoutBinding
+import com.example.myapplication.ui.page.mine.MineFragment
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
@@ -123,49 +124,4 @@ class PromptUseCase() {
         alertDialog.window!!.decorView.setPadding(0, 30, 0, 50)
     }
 
-    fun promptEdit(
-        user: User,
-        mPositiveButtonListener: (String, String, String) -> Unit
-    ) {
-
-        val context = ActivityUtils.getTopActivity()
-        val customView = context.layoutInflater().inflate(R.layout.mine_edit_layout, null, false)
-
-        val alertDialog = AlertDialog.Builder(context)
-            .setView(customView)
-            .setCancelable(false)
-            .create()
-
-        val mineOk = customView.findViewById<TextView>(R.id.mine_ok)
-        val mineCancel = customView.findViewById<TextView>(R.id.mine_cancel)
-        val mineAddress = customView.findViewById<EditText>(R.id.mine_address)
-        val mineNeck = customView.findViewById<EditText>(R.id.mine_neck)
-        val mineNumber = customView.findViewById<TextView>(R.id.mine_number)
-        val mineSign = customView.findViewById<EditText>(R.id.mine_personal_sign)
-        val mineRegisterTime = customView.findViewById<TextView>(R.id.mine_register_time)
-        val mineImage = customView.findViewById<ImageView>(R.id.mine_image)
-
-        mineAddress.text = Editable.Factory.getInstance().newEditable(user.address)
-        mineSign.text = Editable.Factory.getInstance().newEditable(user.sign)
-        GlideImageLoader().displayImageWithRadius(user.image, mineImage)
-        mineNeck.text = Editable.Factory.getInstance().newEditable(user.neck)
-        mineNumber.text = user.number.toString()
-        mineRegisterTime.text = TimeUtil.millis2String(user.time, TimeUtil.dateFormatYMD_CN)
-
-
-
-        mineOk.setOnClickListener {
-            val neck = mineNeck.text.toString().trim()
-            val address = mineAddress.text.toString().trim()
-            val sign = mineSign.text.toString().trim()
-            mPositiveButtonListener.invoke(neck, address, sign)
-            alertDialog.dismiss()
-        }
-        mineCancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        alertDialog.show()
-        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-        alertDialog.window!!.decorView.setPadding(80, 0, 80, 0)
-    }
 }

@@ -30,3 +30,11 @@ data class User(
 ) {
 
 }
+
+data class UserUpdate(
+    var number: Long,
+    var neck: String,
+    var address: String,
+    var sign: String,
+    var image: String
+)

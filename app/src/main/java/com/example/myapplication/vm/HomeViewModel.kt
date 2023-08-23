@@ -24,7 +24,7 @@ class HomeViewModel : BaseViewModel() {
 
     private val newsStoreRepository = DataManager.newsStoreRepository
     var news = MutableLiveData<List<NewsInfo>>()
-    private var imagePath = MutableLiveData<String>("")
+    var imagePath = MutableLiveData<String>("")
     var tagText = MutableLiveData<String>("")
     var newsPostState = MutableLiveData<Boolean>(false)
 

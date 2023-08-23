@@ -1,20 +1,21 @@
 package com.example.myapplication.ui.page.mine
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
+import com.blankj.utilcode.util.UriUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.DataManager
 import com.example.myapplication.R
-import com.example.myapplication.database.entity.User
-import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentMineBinding
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.vm.MineViewModel
 
 /**
@@ -33,8 +34,8 @@ class MineFragment : BaseFragment() {
 
 
     private lateinit var homeBinding: FragmentMineBinding
-
     val viewModel by viewModels<MineViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,14 +47,14 @@ class MineFragment : BaseFragment() {
         return view
     }
 
-    fun init(view: View){
+    fun init(view: View) {
 
         homeBinding.apply {
             userName.setOnClickListener {
                 findNavController().navigate(R.id.goLoginFragment)
             }
             mineEdit.setOnClickListener {
-                viewModel.promptEdit()
+                findNavController().navigate(R.id.goMineEditFragment)
             }
             goCollect.setOnClickListener {
                 ToastUtils.showShort("还没做呢，别点我啦")
@@ -70,6 +71,10 @@ class MineFragment : BaseFragment() {
             goFeedback.setOnClickListener {
                 findNavController().navigate(R.id.goFeedbackFragment)
             }
+        }
+
+        viewModel.user.observe(viewLifecycleOwner) {
+            GlideImageLoader().displayLocalFile(it.image, homeBinding.mineTouxiang)
         }
     }
 

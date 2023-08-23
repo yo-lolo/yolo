@@ -1,5 +1,6 @@
 package com.example.myapplication.repos
 
+import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.imp.UserTaskImp
 import kotlinx.coroutines.Dispatchers
@@ -64,8 +65,14 @@ class UserStoreRepository(private val userTaskImp: UserTaskImp) {
     /**
      * 通过号码更新用户信息
      */
-    suspend fun updateUserInfo(number: Long, neck: String, address: String, sign: String) =
+    suspend fun updateUserInfo(
+        number: Long,
+        neck: String,
+        address: String,
+        sign: String,
+        imagePath: String
+    ) =
         withContext(Dispatchers.IO) {
-            return@withContext userTaskImp.updateUserInfo(number, neck, address, sign)
+            return@withContext userTaskImp.updateUserInfo(number, neck, address, sign, imagePath)
         }
 }
