@@ -36,7 +36,6 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
         var list = allList.filter { it.level == 1 }
         var replyList = allList.filter { it.level == 2 }
         holder.setData(
-            position,
             list[position],
             goCommentListener,
             goUserDetail,
@@ -58,13 +57,17 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
         var replyListAdapter = ReplyListAdapter()
 
         fun setData(
-            position: Int,
             commentInfo: CommentInfo,
             goCommentListener: (Long) -> Unit,
             goUserDetail: (Long) -> Unit,
             replyList: List<CommentInfo>,
             deleteCommentListener: (CommentInfo) -> Unit
         ) {
+            binding.commentTime.text = TimeUtil.millis2String(commentInfo.time)
+            binding.commentNeck.text = commentInfo.number.toString()
+            binding.commentContent.text = commentInfo.content
+
+            // 一些回调函数 具体实现在NewsDetailFragment中 invoke中的值时传入的参数
             binding.goComment.setOnClickListener {
                 goCommentListener.invoke(commentInfo.id)
             }
@@ -75,10 +78,8 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
                 deleteCommentListener.invoke(commentInfo)
                 true
             }
-            binding.commentTime.text = TimeUtil.millis2String(commentInfo.time)
-            binding.commentNeck.text = commentInfo.number.toString()
-            binding.commentContent.text = commentInfo.content
 
+            // 过滤出该条评论下的评论 即replyId == commentInfo.id
             val currentReplyList =
                 replyList.filter { it.replyId == commentInfo.id }
             binding.replyList.visibility =
@@ -91,6 +92,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
                 list = currentReplyList
                 notifyDataSetChanged()
             }
+            // 回调 这里因为RecyclerView中嵌套了一个RecyclerView 所以replyListAdapter中的回调要传两层
             replyListAdapter.goUserDetail = {
                 goUserDetail.invoke(it)
             }

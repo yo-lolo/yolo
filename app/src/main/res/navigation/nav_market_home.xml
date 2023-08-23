@@ -100,6 +100,16 @@
         android:label="MineEditFragment" />
 
     <fragment
+        android:id="@+id/MineNewsFragment"
+        android:name="com.example.myapplication.ui.page.mine.MineNewsFragment"
+        android:label="MineNewsFragment" />
+
+    <fragment
+        android:id="@+id/MineCommentsFragment"
+        android:name="com.example.myapplication.ui.page.mine.MineCommentsFragment"
+        android:label="MineCommentsFragment" />
+
+    <fragment
         android:id="@+id/appDetailFragment"
         android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
         android:label="AppDetailFragment">
@@ -179,5 +189,13 @@
     <action
         android:id="@+id/goMineEditFragment"
         app:destination="@id/MineEditFragment" />
+
+    <action
+        android:id="@+id/goMineNewsFragment"
+        app:destination="@id/MineNewsFragment" />
+
+    <action
+        android:id="@+id/goMineCommentsFragment"
+        app:destination="@id/MineCommentsFragment" />
 
 </navigation>

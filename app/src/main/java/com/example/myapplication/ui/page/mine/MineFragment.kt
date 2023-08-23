@@ -57,13 +57,16 @@ class MineFragment : BaseFragment() {
             mineEdit.setOnClickListener {
                 findNavController().navigate(R.id.goMineEditFragment)
             }
-            goCollect.setOnClickListener {
+            goMineComment.setOnClickListener {
+                findNavController().navigate(R.id.goMineNewsFragment)
+            }
+            goMineNews.setOnClickListener {
+                findNavController().navigate(R.id.goMineCommentsFragment)
+            }
+            goMineGreats.setOnClickListener {
                 ToastUtils.showShort("还没做呢，别点我啦")
             }
             goHistory.setOnClickListener {
-                ToastUtils.showShort("还没做呢，别点我啦")
-            }
-            goComment.setOnClickListener {
                 ToastUtils.showShort("还没做呢，别点我啦")
             }
             goSetting.setOnClickListener {

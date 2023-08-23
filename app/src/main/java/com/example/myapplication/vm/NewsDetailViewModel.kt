@@ -84,13 +84,14 @@ class NewsDetailViewModel : BaseViewModel() {
     /**
      * 评论删除逻辑
      */
-    fun deleteComment(newsId: Long, commentInfo: CommentInfo) {
-        if (AppConfig.phoneNumber == commentInfo.number || commentInfo.newsId == newsId) {
+    fun deleteComment(newsInfo: NewsInfo, commentInfo: CommentInfo) {
+        if (AppConfig.phoneNumber == commentInfo.number || commentInfo.newsId == newsInfo.id) {
             viewModelScope.launch {
                 kotlin.runCatching {
                     commentStoreRepository.deleteCommentById(commentInfo.id)
                 }.onSuccess {
                     ToastUtils.showShort("删除评论成功")
+                    initData(newsInfo) //更新数据
                 }.onFailure {
                     ToastUtils.showShort("删除评论失败,请重试")
                 }

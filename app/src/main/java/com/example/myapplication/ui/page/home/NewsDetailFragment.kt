@@ -64,24 +64,19 @@ class NewsDetailFragment : BaseFragment() {
         binding.apply {
             newsDetailAuthor.text = newsInfo!!.number.toString()
             newsAuthorIcon.setOnClickListener {
-                if (viewModel.isFriend.value!!) {
-                    UserDetailFragment.goUserDetailFragment(
-                        1,
-                        newsInfo!!.number,
-                        findNavController()
-                    )
-                } else {
-                    UserDetailFragment.goUserDetailFragment(
-                        0,
-                        newsInfo!!.number,
-                        findNavController()
-                    )
-                }
+                // 判断文章作者是否为好友 跳转到用户详情界面
+                val tag = if (viewModel.isFriend.value!!) 1 else 0
+                UserDetailFragment.goUserDetailFragment(
+                    tag,
+                    newsInfo!!.number,
+                    findNavController()
+                )
             }
             newsDetailContent.text = newsInfo!!.content.repeat(500)
             newsDetailTag.text = newsInfo!!.tag
             newsDetailTime.text = TimeUtil.millis2String(newsInfo!!.time)
             newsDetailTitle.text = newsInfo!!.title
+            // TODO:文章管理，添加更新时间字段
             newsDetailUpdateTime.text =
                 "-----     更新于 ${TimeUtil.millis2String(newsInfo!!.time)}     -----"
             commentList.apply {
@@ -105,10 +100,8 @@ class NewsDetailFragment : BaseFragment() {
             }
             commentListAdapter.deleteCommentListener = {
                 PromptUseCase().deletePrompt("确定要删除这条评论吗"){
-                    viewModel.deleteComment(newsInfo!!.id, it)
+                    viewModel.deleteComment(newsInfo!!, it)
                 }
-
-
             }
             viewModel.isFriend.observe(viewLifecycleOwner) {
                 binding.addFriend.visibility = if (it) View.GONE else View.VISIBLE
