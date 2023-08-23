@@ -74,5 +74,7 @@ class NewsFragment : BaseFragment() {
         }
 
         binding.newRefresh.setFooterHeight(0f)
+
+        initProgress(viewModel.loadingTaskCount)
     }
 }

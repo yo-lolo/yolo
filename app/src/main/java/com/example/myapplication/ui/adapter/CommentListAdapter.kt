@@ -26,6 +26,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
     var allList = listOf<CommentInfo>()
     var goCommentListener: (Long) -> Unit = {}
     var goUserDetail: (Long) -> Unit = {}
+    var deleteCommentListener: (CommentInfo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentListViewHolder {
         return CommentListViewHolder(parent)
@@ -34,7 +35,14 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
     override fun onBindViewHolder(holder: CommentListViewHolder, position: Int) {
         var list = allList.filter { it.level == 1 }
         var replyList = allList.filter { it.level == 2 }
-        holder.setData(position, list[position], goCommentListener, goUserDetail, replyList)
+        holder.setData(
+            position,
+            list[position],
+            goCommentListener,
+            goUserDetail,
+            replyList,
+            deleteCommentListener
+        )
     }
 
     override fun getItemCount(): Int {
@@ -54,13 +62,18 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
             commentInfo: CommentInfo,
             goCommentListener: (Long) -> Unit,
             goUserDetail: (Long) -> Unit,
-            replyList: List<CommentInfo>
+            replyList: List<CommentInfo>,
+            deleteCommentListener: (CommentInfo) -> Unit
         ) {
             binding.goComment.setOnClickListener {
                 goCommentListener.invoke(commentInfo.id)
             }
             binding.mainComment.setOnClickListener {
                 goUserDetail.invoke(commentInfo.number)
+            }
+            binding.mainComment.setOnLongClickListener {
+                deleteCommentListener.invoke(commentInfo)
+                true
             }
             binding.commentTime.text = TimeUtil.millis2String(commentInfo.time)
             binding.commentNeck.text = commentInfo.number.toString()
@@ -80,6 +93,9 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
             }
             replyListAdapter.goUserDetail = {
                 goUserDetail.invoke(it)
+            }
+            replyListAdapter.deleteCommentListener = {
+                deleteCommentListener.invoke(it)
             }
         }
     }

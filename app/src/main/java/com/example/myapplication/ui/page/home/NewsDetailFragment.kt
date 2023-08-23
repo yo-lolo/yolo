@@ -15,6 +15,7 @@ import com.example.myapplication.databinding.FragmentNewsDetailBinding
 import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
+import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.vm.NewsDetailViewModel
 
@@ -39,8 +40,6 @@ class NewsDetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         newsInfo = arguments?.getSerializable("news") as NewsInfo
-        viewModel.initData(newsInfo!!.number)
-        viewModel.initComments(newsInfo!!.id)
         super.onCreate(savedInstanceState)
     }
 
@@ -104,16 +103,27 @@ class NewsDetailFragment : BaseFragment() {
             commentListAdapter.goUserDetail = {
                 UserDetailFragment.goUserDetailFragment(it, findNavController())
             }
+            commentListAdapter.deleteCommentListener = {
+                PromptUseCase().deletePrompt("确定要删除这条评论吗"){
+                    viewModel.deleteComment(newsInfo!!.id, it)
+                }
 
+
+            }
             viewModel.isFriend.observe(viewLifecycleOwner) {
                 binding.addFriend.visibility = if (it) View.GONE else View.VISIBLE
             }
 
             binding.addFriend.setOnClickListener {
-                viewModel.insertFriend(newsInfo!!.number)
+                viewModel.insertFriend(newsInfo!!)
             }
         }
+        initProgress(viewModel.loadingTaskCount)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.initData(newsInfo!!)
     }
 
     companion object {

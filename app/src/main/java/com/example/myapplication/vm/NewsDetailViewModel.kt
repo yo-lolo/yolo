@@ -7,6 +7,7 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.CommentInfo
+import com.example.myapplication.database.entity.NewsInfo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -30,23 +31,31 @@ class NewsDetailViewModel : BaseViewModel() {
     var commentState = MutableLiveData<Boolean>(false)
     var comments = MutableLiveData<List<CommentInfo>>()
 
-    fun insertFriend(authorNumber: Long) {
+    /**
+     * 添加好友
+     */
+    fun insertFriend(newsInfo: NewsInfo) {
         launchSafe {
             kotlin.runCatching {
-                friendsStoreRepository.insertFriend(authorNumber)
+                friendsStoreRepository.insertFriend(newsInfo.number)
             }.onSuccess {
                 ToastUtils.showLong("已发送好友请求,等待好友验证")
             }
-            initData(authorNumber)
+            initData(newsInfo)
         }
     }
 
-    fun initData(authorNumber: Long) {
+    /**
+     * 初始化数据（评论列表，好友状态）
+     */
+    fun initData(newsInfo: NewsInfo) {
         launchSafe {
-            if (AppConfig.phoneNumber == authorNumber) {
+            comments.value = commentStoreRepository.getCommentsByNewId(newsInfo.id)
+            if (AppConfig.phoneNumber == newsInfo.number) {
                 isFriend.value = true
             }
-            val friend = friendsStoreRepository.getFriendById(authorNumber)
+            val friend = friendsStoreRepository.getFriendById(newsInfo.number)
+
             if (friend.isNotEmpty()) {
                 if (friend[0].tag == 1) {
                     isFriend.value = true
@@ -55,12 +64,9 @@ class NewsDetailViewModel : BaseViewModel() {
         }
     }
 
-    fun initComments(newsId: Long) {
-        viewModelScope.launch {
-            comments.value = commentStoreRepository.getCommentsByNewId(newsId)
-        }
-    }
-
+    /**
+     * 发布评论
+     */
     fun postComment(newsId: Long, content: String, level: Int, replyId: Long? = null) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -71,6 +77,23 @@ class NewsDetailViewModel : BaseViewModel() {
                 commentState.value = true
             }.onFailure {
                 ToastUtils.showShort("评论发布失败,请重试")
+            }
+        }
+    }
+
+    /**
+     * 评论删除逻辑
+     */
+    fun deleteComment(newsId: Long, commentInfo: CommentInfo) {
+        if (AppConfig.phoneNumber == commentInfo.number || commentInfo.newsId == newsId) {
+            viewModelScope.launch {
+                kotlin.runCatching {
+                    commentStoreRepository.deleteCommentById(commentInfo.id)
+                }.onSuccess {
+                    ToastUtils.showShort("删除评论成功")
+                }.onFailure {
+                    ToastUtils.showShort("删除评论失败,请重试")
+                }
             }
         }
     }

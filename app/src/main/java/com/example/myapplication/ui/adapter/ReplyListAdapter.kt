@@ -24,13 +24,14 @@ class ReplyListAdapter : RecyclerView.Adapter<ReplyListAdapter.ReplyListViewHold
 
     var list = listOf<CommentInfo>()
     var goUserDetail: (Long) -> Unit = {}
+    var deleteCommentListener: (CommentInfo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReplyListViewHolder {
         return ReplyListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: ReplyListViewHolder, position: Int) {
-        holder.setData(position, list[position], goUserDetail)
+        holder.setData(position, list[position], goUserDetail, deleteCommentListener)
     }
 
     override fun getItemCount(): Int {
@@ -45,11 +46,20 @@ class ReplyListAdapter : RecyclerView.Adapter<ReplyListAdapter.ReplyListViewHold
             false
         )
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun setData(position: Int, comment: CommentInfo, goUserDetail: (Long) -> Unit) {
+        fun setData(
+            position: Int,
+            comment: CommentInfo,
+            goUserDetail: (Long) -> Unit,
+            deleteCommentListener: (CommentInfo) -> Unit
+        ) {
             binding.replyContent.text = comment.content
             binding.replyNeck.text = comment.number.toString()
             binding.replyItem.setOnClickListener {
                 goUserDetail.invoke(comment.number)
+            }
+            binding.replyItem.setOnLongClickListener {
+                deleteCommentListener.invoke(comment)
+                true
             }
         }
     }

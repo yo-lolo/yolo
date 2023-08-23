@@ -35,7 +35,7 @@ class NewsDetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         newsInfo = arguments?.getSerializable("news") as NewsInfo
-        viewModel.initData(newsInfo!!.number)
+        viewModel.initData(newsInfo!!)
         super.onCreate(savedInstanceState)
     }
 
