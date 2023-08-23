@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
@@ -12,6 +13,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.databinding.FragmentPostCommentBinding
+import com.example.myapplication.vm.NewsDetailViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -28,9 +30,16 @@ import com.example.myapplication.databinding.FragmentPostCommentBinding
 class PostCommentFragment : BaseFragment() {
 
     private lateinit var binding: FragmentPostCommentBinding
+    private var newsId: Long? = null
+    private var commentId: Long? = null
+    private val viewModel by viewModels<NewsDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.apply {
+            newsId = getLong("newsId")
+            commentId = getLong("commentId")
+        }
     }
 
     override fun onCreateView(
@@ -63,6 +72,19 @@ class PostCommentFragment : BaseFragment() {
                 }
             }
         }
+
+        binding.postButton.setOnClickListener {
+            val content = binding.replyContentEdit.text.toString().trim()
+            val level = if (commentId!!.toInt() == -1) 1 else 2
+            val replyId = if (commentId!!.toInt() == -1) null else commentId!!
+            viewModel.postComment(newsId!!, content, level, replyId)
+        }
+
+        viewModel.commentState.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     companion object {
@@ -71,7 +93,7 @@ class PostCommentFragment : BaseFragment() {
             navController: NavController,
             commentId: Long = -1
         ) {
-            var bundle = Bundle().apply {
+            val bundle = Bundle().apply {
                 putLong("newsId", newsId)
                 putLong("commentId", commentId)
             }

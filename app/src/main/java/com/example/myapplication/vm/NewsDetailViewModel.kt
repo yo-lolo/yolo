@@ -1,10 +1,14 @@
 package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
+import com.example.myapplication.database.entity.CommentInfo
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -20,10 +24,11 @@ import com.example.myapplication.config.AppConfig
  */
 class NewsDetailViewModel : BaseViewModel() {
 
-    private val testStoreRepository = DataManager.testStoreRepository
     private val friendsStoreRepository = DataManager.friendsStoreRepository
-    private val chatStoreRepository = DataManager.chatStoreRepository
+    private val commentStoreRepository = DataManager.commentStoreRepository
     var isFriend = MutableLiveData<Boolean>(false)
+    var commentState = MutableLiveData<Boolean>(false)
+    var comments = MutableLiveData<List<CommentInfo>>()
 
     fun insertFriend(authorNumber: Long) {
         launchSafe {
@@ -43,9 +48,29 @@ class NewsDetailViewModel : BaseViewModel() {
             }
             val friend = friendsStoreRepository.getFriendById(authorNumber)
             if (friend.isNotEmpty()) {
-                if (friend[0].tag == 1){
+                if (friend[0].tag == 1) {
                     isFriend.value = true
                 }
+            }
+        }
+    }
+
+    fun initComments(newsId: Long) {
+        viewModelScope.launch {
+            comments.value = commentStoreRepository.getCommentsByNewId(newsId)
+        }
+    }
+
+    fun postComment(newsId: Long, content: String, level: Int, replyId: Long? = null) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                commentStoreRepository.insertComment(newsId, content, level, replyId)
+            }.onSuccess {
+                ToastUtils.showShort("评论发布成功")
+                delay(1000)
+                commentState.value = true
+            }.onFailure {
+                ToastUtils.showShort("评论发布失败,请重试")
             }
         }
     }

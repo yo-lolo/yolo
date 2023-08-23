@@ -1,5 +1,10 @@
 package com.example.myapplication.imp
 
+import com.example.myapplication.api.CommentTask
+import com.example.myapplication.database.AppDataBase
+import com.example.myapplication.database.dao.CommentDao
+import com.example.myapplication.database.entity.CommentInfo
+
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
  * @ProjectName : My Application
@@ -12,5 +17,27 @@ package com.example.myapplication.imp
  * @UpdateDate : 2023/8/1 16:30
  * @UpdateRemark : 更新说明
  */
-class CommentTaskImp {
+class CommentTaskImp(
+    appDataBase: AppDataBase,
+    private val commentDao: CommentDao = appDataBase.CommentDao()
+) : CommentTask {
+    override fun insertComment(commentInfo: CommentInfo): Long {
+        return commentDao.insertComment(commentInfo)
+    }
+
+    override fun deleteComment(commentInfo: CommentInfo) {
+        commentDao.deleteComment(commentInfo)
+    }
+
+    override fun deleteCommentById(id: Long) {
+        commentDao.deleteCommentById(id)
+    }
+
+    override fun getAllComment(): List<CommentInfo> {
+        return commentDao.getAllComment()
+    }
+
+    override fun getCommentsByNewId(newsId: Long): List<CommentInfo> {
+        return commentDao.getCommentsByNewId(newsId)
+    }
 }

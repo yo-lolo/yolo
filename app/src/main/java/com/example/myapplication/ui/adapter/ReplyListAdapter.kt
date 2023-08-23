@@ -2,8 +2,10 @@ package com.example.myapplication.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.databinding.LayoutCommentListItemBinding
 import com.example.myapplication.databinding.LayoutReplyListItemBinding
+import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -20,14 +22,15 @@ import com.example.myapplication.util.layoutInflater
  */
 class ReplyListAdapter : RecyclerView.Adapter<ReplyListAdapter.ReplyListViewHolder>() {
 
-    var list = listOf<String>()
+    var list = listOf<CommentInfo>()
+    var goUserDetail: (Long) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReplyListViewHolder {
         return ReplyListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: ReplyListViewHolder, position: Int) {
-        holder.setData(position, list[position])
+        holder.setData(position, list[position], goUserDetail)
     }
 
     override fun getItemCount(): Int {
@@ -42,8 +45,12 @@ class ReplyListAdapter : RecyclerView.Adapter<ReplyListAdapter.ReplyListViewHold
             false
         )
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun setData(position: Int, data: String) {
-            binding.replyContent.text = data
+        fun setData(position: Int, comment: CommentInfo, goUserDetail: (Long) -> Unit) {
+            binding.replyContent.text = comment.content
+            binding.replyNeck.text = comment.number.toString()
+            binding.replyItem.setOnClickListener {
+                goUserDetail.invoke(comment.number)
+            }
         }
     }
 

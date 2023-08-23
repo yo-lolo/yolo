@@ -46,6 +46,7 @@ object DataManager {
     lateinit var friendsStoreRepository: FriendsStoreRepository
     lateinit var newsStoreRepository: NewsStoreRepository
     lateinit var testStoreRepository: TestStoreRepository
+    lateinit var commentStoreRepository: CommentStoreRepository
     private var appDataBase: AppDataBase? = null
     val launchScope by lazy {
         val exceptionHandler = CoroutineExceptionHandler { _, e -> Log.e("yolo", e.toString()) }
@@ -62,6 +63,7 @@ object DataManager {
         friendsStoreRepository = FriendsStoreRepository(FriendTaskImp(appDataBase!!))
         newsStoreRepository = NewsStoreRepository(NewsTaskImp(appDataBase!!))
         testStoreRepository = TestStoreRepository(appDataBase!!)
+        commentStoreRepository = CommentStoreRepository(CommentTaskImp(appDataBase!!))
         initSmartRefresh()
         //initData()
     }

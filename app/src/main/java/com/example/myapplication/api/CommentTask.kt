@@ -1,5 +1,10 @@
 package com.example.myapplication.api
 
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import com.example.myapplication.database.entity.CommentInfo
+
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
  * @ProjectName : My Application
@@ -12,5 +17,30 @@ package com.example.myapplication.api
  * @UpdateDate : 2023/8/1 16:28
  * @UpdateRemark : 更新说明
  */
-class CommentTask {
+interface CommentTask {
+
+    /**
+     * 添加评论
+     */
+    fun insertComment(commentInfo: CommentInfo): Long
+
+    /**
+     * 删除评论
+     */
+    fun deleteComment(commentInfo: CommentInfo)
+
+    /**
+     * 通过id 删除评论
+     */
+    fun deleteCommentById(id: Long)
+
+    /**
+     * 获取所有评论
+     */
+    fun getAllComment(): List<CommentInfo>
+
+    /**
+     * 通过文章Id获取评论
+     */
+    fun getCommentsByNewId(newsId: Long): List<CommentInfo>
 }

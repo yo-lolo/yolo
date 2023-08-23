@@ -15,6 +15,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentMineBinding
+import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.vm.MineViewModel
 
@@ -73,8 +74,11 @@ class MineFragment : BaseFragment() {
             }
         }
 
-        viewModel.user.observe(viewLifecycleOwner) {
-            GlideImageLoader().displayLocalFile(it.image, homeBinding.mineTouxiang)
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            GlideImageLoader().displayLocalFile(user.image, homeBinding.mineTouxiang)
+            homeBinding.mineTouxiang.setOnClickListener {
+                PromptUseCase().promptBigImage(user.image)
+            }
         }
     }
 

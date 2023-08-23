@@ -3,6 +3,7 @@ package com.example.myapplication.database.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.Query
 import com.example.myapplication.database.entity.CommentInfo
 
 /**
@@ -25,5 +26,14 @@ interface CommentDao {
 
     @Delete
     fun deleteComment(commentInfo: CommentInfo)
+
+    @Query("delete from CommentInfo where id = :id")
+    fun deleteCommentById(id: Long)
+
+    @Query("select * from CommentInfo")
+    fun getAllComment() : List<CommentInfo>
+
+    @Query("select * from CommentInfo where newsId = :newsId")
+    fun getCommentsByNewId(newsId: Long) : List<CommentInfo>
 
 }

@@ -40,6 +40,7 @@ class NewsDetailFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         newsInfo = arguments?.getSerializable("news") as NewsInfo
         viewModel.initData(newsInfo!!.number)
+        viewModel.initComments(newsInfo!!.id)
         super.onCreate(savedInstanceState)
     }
 
@@ -92,8 +93,16 @@ class NewsDetailFragment : BaseFragment() {
                 PostCommentFragment.goPostCommentFragment(newsInfo!!.id, findNavController())
             }
 
+            viewModel.comments.observe(viewLifecycleOwner) {
+                commentListAdapter.allList = it
+                commentListAdapter.notifyDataSetChanged()
+            }
+
             commentListAdapter.goCommentListener = {
-                findNavController().navigate(R.id.goPostCommentFragment)
+                PostCommentFragment.goPostCommentFragment(newsInfo!!.id, findNavController(), it)
+            }
+            commentListAdapter.goUserDetail = {
+                UserDetailFragment.goUserDetailFragment(it, findNavController())
             }
 
             viewModel.isFriend.observe(viewLifecycleOwner) {
