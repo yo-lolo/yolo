@@ -52,5 +52,10 @@ class GlideImageLoader : ImageLoader() {
         Glide.with(context).load(localPath).error(R.mipmap.touxiang).into(imageView)
     }
 
+    fun displayImageError(path: Any?, imageView: ImageView?) {
+        val localPath = Uri.fromFile(File(path as String))
+        Glide.with(context).load(localPath).error(R.mipmap.image_error).into(imageView)
+    }
+
 
 }

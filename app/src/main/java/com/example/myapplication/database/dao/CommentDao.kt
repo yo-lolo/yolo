@@ -37,6 +37,9 @@ interface CommentDao {
     fun getCommentsByNewId(newsId: Long): List<CommentInfo>
 
     @Query("select * from CommentInfo where number = :number")
-    fun getCommentsById(number: Long): List<CommentInfo>
+    fun getCommentsByNumber(number: Long): List<CommentInfo>
+
+    @Query("select * from CommentInfo where id = :id")
+    fun getCommentsById(id: Long): CommentInfo
 
 }

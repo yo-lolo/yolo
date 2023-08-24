@@ -13,7 +13,7 @@ import com.example.myapplication.databinding.FragmentMineCommentsBinding
 import com.example.myapplication.ui.adapter.MineCommentListAdapter
 import com.example.myapplication.ui.page.home.NewsDetailFragment
 import com.example.myapplication.ui.page.home.PostCommentFragment
-import com.example.myapplication.vm.MineViewModel
+import com.example.myapplication.vm.MineCommentsViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -30,7 +30,7 @@ import com.example.myapplication.vm.MineViewModel
 class MineCommentsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMineCommentsBinding
-    val viewModel by viewModels<MineViewModel>()
+    val viewModel by viewModels<MineCommentsViewModel>()
     private val commentsMineAdapter = MineCommentListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +53,7 @@ class MineCommentsFragment : BaseFragment() {
         binding.include.headLayout.apply {
             setTitle("评论")
             setBackListener { findNavController().popBackStack() }
+            setHeadLayoutColor()
         }
 
         viewModel.commentsNewsMap.observe(viewLifecycleOwner) {
@@ -74,7 +75,7 @@ class MineCommentsFragment : BaseFragment() {
         commentsMineAdapter.goUserDetailListener = {
             UserDetailFragment.goUserDetailFragment(it, findNavController())
         }
-
+        initProgress(viewModel.loadingTaskCount)
     }
 
 }

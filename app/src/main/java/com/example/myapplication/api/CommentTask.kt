@@ -47,5 +47,10 @@ interface CommentTask {
     /**
      * 查找该用户的所有评论
      */
-    fun getCommentsById(number: Long): List<CommentInfo>
+    fun getCommentsByNumber(number: Long): List<CommentInfo>
+
+    /**
+     * 根据Id查找评论
+     */
+    fun getCommentsById(id: Long): CommentInfo
 }
