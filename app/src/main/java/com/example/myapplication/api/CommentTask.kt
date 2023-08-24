@@ -53,4 +53,9 @@ interface CommentTask {
      * 根据Id查找评论
      */
     fun getCommentsById(id: Long): CommentInfo
+
+    /**
+     * 找回复的所有评论
+     */
+    fun getCommentsByReplyId(replyId: Long): List<CommentInfo>
 }

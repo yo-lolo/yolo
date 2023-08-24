@@ -56,6 +56,10 @@ class CommentStoreRepository(private val commentTask: CommentTask) {
         return@withContext commentTask.getCommentsByNewId(newsId)
     }
 
+    suspend fun getCommentsByReplyId(replyId: Long): List<CommentInfo> = withContext(Dispatchers.IO) {
+        return@withContext commentTask.getCommentsByReplyId(replyId)
+    }
+
     suspend fun getCommentsByNumber(number: Long): List<CommentInfo> = withContext(Dispatchers.IO) {
         return@withContext commentTask.getCommentsByNumber(number)
     }

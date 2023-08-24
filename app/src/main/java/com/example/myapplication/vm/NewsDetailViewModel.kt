@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
  */
 class NewsDetailViewModel : BaseViewModel() {
 
+    var contentCount = MutableLiveData<Int>(0)
     private val friendsStoreRepository = DataManager.friendsStoreRepository
     private val commentStoreRepository = DataManager.commentStoreRepository
     var isFriend = MutableLiveData<Boolean>(false)
@@ -61,6 +62,13 @@ class NewsDetailViewModel : BaseViewModel() {
                     isFriend.value = true
                 }
             }
+
+            // 解决level1的评论删除后 level2的评论不删除时 显示评论数目与所看到的不同的问题
+            val commentLevel1 = comments.value!!.filter { it.level == 1 }
+            val commentLevel2 = comments.value!!.filter { it.level == 2 }
+            var replyIdListExist = commentLevel1.map { it.id }
+            val replyCounts = commentLevel2.filter { it.replyId in replyIdListExist }.size
+            contentCount.value = commentLevel1.size + replyCounts
         }
     }
 

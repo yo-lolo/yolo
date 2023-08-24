@@ -42,4 +42,7 @@ interface CommentDao {
     @Query("select * from CommentInfo where id = :id")
     fun getCommentsById(id: Long): CommentInfo
 
+    @Query("select * from CommentInfo where replyId = :replyId")
+    fun getCommentsByReplyId(replyId: Long): List<CommentInfo>
+
 }

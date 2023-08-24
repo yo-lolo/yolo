@@ -48,4 +48,8 @@ class CommentTaskImp(
     override fun getCommentsById(id: Long): CommentInfo {
         return commentDao.getCommentsById(id)
     }
+
+    override fun getCommentsByReplyId(replyId: Long): List<CommentInfo> {
+        return commentDao.getCommentsByReplyId(replyId)
+    }
 }
