@@ -55,11 +55,11 @@ class HomeFragment : BaseFragment() {
 
         // 轮播图片集合
         val images = listOf(
-            "https://c-ssl.duitang.com/uploads/blog/202102/06/20210206215858_cf107.jpg",
-            "https://c-ssl.dtstatic.com/uploads/item/201902/10/20190210213858_uwecj.thumb.1000_0.jpg",
-            "https://c-ssl.dtstatic.com/uploads/item/201702/21/20170221152232_45imE.thumb.1000_0.jpeg",
-            "https://c-ssl.dtstatic.com/uploads/item/201707/07/20170707101903_23Bax.thumb.1000_0.jpeg",
-            "https://c-ssl.dtstatic.com/uploads/item/202004/16/20200416114418_bunuf.thumb.1000_0.jpg"
+            "https://alifei02.cfp.cn/creative/vcg/800/new/VCG21gic19937006.jpg",
+            "https://alifei01.cfp.cn/creative/vcg/800/version23/VCG41157532246.jpg",
+            "https://tenfei04.cfp.cn/creative/vcg/800/version23/VCG41164857181.jpg",
+            "https://alifei05.cfp.cn/creative/vcg/800/version23/VCG41542511145.jpg",
+            "https://tenfei03.cfp.cn/creative/vcg/800/new/VCG41N1090223986.jpg"
         )
 
         binding.banner.apply {
@@ -80,7 +80,7 @@ class HomeFragment : BaseFragment() {
 
         // 轮播图的监听方法
         binding.banner.setOnBannerListener {
-            ToastUtils.showShort("你点击了TWICE的第${it + 1}张轮播图")
+            ToastUtils.showShort("你点击了第${it + 1}张轮播图")
         }
 
         // 设置RecyclerView在垂直状态下不滑动

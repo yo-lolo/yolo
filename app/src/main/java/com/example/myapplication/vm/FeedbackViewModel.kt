@@ -8,6 +8,7 @@ import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.FeedbackInfo
 import com.example.myapplication.util.JsonUtil
 import com.example.myapplication.util.TimeUtil
+import kotlinx.coroutines.delay
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -43,6 +44,7 @@ class FeedbackViewModel : BaseViewModel() {
                     )
                 }.onSuccess {
                     ToastUtils.showShort("反馈成功")
+                    delay(1000)
                     commentSuccess.value = true
                 }.onFailure {
                     ToastUtils.showShort("反馈失败")

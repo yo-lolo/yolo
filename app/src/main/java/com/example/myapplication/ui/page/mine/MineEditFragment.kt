@@ -65,6 +65,7 @@ class MineEditFragment : BaseFragment() {
                 mineNeck.text = Editable.Factory.getInstance().newEditable(user.neck)
                 mineNumber.text = user.number.toString()
                 mineRegisterTime.text = TimeUtil.millis2String(user.time, TimeUtil.dateFormatYMD_CN)
+                viewModel.imagePath.value = user.image
                 mineImage.setOnClickListener {
                     openPhoto()
                 }

@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">YoLo</string>
+    <string name="app_name">paypal</string>
     <string name="problem_desc"><font color='#EE1919'>*</font><font color='#3C3C3C'>问题反馈</font></string>
-    <string name="agree_protocol_text"><font color='#ff888888'>登录代表你默认同意</font><font color='#fe7289'>用户协议</font><font color='#ff888888'>和</font><font color='#fe7289'>隐私政策</font></string>
-    <string name="reg_agree_protocol_text"><font color='#ff888888'>确认注册代表你默认同意</font><font color='#fe7289'>用户协议</font><font color='#ff888888'>和</font><font color='#fe7289'>隐私政策</font></string>
+    <string name="agree_protocol_text"><font color='#ff888888'>登录代表你默认同意</font><font color='#1296db'>用户协议</font><font color='#ff888888'>和</font><font color='#1296db'>隐私政策</font></string>
+    <string name="reg_agree_protocol_text"><font color='#ff888888'>确认注册代表你默认同意</font><font color='#1296db'>用户协议</font><font color='#ff888888'>和</font><font color='#1296db'>隐私政策</font></string>
     <string name="forget_pass_text">忘记密码？</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tag_text"><font color='#EE1919'>*</font>请选择任意标签</string>

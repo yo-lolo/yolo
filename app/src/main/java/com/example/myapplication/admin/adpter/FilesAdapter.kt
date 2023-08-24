@@ -27,10 +27,10 @@ class FilesAdapter : RecyclerView.Adapter<FilesAdapter.FilesViewHolder>() {
         R.id.goAdminCommentFragment
     )
     private val iconRes = listOf(
-        R.mipmap.home_icon,
-        R.mipmap.comment_icon,
-        R.mipmap.favorite_icon,
-        R.mipmap.notify_icon,
+        R.mipmap.admin_user_list_icon,
+        R.mipmap.admin_feed_list_icon,
+        R.mipmap.admin_news_list_icon,
+        R.mipmap.admin_comment_list_icon,
     )
     var clickListener: (Int) -> Unit = {}
 

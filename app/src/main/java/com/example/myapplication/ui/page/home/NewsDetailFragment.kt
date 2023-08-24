@@ -86,6 +86,7 @@ class NewsDetailFragment : BaseFragment() {
             }
 
             viewModel.comments.observe(viewLifecycleOwner) {
+                binding.contentCount.text = it.size.toString()
                 commentListAdapter.allList = it
                 commentListAdapter.notifyDataSetChanged()
             }
