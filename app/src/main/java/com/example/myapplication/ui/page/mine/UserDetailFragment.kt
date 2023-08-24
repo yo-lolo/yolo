@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentUserDetailBinding
 import com.example.myapplication.ui.page.mess.ChatFragment
 import com.example.myapplication.util.TimeUtil
@@ -30,13 +31,11 @@ class UserDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUserDetailBinding
     var number: Long? = null
-    var tag: Int? = null
     val viewModel by viewModels<UserDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         number = arguments?.getLong("number")
-        tag = arguments?.getInt("tag")!!
         viewModel.initUserInfo(number!!)
     }
 
@@ -59,7 +58,11 @@ class UserDetailFragment : BaseFragment() {
             setMenuListener {}
         }
 
-        binding.goChat.visibility = if (tag == 0) View.GONE else View.VISIBLE
+        // 判断是否为好友
+        viewModel.isFriend.observe(viewLifecycleOwner) {
+            binding.goChat.visibility = if (it) View.VISIBLE else View.GONE
+            binding.addFriend.visibility = if (it) View.GONE else View.VISIBLE
+        }
 
         viewModel.userDetailInfo.observe(viewLifecycleOwner) {
             binding.userDetailNumber.text = "电话号码：${it.number.toString()}"
@@ -71,21 +74,18 @@ class UserDetailFragment : BaseFragment() {
         binding.goChat.setOnClickListener {
             ChatFragment.goChatFragment(findNavController(), number!!)
         }
+        binding.addFriend.setOnClickListener {
+            //TODO 用户详情界面添加好友
+        }
+        binding.userNews.setOnClickListener {
+            MineNewsFragment.goMineNewsFragment(findNavController(), number!!, 1)
+        }
     }
 
     companion object {
         fun goUserDetailFragment(number: Long, navController: NavController) {
             var args = Bundle().apply {
                 putLong("number", number)
-                putInt("tag", 1)
-            }
-            navController.navigate(R.id.goUserDetailFragment, args)
-        }
-
-        fun goUserDetailFragment(tag: Int, number: Long, navController: NavController) {
-            var args = Bundle().apply {
-                putLong("number", number)
-                putInt("tag", tag)
             }
             navController.navigate(R.id.goUserDetailFragment, args)
         }

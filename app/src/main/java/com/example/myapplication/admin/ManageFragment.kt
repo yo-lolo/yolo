@@ -4,18 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
-import com.example.myapplication.R
 import com.example.myapplication.admin.adpter.FilesAdapter
-import com.example.myapplication.admin.ui.manage.CommentFragment
-import com.example.myapplication.admin.ui.manage.UserFragment
-import com.example.myapplication.admin.ui.manage.NewsFragment
-import com.example.myapplication.admin.ui.manage.FeedbackFragment
 import com.example.myapplication.databinding.FragmentManagerTestBinding
 
 /**

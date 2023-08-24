@@ -28,23 +28,23 @@
 
     <fragment
         android:id="@+id/NewsFragment"
-        android:name="com.example.myapplication.admin.ui.manage.NewsFragment"
+        android:name="com.example.myapplication.admin.ui.manage.AdiminNewsFragment"
         android:label="NewsFragment" />
     <fragment
         android:id="@+id/FeedbackFragment"
-        android:name="com.example.myapplication.admin.ui.manage.FeedbackFragment"
+        android:name="com.example.myapplication.admin.ui.manage.AdminFeedbackFragment"
         android:label="FeedbackFragment" />
     <fragment
         android:id="@+id/NewsDetailFragment"
-        android:name="com.example.myapplication.admin.ui.manage.NewsDetailFragment"
+        android:name="com.example.myapplication.admin.ui.manage.AdminNewsDetailFragment"
         android:label="NewsDetailFragment" />
     <fragment
         android:id="@+id/CommentFragment"
-        android:name="com.example.myapplication.admin.ui.manage.CommentFragment"
+        android:name="com.example.myapplication.admin.ui.manage.AdminCommentFragment"
         android:label="CommentFragment" />
     <fragment
         android:id="@+id/UserFragment"
-        android:name="com.example.myapplication.admin.ui.manage.UserFragment"
+        android:name="com.example.myapplication.admin.ui.manage.AdminUserFragment"
         android:label="UserFragment" />
     <fragment
         android:id="@+id/userDetailFragment"

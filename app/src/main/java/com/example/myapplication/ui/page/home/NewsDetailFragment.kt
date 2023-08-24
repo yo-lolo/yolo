@@ -63,11 +63,9 @@ class NewsDetailFragment : BaseFragment() {
         }
         binding.apply {
             newsDetailAuthor.text = newsInfo!!.number.toString()
-            newsAuthorIcon.setOnClickListener {
+            newsMess.setOnClickListener {
                 // 判断文章作者是否为好友 跳转到用户详情界面
-                val tag = if (viewModel.isFriend.value!!) 1 else 0
                 UserDetailFragment.goUserDetailFragment(
-                    tag,
                     newsInfo!!.number,
                     findNavController()
                 )

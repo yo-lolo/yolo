@@ -85,4 +85,7 @@ dependencies {
 
     // 图片圆角
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //快速构造适配器...
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11'
 }

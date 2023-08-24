@@ -31,9 +31,12 @@ interface CommentDao {
     fun deleteCommentById(id: Long)
 
     @Query("select * from CommentInfo")
-    fun getAllComment() : List<CommentInfo>
+    fun getAllComment(): List<CommentInfo>
 
     @Query("select * from CommentInfo where newsId = :newsId")
-    fun getCommentsByNewId(newsId: Long) : List<CommentInfo>
+    fun getCommentsByNewId(newsId: Long): List<CommentInfo>
+
+    @Query("select * from CommentInfo where number = :number")
+    fun getCommentsById(number: Long): List<CommentInfo>
 
 }

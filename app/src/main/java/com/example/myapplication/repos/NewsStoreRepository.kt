@@ -61,8 +61,15 @@ class NewsStoreRepository(private val newsTaskImp: NewsTaskImp) {
     /**
      * 获取该账号的新闻
      */
-    suspend fun getNewsById(number: Long): List<NewsInfo> = withContext(Dispatchers.IO) {
-        return@withContext newsTaskImp.getNewsById(number)
+    suspend fun getNewsByNumber(number: Long): List<NewsInfo> = withContext(Dispatchers.IO) {
+        return@withContext newsTaskImp.getNewsByNumber(number)
+    }
+
+    /**
+     * 获取该账号的新闻
+     */
+    suspend fun getNewsById(id: Long): NewsInfo = withContext(Dispatchers.IO) {
+        return@withContext newsTaskImp.getNewsById(id)
     }
 
 }

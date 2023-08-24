@@ -6,6 +6,8 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
+import com.example.myapplication.database.entity.CommentInfo
+import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
 import kotlinx.coroutines.launch
 
@@ -24,13 +26,33 @@ import kotlinx.coroutines.launch
 class MineViewModel : BaseViewModel() {
 
     private val userStoreRepository = DataManager.userStoreRepository
+    private val newsStoreRepository = DataManager.newsStoreRepository
+    private val commentStoreRepository = DataManager.commentStoreRepository
     var user = MutableLiveData<User>()
+    val news = MutableLiveData<List<NewsInfo>>()
+    val commentsNewsMap = MutableLiveData<Map<CommentInfo, NewsInfo>>()
     var imagePath = MutableLiveData<String>("")
+    var resultMap = mutableMapOf<CommentInfo, NewsInfo>()
 
-
-    fun initData() {
+    /**
+     * 初始化用户数据，默认为当前用户
+     */
+    fun initData(number: Long = AppConfig.phoneNumber) {
         viewModelScope.launch {
-            user.value = userStoreRepository.queryUserByNumber(AppConfig.phoneNumber)
+            user.value = userStoreRepository.queryUserByNumber(number)
+            news.value = newsStoreRepository.getNewsByNumber(number)
+        }
+    }
+
+    fun initComments(number: Long = AppConfig.phoneNumber) {
+        viewModelScope.launch {
+            user.value = userStoreRepository.queryUserByNumber(number)
+            news.value = newsStoreRepository.getNewsByNumber(number)
+            commentStoreRepository.getCommentsById(number).map {
+                resultMap[it] = newsStoreRepository.getNewsById(it.newsId)
+            }
+            val mapSortByTime = resultMap.toList().sortedByDescending { it.first.time.toLong() }
+            commentsNewsMap.value = mapSortByTime.toMap()
         }
     }
 
@@ -38,6 +60,9 @@ class MineViewModel : BaseViewModel() {
         imagePath.value = path
     }
 
+    /**
+     * 更新用户信息
+     */
     fun updateUserEdit(neck: String, address: String, sign: String) {
         if (user.value != null) {
             viewModelScope.launch {

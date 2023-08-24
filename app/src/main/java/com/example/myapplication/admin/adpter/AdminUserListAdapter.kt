@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.LayoutManageUsersItemBinding
-import com.example.myapplication.databinding.LayoutOnceListItemBinding
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
@@ -21,7 +20,7 @@ import com.example.myapplication.util.layoutInflater
  * @UpdateDate : 2023/7/25 16:19
  * @UpdateRemark : 更新说明
  */
-class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
+class AdminUserListAdapter : RecyclerView.Adapter<AdminUserListAdapter.UserListViewHolder>() {
 
     var list: List<User> = listOf()
 

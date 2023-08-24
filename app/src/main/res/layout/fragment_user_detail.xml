@@ -73,6 +73,7 @@
             android:background="@color/color_e7e7e7" />
 
         <TextView
+            android:id="@+id/user_news"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:drawableRight="@mipmap/icon_more"
@@ -129,8 +130,7 @@
         android:layout_marginTop="10dp"
         android:background="@color/color_FFFFFF"
         android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"

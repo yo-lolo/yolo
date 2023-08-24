@@ -43,4 +43,9 @@ interface CommentTask {
      * 通过文章Id获取评论
      */
     fun getCommentsByNewId(newsId: Long): List<CommentInfo>
+
+    /**
+     * 查找该用户的所有评论
+     */
+    fun getCommentsById(number: Long): List<CommentInfo>
 }

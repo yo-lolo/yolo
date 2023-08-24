@@ -23,11 +23,17 @@ import kotlinx.coroutines.launch
  */
 class UserDetailViewModel : BaseViewModel() {
     var userDetailInfo = MutableLiveData<User>()
+    var isFriend = MutableLiveData<Boolean>(false)
     private val userStoreRepository = DataManager.userStoreRepository
+    private val friendsStoreRepository = DataManager.friendsStoreRepository
 
     fun initUserInfo(number: Long) {
         viewModelScope.launch {
             userDetailInfo.value = userStoreRepository.queryUserByNumber(number)
+
+            isFriend.value =
+                friendsStoreRepository.getFriendById(number)
+                    .isNotEmpty() || number == AppConfig.phoneNumber
         }
     }
 }

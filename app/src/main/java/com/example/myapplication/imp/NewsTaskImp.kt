@@ -34,7 +34,12 @@ class NewsTaskImp(
         return newsDao.getNews()
     }
 
-    override fun getNewsById(number: Long): List<NewsInfo> {
-        return newsDao.getNewsById(number)
+    override fun getNewsByNumber(number: Long): List<NewsInfo> {
+        return newsDao.getNewsByNumber(number)
     }
+
+    override fun getNewsById(id: Long): NewsInfo {
+        return newsDao.getNewsById(id)
+    }
+
 }

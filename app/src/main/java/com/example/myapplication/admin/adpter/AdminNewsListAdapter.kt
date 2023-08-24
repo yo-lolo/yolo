@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.AdiminLayoutNewsListItemBinding
-import com.example.myapplication.databinding.LayoutNewsListItemBinding
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
@@ -21,7 +20,7 @@ import com.example.myapplication.util.layoutInflater
  * @UpdateDate : 2023/8/22 15:14
  * @UpdateRemark : 更新说明
  */
-class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>() {
+class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListViewHolder>() {
 
     var list: List<NewsInfo> = listOf()
     var showContentListener: (NewsInfo) -> Unit = {}

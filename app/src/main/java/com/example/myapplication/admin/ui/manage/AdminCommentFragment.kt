@@ -8,7 +8,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.databinding.FragmentFourBinding
 
 
-class CommentFragment : BaseFragment() {
+class AdminCommentFragment : BaseFragment() {
 
     private lateinit var binding : FragmentFourBinding
 

@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DataManager
 import com.example.myapplication.database.entity.FeedbackInfo
 import com.example.myapplication.databinding.LayoutManageFeedbacksItemBinding
-import com.example.myapplication.databinding.LayoutManageImagesItemBinding
-import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.JsonUtil
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
@@ -26,7 +24,7 @@ import java.util.ArrayList
  * @UpdateDate : 2023/8/1 13:40
  * @UpdateRemark : 更新说明
  */
-class FeedbacksAdapter : RecyclerView.Adapter<FeedbacksAdapter.FeedbacksViewHolder>() {
+class AdminFeedbacksAdapter : RecyclerView.Adapter<AdminFeedbacksAdapter.FeedbacksViewHolder>() {
 
     var list: List<FeedbackInfo> = listOf()
     var showBigImageListener: (String) -> Unit = {}

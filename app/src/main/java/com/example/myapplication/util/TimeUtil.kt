@@ -24,6 +24,7 @@ object TimeUtil {
      * 时间日期格式化
      */
     var dateFormatYMDHMS = "yyyy-MM-dd HH:mm:ss"
+    var dateFormatYMDHM = "yyyy-MM-dd HH:mm"
     var dateFormatYMD = "yyyy-MM-dd"
     var dateFormatYMDHMSCN = "yyyy年MM月dd日 HH时mm分ss秒"
     var dateFormatYMDHM_CN = "yyyy年MM月dd日 HH时mm分"

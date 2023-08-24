@@ -4,62 +4,59 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.admin.adpter.FeedbacksAdapter
-import com.example.myapplication.admin.adpter.ImagesAdapter
+import com.example.myapplication.admin.adpter.AdminUserListAdapter
 import com.example.myapplication.admin.vm.ManageViewModel
-import com.example.myapplication.databinding.FragmentTwoBinding
+import com.example.myapplication.databinding.FragmentOneBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
-import com.example.myapplication.useCase.PromptUseCase
 
 
-class FeedbackFragment : BaseFragment() {
+class AdminUserFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentTwoBinding
-    private val feedbacksAdapter = FeedbacksAdapter()
+    private lateinit var binding: FragmentOneBinding
+    private val userListAdapter = AdminUserListAdapter()
     private val viewModel by viewModels<ManageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.initFeedbacks()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTwoBinding.inflate(layoutInflater)
-        initView()
-        return binding.root
+        binding = FragmentOneBinding.inflate(layoutInflater)
+        val view = binding.root
+        initView(view)
+        return view
     }
 
-    private fun initView() {
+    private fun initView(view: View) {
 
         binding.include.headLayout.apply {
-            setTitle("反馈")
+            setTitle("用户")
             setHeadLayoutColor()
             setBackListener { findNavController().popBackStack() }
         }
 
-        binding.manageFeedbacks.apply {
+        binding.userList.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = EmptyViewAdapter(feedbacksAdapter)
+            adapter = EmptyViewAdapter(userListAdapter)
         }
 
-        viewModel.feedbacks.observe(viewLifecycleOwner) {
-            feedbacksAdapter.list = it
-            feedbacksAdapter.notifyDataSetChanged()
+        viewModel.userList.observe(viewLifecycleOwner) {
+            userListAdapter.list = it
+            userListAdapter.notifyDataSetChanged()
         }
+    }
 
-        feedbacksAdapter.showBigImageListener = {
-            PromptUseCase().promptBigImage(it)
-        }
+    override fun onResume() {
+        super.onResume()
+        viewModel.initData()
     }
 
 }

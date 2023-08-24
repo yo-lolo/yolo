@@ -30,6 +30,9 @@ interface NewsDao {
     fun getNews(): List<NewsInfo>
 
     @Query("select * from NewsInfo where number =:number")
-    fun getNewsById(number: Long): List<NewsInfo>
+    fun getNewsByNumber(number: Long): List<NewsInfo>
+
+    @Query("select * from NewsInfo where id =:id")
+    fun getNewsById(id: Long): NewsInfo
 
 }

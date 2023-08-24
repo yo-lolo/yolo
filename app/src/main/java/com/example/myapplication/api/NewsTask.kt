@@ -37,5 +37,7 @@ interface NewsTask {
     /**
      * 获取该账号的新闻
      */
-    fun getNewsById(number: Long): List<NewsInfo>
+    fun getNewsByNumber(number: Long): List<NewsInfo>
+
+    fun getNewsById(id: Long): NewsInfo
 }

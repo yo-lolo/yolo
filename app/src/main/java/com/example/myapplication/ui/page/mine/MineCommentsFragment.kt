@@ -4,7 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.databinding.FragmentMineCommentsBinding
+import com.example.myapplication.ui.adapter.MineCommentListAdapter
+import com.example.myapplication.ui.page.home.NewsDetailFragment
+import com.example.myapplication.ui.page.home.PostCommentFragment
+import com.example.myapplication.vm.MineViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -20,16 +29,52 @@ import com.ctq.sphone.market.base.BaseFragment
  */
 class MineCommentsFragment : BaseFragment() {
 
+    private lateinit var binding: FragmentMineCommentsBinding
+    val viewModel by viewModels<MineViewModel>()
+    private val commentsMineAdapter = MineCommentListAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.initComments()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    ): View {
+        binding = FragmentMineCommentsBinding.inflate(layoutInflater)
+        val view = binding.root
+        initView(view)
+        return view
+    }
+
+    private fun initView(view: View) {
+        binding.include.headLayout.apply {
+            setTitle("评论")
+            setBackListener { findNavController().popBackStack() }
+        }
+
+        viewModel.commentsNewsMap.observe(viewLifecycleOwner) {
+            commentsMineAdapter.list = it
+            commentsMineAdapter.notifyDataSetChanged()
+        }
+
+        binding.mineComments.apply {
+            adapter = commentsMineAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        }
+
+        commentsMineAdapter.goCommentListener = { newsId, commentId ->
+            PostCommentFragment.goPostCommentFragment(newsId, findNavController(), commentId)
+        }
+        commentsMineAdapter.goNewsDetailListener = {
+            NewsDetailFragment.goNewsDetailFragment(it, findNavController())
+        }
+        commentsMineAdapter.goUserDetailListener = {
+            UserDetailFragment.goUserDetailFragment(it, findNavController())
+        }
+
     }
 
 }

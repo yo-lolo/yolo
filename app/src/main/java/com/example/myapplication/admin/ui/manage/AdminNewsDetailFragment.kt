@@ -26,7 +26,7 @@ import com.example.myapplication.vm.NewsDetailViewModel
  * @UpdateDate : 2023/7/27 17:27
  * @UpdateRemark : 更新说明
  */
-class NewsDetailFragment : BaseFragment() {
+class AdminNewsDetailFragment : BaseFragment() {
 
     private lateinit var binding: AdminFragmentNewsDetailBinding
 
@@ -69,7 +69,7 @@ class NewsDetailFragment : BaseFragment() {
     }
 
     companion object {
-        fun goNewsDetailFragment(newsInfo: NewsInfo, navController: NavController) {
+        fun goAdminNewsDetailFragment(newsInfo: NewsInfo, navController: NavController) {
             val args = Bundle().apply {
                 putSerializable("news", newsInfo)
             }
