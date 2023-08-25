@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
@@ -12,7 +11,6 @@ import com.example.myapplication.R
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.AdminFragmentNewsDetailBinding
 import com.example.myapplication.util.TimeUtil
-import com.example.myapplication.vm.NewsDetailViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -31,11 +29,9 @@ class AdminNewsDetailFragment : BaseFragment() {
     private lateinit var binding: AdminFragmentNewsDetailBinding
 
     var newsInfo: NewsInfo? = null
-    private val viewModel by viewModels<NewsDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         newsInfo = arguments?.getSerializable("news") as NewsInfo
-        viewModel.initData(newsInfo!!)
         super.onCreate(savedInstanceState)
     }
 

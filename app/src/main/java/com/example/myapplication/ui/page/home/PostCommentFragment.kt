@@ -41,6 +41,7 @@ class PostCommentFragment : BaseFragment() {
             newsId = getLong("newsId")
             commentId = getLong("commentId")
         }
+        viewModel.initReplyComment(commentId!!)
     }
 
     override fun onCreateView(
@@ -74,12 +75,16 @@ class PostCommentFragment : BaseFragment() {
             }
         }
 
-        binding.postButton.setOnClickListener {
-            val content = binding.replyContentEdit.text.toString().trim()
-            val level = if (commentId!!.toInt() == -1) 1 else 2
-            val replyId = if (commentId!!.toInt() == -1) null else commentId!!
-            viewModel.postComment(newsId!!, content, level, replyId)
+        viewModel.replyComment.observe(viewLifecycleOwner){comment ->
+            binding.postButton.setOnClickListener {
+                val content = binding.replyContentEdit.text.toString().trim()
+                val level = if (commentId!!.toInt() == -1) 1 else 2
+                val replyId = if (commentId!!.toInt() == -1) null else commentId!!
+                val replyNumber = if (commentId!!.toInt() == -1) null else comment.number
+                    viewModel.postComment(newsId!!, content, level, replyNumber, replyId)
+            }
         }
+
 
         viewModel.commentState.observe(viewLifecycleOwner) {
             if (it) {

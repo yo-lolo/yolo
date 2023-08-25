@@ -37,13 +37,13 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
 
     suspend fun insertNews() = withContext(Dispatchers.IO) {
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(33333333333, 1, "美食", 1, "世界上最美味的旋转小火锅！", "没想好"))
+            .insertNews(NewsInfo(33333333333, 1, "美食", 1, "世界上最美味的旋转小火锅！", "世界上最美味的旋转小火锅"))
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(44444444444, 1, "汽车", 1, "广汽集团", "没想好"))
+            .insertNews(NewsInfo(44444444444, 1, "汽车", 1, "广汽集团", "广汽集团"))
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(11111111111, 1690789826637, "支付宝", 0, "支付宝额度提升啦！", "没想好"))
+            .insertNews(NewsInfo(11111111111, 1690789826637, "支付宝", 0, "支付宝额度提升啦！", "支付宝额度提升啦"))
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(22222222222, 1690789826637, "微信", 0, "微信闪退怎么回事？", "没想好"))
+            .insertNews(NewsInfo(22222222222, 1690789826637, "微信", 0, "微信闪退怎么回事？", "微信闪退怎么回事"))
     }
 
 }

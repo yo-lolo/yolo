@@ -1,5 +1,6 @@
 package com.example.myapplication.vm
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
@@ -28,6 +29,9 @@ class NewsDetailViewModel : BaseViewModel() {
     var contentCount = MutableLiveData<Int>(0)
     private val friendsStoreRepository = DataManager.friendsStoreRepository
     private val commentStoreRepository = DataManager.commentStoreRepository
+    private val newsStoreRepository = DataManager.newsStoreRepository
+    var replyComment = MutableLiveData<CommentInfo>()
+    var newsInfo = MutableLiveData<NewsInfo>()
     var isFriend = MutableLiveData<Boolean>(false)
     var commentState = MutableLiveData<Boolean>(false)
     var comments = MutableLiveData<List<CommentInfo>>()
@@ -35,27 +39,29 @@ class NewsDetailViewModel : BaseViewModel() {
     /**
      * 添加好友
      */
-    fun insertFriend(newsInfo: NewsInfo) {
+    fun insertFriend(newsId: Long) {
         launchSafe {
             kotlin.runCatching {
-                friendsStoreRepository.insertFriend(newsInfo.number)
+                val info = newsStoreRepository.getNewsById(newsId)
+                friendsStoreRepository.insertFriend(info.number)
             }.onSuccess {
                 ToastUtils.showLong("已发送好友请求,等待好友验证")
             }
-            initData(newsInfo)
+            initData(newsId)
         }
     }
 
     /**
      * 初始化数据（评论列表，好友状态）
      */
-    fun initData(newsInfo: NewsInfo) {
+    fun initData(newsId: Long) {
         launchSafe {
-            comments.value = commentStoreRepository.getCommentsByNewId(newsInfo.id)
-            if (AppConfig.phoneNumber == newsInfo.number) {
+            newsInfo.value = newsStoreRepository.getNewsById(newsId)
+            comments.value = commentStoreRepository.getCommentsByNewId(newsId)
+            if (AppConfig.phoneNumber == newsInfo.value!!.number) {
                 isFriend.value = true
             }
-            val friend = friendsStoreRepository.getFriendById(newsInfo.number)
+            val friend = friendsStoreRepository.getFriendById(newsInfo.value!!.number)
 
             if (friend.isNotEmpty()) {
                 if (friend[0].tag == 1) {
@@ -72,19 +78,38 @@ class NewsDetailViewModel : BaseViewModel() {
         }
     }
 
+
+    fun initReplyComment(commentId : Long){
+        viewModelScope.launch {
+            replyComment.value = commentStoreRepository.getCommentsById(commentId)
+        }
+    }
     /**
      * 发布评论
      */
-    fun postComment(newsId: Long, content: String, level: Int, replyId: Long? = null) {
+    fun postComment(
+        newsId: Long,
+        content: String,
+        level: Int,
+        replyNumber: Long? = null,
+        replyId: Long? = null
+    ) {
         viewModelScope.launch {
             kotlin.runCatching {
-                commentStoreRepository.insertComment(newsId, content, level, replyId)
+                commentStoreRepository.insertComment(
+                    newsId,
+                    content,
+                    level,
+                    replyNumber,
+                    replyId
+                )
             }.onSuccess {
                 ToastUtils.showShort("评论发布成功")
                 delay(1000)
                 commentState.value = true
             }.onFailure {
                 ToastUtils.showShort("评论发布失败,请重试")
+                Log.e("yolo", it.toString())
             }
         }
     }
@@ -92,14 +117,14 @@ class NewsDetailViewModel : BaseViewModel() {
     /**
      * 评论删除逻辑
      */
-    fun deleteComment(newsInfo: NewsInfo, commentInfo: CommentInfo) {
-        if (AppConfig.phoneNumber == commentInfo.number || commentInfo.newsId == newsInfo.id) {
+    fun deleteComment(newsId: Long, commentInfo: CommentInfo) {
+        if (AppConfig.phoneNumber == commentInfo.number || commentInfo.newsId == newsId) {
             viewModelScope.launch {
                 kotlin.runCatching {
                     commentStoreRepository.deleteCommentById(commentInfo.id)
                 }.onSuccess {
                     ToastUtils.showShort("删除评论成功")
-                    initData(newsInfo) //更新数据
+                    initData(newsId) //更新数据
                 }.onFailure {
                     ToastUtils.showShort("删除评论失败,请重试")
                 }

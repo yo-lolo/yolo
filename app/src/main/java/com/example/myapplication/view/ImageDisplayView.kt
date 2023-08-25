@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.UriUtils
+import com.example.myapplication.DataManager
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.LayoutImageDisplayViewBinding
 import com.example.myapplication.ui.adapter.ImageDisplayAdapter
@@ -42,7 +43,7 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
         viewBinding =
             LayoutImageDisplayViewBinding.inflate(LayoutInflater.from(context), this, true)
         viewBinding.displayImageRecyclew.apply {
-            layoutManager = GridLayoutManager(context, 4)
+            layoutManager = DataManager.GridLayoutManagerNotScroll(4)
             adapter = imageDisplayAdapter
         }
 

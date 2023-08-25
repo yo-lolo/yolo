@@ -89,7 +89,7 @@ object DataManager {
     }
 
     fun layoutManagerNotScroll(): LinearLayoutManager {
-        var linearlayoutManager: LinearLayoutManager = object : LinearLayoutManager(context) {
+        val linearlayoutManager: LinearLayoutManager = object : LinearLayoutManager(context) {
             override fun canScrollVertically(): Boolean {
                 return false
             }
@@ -98,7 +98,7 @@ object DataManager {
     }
 
     fun GridLayoutManagerNotScroll(spanCount: Int): GridLayoutManager {
-        var gridLayoutManager: GridLayoutManager = object : GridLayoutManager(context, spanCount) {
+        val gridLayoutManager: GridLayoutManager = object : GridLayoutManager(context, spanCount) {
             override fun canScrollVertically(): Boolean {
                 return false
             }

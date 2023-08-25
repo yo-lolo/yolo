@@ -22,6 +22,7 @@ data class CommentInfo(
     val content: String,
     val time: Long,
     var level: Int = 1,
+    val replyNumber: Long? = null,
     val replyId: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true)

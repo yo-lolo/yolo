@@ -49,8 +49,8 @@ class MineCommentsViewModel : BaseViewModel() {
                 if (it.replyId != null) {
                     var user2: User? = null
                     val reply = commentStoreRepository.getCommentsById(it.replyId)
-                    if (reply != null) {
-                        user2 = userStoreRepository.queryUserByNumber(reply.number)
+                    if (it.replyNumber != null) {
+                        user2 = userStoreRepository.queryUserByNumber(it.replyNumber)
                     }
                     resultMap[it] = MineComments(news, user, reply, user2)
                 } else {

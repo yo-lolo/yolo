@@ -25,6 +25,7 @@ class CommentStoreRepository(private val commentTask: CommentTask) {
         newsId: Long,
         content: String,
         level: Int,
+        replyNumber: Long? = null,
         replyId: Long? = null
     ): Long =
         withContext(Dispatchers.IO) {
@@ -35,6 +36,7 @@ class CommentStoreRepository(private val commentTask: CommentTask) {
                     content,
                     TimeUtil.getCurrentMill(),
                     level,
+                    replyNumber,
                     replyId
                 )
             )
@@ -56,9 +58,10 @@ class CommentStoreRepository(private val commentTask: CommentTask) {
         return@withContext commentTask.getCommentsByNewId(newsId)
     }
 
-    suspend fun getCommentsByReplyId(replyId: Long): List<CommentInfo> = withContext(Dispatchers.IO) {
-        return@withContext commentTask.getCommentsByReplyId(replyId)
-    }
+    suspend fun getCommentsByReplyId(replyId: Long): List<CommentInfo> =
+        withContext(Dispatchers.IO) {
+            return@withContext commentTask.getCommentsByReplyId(replyId)
+        }
 
     suspend fun getCommentsByNumber(number: Long): List<CommentInfo> = withContext(Dispatchers.IO) {
         return@withContext commentTask.getCommentsByNumber(number)

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.page.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
-import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.FragmentNewsDetailBinding
 import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
@@ -35,11 +35,11 @@ class NewsDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewsDetailBinding
     private var commentListAdapter = CommentListAdapter()
-    var newsInfo: NewsInfo? = null
+    var newsId: Long? = null
     private val viewModel by viewModels<NewsDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        newsInfo = arguments?.getSerializable("news") as NewsInfo
+        newsId = arguments?.getLong("newsId")
         super.onCreate(savedInstanceState)
     }
 
@@ -53,6 +53,7 @@ class NewsDetailFragment : BaseFragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
         binding.include.headLayout.apply {
             setBackListener {
@@ -61,68 +62,81 @@ class NewsDetailFragment : BaseFragment() {
             setMenuListener {}
             setHeadLayoutColor()
         }
-        binding.apply {
-            newsDetailAuthor.text = newsInfo!!.number.toString()
-            newsMess.setOnClickListener {
-                // 判断文章作者是否为好友 跳转到用户详情界面
-                UserDetailFragment.goUserDetailFragment(
-                    newsInfo!!.number,
-                    findNavController()
-                )
-            }
-            newsDetailContent.text = newsInfo!!.content.repeat(500)
-            newsDetailTag.text = newsInfo!!.tag
-            newsDetailTime.text = TimeUtil.millis2String(newsInfo!!.time)
-            newsDetailTitle.text = newsInfo!!.title
-            // TODO:文章管理，添加更新时间字段
-            newsDetailUpdateTime.text =
-                "-----     更新于 ${TimeUtil.millis2String(newsInfo!!.time)}     -----"
-            commentList.apply {
-                layoutManager = DataManager.layoutManagerNotScroll()
-                adapter = EmptyViewAdapter(commentListAdapter)
-            }
-            binding.postComment.setOnClickListener {
-                PostCommentFragment.goPostCommentFragment(newsInfo!!.id, findNavController())
-            }
-
-            viewModel.comments.observe(viewLifecycleOwner) {
-                commentListAdapter.allList = it
-                commentListAdapter.notifyDataSetChanged()
-            }
-            viewModel.contentCount.observe(viewLifecycleOwner) {
-                binding.contentCount.text = it.toString()
-            }
-            commentListAdapter.goCommentListener = {
-                PostCommentFragment.goPostCommentFragment(newsInfo!!.id, findNavController(), it)
-            }
-            commentListAdapter.goUserDetail = {
-                UserDetailFragment.goUserDetailFragment(it, findNavController())
-            }
-            commentListAdapter.deleteCommentListener = {
-                PromptUseCase().deletePrompt("确定要删除这条评论吗"){
-                    viewModel.deleteComment(newsInfo!!, it)
+        // 初始化截面数据
+        viewModel.newsInfo.observe(viewLifecycleOwner) { newsInfo ->
+            binding.apply {
+                newsDetailAuthor.text = newsInfo.number.toString()
+                newsMess.setOnClickListener {
+                    // 判断文章作者是否为好友 跳转到用户详情界面
+                    UserDetailFragment.goUserDetailFragment(
+                        newsInfo.number,
+                        findNavController()
+                    )
                 }
-            }
-            viewModel.isFriend.observe(viewLifecycleOwner) {
-                binding.addFriend.visibility = if (it) View.GONE else View.VISIBLE
-            }
-
-            binding.addFriend.setOnClickListener {
-                viewModel.insertFriend(newsInfo!!)
+                newsDetailContent.text = newsInfo.content.repeat(500)
+                newsDetailTag.text = newsInfo.tag
+                newsDetailTime.text = TimeUtil.millis2String(newsInfo.time)
+                newsDetailTitle.text = newsInfo.title
+                // TODO:文章管理，添加更新时间字段
+                newsDetailUpdateTime.text =
+                    "-----     更新于 ${TimeUtil.millis2String(newsInfo.time)}     -----"
             }
         }
+
+        binding.postComment.setOnClickListener {
+            PostCommentFragment.goPostCommentFragment(newsId!!, findNavController())
+        }
+
+        viewModel.contentCount.observe(viewLifecycleOwner) {
+            binding.contentCount.text = it.toString()
+        }
+
+        viewModel.isFriend.observe(viewLifecycleOwner) {
+            binding.addFriend.visibility = if (it) View.GONE else View.VISIBLE
+        }
+
+        binding.addFriend.setOnClickListener {
+            viewModel.insertFriend(newsId!!)
+        }
+        initCommentList()
+
         initProgress(viewModel.loadingTaskCount)
+    }
+
+    /**
+     * 初始化评论列表
+     */
+    private fun initCommentList() {
+        binding.commentList.apply {
+            layoutManager = DataManager.layoutManagerNotScroll()
+            adapter = EmptyViewAdapter(commentListAdapter)
+        }
+        commentListAdapter.goCommentListener = {
+            PostCommentFragment.goPostCommentFragment(newsId!!, findNavController(), it)
+        }
+        commentListAdapter.goUserDetail = {
+            UserDetailFragment.goUserDetailFragment(it, findNavController())
+        }
+        commentListAdapter.deleteCommentListener = {
+            PromptUseCase().deletePrompt("确定要删除这条评论吗") {
+                viewModel.deleteComment(newsId!!, it)
+            }
+        }
+        viewModel.comments.observe(viewLifecycleOwner) {
+            commentListAdapter.allList = it
+            commentListAdapter.notifyDataSetChanged()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.initData(newsInfo!!)
+        viewModel.initData(newsId!!)
     }
 
     companion object {
-        fun goNewsDetailFragment(newsInfo: NewsInfo, navController: NavController) {
+        fun goNewsDetailFragment(newsId: Long, navController: NavController) {
             val args = Bundle().apply {
-                putSerializable("news", newsInfo)
+                putLong("newsId", newsId)
             }
             navController.navigate(R.id.goNewsDetailFragment, args)
         }

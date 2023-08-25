@@ -23,7 +23,7 @@ import com.example.myapplication.util.layoutInflater
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>() {
 
     var list: List<NewsInfo> = listOf()
-    var goNewsDetailListener: (NewsInfo) -> Unit = {}
+    var goNewsDetailListener: (Long) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
         return NewsListViewHolder(parent)
@@ -46,7 +46,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
         )
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(position: Int, news: NewsInfo, goNewsDetailListener: (NewsInfo) -> Unit) {
+        fun setData(position: Int, news: NewsInfo, goNewsDetailListener: (Long) -> Unit) {
             binding.newsAuthor.text = news.number.toString()
             binding.newsTag.text = news.tag
             binding.newsContent.text = news.content
@@ -54,7 +54,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
             binding.newsTitle.text = news.title
             GlideImageLoader().displayLocalFile(news.image, binding.newsImage)
             binding.newsItem.setOnClickListener {
-                goNewsDetailListener.invoke(news)
+                goNewsDetailListener.invoke(news.id)
             }
         }
     }

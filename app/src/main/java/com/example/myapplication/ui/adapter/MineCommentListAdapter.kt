@@ -32,7 +32,7 @@ class MineCommentListAdapter :
     var list: Map<CommentInfo, MineComments> = mapOf()
     var goCommentListener: (Long, Long) -> Unit = { newsId, commentId -> }
     var goUserDetailListener: (Long) -> Unit = {}
-    var goNewsDetailListener: (NewsInfo) -> Unit = {}
+    var goNewsDetailListener: (Long) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentListViewHolder {
         return CommentListViewHolder(parent)
@@ -64,7 +64,7 @@ class MineCommentListAdapter :
             comment: CommentInfo,
             aLot: MineComments,
             goCommentListener: (Long, Long) -> Unit,
-            goNewsDetailListener: (NewsInfo) -> Unit,
+            goNewsDetailListener: (Long) -> Unit,
             goUserDetailListener: (Long) -> Unit,
         ) {
             val reply = aLot.replyComment
@@ -95,7 +95,7 @@ class MineCommentListAdapter :
                 binding.newsAuthor.text = "@" + news.number.toString()
                 GlideImageLoader().displayLocalFile(news.image, binding.newsImage)
                 binding.newsItem.setOnClickListener {
-                    goNewsDetailListener.invoke(news)
+                    goNewsDetailListener.invoke(news.id)
                 }
                 binding.goUserDetail.setOnClickListener {
                     goUserDetailListener.invoke(comment.number)
