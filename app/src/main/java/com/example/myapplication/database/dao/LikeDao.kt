@@ -3,6 +3,7 @@ package com.example.myapplication.database.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.Query
 import com.example.myapplication.database.entity.LikeInfo
 
 /**
@@ -24,5 +25,17 @@ interface LikeDao {
 
     @Delete
     fun deleteLike(likeInfo: LikeInfo)
+
+    @Query("delete from LikeInfo where id = :id")
+    fun deleteLikeById(id: Long)
+
+    @Query("select * from LikeInfo where number = :number")
+    fun getLikesMine(number: Long): List<LikeInfo>
+
+    @Query("select * from LikeInfo where newsId = :newsId")
+    fun getLikesByNewId(newsId: Long): List<LikeInfo>
+
+    @Query("select * from LikeInfo")
+    fun getAllLikes(): List<LikeInfo>
 
 }

@@ -40,14 +40,17 @@ import kotlinx.coroutines.*
 object DataManager {
 
     lateinit var context: Context
+    private var appDataBase: AppDataBase? = null
     lateinit var userStoreRepository: UserStoreRepository
     lateinit var feedbackStoreRepository: FeedbackStoreRepository
     lateinit var chatStoreRepository: ChatStoreRepository
     lateinit var friendsStoreRepository: FriendsStoreRepository
     lateinit var newsStoreRepository: NewsStoreRepository
-    lateinit var testStoreRepository: TestStoreRepository
+    lateinit var likeStoreRepository: LikeStoreRepository
     lateinit var commentStoreRepository: CommentStoreRepository
-    private var appDataBase: AppDataBase? = null
+
+    lateinit var testStoreRepository: TestStoreRepository
+
     val launchScope by lazy {
         val exceptionHandler = CoroutineExceptionHandler { _, e -> Log.e("yolo", e.toString()) }
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO + exceptionHandler)
@@ -62,6 +65,7 @@ object DataManager {
         chatStoreRepository = ChatStoreRepository(ChatTaskImp(appDataBase!!))
         friendsStoreRepository = FriendsStoreRepository(FriendTaskImp(appDataBase!!))
         newsStoreRepository = NewsStoreRepository(NewsTaskImp(appDataBase!!))
+        likeStoreRepository = LikeStoreRepository(LikeTaskImp(appDataBase!!))
         testStoreRepository = TestStoreRepository(appDataBase!!)
         commentStoreRepository = CommentStoreRepository(CommentTaskImp(appDataBase!!))
         initSmartRefresh()

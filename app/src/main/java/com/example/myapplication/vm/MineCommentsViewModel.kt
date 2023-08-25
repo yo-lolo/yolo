@@ -29,6 +29,7 @@ class MineCommentsViewModel : BaseViewModel() {
     private val userStoreRepository = DataManager.userStoreRepository
     private val newsStoreRepository = DataManager.newsStoreRepository
     private val commentStoreRepository = DataManager.commentStoreRepository
+    private val likeStoreRepository = DataManager.likeStoreRepository
     var user = MutableLiveData<User>()
     val news = MutableLiveData<List<NewsInfo>>()
     val commentsNewsMap = MutableLiveData<Map<CommentInfo, MineComments>>()
@@ -60,6 +61,13 @@ class MineCommentsViewModel : BaseViewModel() {
 
             val mapSortByTime = resultMap.toList().sortedByDescending { it.first.time.toLong() }
             commentsNewsMap.value = mapSortByTime.toMap()
+        }
+    }
+
+    fun initLikes() {
+        viewModelScope.launch {
+            var newsIdsByLike = likeStoreRepository.getLikesMine(AppConfig.phoneNumber).map { it.newsId }
+            var resultMap = mutableMapOf<Long,String>()
         }
     }
 

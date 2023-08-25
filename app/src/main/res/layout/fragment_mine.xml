@@ -138,7 +138,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/go_mine_greats"
+            android:id="@+id/go_mine_likes"
             style="@style/appMineLayout">
 
             <ImageView

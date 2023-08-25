@@ -2,6 +2,8 @@ package com.example.myapplication.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
+import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.LayoutNewsListItemBinding
 import com.example.myapplication.util.GlideImageLoader
@@ -22,7 +24,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>() {
 
-    var list: List<NewsInfo> = listOf()
+    var list: List<Pair<NewsInfo, NewsDataInfo>> = listOf()
     var goNewsDetailListener: (Long) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
@@ -30,7 +32,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
     }
 
     override fun onBindViewHolder(holder: NewsListViewHolder, position: Int) {
-        holder.setData(position, list[position], goNewsDetailListener)
+        holder.setData(position, list[position].first, list[position].second, goNewsDetailListener)
     }
 
     override fun getItemCount(): Int {
@@ -46,8 +48,16 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
         )
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(position: Int, news: NewsInfo, goNewsDetailListener: (Long) -> Unit) {
-            binding.newsAuthor.text = news.number.toString()
+        fun setData(
+            position: Int,
+            news: NewsInfo,
+            userCountState: NewsDataInfo,
+            goNewsDetailListener: (Long) -> Unit
+        ) {
+            val user = userCountState.user
+            val likeCount = userCountState.likeCount
+            val likeState = userCountState.likeState
+            binding.newsAuthor.text = user.neck
             binding.newsTag.text = news.tag
             binding.newsContent.text = news.content
             binding.newsDate.text = TimeUtil.millis2String(news.time, TimeUtil.dateFormatYMD_CN)
@@ -56,6 +66,11 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
             binding.newsItem.setOnClickListener {
                 goNewsDetailListener.invoke(news.id)
             }
+            binding.greatCount.text = likeCount.toString()
+            binding.great.setOnClickListener {
+
+            }
+            binding.great.setImageResource(if (likeState) R.mipmap.great_click else R.mipmap.great)
         }
     }
 }

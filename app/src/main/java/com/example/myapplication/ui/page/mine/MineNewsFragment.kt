@@ -64,7 +64,7 @@ class MineNewsFragment : BaseFragment() {
             setBackListener { findNavController().popBackStack() }
         }
 
-        viewModel.news.observe(viewLifecycleOwner) {
+        viewModel.newsMapData.observe(viewLifecycleOwner) {
             newsMineAdapter.list = it
             newsMineAdapter.notifyDataSetChanged()
         }

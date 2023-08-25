@@ -10,206 +10,226 @@
         android:id="@+id/include"
         layout="@layout/comm_head_layout" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_FFFFFF"
-                android:orientation="vertical"
-                android:paddingHorizontal="15dp">
-
-
-                <TextView
-                    android:id="@+id/news_detail_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="3dp"
-                    android:text="Android 即将进入大AI时代"
-                    android:textColor="@color/color_3c3c3c"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:background="@color/color_FFFFFF"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="15dp">
 
-                    <LinearLayout
-                        android:id="@+id/news_mess"
-                        android:layout_width="wrap_content"
+
+                    <TextView
+                        android:id="@+id/news_detail_title"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.makeramen.roundedimageview.RoundedImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@mipmap/touxiang"
-                            app:riv_corner_radius="90dp" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/news_detail_author"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="MoMo"
-                                android:textColor="@color/color_3c3c3c"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:id="@+id/news_detail_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="2022年10月21日"
-                                android:textColor="@color/color_dbdbdb"
-                                android:textSize="10dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
+                        android:paddingVertical="3dp"
+                        android:text="Android 即将进入大AI时代"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="22dp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="right">
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/news_mess"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@mipmap/touxiang"
+                                app:riv_corner_radius="90dp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/news_detail_author"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="MoMo"
+                                    android:textColor="@color/color_3c3c3c"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:id="@+id/news_detail_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2022年10月21日"
+                                    android:textColor="@color/color_dbdbdb"
+                                    android:textSize="10dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="right">
+
+                            <TextView
+                                android:id="@+id/add_friend"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginEnd="10dp"
+                                android:background="@drawable/chat_right_bg"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="10dp"
+                                android:text="+好友"
+                                android:textColor="@color/color_FFFFFF"
+                                android:textSize="12dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/news_detail_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:text="这里是正文呀"
+                        android:textColor="@color/color_3c3c3c"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@mipmap/tag_icon" />
 
                         <TextView
-                            android:id="@+id/add_friend"
+                            android:id="@+id/news_detail_tag"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginVertical="8dp"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/chat_right_bg"
-                            android:gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/big_gray_bg"
                             android:paddingHorizontal="10dp"
-                            android:text="+好友"
-                            android:textColor="@color/color_FFFFFF"
-                            android:textSize="12dp" />
+                            android:paddingVertical="3dp"
+                            android:text="标签"
+                            android:textColor="#5A5C6C"
+                            android:textSize="13dp" />
                     </LinearLayout>
-                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/news_detail_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:text="这里是正文呀"
-                    android:textColor="@color/color_3c3c3c"
-                    android:textSize="14dp" />
+                    <TextView
+                        android:id="@+id/news_detail_update_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:text="-----     更新于 2023-06-12 21:35     -----"
+                        android:textColor="#A4A4A4"
+                        android:textSize="11dp" />
+
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_FFFFFF"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="15dp">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@mipmap/tag_icon" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="12dp"
+                            android:text="全部评论"
+                            android:textColor="@color/color_3c3c3c"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/content_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="66dp"
+                            android:paddingVertical="12dp"
+                            android:text="8"
+                            android:textColor="@color/color_3c3c3c"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/post_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:paddingHorizontal="5dp"
+                            android:paddingVertical="12dp"
+                            android:text="发表评论"
+                            android:textColor="@color/color_theme"
+                            android:textSize="15dp" />
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/comment_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <TextView
-                        android:id="@+id/news_detail_tag"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/big_gray_bg"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="3dp"
-                        android:text="标签"
-                        android:textColor="#5A5C6C"
+                        android:layout_marginVertical="50dp"
+                        android:gravity="center"
+                        android:text="-----     已显示全部评论     -----"
+                        android:textColor="#A4A4A4"
                         android:textSize="13dp" />
+
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/news_detail_update_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
-                    android:text="-----     更新于 2023-06-12 21:35     -----"
-                    android:textColor="#A4A4A4"
-                    android:textSize="11dp" />
-
             </LinearLayout>
+        </ScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/color_FFFFFF"
-                android:orientation="vertical"
-                android:paddingHorizontal="15dp">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.9"
+            android:elevation="2dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/fab_unlike_icon"
+            android:backgroundTint="@color/white"
+            app:backgroundTint="@color/white"
+            app:rippleColor="@color/white" />
+    </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:paddingVertical="12dp"
-                        android:text="全部评论"
-                        android:textColor="@color/color_3c3c3c"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/content_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="66dp"
-                        android:paddingVertical="12dp"
-                        android:text="8"
-                        android:textColor="@color/color_3c3c3c"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/post_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:paddingHorizontal="5dp"
-                        android:paddingVertical="12dp"
-                        android:text="发表评论"
-                        android:textColor="@color/color_theme"
-                        android:textSize="15dp" />
-
-                </RelativeLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/comment_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="50dp"
-                    android:gravity="center"
-                    android:text="-----     已显示全部评论     -----"
-                    android:textColor="#A4A4A4"
-                    android:textSize="13dp" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

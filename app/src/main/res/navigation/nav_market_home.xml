@@ -110,14 +110,9 @@
         android:label="MineCommentsFragment" />
 
     <fragment
-        android:id="@+id/appDetailFragment"
-        android:name="com.example.myapplication.ui.page.detail.AppDetailFragment"
-        android:label="AppDetailFragment">
-        <argument
-            android:name="appId"
-            app:argType="string"
-            app:nullable="false" />
-    </fragment>
+        android:id="@+id/MineLikeFragment"
+        android:name="com.example.myapplication.ui.page.mine.MineLikeFragment"
+        android:label="MineLikeFragment" />
 
 
     <action
@@ -135,9 +130,6 @@
     <action
         android:id="@+id/goSearchFragment"
         app:destination="@id/searchFragment" />
-    <action
-        android:id="@+id/goAppDetailFragment"
-        app:destination="@id/appDetailFragment" />
     <action
         android:id="@+id/goSettingFragment"
         app:destination="@id/settingFragment" />
@@ -197,5 +189,9 @@
     <action
         android:id="@+id/goMineCommentsFragment"
         app:destination="@id/MineCommentsFragment" />
+
+    <action
+        android:id="@+id/goMineLikeFragment"
+        app:destination="@id/MineLikeFragment" />
 
 </navigation>

@@ -45,7 +45,6 @@ class HomeFragment : BaseFragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
-        viewModel.initData()
         return view
     }
 
@@ -99,8 +98,8 @@ class HomeFragment : BaseFragment() {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
 
-        viewModel.news.observe(viewLifecycleOwner) { news ->
-            newsListAdapter.list = news.filter { !TimeUtil.isToday(it.time) }.take(2)
+        viewModel.newsMapData.observe(viewLifecycleOwner) { newsDataList ->
+            newsListAdapter.list = newsDataList
             newsListAdapter.notifyDataSetChanged()
         }
 
@@ -114,6 +113,11 @@ class HomeFragment : BaseFragment() {
 
         GlideImageLoader().displayImage(context, R.drawable.world, binding.imageTest)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.initData()
     }
 
 }

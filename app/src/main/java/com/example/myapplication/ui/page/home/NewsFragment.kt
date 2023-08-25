@@ -64,7 +64,7 @@ class NewsFragment : BaseFragment() {
             adapter = EmptyViewAdapter(newsListAdapter)
         }
 
-        viewModel.news.observe(viewLifecycleOwner){
+        viewModel.newsMapData.observe(viewLifecycleOwner){
             newsListAdapter.list = it
             newsListAdapter.notifyDataSetChanged()
         }

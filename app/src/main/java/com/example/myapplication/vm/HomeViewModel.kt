@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.config.AppConfig
+import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.NewsInfo
 import kotlinx.coroutines.delay
 
@@ -23,14 +25,24 @@ import kotlinx.coroutines.delay
 class HomeViewModel : BaseViewModel() {
 
     private val newsStoreRepository = DataManager.newsStoreRepository
-    var news = MutableLiveData<List<NewsInfo>>()
+    private val userStoreRepository = DataManager.userStoreRepository
+    private val likeStoreRepository = DataManager.likeStoreRepository
+    var newsMapData = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
     var imagePath = MutableLiveData<String>("")
     var tagText = MutableLiveData<String>("")
+    var resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
     var newsPostState = MutableLiveData<Boolean>(false)
 
     fun initData() {
         launchSafe {
-            news.value = newsStoreRepository.getNews().filter { it.type == 1 }
+            newsStoreRepository.getNews().filter { it.type == 1 }.map { newsInfo ->
+                val user = userStoreRepository.queryUserByNumber(newsInfo.number)
+                val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
+                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                    .any { it.newsId == newsInfo.id }
+                resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
+            }
+            newsMapData.value = resultMap.toList()
         }
     }
 

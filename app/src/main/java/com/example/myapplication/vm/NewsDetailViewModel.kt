@@ -8,7 +8,9 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.CommentInfo
+import com.example.myapplication.database.entity.LikeInfo
 import com.example.myapplication.database.entity.NewsInfo
+import com.example.myapplication.database.entity.User
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -29,9 +31,14 @@ class NewsDetailViewModel : BaseViewModel() {
     var contentCount = MutableLiveData<Int>(0)
     private val friendsStoreRepository = DataManager.friendsStoreRepository
     private val commentStoreRepository = DataManager.commentStoreRepository
+    private val userStoreRepository = DataManager.userStoreRepository
     private val newsStoreRepository = DataManager.newsStoreRepository
+    private val likeStoreRepository = DataManager.likeStoreRepository
     var replyComment = MutableLiveData<CommentInfo>()
     var newsInfo = MutableLiveData<NewsInfo>()
+    var userInfo = MutableLiveData<User>()
+    var isLike = MutableLiveData<Boolean>()
+    var likeInfo = MutableLiveData<LikeInfo>()
     var isFriend = MutableLiveData<Boolean>(false)
     var commentState = MutableLiveData<Boolean>(false)
     var comments = MutableLiveData<List<CommentInfo>>()
@@ -56,8 +63,9 @@ class NewsDetailViewModel : BaseViewModel() {
      */
     fun initData(newsId: Long) {
         launchSafe {
-            newsInfo.value = newsStoreRepository.getNewsById(newsId)
-            comments.value = commentStoreRepository.getCommentsByNewId(newsId)
+            val news = newsStoreRepository.getNewsById(newsId)
+            newsInfo.value = news
+            userInfo.value = userStoreRepository.queryUserByNumber(news.number)
             if (AppConfig.phoneNumber == newsInfo.value!!.number) {
                 isFriend.value = true
             }
@@ -69,6 +77,15 @@ class NewsDetailViewModel : BaseViewModel() {
                 }
             }
 
+            initComment(newsId)
+            initLike(newsId)
+
+        }
+    }
+
+    fun initComment(newsId: Long) {
+        viewModelScope.launch {
+            comments.value = commentStoreRepository.getCommentsByNewId(newsId)
             // 解决level1的评论删除后 level2的评论不删除时 显示评论数目与所看到的不同的问题
             val commentLevel1 = comments.value!!.filter { it.level == 1 }
             val commentLevel2 = comments.value!!.filter { it.level == 2 }
@@ -78,12 +95,23 @@ class NewsDetailViewModel : BaseViewModel() {
         }
     }
 
+    fun initLike(newsId: Long) {
+        viewModelScope.launch {
+            val ss = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                .filter { it.newsId == newsId }
+            if (ss.isNotEmpty())
+                likeInfo.value = ss[0]
+            isLike.value = ss.isNotEmpty()
+        }
+    }
 
-    fun initReplyComment(commentId : Long){
+
+    fun initReplyComment(commentId: Long) {
         viewModelScope.launch {
             replyComment.value = commentStoreRepository.getCommentsById(commentId)
         }
     }
+
     /**
      * 发布评论
      */
@@ -129,6 +157,47 @@ class NewsDetailViewModel : BaseViewModel() {
                     ToastUtils.showShort("删除评论失败,请重试")
                 }
             }
+        }
+    }
+
+    /**
+     * 根据点赞状态判断插入和删除
+     */
+    fun chargeLike(newsId: Long) {
+        viewModelScope.launch {
+            val newInfo = newsStoreRepository.getNewsById(newsId)
+            if (isLike.value!!) {
+                deleteLike(newsId)
+            } else {
+                postLike(newInfo)
+            }
+        }
+
+    }
+
+    /**
+     * 删除点赞记录
+     */
+    private fun deleteLike(newsId: Long) {
+        viewModelScope.launch {
+            likeStoreRepository.deleteLikeById(likeInfo.value!!.id)
+            initLike(newsId)
+        }
+    }
+
+    /**
+     * 插入点赞记录
+     */
+    private fun postLike(newInfo: NewsInfo) {
+        viewModelScope.launch {
+            likeStoreRepository.insertLike(
+                LikeInfo(
+                    AppConfig.phoneNumber,
+                    newInfo.id,
+                    newInfo.number
+                )
+            )
+            initLike(newInfo.id)
         }
     }
 

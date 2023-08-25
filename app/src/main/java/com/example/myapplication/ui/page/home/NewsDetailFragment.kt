@@ -1,10 +1,13 @@
 package com.example.myapplication.ui.page.home
 
 import android.annotation.SuppressLint
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat.setBackgroundTintList
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -62,10 +65,12 @@ class NewsDetailFragment : BaseFragment() {
             setMenuListener {}
             setHeadLayoutColor()
         }
+        viewModel.userInfo.observe(viewLifecycleOwner){ user ->
+            binding.newsDetailAuthor.text = user.neck
+        }
         // 初始化截面数据
         viewModel.newsInfo.observe(viewLifecycleOwner) { newsInfo ->
             binding.apply {
-                newsDetailAuthor.text = newsInfo.number.toString()
                 newsMess.setOnClickListener {
                     // 判断文章作者是否为好友 跳转到用户详情界面
                     UserDetailFragment.goUserDetailFragment(
@@ -73,14 +78,26 @@ class NewsDetailFragment : BaseFragment() {
                         findNavController()
                     )
                 }
-                newsDetailContent.text = newsInfo.content.repeat(500)
+                newsDetailContent.text = newsInfo.content.repeat(100)
                 newsDetailTag.text = newsInfo.tag
-                newsDetailTime.text = TimeUtil.millis2String(newsInfo.time)
+                newsDetailTime.text = TimeUtil.millis2String(newsInfo.time, TimeUtil.dateFormatYMD_CN)
                 newsDetailTitle.text = newsInfo.title
                 // TODO:文章管理，添加更新时间字段
                 newsDetailUpdateTime.text =
                     "-----     更新于 ${TimeUtil.millis2String(newsInfo.time)}     -----"
             }
+        }
+
+        viewModel.isLike.observe(viewLifecycleOwner) { isLike ->
+            val colorRes = if (isLike) R.color.candy_r else R.color.color_8a8a8a
+            val colorStateList = ContextCompat.getColorStateList(DataManager.context, colorRes)
+            binding.fabLike.apply {
+                imageTintMode = PorterDuff.Mode.SRC_ATOP
+                imageTintList = colorStateList
+            }
+        }
+        binding.fabLike.setOnClickListener {
+            viewModel.chargeLike(newsId!!)
         }
 
         binding.postComment.setOnClickListener {

@@ -7,6 +7,7 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.data.MineComments
+import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
@@ -28,8 +29,10 @@ class MineViewModel : BaseViewModel() {
 
     private val userStoreRepository = DataManager.userStoreRepository
     private val newsStoreRepository = DataManager.newsStoreRepository
+    private val likeStoreRepository = DataManager.likeStoreRepository
     var user = MutableLiveData<User>()
-    val news = MutableLiveData<List<NewsInfo>>()
+    var newsMapData = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
+    var resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
     var imagePath = MutableLiveData<String>("")
 
     /**
@@ -38,7 +41,14 @@ class MineViewModel : BaseViewModel() {
     fun initData(number: Long = AppConfig.phoneNumber) {
         viewModelScope.launch {
             user.value = userStoreRepository.queryUserByNumber(number)
-            news.value = newsStoreRepository.getNewsByNumber(number)
+            newsStoreRepository.getNews().filter { it.type == 1 && it.number == number }.map { newsInfo ->
+                val user = userStoreRepository.queryUserByNumber(newsInfo.number)
+                val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
+                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                    .any { it.newsId == newsInfo.id }
+                resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
+            }
+            newsMapData.value = resultMap.toList()
         }
     }
 
