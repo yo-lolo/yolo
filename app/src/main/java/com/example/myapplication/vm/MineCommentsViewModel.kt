@@ -43,9 +43,11 @@ class MineCommentsViewModel : BaseViewModel() {
 
             commentStoreRepository.getCommentsByNumber(number).map {
                 var user: User? = null
+                var newsUser: User? = null
                 val news = newsStoreRepository.getNewsById(it.newsId)
                 if (news != null) {
                     user = userStoreRepository.queryUserByNumber(it.number)
+                    newsUser = userStoreRepository.queryUserByNumber(news.number)
                 }
                 if (it.replyId != null) {
                     var user2: User? = null
@@ -53,9 +55,9 @@ class MineCommentsViewModel : BaseViewModel() {
                     if (it.replyNumber != null) {
                         user2 = userStoreRepository.queryUserByNumber(it.replyNumber)
                     }
-                    resultMap[it] = MineComments(news, user, reply, user2)
+                    resultMap[it] = MineComments(newsUser, news, user, reply, user2)
                 } else {
-                    resultMap[it] = MineComments(news, user)
+                    resultMap[it] = MineComments(newsUser, news, user)
                 }
             }
 
@@ -66,8 +68,9 @@ class MineCommentsViewModel : BaseViewModel() {
 
     fun initLikes() {
         viewModelScope.launch {
-            var newsIdsByLike = likeStoreRepository.getLikesMine(AppConfig.phoneNumber).map { it.newsId }
-            var resultMap = mutableMapOf<Long,String>()
+            var newsIdsByLike =
+                likeStoreRepository.getLikesMine(AppConfig.phoneNumber).map { it.newsId }
+            var resultMap = mutableMapOf<Long, String>()
         }
     }
 

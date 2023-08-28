@@ -13,6 +13,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentMineNewsBinding
+import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.ui.page.home.NewsDetailFragment
 import com.example.myapplication.vm.MineViewModel
@@ -70,7 +71,7 @@ class MineNewsFragment : BaseFragment() {
         }
 
         binding.mineNews.apply {
-            adapter = newsMineAdapter
+            adapter = EmptyViewAdapter(newsMineAdapter)
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 

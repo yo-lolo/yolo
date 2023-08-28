@@ -166,7 +166,9 @@
                 android:id="@+id/news_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@mipmap/image_error" />
+                android:scaleType="centerCrop"
+                app:riv_corner_radius="3dp"
+                tools:background="@mipmap/image_error" />
 
             <LinearLayout
                 android:layout_width="match_parent"

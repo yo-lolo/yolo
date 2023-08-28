@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat.setBackgroundTintList
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -19,6 +18,7 @@ import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.vm.NewsDetailViewModel
 
@@ -65,8 +65,9 @@ class NewsDetailFragment : BaseFragment() {
             setMenuListener {}
             setHeadLayoutColor()
         }
-        viewModel.userInfo.observe(viewLifecycleOwner){ user ->
+        viewModel.userInfo.observe(viewLifecycleOwner) { user ->
             binding.newsDetailAuthor.text = user.neck
+            GlideImageLoader().displayLocalFile(user.image, binding.userIcon)
         }
         // 初始化截面数据
         viewModel.newsInfo.observe(viewLifecycleOwner) { newsInfo ->
@@ -80,7 +81,8 @@ class NewsDetailFragment : BaseFragment() {
                 }
                 newsDetailContent.text = newsInfo.content.repeat(100)
                 newsDetailTag.text = newsInfo.tag
-                newsDetailTime.text = TimeUtil.millis2String(newsInfo.time, TimeUtil.dateFormatYMD_CN)
+                newsDetailTime.text =
+                    TimeUtil.millis2String(newsInfo.time, TimeUtil.dateFormatYMD_CN)
                 newsDetailTitle.text = newsInfo.title
                 // TODO:文章管理，添加更新时间字段
                 newsDetailUpdateTime.text =
@@ -139,7 +141,7 @@ class NewsDetailFragment : BaseFragment() {
                 viewModel.deleteComment(newsId!!, it)
             }
         }
-        viewModel.comments.observe(viewLifecycleOwner) {
+        viewModel.commentsMap.observe(viewLifecycleOwner) {
             commentListAdapter.allList = it
             commentListAdapter.notifyDataSetChanged()
         }

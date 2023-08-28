@@ -60,8 +60,8 @@ class FriendsFragment : BaseFragment() {
             adapter = EmptyViewAdapter(friendListAdapter)
         }
 
-        viewModel.friends.observe(viewLifecycleOwner) { friends ->
-            friendListAdapter.list = friends.filter { it.tag == 1 }
+        viewModel.mineFriendsMap.observe(viewLifecycleOwner) { friends ->
+            friendListAdapter.list = friends.filter { it.key.tag == 1 }
             friendListAdapter.notifyDataSetChanged()
         }
 
@@ -72,6 +72,6 @@ class FriendsFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.initData()
+        viewModel.initFriendsData()
     }
 }

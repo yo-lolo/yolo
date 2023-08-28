@@ -12,6 +12,7 @@ import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentUserDetailBinding
 import com.example.myapplication.ui.page.mess.ChatFragment
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.vm.UserDetailViewModel
 
@@ -69,6 +70,7 @@ class UserDetailFragment : BaseFragment() {
             binding.userDetailNeck.text = it.neck
             binding.userDetailTime.text =
                 "注册时间：${TimeUtil.millis2String(it.time, TimeUtil.dateFormatYMD_CN)}"
+            GlideImageLoader().displayLocalFile(it.image, binding.userIcon)
         }
 
         binding.goChat.setOnClickListener {

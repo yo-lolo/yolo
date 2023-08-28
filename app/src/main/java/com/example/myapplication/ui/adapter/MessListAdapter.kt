@@ -3,7 +3,9 @@ package com.example.myapplication.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.data.MessData
 import com.example.myapplication.databinding.LayoutMessListItemBinding
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
 
@@ -21,7 +23,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolder>() {
 
-    var list: Map<Long, List<String>> = mapOf()
+    var list: Map<Long, MessData> = mapOf()
     var goChatListener: (Long) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
@@ -31,7 +33,7 @@ class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolde
     override fun onBindViewHolder(holder: FriendListViewHolder, position: Int) {
         holder.setData(
             list.keys.toList()[position],
-            list[list.keys.toList()[position]]!!,
+            list.values.toList()[position],
             goChatListener
         )
     }
@@ -53,12 +55,16 @@ class MessListAdapter : RecyclerView.Adapter<MessListAdapter.FriendListViewHolde
 
         fun setData(
             number: Long,
-            contentAndTime: List<String>,
+            messData: MessData,
             goChatListener: (Long) -> Unit
         ) {
-            binding.friendName.text = number.toString()
-            binding.friendLastMess.text = contentAndTime[0]
-            binding.lastMessTime.text = TimeUtil.getFriendlyTimeSpanByNow(contentAndTime[1].toLong())
+            val chatInfo = messData.newChatInfo
+            val friendUser = messData.friendUser
+            binding.friendName.text = friendUser.neck
+            binding.friendLastMess.text = chatInfo.content
+            binding.lastMessTime.text =
+                TimeUtil.getFriendlyTimeSpanByNow(chatInfo.time)
+            GlideImageLoader().displayLocalFile(friendUser.image, binding.friendIcon)
             binding.friendItem.setOnClickListener {
                 goChatListener.invoke(number)
             }

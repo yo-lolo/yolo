@@ -25,9 +25,10 @@ import com.example.myapplication.database.entity.User
  * user2 : 副评论对应的用户
  */
 class MineComments(
+    val newsUser: User? = null,
     val newsInfo: NewsInfo? = null,
     val user: User? = null,
     val replyComment: CommentInfo? = null,
-    val user2: User? = null
-) {
+    val user2: User? = null,
+    ) {
 }

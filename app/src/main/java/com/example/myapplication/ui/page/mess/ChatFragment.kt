@@ -1,12 +1,9 @@
 package com.example.myapplication.ui.page.mess
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -16,13 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.KeyboardUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.DataManager
 import com.example.myapplication.R
-import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.ui.adapter.ChatListAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
-import com.example.myapplication.util.SoftInputUtil
 import com.example.myapplication.vm.MessageViewModel
 
 
@@ -66,16 +60,19 @@ class ChatFragment : BaseFragment() {
 
 
     fun initView() {
-        binding.include.headLayout.apply {
-            setTitle(friendNumber.toString())
-            setBackListener { findNavController().popBackStack() }
-            setMenuListener {
-                ChatDetailFragment.goChatDetailFragment(
-                    friendNumber!!,
-                    findNavController()
-                )
+        viewModel.friendUserInfo.observe(viewLifecycleOwner) { user ->
+            binding.include.headLayout.apply {
+                setTitle(user.neck)
+                setBackListener { findNavController().popBackStack() }
+                setMenuListener {
+                    ChatDetailFragment.goChatDetailFragment(
+                        friendNumber!!,
+                        findNavController()
+                    )
+                }
             }
         }
+
         binding.chatContent.doOnTextChanged { text, start, before, count ->
             binding.chatSubmit.visibility = if (text!!.isNotEmpty()) View.VISIBLE else View.GONE
         }
@@ -85,7 +82,7 @@ class ChatFragment : BaseFragment() {
             adapter = chatListAdapter
         }
 
-        viewModel.chats.observe(viewLifecycleOwner) {
+        viewModel.chatsMap.observe(viewLifecycleOwner) {
             chatListAdapter.list = it
             chatListAdapter.notifyDataSetChanged()
         }

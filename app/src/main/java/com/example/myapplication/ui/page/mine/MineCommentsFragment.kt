@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.databinding.FragmentMineCommentsBinding
+import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.MineCommentListAdapter
 import com.example.myapplication.ui.page.home.NewsDetailFragment
 import com.example.myapplication.ui.page.home.PostCommentFragment
@@ -62,7 +63,7 @@ class MineCommentsFragment : BaseFragment() {
         }
 
         binding.mineComments.apply {
-            adapter = commentsMineAdapter
+            adapter = EmptyViewAdapter(commentsMineAdapter)
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 

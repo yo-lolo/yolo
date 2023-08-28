@@ -71,6 +71,7 @@ class MineCommentListAdapter :
             val user2 = aLot.user2
             val news = aLot.newsInfo
             val user = aLot.user
+            val newsUser = aLot.newsUser
             if (comment.level == 2) {
                 binding.visibleReply1.visibility = View.VISIBLE
                 binding.replyItem.visibility = View.VISIBLE
@@ -85,6 +86,7 @@ class MineCommentListAdapter :
                 binding.commentTime.text =
                     TimeUtil.millis2String(comment.time, TimeUtil.dateFormatYMDHM)
                 binding.commentNeck.text = user.neck
+                GlideImageLoader().displayLocalFile(user.image, binding.commentIcon)
                 binding.commentContent.text = comment.content
 
                 // 一些回调函数 具体实现在NewsDetailFragment中 invoke中的值时传入的参数
@@ -92,7 +94,7 @@ class MineCommentListAdapter :
                     goCommentListener.invoke(news.id, comment.id)
                 }
                 binding.newsTitle.text = news.title
-                binding.newsAuthor.text = "@" + news.number.toString()
+                binding.newsAuthor.text = "@" + newsUser?.neck
                 GlideImageLoader().displayLocalFile(news.image, binding.newsImage)
                 binding.newsItem.setOnClickListener {
                     goNewsDetailListener.invoke(news.id)

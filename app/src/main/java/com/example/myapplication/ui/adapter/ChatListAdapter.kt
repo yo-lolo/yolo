@@ -3,17 +3,12 @@ package com.example.myapplication.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
-import coil.transform.RoundedCornersTransformation
-import coil.util.CoilUtils
-import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
+import com.example.myapplication.data.ChatData
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.databinding.LayoutChatListItemBinding
-import com.example.myapplication.databinding.LayoutImageItemBinding
-import com.example.myapplication.util.ImageUtil
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 
 /**
@@ -30,7 +25,7 @@ import com.example.myapplication.util.TimeUtil
  */
 class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
 
-    var list: List<ChatInfo> = listOf()
+    var list: Map<ChatInfo, ChatData> = mapOf()
     var goUserDetailListener: (Long) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder {
@@ -40,7 +35,8 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
     override fun onBindViewHolder(holder: ChatListViewHolder, position: Int) {
         holder.setData(
             position,
-            list[position],
+            list.keys.toList()[position],
+            list.values.toList()[position],
             goUserDetailListener
         )
     }
@@ -58,8 +54,13 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
         fun setData(
             position: Int,
             chat: ChatInfo,
+            chatData: ChatData,
             goUserDetailListener: (Long) -> Unit
         ) {
+            val me = chatData.me
+            val friend = chatData.friend
+            GlideImageLoader().displayLocalFile(me.image, binding.rightIcon)
+            GlideImageLoader().displayLocalFile(friend.image, binding.leftIcon)
             if (chat.sendTag == AppConfig.phoneNumber) {
                 binding.leftChat.visibility = View.GONE
                 binding.rightChat.visibility = View.VISIBLE
@@ -73,7 +74,7 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
                 binding.leftChat.visibility = View.VISIBLE
                 binding.leftContent.text = chat.content
                 binding.leftTime.text = TimeUtil.getFriendlyTimeSpanByNow(chat.time)
-                binding.leftIcon.setOnClickListener{
+                binding.leftIcon.setOnClickListener {
                     goUserDetailListener.invoke(chat.sendTag)
                 }
             }

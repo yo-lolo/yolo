@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DataManager
 import com.example.myapplication.database.entity.CommentInfo
+import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.LayoutCommentListItemBinding
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
 
@@ -23,7 +25,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListViewHolder>() {
 
-    var allList = listOf<CommentInfo>()
+    var allList: Map<CommentInfo, User> = mapOf()
     var goCommentListener: (Long) -> Unit = {}
     var goUserDetail: (Long) -> Unit = {}
     var deleteCommentListener: (CommentInfo) -> Unit = {}
@@ -33,10 +35,11 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
     }
 
     override fun onBindViewHolder(holder: CommentListViewHolder, position: Int) {
-        var list = allList.filter { it.level == 1 }
-        var replyList = allList.filter { it.level == 2 }
+        var list = allList.filter { it.key.level == 1 }
+        var replyList = allList.filter { it.key.level == 2 }
         holder.setData(
-            list[position],
+            list.keys.toList()[position],
+            list.values.toList()[position],
             goCommentListener,
             goUserDetail,
             replyList,
@@ -45,7 +48,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
     }
 
     override fun getItemCount(): Int {
-        return allList.filter { it.level == 1 }.size
+        return allList.filter { it.key.level == 1 }.size
     }
 
     class CommentListViewHolder(
@@ -58,16 +61,17 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
 
         fun setData(
             commentInfo: CommentInfo,
+            user: User,
             goCommentListener: (Long) -> Unit,
             goUserDetail: (Long) -> Unit,
-            replyList: List<CommentInfo>,
+            replyList: Map<CommentInfo, User>,
             deleteCommentListener: (CommentInfo) -> Unit
         ) {
             binding.commentTime.text = TimeUtil.millis2String(commentInfo.time)
-            binding.commentNeck.text = commentInfo.number.toString()
+            binding.commentNeck.text = user.neck
             binding.commentContent.text = commentInfo.content
-
-            // 一些回调函数 具体实现在NewsDetailFragment中 invoke中的值时传入的参数
+            GlideImageLoader().displayLocalFile(user.image, binding.commentIcon)
+            // 一些回调函数 具体实现在NewsDetailFragment中 invoke中的值是传入的参数
             binding.goComment.setOnClickListener {
                 goCommentListener.invoke(commentInfo.id)
             }
@@ -81,7 +85,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
 
             // 过滤出该条评论下的评论 即replyId == commentInfo.id
             val currentReplyList =
-                replyList.filter { it.replyId == commentInfo.id }
+                replyList.filter { it.key.replyId == commentInfo.id }
             binding.replyList.visibility =
                 if (currentReplyList.isNotEmpty()) View.VISIBLE else View.GONE
             binding.replyList.apply {

@@ -4,7 +4,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.database.entity.FriendInfo
+import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.LayoutNewFriendsItemBinding
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -21,7 +23,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendListViewHolder>() {
 
-    var list: List<FriendInfo> = listOf()
+    var list: Map<FriendInfo, User> = mapOf()
     var goUserDetail: (Long) -> Unit = {}
     var agreeFriendListener: (Long, Long) -> Unit = { id, number -> }
 
@@ -30,7 +32,13 @@ class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendLis
     }
 
     override fun onBindViewHolder(holder: FriendListViewHolder, position: Int) {
-        holder.setData(position, list[position], goUserDetail, agreeFriendListener)
+        holder.setData(
+            position,
+            list.keys.toList()[position],
+            list.values.toList()[position],
+            goUserDetail,
+            agreeFriendListener
+        )
     }
 
     override fun getItemCount(): Int {
@@ -51,10 +59,12 @@ class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendLis
         fun setData(
             position: Int,
             friend: FriendInfo,
+            user: User,
             goUserDetail: (Long) -> Unit,
             agreeFriendListener: (Long, Long) -> Unit,
         ) {
-            binding.friendName.text = friend.number.toString()
+            binding.friendName.text = user.neck
+            GlideImageLoader().displayLocalFile(user.image, binding.friendIcon)
             when (friend.tag) {
                 0 -> {
                     binding.agreeFriend.visibility = View.VISIBLE

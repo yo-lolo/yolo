@@ -4,8 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
+import com.example.myapplication.data.ChatData
+import com.example.myapplication.data.MessData
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
+import com.example.myapplication.database.entity.User
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -23,29 +26,46 @@ class MessageViewModel : BaseViewModel() {
 
     private val friendsStoreRepository = DataManager.friendsStoreRepository
     private val chatStoreRepository = DataManager.chatStoreRepository
-
-    var friends = MutableLiveData<List<FriendInfo>>()
-    var chats = MutableLiveData<List<ChatInfo>>()
-    var newFriends = MutableLiveData<List<FriendInfo>>()
-
+    private val userStoreRepository = DataManager.userStoreRepository
+    var mineFriendsMap = MutableLiveData<Map<FriendInfo, User>>()
+    var chatsMap = MutableLiveData<Map<ChatInfo, ChatData>>()
+    var newFriendsMap = MutableLiveData<Map<FriendInfo, User>>()
+    var friendUserInfo = MutableLiveData<User>()
     var friendTag1: MutableList<FriendInfo> = mutableListOf()
-    var resultMap = mutableMapOf<Long, List<String>>()
-    var chatFriendsMap = MutableLiveData<Map<Long, List<String>>>()
+    var chatFriendsMap = MutableLiveData<Map<Long, MessData>>()
 
-    fun initData() {
+    fun initFriendsData() {
         launchSafe {
-            friends.value = friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
-            // 获取到已添加成功的好友列表
-            friendTag1 =
-                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == 1 }
-                    .toMutableList()
-            newFriends.value = friendsStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
+            val mineFriends = friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+            val resultMap = mutableMapOf<FriendInfo, User>()
+            mineFriends.map {
+                val user = userStoreRepository.queryUserByNumber(it.friendNumber)
+                resultMap[it] = user
+            }
+            mineFriendsMap.value = resultMap.toMap()
             initMess()
         }
     }
 
-    private fun initMess() {
+    fun initNewFriends() {
         launchSafe {
+            val newFriends = friendsStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
+            val resultMap = mutableMapOf<FriendInfo, User>()
+            newFriends.map {
+                val user = userStoreRepository.queryUserByNumber(it.number)
+                resultMap[it] = user
+            }
+            newFriendsMap.value = resultMap.toMap()
+        }
+    }
+
+    fun initMess() {
+        launchSafe {
+            val resultMap = mutableMapOf<Long, MessData>()
+            // 获取到已添加成功的好友列表
+            friendTag1 =
+                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == 1 }
+                    .toMutableList()
             // 1.获取本人的聊天记录 如果不为空 在信息展示的列表中加入本人号码
             val chatSelf = chatStoreRepository.getChatsSelf()
             val newList = friendTag1.map { it.friendNumber }.toMutableList()
@@ -54,26 +74,33 @@ class MessageViewModel : BaseViewModel() {
             }
             // 2.在map映射中赋予resultMap的key与value key为对象的号码,value是一个List集合，包含了最后一条信息的时间和内容
             newList.map { number ->
-                resultMap[number] = listOf(
-                    chatStoreRepository.getLastChatBT2(number).content,
-                    chatStoreRepository.getLastChatBT2(number).time.toString()
-                )
+                val chatInfo = chatStoreRepository.getLastChatBT2(number)
+                val friendUser = userStoreRepository.queryUserByNumber(number)
+                resultMap[number] = MessData(chatInfo, friendUser)
             }
             // 3.通过时间将Map进行排序
-            val mapSortByTime = resultMap.toList().sortedByDescending { it.second[1].toLong() }
+            val mapSortByTime = resultMap.toList().sortedByDescending { it.second.newChatInfo.time }
             chatFriendsMap.value = mapSortByTime.toMap()
         }
     }
 
     fun initChats(friendNumber: Long) {
         launchSafe {
+            friendUserInfo.value = userStoreRepository.queryUserByNumber(friendNumber)
             // fix:给自己发送消息时的逻辑问题
-            if (AppConfig.phoneNumber != friendNumber) {
-                chats.value = chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+            val resultMap = mutableMapOf<ChatInfo, ChatData>()
+            val chats = if (AppConfig.phoneNumber != friendNumber) {
+                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
                     .filter { it.friendNumber != it.number }
             } else {
-                chats.value = chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
             }
+            chats.map { chatInfo ->
+                val me = userStoreRepository.queryUserByNumber(AppConfig.phoneNumber)
+                val friend = userStoreRepository.queryUserByNumber(friendNumber)
+                resultMap[chatInfo] = ChatData(me, friend)
+            }
+            chatsMap.value = resultMap.toMap()
         }
     }
 
@@ -100,7 +127,8 @@ class MessageViewModel : BaseViewModel() {
     }
 
     private fun onRefresh(friendNumber: Long) {
-        initData()
+        initFriendsData()
+        initNewFriends()
         initChats(friendNumber)
     }
 

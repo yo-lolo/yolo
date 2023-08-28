@@ -69,7 +69,7 @@ object DataManager {
         testStoreRepository = TestStoreRepository(appDataBase!!)
         commentStoreRepository = CommentStoreRepository(CommentTaskImp(appDataBase!!))
         initSmartRefresh()
-        //initData()
+        initData()
     }
 
     private fun createDb(): AppDataBase {

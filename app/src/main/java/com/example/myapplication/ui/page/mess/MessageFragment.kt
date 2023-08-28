@@ -44,7 +44,7 @@ class MessageFragment : BaseFragment() {
     ): View {
         binding = FragmentMessBinding.inflate(layoutInflater)
         initView()
-        viewModel.initData()
+        viewModel.initMess()
         return binding.root
     }
 

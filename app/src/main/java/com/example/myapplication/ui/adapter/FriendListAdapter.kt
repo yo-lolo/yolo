@@ -2,10 +2,10 @@ package com.example.myapplication.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.database.entity.FriendInfo
+import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.LayoutFriendListItemBinding
-import com.example.myapplication.util.TimeUtil
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -22,7 +22,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewHolder>() {
 
-    var list: List<FriendInfo> = listOf()
+    var list: Map<FriendInfo, User> = mapOf()
     var goUserDetail: (Long) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
@@ -30,7 +30,7 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
     }
 
     override fun onBindViewHolder(holder: FriendListViewHolder, position: Int) {
-        holder.setData(list[position], goUserDetail)
+        holder.setData(list.keys.toList()[position], list.values.toList()[position], goUserDetail)
     }
 
     override fun getItemCount(): Int {
@@ -50,12 +50,14 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
 
         fun setData(
             friend: FriendInfo,
+            user: User,
             goUserDetail: (Long) -> Unit
         ) {
-            binding.friendName.text = friend.friendNumber.toString()
+            binding.friendName.text = user.neck
             binding.friendItem.setOnClickListener {
                 goUserDetail.invoke(friend.friendNumber)
             }
+            GlideImageLoader().displayLocalFile(user.image, binding.friendIcon)
         }
     }
 

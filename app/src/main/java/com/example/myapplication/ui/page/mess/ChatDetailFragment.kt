@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
@@ -12,7 +13,9 @@ import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatDetailBinding
 import com.example.myapplication.ui.page.mine.UserDetailFragment
+import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.JsonUtil
+import com.example.myapplication.vm.MessageViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -30,9 +33,11 @@ class ChatDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentChatDetailBinding
     var number: Long? = null
+    val viewModel by viewModels<MessageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         number = arguments?.getLong("friendNumber")
+        viewModel.initChats(number!!)
         super.onCreate(savedInstanceState)
     }
 
@@ -54,6 +59,11 @@ class ChatDetailFragment : BaseFragment() {
         binding.userIcon.setOnClickListener {
             UserDetailFragment.goUserDetailFragment(number!!, findNavController())
         }
+        viewModel.friendUserInfo.observe(viewLifecycleOwner) {
+            GlideImageLoader().displayLocalFile(it.image, binding.userIcon)
+            binding.userNeck.text = it.neck
+        }
+
     }
 
     companion object {

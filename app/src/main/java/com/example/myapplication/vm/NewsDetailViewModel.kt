@@ -7,6 +7,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
+import com.example.myapplication.data.MessData
 import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.LikeInfo
 import com.example.myapplication.database.entity.NewsInfo
@@ -41,7 +42,7 @@ class NewsDetailViewModel : BaseViewModel() {
     var likeInfo = MutableLiveData<LikeInfo>()
     var isFriend = MutableLiveData<Boolean>(false)
     var commentState = MutableLiveData<Boolean>(false)
-    var comments = MutableLiveData<List<CommentInfo>>()
+    var commentsMap = MutableLiveData<Map<CommentInfo, User>>()
 
     /**
      * 添加好友
@@ -85,10 +86,16 @@ class NewsDetailViewModel : BaseViewModel() {
 
     fun initComment(newsId: Long) {
         viewModelScope.launch {
-            comments.value = commentStoreRepository.getCommentsByNewId(newsId)
+            val comments = commentStoreRepository.getCommentsByNewId(newsId)
+            val resultMap = mutableMapOf<CommentInfo, User>()
+            comments.map {
+                val user = userStoreRepository.queryUserByNumber(it.number)
+                resultMap[it] = user
+            }
+            commentsMap.value = resultMap.toMap()
             // 解决level1的评论删除后 level2的评论不删除时 显示评论数目与所看到的不同的问题
-            val commentLevel1 = comments.value!!.filter { it.level == 1 }
-            val commentLevel2 = comments.value!!.filter { it.level == 2 }
+            val commentLevel1 = comments.filter { it.level == 1 }
+            val commentLevel2 = comments.filter { it.level == 2 }
             var replyIdListExist = commentLevel1.map { it.id }
             val replyCounts = commentLevel2.filter { it.replyId in replyIdListExist }.size
             contentCount.value = commentLevel1.size + replyCounts

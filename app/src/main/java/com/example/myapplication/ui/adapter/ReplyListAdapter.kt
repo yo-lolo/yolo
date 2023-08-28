@@ -3,9 +3,8 @@ package com.example.myapplication.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.database.entity.CommentInfo
-import com.example.myapplication.databinding.LayoutCommentListItemBinding
+import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.LayoutReplyListItemBinding
-import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.util.layoutInflater
 
 /**
@@ -22,7 +21,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class ReplyListAdapter : RecyclerView.Adapter<ReplyListAdapter.ReplyListViewHolder>() {
 
-    var list = listOf<CommentInfo>()
+    var list: Map<CommentInfo, User> = mapOf()
     var goUserDetail: (Long) -> Unit = {}
     var deleteCommentListener: (CommentInfo) -> Unit = {}
 
@@ -31,7 +30,12 @@ class ReplyListAdapter : RecyclerView.Adapter<ReplyListAdapter.ReplyListViewHold
     }
 
     override fun onBindViewHolder(holder: ReplyListViewHolder, position: Int) {
-        holder.setData(list[position], goUserDetail, deleteCommentListener)
+        holder.setData(
+            list.keys.toList()[position],
+            list.values.toList()[position],
+            goUserDetail,
+            deleteCommentListener
+        )
     }
 
     override fun getItemCount(): Int {
@@ -48,11 +52,12 @@ class ReplyListAdapter : RecyclerView.Adapter<ReplyListAdapter.ReplyListViewHold
     ) : RecyclerView.ViewHolder(binding.root) {
         fun setData(
             comment: CommentInfo,
+            user: User,
             goUserDetail: (Long) -> Unit,
             deleteCommentListener: (CommentInfo) -> Unit
         ) {
             binding.replyContent.text = comment.content
-            binding.replyNeck.text = comment.number.toString()
+            binding.replyNeck.text = user.neck
             // 一般来说 回调时去上一层实现 上一层实现不了 就去上上层实现 以此类推 总能实现
             // 原因：UI需要在Activity/Fragment中去实现
             // 由于ReplyListAdapter上一层还是个适配器 所以需要去上上层 也就是NewsDetailFragment中实现

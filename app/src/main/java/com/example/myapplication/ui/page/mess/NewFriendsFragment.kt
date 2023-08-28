@@ -59,7 +59,7 @@ class NewFriendsFragment : BaseFragment() {
             adapter = EmptyViewAdapter(newFriendsAdapter)
         }
 
-        viewModel.newFriends.observe(viewLifecycleOwner) {
+        viewModel.newFriendsMap.observe(viewLifecycleOwner) {
             newFriendsAdapter.list = it
             newFriendsAdapter.notifyDataSetChanged()
         }
@@ -75,6 +75,6 @@ class NewFriendsFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.initData()
+        viewModel.initNewFriends()
     }
 }

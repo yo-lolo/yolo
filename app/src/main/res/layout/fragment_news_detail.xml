@@ -55,6 +55,7 @@
                             android:orientation="horizontal">
 
                             <com.makeramen.roundedimageview.RoundedImageView
+                                android:id="@+id/user_icon"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:src="@mipmap/touxiang"
