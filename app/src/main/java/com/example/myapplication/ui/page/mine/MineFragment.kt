@@ -72,10 +72,12 @@ class MineFragment : BaseFragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
-            homeBinding.userName.text = user.neck
-            GlideImageLoader().displayLocalFile(user.image, homeBinding.mineTouxiang)
-            homeBinding.mineTouxiang.setOnClickListener {
-                UserDetailFragment.goUserDetailFragment(user.number, findNavController())
+            if (user != null) {
+                homeBinding.userName.text = user.neck
+                GlideImageLoader().displayLocalFile(user.image, homeBinding.mineTouxiang)
+                homeBinding.mineTouxiang.setOnClickListener {
+                    UserDetailFragment.goUserDetailFragment(user.number, findNavController())
+                }
             }
         }
     }

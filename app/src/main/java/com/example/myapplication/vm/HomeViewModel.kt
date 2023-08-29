@@ -35,7 +35,7 @@ class HomeViewModel : BaseViewModel() {
 
     fun initData() {
         launchSafe {
-            newsStoreRepository.getNews().filter { it.type == 1 }.map { newsInfo ->
+            newsStoreRepository.getNews().map { newsInfo ->
                 val user = userStoreRepository.queryUserByNumber(newsInfo.number)
                 val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
                 val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)

@@ -14,7 +14,7 @@ import com.example.myapplication.database.entity.User
  * @UpdateDate : 2023/8/25 14:34
  * @UpdateRemark : 更新说明
  */
-class NewsDataInfo(
+data class NewsDataInfo(
     val user: User,
     val likeCount: Int,
     val likeState: Boolean

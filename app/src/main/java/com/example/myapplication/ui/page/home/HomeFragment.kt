@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentHomeBinding
@@ -82,15 +83,9 @@ class HomeFragment : BaseFragment() {
             ToastUtils.showShort("你点击了第${it + 1}张轮播图")
         }
 
-        // 设置RecyclerView在垂直状态下不滑动
-        var linearlayoutManager: LinearLayoutManager = object : LinearLayoutManager(context) {
-            override fun canScrollVertically(): Boolean {
-                return false
-            }
-        }
         // 初始化Recycler
         binding.newsList.apply {
-            layoutManager = linearlayoutManager
+            layoutManager = DataManager.layoutManagerNotScroll()
             adapter = newsListAdapter
         }
 
@@ -99,7 +94,7 @@ class HomeFragment : BaseFragment() {
         }
 
         viewModel.newsMapData.observe(viewLifecycleOwner) { newsDataList ->
-            newsListAdapter.list = newsDataList
+            newsListAdapter.list = newsDataList.take(2)
             newsListAdapter.notifyDataSetChanged()
         }
 

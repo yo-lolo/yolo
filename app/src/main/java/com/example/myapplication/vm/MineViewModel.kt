@@ -30,7 +30,7 @@ class MineViewModel : BaseViewModel() {
     private val userStoreRepository = DataManager.userStoreRepository
     private val newsStoreRepository = DataManager.newsStoreRepository
     private val likeStoreRepository = DataManager.likeStoreRepository
-    var user = MutableLiveData<User>()
+    var user = MutableLiveData<User?>()
     var newsMapData = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
     var resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
     var imagePath = MutableLiveData<String>("")

@@ -92,6 +92,9 @@ object DataManager {
         }
     }
 
+    /**
+     * 设置RecyclerView在垂直状态下不滑动
+     */
     fun layoutManagerNotScroll(): LinearLayoutManager {
         val linearlayoutManager: LinearLayoutManager = object : LinearLayoutManager(context) {
             override fun canScrollVertically(): Boolean {
@@ -125,7 +128,6 @@ object DataManager {
 
     private fun initData() {
         launchScope.launch {
-            testStoreRepository.insertNews()
             testStoreRepository.insertUser()
         }
     }

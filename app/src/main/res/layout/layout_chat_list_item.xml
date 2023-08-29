@@ -90,7 +90,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="8dp"
                 android:text="这是一段对话 这是一段对话 这是一段对话 这是一段对话"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
         </LinearLayout>

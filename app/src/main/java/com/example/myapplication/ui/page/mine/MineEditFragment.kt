@@ -58,22 +58,25 @@ class MineEditFragment : BaseFragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
-            binding.apply {
-                mineAddress.text = Editable.Factory.getInstance().newEditable(user.address)
-                minePersonalSign.text = Editable.Factory.getInstance().newEditable(user.sign)
-                GlideImageLoader().displayImageWithRadius(user.image, mineImage)
-                mineNeck.text = Editable.Factory.getInstance().newEditable(user.neck)
-                mineNumber.text = user.number.toString()
-                mineRegisterTime.text = TimeUtil.millis2String(user.time, TimeUtil.dateFormatYMD_CN)
-                viewModel.imagePath.value = user.image
-                mineImage.setOnClickListener {
-                    openPhoto()
-                }
-                mineOk.setOnClickListener {
-                    val neck = mineNeck.text.toString().trim()
-                    val address = mineAddress.text.toString().trim()
-                    val sign = minePersonalSign.text.toString().trim()
-                    viewModel.updateUserEdit(neck, address, sign)
+            if (user != null){
+                binding.apply {
+                    mineAddress.text = Editable.Factory.getInstance().newEditable(user.address)
+                    minePersonalSign.text = Editable.Factory.getInstance().newEditable(user.sign)
+                    GlideImageLoader().displayImageWithRadius(user.image, mineImage)
+                    mineNeck.text = Editable.Factory.getInstance().newEditable(user.neck)
+                    mineNumber.text = user.number.toString()
+                    mineRegisterTime.text =
+                        TimeUtil.millis2String(user.time, TimeUtil.dateFormatYMD_CN)
+                    viewModel.imagePath.value = user.image
+                    mineImage.setOnClickListener {
+                        openPhoto()
+                    }
+                    mineOk.setOnClickListener {
+                        val neck = mineNeck.text.toString().trim()
+                        val address = mineAddress.text.toString().trim()
+                        val sign = minePersonalSign.text.toString().trim()
+                        viewModel.updateUserEdit(neck, address, sign)
+                    }
                 }
             }
         }
