@@ -1,7 +1,9 @@
 package com.example.myapplication.ui.adapter
 
+import android.graphics.Color
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.engine.Resource
 import com.example.myapplication.R
 import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.NewsInfo
@@ -71,6 +73,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsListViewHolder>
 
             }
             binding.great.setImageResource(if (likeState) R.mipmap.great_click else R.mipmap.great)
+            binding.greatCount.setTextColor(if (likeState) Color.parseColor("#1296db") else Color.GRAY)
         }
     }
 }

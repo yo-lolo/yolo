@@ -69,7 +69,7 @@ object DataManager {
         testStoreRepository = TestStoreRepository(appDataBase!!)
         commentStoreRepository = CommentStoreRepository(CommentTaskImp(appDataBase!!))
         initSmartRefresh()
-        initData()
+        //initData()
     }
 
     private fun createDb(): AppDataBase {
@@ -129,6 +129,7 @@ object DataManager {
     private fun initData() {
         launchScope.launch {
             testStoreRepository.insertUser()
+            testStoreRepository.insertNews()
         }
     }
 
