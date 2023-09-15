@@ -25,7 +25,7 @@ import com.example.myapplication.util.layoutInflater
  */
 class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListViewHolder>() {
 
-    var allList: Map<CommentInfo, User> = mapOf()
+    var list: Map<CommentInfo, User> = mapOf()
     var goCommentListener: (Long) -> Unit = {}
     var goUserDetail: (Long) -> Unit = {}
     var deleteCommentListener: (CommentInfo) -> Unit = {}
@@ -35,8 +35,8 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
     }
 
     override fun onBindViewHolder(holder: CommentListViewHolder, position: Int) {
-        var list = allList.filter { it.key.level == 1 }
-        var replyList = allList.filter { it.key.level == 2 }
+        var list = list.filter { it.key.level == 1 }
+        var replyList = list.filter { it.key.level == 2 }
         holder.setData(
             list.keys.toList()[position],
             list.values.toList()[position],
@@ -48,7 +48,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.CommentListVi
     }
 
     override fun getItemCount(): Int {
-        return allList.filter { it.key.level == 1 }.size
+        return list.filter { it.key.level == 1 }.size
     }
 
     class CommentListViewHolder(

@@ -11,6 +11,7 @@ import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -34,6 +35,7 @@ class MineViewModel : BaseViewModel() {
     var newsMapData = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
     var resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
     var imagePath = MutableLiveData<String>("")
+    val editState = MutableLiveData<Boolean>(false)
 
     /**
      * 初始化用户数据，默认为当前用户
@@ -41,13 +43,14 @@ class MineViewModel : BaseViewModel() {
     fun initData(number: Long = AppConfig.phoneNumber) {
         viewModelScope.launch {
             user.value = userStoreRepository.queryUserByNumber(number)
-            newsStoreRepository.getNews().filter { it.type == 1 && it.number == number }.map { newsInfo ->
-                val user = userStoreRepository.queryUserByNumber(newsInfo.number)
-                val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
-                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
-                    .any { it.newsId == newsInfo.id }
-                resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
-            }
+            newsStoreRepository.getNews().filter { it.type == 1 && it.number == number }
+                .map { newsInfo ->
+                    val user = userStoreRepository.queryUserByNumber(newsInfo.number)
+                    val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
+                    val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                        .any { it.newsId == newsInfo.id }
+                    resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
+                }
             newsMapData.value = resultMap.toList()
         }
     }
@@ -70,6 +73,8 @@ class MineViewModel : BaseViewModel() {
                     ToastUtils.showShort("保存失败")
                 }.onSuccess {
                     ToastUtils.showShort("保存成功")
+                    delay(500)
+                    editState.value = true
                 }
             }
         } else {

@@ -142,7 +142,7 @@ class NewsDetailFragment : BaseFragment() {
             }
         }
         viewModel.commentsMap.observe(viewLifecycleOwner) {
-            commentListAdapter.allList = it
+            commentListAdapter.list = it
             commentListAdapter.notifyDataSetChanged()
         }
     }

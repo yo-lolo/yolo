@@ -7,7 +7,6 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
-import com.example.myapplication.data.MessData
 import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.LikeInfo
 import com.example.myapplication.database.entity.NewsInfo
@@ -35,6 +34,7 @@ class NewsDetailViewModel : BaseViewModel() {
     private val userStoreRepository = DataManager.userStoreRepository
     private val newsStoreRepository = DataManager.newsStoreRepository
     private val likeStoreRepository = DataManager.likeStoreRepository
+
     var replyComment = MutableLiveData<CommentInfo>()
     var newsInfo = MutableLiveData<NewsInfo>()
     var userInfo = MutableLiveData<User>()
@@ -48,7 +48,7 @@ class NewsDetailViewModel : BaseViewModel() {
      * 添加好友
      */
     fun insertFriend(newsId: Long) {
-        launchSafe {
+        viewModelScope.launch {
             kotlin.runCatching {
                 val info = newsStoreRepository.getNewsById(newsId)
                 friendsStoreRepository.insertFriend(info.number)
@@ -63,7 +63,7 @@ class NewsDetailViewModel : BaseViewModel() {
      * 初始化数据（评论列表，好友状态）
      */
     fun initData(newsId: Long) {
-        launchSafe {
+        viewModelScope.launch {
             val news = newsStoreRepository.getNewsById(newsId)
             newsInfo.value = news
             userInfo.value = userStoreRepository.queryUserByNumber(news.number)
@@ -85,8 +85,25 @@ class NewsDetailViewModel : BaseViewModel() {
     }
 
     fun initComment(newsId: Long) {
-        viewModelScope.launch {
+
+        launchTest {
+            // 获取该文章的所有评论
             val comments = commentStoreRepository.getCommentsByNewId(newsId)
+            // 获取level为1、2的评论、按时间进行排序
+            val level1 = comments.filter { it.level == 1 }.sortedBy { it.time }
+            val level2 = comments.filter { it.level == 2 }.sortedBy { it.time }
+            // 将level为2的列表按照回复评论的Id进行分组
+            val level2Group = level2.groupBy { it.replyId }
+            // 创建空列表
+            val list = mutableListOf<CommentInfo>()
+            // 遍历level1的列表 获取到对应的level2列表 依次添加进空列表中
+            level1.forEach { level1Info ->
+                val newLevel2Group = level2Group[level1Info.id]
+                list.add(level1Info)
+                if (newLevel2Group != null) {
+                    list.addAll(newLevel2Group)
+                }
+            }
             val resultMap = mutableMapOf<CommentInfo, User>()
             comments.map {
                 val user = userStoreRepository.queryUserByNumber(it.number)
@@ -96,7 +113,7 @@ class NewsDetailViewModel : BaseViewModel() {
             // 解决level1的评论删除后 level2的评论不删除时 显示评论数目与所看到的不同的问题
             val commentLevel1 = comments.filter { it.level == 1 }
             val commentLevel2 = comments.filter { it.level == 2 }
-            var replyIdListExist = commentLevel1.map { it.id }
+            val replyIdListExist = commentLevel1.map { it.id }
             val replyCounts = commentLevel2.filter { it.replyId in replyIdListExist }.size
             contentCount.value = commentLevel1.size + replyCounts
         }

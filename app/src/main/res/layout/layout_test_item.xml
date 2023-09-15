@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/main_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="12dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/comment_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@mipmap/touxiang"
+                app:riv_corner_radius="90dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/comment_neck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MoMo"
+                    android:textColor="@color/color_3c3c3c"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/comment_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2022年10月21日"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/color_dbdbdb"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/goComment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/comment_icon"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/comment_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="非常棒，喜欢这个系列"
+            android:layout_marginLeft="43dp"
+            android:textColor="@color/color_3c3c3c"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+</LinearLayout>

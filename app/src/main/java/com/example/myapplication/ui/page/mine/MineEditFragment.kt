@@ -58,7 +58,7 @@ class MineEditFragment : BaseFragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
-            if (user != null){
+            if (user != null) {
                 binding.apply {
                     mineAddress.text = Editable.Factory.getInstance().newEditable(user.address)
                     minePersonalSign.text = Editable.Factory.getInstance().newEditable(user.sign)
@@ -79,6 +79,10 @@ class MineEditFragment : BaseFragment() {
                     }
                 }
             }
+        }
+
+        viewModel.editState.observe(viewLifecycleOwner) {
+            if (it) findNavController().popBackStack()
         }
     }
 

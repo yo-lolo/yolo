@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
+            android:background="@drawable/mess_item_bg"
             android:paddingVertical="10dp">
 
             <LinearLayout

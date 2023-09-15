@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -37,6 +39,25 @@ open class BaseViewModel : ViewModel() {
                     ToastUtils.showShort("网络连接失败，请稍后再试")
                 }
                 Log.e("", it.toString())
+            }
+        }
+    }
+
+    fun launchTest(progress: Boolean = true, block: suspend () -> Unit) {
+        var time : Long = 0
+        var endTime : Long = 0
+        launch(progress) {
+            kotlin.runCatching {
+                time = TimeUtils.getNowMills()
+                block.invoke()
+            }.onFailure {
+                if (it is IOException) {
+                    ToastUtils.showShort("网络连接失败，请稍后再试")
+                }
+                Log.e("", it.toString())
+            }.onSuccess {
+                endTime = TimeUtils.getNowMills()
+                Log.e("time_during", "${endTime - time}")
             }
         }
     }

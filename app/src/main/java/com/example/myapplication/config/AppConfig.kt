@@ -23,7 +23,7 @@ object AppConfig {
     //const val phoneNumber: Long = 22222222222
     const val BASE_TAG = "yolo"
     //const val phoneNumber: Long = 11111111111
-    const val phoneNumber: Long = 33333333333
+    const val phoneNumber: Long = 44444444444
     const val IMAGE_OPEN = 0xff
     const val NEWS_IMAGE_OPEN = 1
     const val USER_IMAGE_EDIT = 2
