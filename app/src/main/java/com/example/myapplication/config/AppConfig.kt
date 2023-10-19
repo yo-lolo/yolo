@@ -31,6 +31,12 @@ object AppConfig {
     const val MSG_FROM_CLIENT = 1
     const val MSG_FROM_SERVICE = 1
 
+    const val PACKAGE_NAME = "com.example.myapplication"
+
+    const val VERSION_NAME = "1.0.0"
+
+    const val APP_NAME = "YoLo"
+
     //枚举反馈类型, 1、质量问题，2、使用问题 3、其他
     enum class FeedbackType(typeId: String, desc: String) {
         QA_TYPE("1", "质量问题"),

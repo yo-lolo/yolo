@@ -114,6 +114,11 @@
         android:name="com.example.myapplication.ui.page.mine.MineLikeFragment"
         android:label="MineLikeFragment" />
 
+    <fragment
+        android:id="@+id/AboutFragment"
+        android:name="com.example.myapplication.ui.page.setting.AboutFragment"
+        android:label="AboutFragment" />
+
 
     <action
         android:id="@+id/goHomeFragment"
@@ -193,5 +198,9 @@
     <action
         android:id="@+id/goMineLikeFragment"
         app:destination="@id/MineLikeFragment" />
+
+    <action
+        android:id="@+id/goAboutFragment"
+        app:destination="@id/AboutFragment" />
 
 </navigation>

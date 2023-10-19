@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSettingBinding
 import com.example.myapplication.useCase.PromptUseCase
 
@@ -82,8 +83,7 @@ class SettingFragment : BaseFragment() {
             )
         }
         binding.settingsAbout.setOnClickListener {
-            //TODO 关于
-            ToastUtils.showShort("关于")
+            findNavController().navigate(R.id.goAboutFragment)
         }
         binding.exitLogin.setOnClickListener {
             //TODO 退出登录

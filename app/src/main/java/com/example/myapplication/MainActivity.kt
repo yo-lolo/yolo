@@ -31,6 +31,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initView(){
+        //欢迎语动画设置
         ValueAnimator.ofFloat(0.0F, 1.0F).also { animator ->
             animator.repeatMode = ValueAnimator.RESTART
             animator.duration = 2000L
