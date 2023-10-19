@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.Manifest
+import android.animation.ValueAnimator
 import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -22,10 +23,21 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
+        initView()
         toMyApplicationPage()
 
         val uri = Uri.parse("content://com.example.myapplication.provider.BookProvider")
         contentResolver.query(uri, null, null, null, null, null)
+    }
+
+    private fun initView(){
+        ValueAnimator.ofFloat(0.0F, 1.0F).also { animator ->
+            animator.repeatMode = ValueAnimator.RESTART
+            animator.duration = 2000L
+            animator.addUpdateListener {
+                activityMainBinding.typerTextView.setProgress(it.animatedValue as Float)
+            }
+        }.start()
     }
 
     private fun toMyApplicationPage() {

@@ -89,5 +89,10 @@ dependencies {
     //快速构造适配器...
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11'
 
+    //popUp组件
     implementation 'com.github.li-xiaojun:XPopup:2.9.19'
+
+    def htextview_version = "0.1.6"
+    implementation "com.hanks:htextview-base:$htextview_version"        // base library
+    implementation "com.hanks:htextview-typer:$htextview_version"
 }
