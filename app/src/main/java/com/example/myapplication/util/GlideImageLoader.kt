@@ -39,20 +39,20 @@ class GlideImageLoader : ImageLoader() {
     var context = DataManager.context
 
 
-    override fun displayImage(context: Context?, path: Any?, imageView: ImageView?) {
+    override fun displayImage(context: Context, path: Any?, imageView: ImageView) {
         Glide.with(context).load(path).error(R.mipmap.icon_empty).into(imageView)
     }
 
-    fun displayImageWithRadius(path: Any?, imageView: ImageView?) {
+    fun displayImageWithRadius(path: Any?, imageView: ImageView) {
         Glide.with(context).load(path).error(R.mipmap.touxiang).into(imageView)
     }
 
-    fun displayLocalFile(path: Any?, imageView: ImageView?) {
+    fun displayLocalFile(path: Any?, imageView: ImageView) {
         val localPath = Uri.fromFile(File(path as String))
         Glide.with(context).load(localPath).error(R.mipmap.touxiang).into(imageView)
     }
 
-    fun displayImageError(path: Any?, imageView: ImageView?) {
+    fun displayImageError(path: Any?, imageView: ImageView) {
         val localPath = Uri.fromFile(File(path as String))
         Glide.with(context).load(localPath).error(R.mipmap.image_error).into(imageView)
     }

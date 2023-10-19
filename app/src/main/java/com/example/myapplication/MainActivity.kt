@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.Manifest
 import android.content.Context
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -22,6 +23,9 @@ class MainActivity : BaseActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
         toMyApplicationPage()
+
+        val uri = Uri.parse("content://com.example.myapplication.provider.BookProvider")
+        contentResolver.query(uri, null, null, null, null, null)
     }
 
     private fun toMyApplicationPage() {

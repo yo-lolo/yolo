@@ -9,6 +9,7 @@
     android:orientation="vertical"
     app:cardBackgroundColor="#D9000000"
     app:cardCornerRadius="15dp"
+    android:alpha="0.7"
     app:cardElevation="0px">
 
     <LinearLayout

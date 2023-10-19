@@ -28,6 +28,9 @@ object AppConfig {
     const val NEWS_IMAGE_OPEN = 1
     const val USER_IMAGE_EDIT = 2
 
+    const val MSG_FROM_CLIENT = 1
+    const val MSG_FROM_SERVICE = 1
+
     //枚举反馈类型, 1、质量问题，2、使用问题 3、其他
     enum class FeedbackType(typeId: String, desc: String) {
         QA_TYPE("1", "质量问题"),

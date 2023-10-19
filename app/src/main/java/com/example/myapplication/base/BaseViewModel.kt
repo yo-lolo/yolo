@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.ThreadUtils.runOnUiThread
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.util.TimeUtil
+import com.example.myapplication.util.getLoadingPopup
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -83,6 +85,26 @@ open class BaseViewModel : ViewModel() {
                 block.invoke()
             }
 
+        }
+    }
+
+    private val loadingPopup = getLoadingPopup()
+
+    /**
+     * 显示加载
+     */
+    protected fun showLoading() {
+        runOnUiThread {
+            loadingPopup?.show()
+        }
+    }
+
+    /**
+     * 解除加载
+     */
+    protected fun dismissLoading() {
+        runOnUiThread {
+            loadingPopup?.dismiss()
         }
     }
 }

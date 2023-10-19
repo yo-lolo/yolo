@@ -85,13 +85,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:theme="@style/myRadioButton"
-                android:text="明星" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:theme="@style/myRadioButton"
                 android:text="其他" />
         </RadioGroup>
 

@@ -48,20 +48,16 @@
                 android:textColor="@color/color_3c3c3c"
                 android:textColorHint="#ffbfbfbf"
                 android:textSize="15dp" />
-            <TextView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
+
+            <View
+                android:layout_width="7dp"
+                android:layout_height="7dp"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/mess_red_rot_bg"
                 android:gravity="center"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="30dp"
-                android:textColor="@color/color_FFFFFF"
-                android:textSize="6sp"
-                android:text="11" />
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="35dp" />
         </RelativeLayout>
-
-
 
 
         <View
@@ -69,6 +65,7 @@
             android:layout_height="match_parent"
             android:layout_marginVertical="5dp"
             android:background="@color/color_e7e7e7" />
+
         <TextView
             android:id="@+id/go_friends"
             android:layout_weight="1"

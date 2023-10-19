@@ -2,6 +2,7 @@ package com.example.myapplication.ui.page.home
 
 import android.graphics.Outline
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -106,7 +107,7 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.goAddNewsFragment)
         }
 
-        GlideImageLoader().displayImage(context, R.drawable.world, binding.imageTest)
+        context?.let { GlideImageLoader().displayImage(it, R.drawable.world, binding.imageTest) }
 
     }
 

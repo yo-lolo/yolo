@@ -26,8 +26,8 @@
 
                 <TextView
                     android:id="@+id/label_welcome"
-                    android:layout_width="69dp"
-                    android:layout_height="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="欢迎登录"
                     android:textColor="@color/color_3c3c3c"
                     android:textSize="17sp"
@@ -36,7 +36,7 @@
                 <TextView
                     android:id="@+id/text_phone"
                     android:layout_width="wrap_content"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/label_welcome"
                     android:layout_marginTop="5dp"
                     tools:text="191****1234"

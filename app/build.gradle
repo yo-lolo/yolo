@@ -88,4 +88,6 @@ dependencies {
 
     //快速构造适配器...
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11'
+
+    implementation 'com.github.li-xiaojun:XPopup:2.9.19'
 }

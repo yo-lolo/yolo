@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IsoscelesTriangle">
+        <attr name="interval" format="dimension"/>
+        <attr name="intervalsBetweenValues" format="integer"/>
+        <attr name="valuesInterval" format="integer"/>
+        <attr name="valuesTextSize" format="dimension"/>
+        <attr name="valuesTextColor" format="color"/>
+        <attr name="linesWidth" format="dimension"/>
+        <attr name="linesColor" format="color"/>
+    </declare-styleable>
+</resources>
