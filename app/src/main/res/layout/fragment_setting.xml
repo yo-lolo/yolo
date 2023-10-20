@@ -75,7 +75,7 @@
                 android:background="@color/color_e7e7e7" />
 
             <RelativeLayout
-                android:id="@+id/app_permission"
+                android:id="@+id/modify_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:text="权限"
+                    android:text="修改密码"
                     android:textColor="#3C3C3C"
                     android:textSize="13sp" />
 

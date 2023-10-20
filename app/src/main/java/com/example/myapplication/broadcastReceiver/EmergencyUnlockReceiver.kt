@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.util.Log
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.Constants
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -42,7 +42,7 @@ class EmergencyUnlockReceiver(context: Context, private val block: () -> Unit) :
     }
 
     companion object {
-        val TAG = AppConfig.BASE_TAG + EmergencyUnlockReceiver::class.java.simpleName
+        val TAG = Constants.BASE_TAG + EmergencyUnlockReceiver::class.java.simpleName
         var VOLUME_CHANGED_ACTION = "android.media.VOLUME_CHANGED_ACTION"
         var EXTRA_VOLUME_STREAM_TYPE = "android.media.EXTRA_VOLUME_STREAM_TYPE"
     }

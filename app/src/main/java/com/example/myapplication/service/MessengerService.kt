@@ -9,7 +9,7 @@ import android.os.Message
 import android.os.Messenger
 import android.os.RemoteException
 import android.util.Log
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.Constants
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -28,10 +28,10 @@ class MessengerService : Service() {
     class MessengerHandler : Handler() {
         override fun handleMessage(msg: Message) {
             when (msg.what) {
-                AppConfig.MSG_FROM_CLIENT -> {
-                    Log.e(AppConfig.BASE_TAG, msg.data.getString("msg").toString())
+                Constants.MSG_FROM_CLIENT -> {
+                    Log.e(Constants.BASE_TAG, msg.data.getString("msg").toString())
                     val client = msg.replyTo
-                    val replyMessage = Message.obtain(null, AppConfig.MSG_FROM_SERVICE)
+                    val replyMessage = Message.obtain(null, Constants.MSG_FROM_SERVICE)
                     val bundle = Bundle()
                     bundle.putString("reply", "嗯，你的消息我收到了，稍后会回复你。")
                     replyMessage.data = bundle

@@ -69,6 +69,10 @@ class LoginFragment : BaseFragment() {
             }
         }
 
+        binding.loginSetting.setOnClickListener {
+            findNavController().navigate(R.id.goLoginSettingFragment)
+        }
+
     }
 
     private fun numberAndPass(): Pair<String, String> {

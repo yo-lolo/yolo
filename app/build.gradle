@@ -95,4 +95,7 @@ dependencies {
     def htextview_version = "0.1.6"
     implementation "com.hanks:htextview-base:$htextview_version"        // base library
     implementation "com.hanks:htextview-typer:$htextview_version"
+
+    //基于 mMap 内存映射的移动端通用 key-value 组件
+    implementation('com.tencent:mmkv:1.2.13')
 }

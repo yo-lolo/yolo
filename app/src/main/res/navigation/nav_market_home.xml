@@ -119,6 +119,15 @@
         android:name="com.example.myapplication.ui.page.setting.AboutFragment"
         android:label="AboutFragment" />
 
+    <fragment
+        android:id="@+id/ModifyPassFragment"
+        android:name="com.example.myapplication.ui.page.setting.ModifyPassFragment"
+        android:label="ModifyPassFragment" />
+
+    <fragment
+        android:id="@+id/LoginSettingFragment"
+        android:name="com.example.myapplication.ui.page.setting.LoginSettingFragment"
+        android:label="LoginSettingFragment" />
 
     <action
         android:id="@+id/goHomeFragment"
@@ -202,5 +211,13 @@
     <action
         android:id="@+id/goAboutFragment"
         app:destination="@id/AboutFragment" />
+
+    <action
+        android:id="@+id/goModifyPassFragment"
+        app:destination="@id/ModifyPassFragment" />
+
+    <action
+        android:id="@+id/goLoginSettingFragment"
+        app:destination="@id/LoginSettingFragment" />
 
 </navigation>

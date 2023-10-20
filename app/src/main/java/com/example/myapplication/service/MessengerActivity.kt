@@ -11,8 +11,8 @@ import android.os.Message
 import android.os.Messenger
 import android.os.RemoteException
 import android.util.Log
+import com.example.myapplication.Constants
 import com.example.myapplication.base.BaseActivity
-import com.example.myapplication.config.AppConfig
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -34,7 +34,7 @@ class MessengerActivity : BaseActivity() {
     private val mConnection = object : ServiceConnection {
         override fun onServiceConnected(classNane: ComponentName?, service: IBinder?) {
             mService = Messenger(service)
-            val msg = Message.obtain(null, AppConfig.MSG_FROM_CLIENT)
+            val msg = Message.obtain(null, Constants.MSG_FROM_CLIENT)
             val data = Bundle()
             data.putString("msg", "hello, this is client .")
             msg.data = data
@@ -53,8 +53,8 @@ class MessengerActivity : BaseActivity() {
     private class MessengerHandler : Handler() {
         override fun handleMessage(msg: Message) {
             when (msg.what) {
-                AppConfig.MSG_FROM_SERVICE -> {
-                    Log.e(AppConfig.BASE_TAG, msg.data.getString("reply").toString())
+                Constants.MSG_FROM_SERVICE -> {
+                    Log.e(Constants.BASE_TAG, msg.data.getString("reply").toString())
                 }
 
                 else -> super.handleMessage(msg)

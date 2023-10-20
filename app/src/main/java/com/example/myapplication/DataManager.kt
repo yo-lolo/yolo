@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.*
 
 /**
@@ -40,44 +42,70 @@ import kotlinx.coroutines.*
 object DataManager {
 
     lateinit var context: Context
+
     private var appDataBase: AppDataBase? = null
+
     lateinit var userStoreRepository: UserStoreRepository
+
     lateinit var feedbackStoreRepository: FeedbackStoreRepository
+
     lateinit var chatStoreRepository: ChatStoreRepository
+
     lateinit var friendsStoreRepository: FriendsStoreRepository
+
     lateinit var newsStoreRepository: NewsStoreRepository
+
     lateinit var likeStoreRepository: LikeStoreRepository
+
     lateinit var commentStoreRepository: CommentStoreRepository
 
     lateinit var testStoreRepository: TestStoreRepository
 
     val launchScope by lazy {
-        val exceptionHandler = CoroutineExceptionHandler { _, e -> Log.e("yolo", e.toString()) }
+        val exceptionHandler =
+            CoroutineExceptionHandler { _, e -> Log.e(Constants.BASE_TAG, e.toString()) }
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO + exceptionHandler)
         scope
     }
 
     fun init(context: Context) {
         this.context = context
+
         appDataBase = createDb()
+
+        // 配置用户数据库
         userStoreRepository = UserStoreRepository(UserTaskImp(appDataBase!!))
+
         feedbackStoreRepository = FeedbackStoreRepository(FeedbackTaskImp(appDataBase!!))
+
         chatStoreRepository = ChatStoreRepository(ChatTaskImp(appDataBase!!))
+
         friendsStoreRepository = FriendsStoreRepository(FriendTaskImp(appDataBase!!))
+
         newsStoreRepository = NewsStoreRepository(NewsTaskImp(appDataBase!!))
+
         likeStoreRepository = LikeStoreRepository(LikeTaskImp(appDataBase!!))
+
         testStoreRepository = TestStoreRepository(appDataBase!!)
+
         commentStoreRepository = CommentStoreRepository(CommentTaskImp(appDataBase!!))
+
         initSmartRefresh()
 //        initData()
     }
 
+    /**
+     * 构建数据库
+     */
     private fun createDb(): AppDataBase {
         return Room.databaseBuilder(
             context, AppDataBase::class.java, "database-my"
         ).build()
     }
 
+    /**
+     * 初始化刷新
+     */
     private fun initSmartRefresh() {
         // 设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context?, layout: RefreshLayout ->

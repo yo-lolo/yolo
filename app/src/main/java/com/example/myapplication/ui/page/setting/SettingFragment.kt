@@ -62,9 +62,8 @@ class SettingFragment : BaseFragment() {
             })
         }
 
-        binding.appPermission.setOnClickListener {
-            //TODO 权限查看
-            ToastUtils.showShort("权限查看")
+        binding.modifyPassword.setOnClickListener {
+            findNavController().navigate(R.id.goModifyPassFragment)
         }
         binding.msgNotify.setOnCheckedChangeListener { _, isChecked ->
             //TODO 消息提醒
