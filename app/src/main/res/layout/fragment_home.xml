@@ -68,6 +68,12 @@
             android:layout_marginHorizontal="10dp"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/select_browser_pop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="浏览器弹窗"/>
+
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"

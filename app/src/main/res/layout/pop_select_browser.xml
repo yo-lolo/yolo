@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="400dp"
+    android:orientation="vertical">
+
+
+    <com.hjq.shape.layout.ShapeConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="13.33dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="29.67dp"
+        app:shape_radiusInTopLeft="20dp"
+        app:shape_radiusInTopRight="20dp"
+        app:shape_solidColor="@color/white">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择浏览器打开"
+            android:gravity="center"
+            android:textColor="@color/_FF020F2C"
+            android:textSize="14sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/browser_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33.33dp"
+            tools:spanCount="4"
+            tools:itemCount="10"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:listitem="@layout/item_select_browser" />
+    </com.hjq.shape.layout.ShapeConstraintLayout>
+
+</LinearLayout>

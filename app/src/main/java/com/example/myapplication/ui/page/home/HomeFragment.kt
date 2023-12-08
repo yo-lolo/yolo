@@ -1,24 +1,28 @@
 package com.example.myapplication.ui.page.home
 
+import android.content.Intent
 import android.graphics.Outline
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.pops.SelectBrowserPop
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
+import com.example.myapplication.util.createPop
+import com.example.myapplication.util.getBrowserList
+import com.example.myapplication.util.toBrowser
 import com.example.myapplication.vm.HomeViewModel
 
 /**
@@ -109,6 +113,31 @@ class HomeFragment : BaseFragment() {
 
         context?.let { GlideImageLoader().displayImage(it, R.drawable.world, binding.imageTest) }
 
+        binding.selectBrowserPop.setOnClickListener {
+            browserPop()
+        }
+
+    }
+
+    private fun browserPop(){
+        val browserList = requireContext().getBrowserList()
+        val jumpUrl = "http://www.baidu.com"
+
+        if (browserList.size == 1){
+            val uri = Uri.parse(jumpUrl)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            requireContext().startActivity(intent)
+            return
+        }
+        SelectBrowserPop(requireContext(), browserList).apply {
+            this.onSelectBrowser = {
+                if (jumpUrl != null) {
+                    requireContext().toBrowser(it, jumpUrl)
+                }
+            }
+        }.createPop {
+            this.enableDrag(true)
+        }.show()
     }
 
     override fun onResume() {
