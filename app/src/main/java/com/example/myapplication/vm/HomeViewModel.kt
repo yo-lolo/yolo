@@ -34,7 +34,7 @@ class HomeViewModel : BaseViewModel() {
     var newsPostState = MutableLiveData<Boolean>(false)
 
     fun initData() {
-        launchSafe {
+        launchSafe(false) {
             newsStoreRepository.getNews().map { newsInfo ->
                 val user = userStoreRepository.queryUserByNumber(newsInfo.number)
                 val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size

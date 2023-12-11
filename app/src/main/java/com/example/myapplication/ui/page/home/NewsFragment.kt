@@ -44,7 +44,6 @@ class NewsFragment : BaseFragment() {
     ): View {
         binding = FragmentNewsBinding.inflate(layoutInflater)
         initView()
-        viewModel.initData()
         return binding.root
     }
 
@@ -76,5 +75,10 @@ class NewsFragment : BaseFragment() {
         binding.newRefresh.setFooterHeight(0f)
 
         initProgress(viewModel.loadingTaskCount)
+    }
+
+    override fun onResume() {
+        viewModel.initData()
+        super.onResume()
     }
 }

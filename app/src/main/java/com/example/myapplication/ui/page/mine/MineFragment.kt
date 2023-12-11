@@ -86,4 +86,5 @@ class MineFragment : BaseFragment() {
         super.onResume()
         viewModel.initData()
     }
+
 }
