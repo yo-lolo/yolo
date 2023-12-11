@@ -56,7 +56,7 @@ class AdminUserFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.initData()
+        viewModel.initUsersData()
     }
 
 }

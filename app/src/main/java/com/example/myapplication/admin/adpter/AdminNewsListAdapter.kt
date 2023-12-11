@@ -1,12 +1,15 @@
 package com.example.myapplication.admin.adpter
 
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.AdiminLayoutNewsListItemBinding
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
+import com.example.myapplication.util.unClick
+import com.example.myapplication.util.visibleOrGone
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -24,13 +27,20 @@ class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListV
 
     var list: List<NewsInfo> = listOf()
     var showContentListener: (NewsInfo) -> Unit = {}
+    var auditPassListener: (NewsInfo) -> Unit = {}
+    var auditFailListener: (NewsInfo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
         return NewsListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: NewsListViewHolder, position: Int) {
-        holder.setData(position, list[position], showContentListener)
+        holder.setData(
+            list[position],
+            showContentListener,
+            auditPassListener,
+            auditFailListener
+        )
     }
 
     override fun getItemCount(): Int {
@@ -46,7 +56,14 @@ class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListV
         )
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(position: Int, news: NewsInfo, showContentListener: (NewsInfo) -> Unit) {
+        fun setData(
+            news: NewsInfo,
+            showContentListener: (NewsInfo) -> Unit,
+            auditPassListener: (NewsInfo) -> Unit,
+            auditFailListener: (NewsInfo) -> Unit
+        ) {
+            binding.auditPass.unClick(news.type != 0)
+            binding.auditFail.unClick(news.type != 0)
             binding.newsAuthor.text = "账户：${news.number.toString()}"
             binding.newsTag.text = "标签：${news.tag}"
             binding.newsContent.text = "内容：${news.content}"
@@ -54,8 +71,17 @@ class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListV
                 "发布时间：${TimeUtil.millis2String(news.time, TimeUtil.dateFormatYMD_CN)}"
             binding.newsTitle.text = "标题：${news.title}"
             GlideImageLoader().displayLocalFile(news.image, binding.newsImage)
-            binding.newsItem.setOnClickListener {
+            binding.showDetail.setOnClickListener {
                 showContentListener.invoke(news)
+            }
+            binding.newsItem.setOnClickListener {
+                binding.auditLayout.visibleOrGone(!binding.auditLayout.isVisible)
+            }
+            binding.auditPass.setOnClickListener {
+                auditPassListener.invoke(news)
+            }
+            binding.auditFail.setOnClickListener {
+                auditFailListener.invoke(news)
             }
         }
     }

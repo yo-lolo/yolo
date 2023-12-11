@@ -72,4 +72,11 @@ class NewsStoreRepository(private val newsTaskImp: NewsTaskImp) {
         return@withContext newsTaskImp.getNewsById(id)
     }
 
+    /**
+     * 更新审核状态
+     */
+    suspend fun updateNewsAuditType(type: Int, id: Long) = withContext(Dispatchers.IO) {
+        return@withContext newsTaskImp.updateNewsAuditType(type, id)
+    }
+
 }

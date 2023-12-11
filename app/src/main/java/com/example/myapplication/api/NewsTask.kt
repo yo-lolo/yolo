@@ -39,5 +39,13 @@ interface NewsTask {
      */
     fun getNewsByNumber(number: Long): List<NewsInfo>
 
+    /**
+     * 获取该账号的新闻
+     */
     fun getNewsById(id: Long): NewsInfo
+
+    /**
+     * 更新审核状态
+     */
+    fun updateNewsAuditType(type: Int,id: Long)
 }

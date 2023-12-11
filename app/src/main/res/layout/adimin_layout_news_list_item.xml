@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:background="@drawable/todo_list_item_bg">
+    android:background="@drawable/todo_list_item_bg"
+    android:orientation="vertical">
 
-    <com.example.myapplication.view.ScrollerLinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:paddingHorizontal="10dp"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/news_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/show_detail"
             android:orientation="vertical"
-            android:paddingHorizontal="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="5dp">
 
@@ -26,10 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textStyle="bold"
                 android:text="一定会执行的WorkManager！"
                 android:textColor="@color/color_3c3c3c"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -91,34 +92,52 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="240dp"
+        <TextView
+            android:id="@+id/show_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:drawableRight="@mipmap/right_expand"
+            android:drawablePadding="6dp"
+            android:paddingLeft="10dp"
+            android:text="查\n看\n详\n情"
+            android:textSize="14dp" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/audit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/audit_pass"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:background="@color/color_theme"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="审核通过"
+            android:textColor="@color/color_FFFFFF" />
 
-            <Button
-                android:id="@+id/unread_item"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_theme"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="审核\n通过"
-                android:textColor="@color/color_FFFFFF" />
-
-            <Button
-                android:id="@+id/delete_item"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_red"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="审核\n失败"
-                android:textColor="@color/color_FFFFFF" />
-        </LinearLayout>
-    </com.example.myapplication.view.ScrollerLinearLayout>
+        <TextView
+            android:id="@+id/audit_fail"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_red"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="审核失败"
+            android:textColor="@color/color_FFFFFF" />
+    </LinearLayout>
 
 
 </LinearLayout>

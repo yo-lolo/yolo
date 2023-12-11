@@ -39,7 +39,7 @@ class AdiminNewsFragment : BaseFragment() {
     private fun initView(view: LinearLayout) {
 
         binding.include.headLayout.apply {
-            setTitle("新闻")
+            setTitle("文章")
             setHeadLayoutColor()
             setBackListener { findNavController().popBackStack() }
         }
@@ -54,8 +54,17 @@ class AdiminNewsFragment : BaseFragment() {
             newsListAdapter.notifyDataSetChanged()
         }
 
-        newsListAdapter.showContentListener = {
-            AdminNewsDetailFragment.goAdminNewsDetailFragment(it, findNavController())
+
+        newsListAdapter.apply {
+            showContentListener = {
+                AdminNewsDetailFragment.goAdminNewsDetailFragment(it, findNavController())
+            }
+            auditPassListener = {newInfo ->
+                viewModel.updateNewsAuditType(1, newInfo)
+            }
+            auditFailListener = {newInfo ->
+                viewModel.updateNewsAuditType(-1, newInfo)
+            }
         }
 
     }

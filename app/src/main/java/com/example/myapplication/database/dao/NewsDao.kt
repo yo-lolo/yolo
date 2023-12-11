@@ -35,4 +35,6 @@ interface NewsDao {
     @Query("select * from NewsInfo where id =:id")
     fun getNewsById(id: Long): NewsInfo
 
+    @Query("update NewsInfo set type = :type where id = :id")
+    fun updateNewsAuditType(type: Int, id: Long)
 }

@@ -42,4 +42,8 @@ class NewsTaskImp(
         return newsDao.getNewsById(id)
     }
 
+    override fun updateNewsAuditType(type: Int, id: Long) {
+        return newsDao.updateNewsAuditType(type, id)
+    }
+
 }

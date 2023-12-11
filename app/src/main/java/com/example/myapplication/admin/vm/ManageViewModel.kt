@@ -2,6 +2,7 @@ package com.example.myapplication.admin.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.FeedbackInfo
@@ -30,21 +31,48 @@ class ManageViewModel : BaseViewModel() {
     private val newsStoreRepository = DataManager.newsStoreRepository
     private val feedbackStoreRepository = DataManager.feedbackStoreRepository
 
-    fun initData() {
+    /**
+     * 初始化用户数据
+     */
+    fun initUsersData() {
         viewModelScope.launch {
             userList.value = userStoreRepository.getUsers()
         }
     }
 
-    fun initNews(){
+    /**
+     * 初始化文章数据
+     */
+    fun initNews() {
         viewModelScope.launch {
             newsList.value = newsStoreRepository.getNews()
         }
     }
 
+    /**
+     * 初始化反馈数据
+     */
     fun initFeedbacks() {
         viewModelScope.launch {
             feedbacks.value = feedbackStoreRepository.getAllFeedbacks()
+        }
+    }
+
+    /**
+     * 文章审核
+     */
+    fun updateNewsAuditType(type: Int, newsInfo: NewsInfo) {
+        viewModelScope.launch {
+            launchSafe {
+                kotlin.runCatching {
+                    newsStoreRepository.updateNewsAuditType(type, newsInfo.id)
+                }.onSuccess {
+                    initNews()
+                }.onFailure {
+                    ToastUtils.showShort("审核失败")
+                }
+            }
+
         }
     }
 
