@@ -6,6 +6,7 @@
     android:layout_marginTop="8dp"
     android:background="@drawable/todo_list_item_bg"
     android:orientation="horizontal"
+    android:paddingHorizontal="10dp"
     android:gravity="center_vertical">
 
     <CheckBox
@@ -19,8 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp">
+        android:paddingVertical="10dp">
 
         <TextView
             android:id="@+id/comments_user"
@@ -29,15 +29,15 @@
             android:singleLine="true"
             android:text="用户名"
             android:textColor="@color/color_3c3c3c"
-            android:textSize="14dp"
-            android:textStyle="bold" />
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/comments_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="2dp"
             android:text="评论内容"
-            android:textSize="11dp" />
+            android:textSize="12dp" />
 
     </LinearLayout>
 

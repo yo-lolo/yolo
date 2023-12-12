@@ -59,11 +59,14 @@ class AdiminNewsFragment : BaseFragment() {
             showContentListener = {
                 AdminNewsDetailFragment.goAdminNewsDetailFragment(it, findNavController())
             }
-            auditPassListener = {newInfo ->
+            auditPassListener = { newInfo ->
                 viewModel.updateNewsAuditType(1, newInfo)
             }
-            auditFailListener = {newInfo ->
+            auditFailListener = { newInfo ->
                 viewModel.updateNewsAuditType(-1, newInfo)
+            }
+            auditUndoListener = { newInfo ->
+                viewModel.updateNewsAuditType(0, newInfo)
             }
         }
 

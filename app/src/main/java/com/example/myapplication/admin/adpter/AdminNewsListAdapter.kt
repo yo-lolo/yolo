@@ -3,6 +3,7 @@ package com.example.myapplication.admin.adpter
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.databinding.AdiminLayoutNewsListItemBinding
 import com.example.myapplication.util.GlideImageLoader
@@ -29,6 +30,7 @@ class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListV
     var showContentListener: (NewsInfo) -> Unit = {}
     var auditPassListener: (NewsInfo) -> Unit = {}
     var auditFailListener: (NewsInfo) -> Unit = {}
+    var auditUndoListener: (NewsInfo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
         return NewsListViewHolder(parent)
@@ -39,7 +41,8 @@ class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListV
             list[position],
             showContentListener,
             auditPassListener,
-            auditFailListener
+            auditFailListener,
+            auditUndoListener
         )
     }
 
@@ -60,10 +63,14 @@ class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListV
             news: NewsInfo,
             showContentListener: (NewsInfo) -> Unit,
             auditPassListener: (NewsInfo) -> Unit,
-            auditFailListener: (NewsInfo) -> Unit
+            auditFailListener: (NewsInfo) -> Unit,
+            auditUndoListener: (NewsInfo) -> Unit
         ) {
+            binding.auditImage.setImageResource(getImageResource(news))
+            binding.alphaSpace.alpha = if (news.type != 0) 0.5f else 1f
             binding.auditPass.unClick(news.type != 0)
             binding.auditFail.unClick(news.type != 0)
+            binding.auditUndo.unClick(news.type == 0)
             binding.newsAuthor.text = "账户：${news.number.toString()}"
             binding.newsTag.text = "标签：${news.tag}"
             binding.newsContent.text = "内容：${news.content}"
@@ -82,6 +89,17 @@ class AdminNewsListAdapter : RecyclerView.Adapter<AdminNewsListAdapter.NewsListV
             }
             binding.auditFail.setOnClickListener {
                 auditFailListener.invoke(news)
+            }
+            binding.auditUndo.setOnClickListener {
+                auditUndoListener.invoke(news)
+            }
+        }
+
+        private fun getImageResource(news: NewsInfo): Int {
+            return when (news.type) {
+                0 -> R.mipmap.audit_undo_icon
+                1 -> R.mipmap.audit_pass_icon
+                else -> R.mipmap.audit_fail_icon
             }
         }
     }

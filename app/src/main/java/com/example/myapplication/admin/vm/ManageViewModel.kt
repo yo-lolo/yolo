@@ -132,6 +132,9 @@ class ManageViewModel : BaseViewModel() {
     }
 
 
+    /**
+     * 选中状态改变
+     */
     fun onCheckChange() {
         launch {
             //计算是否全部选中

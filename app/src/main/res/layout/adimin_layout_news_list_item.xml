@@ -13,97 +13,110 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="10dp">
 
-        <LinearLayout
-            android:id="@+id/news_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/show_detail"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp">
+        <RelativeLayout
+            android:id="@+id/alpha_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/news_title"
+            <LinearLayout
+                android:id="@+id/news_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="一定会执行的WorkManager！"
-                android:textColor="@color/color_3c3c3c"
-                android:textSize="14dp"
-                android:textStyle="bold" />
+                android:layout_toStartOf="@+id/show_detail"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/linear_1"
+                <TextView
+                    android:id="@+id/news_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
-                    android:layout_toStartOf="@+id/news_image"
-                    android:orientation="vertical">
+                    android:singleLine="true"
+                    android:text="一定会执行的WorkManager！"
+                    android:textColor="@color/color_3c3c3c"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/news_author"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="小鱼爱编程"
-                        android:textSize="11dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/news_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2022年10月21日"
-                        android:textSize="11dp" />
-
-                    <TextView
-                        android:id="@+id/news_content"
+                    <LinearLayout
+                        android:id="@+id/linear_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:text="小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程"
-                        android:textSize="11dp" />
-                </LinearLayout>
+                        android:layout_marginEnd="3dp"
+                        android:layout_toStartOf="@+id/news_image"
+                        android:orientation="vertical">
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/news_image"
-                    android:layout_width="65dp"
-                    android:layout_height="46dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center_vertical"
-                    android:maxWidth="70dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/touxiang"
-                    app:riv_corner_radius="3dp" />
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/news_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="小鱼爱编程"
+                            android:textSize="11dp" />
+
+                        <TextView
+                            android:id="@+id/news_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2022年10月21日"
+                            android:textSize="11dp" />
+
+                        <TextView
+                            android:id="@+id/news_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:text="小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程小鱼爱编程"
+                            android:textSize="11dp" />
+                    </LinearLayout>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/news_image"
+                        android:layout_width="65dp"
+                        android:layout_height="46dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:maxWidth="70dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/touxiang"
+                        app:riv_corner_radius="3dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/news_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="标签"
+                    android:textSize="11dp" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/news_tag"
+                android:id="@+id/show_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="标签"
-                android:textSize="11dp" />
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:drawableRight="@mipmap/right_expand"
+                android:drawablePadding="6dp"
+                android:paddingLeft="10dp"
+                android:text="查\n看\n详\n情"
+                android:textSize="14dp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/show_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+        <ImageView
+            android:id="@+id/audit_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerInParent="true"
-            android:drawableRight="@mipmap/right_expand"
-            android:drawablePadding="6dp"
-            android:paddingLeft="10dp"
-            android:text="查\n看\n详\n情"
-            android:textSize="14dp" />
-
+            android:background="@mipmap/audit_undo_icon" />
     </RelativeLayout>
 
 
@@ -111,6 +124,7 @@
         android:id="@+id/audit_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <TextView
@@ -118,24 +132,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/color_theme"
             android:clickable="true"
             android:gravity="center"
             android:paddingVertical="10dp"
             android:text="审核通过"
-            android:textColor="@color/color_FFFFFF" />
+            android:textColor="@color/color_theme" />
 
         <TextView
             android:id="@+id/audit_fail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/color_red"
             android:clickable="true"
             android:gravity="center"
             android:paddingVertical="10dp"
             android:text="审核失败"
-            android:textColor="@color/color_FFFFFF" />
+            android:textColor="@color/color_red" />
+
+        <TextView
+            android:id="@+id/audit_undo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="撤销审核"
+            android:textColor="@color/color_8a8a8a" />
     </LinearLayout>
 
 

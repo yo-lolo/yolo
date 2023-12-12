@@ -64,8 +64,8 @@ class AdminCommentsAdapter : RecyclerView.Adapter<AdminCommentsAdapter.CommentsV
                 commentInfo.checked = isChecked
                 checkedChangeListener.invoke()
             }
-            binding.commentsUser.text = commentInfo.number.toString()
-            binding.commentsContent.text = commentInfo.content
+            binding.commentsUser.text = "用户名："+commentInfo.number.toString()
+            binding.commentsContent.text = "评论内容："+commentInfo.content
 
         }
     }
