@@ -14,9 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.FragmentLoginSettingBinding
 import com.example.myapplication.databinding.FragmentSettingBinding
 import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.unClick
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -51,6 +53,16 @@ class LoginSettingFragment : BaseFragment() {
             setBackListener {
                 findNavController().popBackStack()
             }
+        }
+
+        binding.autoLogin.isChecked = MMKVManager.isAutoLogin
+        binding.saveLoginMess.isChecked = MMKVManager.isSavePass
+
+        binding.autoLogin.setOnCheckedChangeListener { _, isChecked ->
+            MMKVManager.isAutoLogin = isChecked
+        }
+        binding.saveLoginMess.setOnCheckedChangeListener { _, isChecked ->
+            MMKVManager.isSavePass = isChecked
         }
 
     }

@@ -7,6 +7,7 @@ import androidx.room.Room
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.imp.UserTaskImp
 import com.example.myapplication.repos.UserStoreRepository
+import com.tencent.mmkv.MMKV
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -26,6 +27,7 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         init(this)
+        MMKV.initialize(this)
     }
 
     fun init(context: Context) {
@@ -33,3 +35,5 @@ class MainApplication : Application() {
     }
 
 }
+
+fun Any.getTag() = Constants.BASE_TAG + this.javaClass.simpleName

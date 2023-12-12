@@ -18,6 +18,11 @@
         android:label="DetailFragment" />
 
     <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.myapplication.SplashFragment"
+        android:label="SplashFragment" />
+
+    <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.myapplication.ui.page.search.SearchFragment"
         android:label="SearchFragment" />
@@ -168,6 +173,9 @@
     <action
         android:id="@+id/goNewsDetailFragment"
         app:destination="@id/newsDetailFragment" />
+    <action
+        android:id="@+id/goSplashFragment"
+        app:destination="@id/splashFragment" />
     <action
         android:id="@+id/goChatFragment"
         app:destination="@id/chatFragment" />

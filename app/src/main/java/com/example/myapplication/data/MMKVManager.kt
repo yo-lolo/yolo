@@ -47,16 +47,16 @@ object MMKVManager {
     /**
      * 保存用户的用户名、密码
      */
-    fun saveUserNumAndPass(number: Long, pass: String) {
-        mmkv.putLong(Constants.USER_NUM, number)
+    fun saveUserNumAndPass(number: String, pass: String) {
+        mmkv.putString(Constants.USER_NUM, number)
         mmkv.putString(Constants.USER_PASSWORD, pass)
     }
 
     /**
      * 获取用户的用户名、密码
      */
-    fun getUserNumAndPass(): Pair<Long, String> {
-        val num = mmkv.getLong(Constants.USER_NUM, 0)
+    fun getUserNumAndPass(): Pair<String, String> {
+        val num = mmkv.getString(Constants.USER_NUM, "") ?: ""
         val pass = mmkv.getString(Constants.USER_PASSWORD, "") ?: ""
         return num to pass
     }

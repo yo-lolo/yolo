@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
+import com.example.myapplication.MainActivity.Companion.TAG
 import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.data.MMKVManager
 import kotlinx.coroutines.delay
 
 /**
@@ -27,6 +29,9 @@ class LoginViewModel : BaseViewModel() {
 
     var loginType = MutableLiveData(false)
     var adminLoginType = MutableLiveData(false)
+    val isAutoLoginLiveData = MutableLiveData(MMKVManager.isAutoLogin)
+
+    val isSaveUserPasswordLiveData = MutableLiveData(MMKVManager.isSavePass)
 
     /**
      * 检查用户登录信息
@@ -41,6 +46,7 @@ class LoginViewModel : BaseViewModel() {
                     val user = userStoreRepository.queryUserByNumber(phoneNumber)
                     if (user != null) {
                         if (pass.isNotEmpty() && pass == user.pass) {
+                            saveUserNumAndPass(number, pass)
                             ToastUtils.showShort("登陆成功,进入首页")
                             delay(1000)
                             loginType.value = true
@@ -54,7 +60,7 @@ class LoginViewModel : BaseViewModel() {
                 }.onFailure {
                     Log.e("yolo", it.toString())
                 }
-            }else{
+            } else {
                 //TODO 测试使用
                 loginType.value = true
                 ToastUtils.showShort("用户名密码不能为空")
@@ -82,4 +88,32 @@ class LoginViewModel : BaseViewModel() {
             }
         }
     }
+
+    /**
+     * 保存用户名和密码
+     */
+    fun saveUserNumAndPass(number: String, password: String) {
+        Log.e(TAG, "saveUserNameAndPassword >>> 保存用户名和密码 用户名: $number, 密码: $password")
+        MMKVManager.saveUserNumAndPass(number, password)
+    }
+
+    /**
+     * 获取保存的用户名和密码
+     */
+    fun getUserNumAndPass() = MMKVManager.getUserNumAndPass()
+
+    /**
+     * 获取当前自动登陆状态
+     */
+    fun getAutoLoginType() = MMKVManager.isAutoLogin
+
+    /**
+     * 自动登录
+     */
+    fun doAutoLogin() {
+        val (num, pass) = getUserNumAndPass()
+        checkLogin(num, pass)
+    }
+
+
 }

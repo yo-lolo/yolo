@@ -1,6 +1,8 @@
 package com.example.myapplication.util
 
+import android.text.Editable
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 
 /**
@@ -60,7 +62,7 @@ fun View.visibleOrGone(show: Boolean) {
     if (show) visible() else gone()
 }
 
-fun TextView.unClick(disable:Boolean) {
+fun TextView.unClick(disable: Boolean) {
     if (disable) {
         alpha = 0.3f
         isEnabled = false
@@ -68,5 +70,9 @@ fun TextView.unClick(disable:Boolean) {
         alpha = 1.0f
         isEnabled = true
     }
+}
+
+fun EditText.setText(str: String) {
+    this.text = Editable.Factory.getInstance().newEditable(str)
 }
 

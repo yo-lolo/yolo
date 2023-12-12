@@ -11,6 +11,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLoginBinding
 import com.example.myapplication.admin.ManageActivity
+import com.example.myapplication.util.setText
 import com.example.myapplication.vm.LoginViewModel
 
 /**
@@ -38,6 +39,7 @@ class LoginFragment : BaseFragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
+        initAutoLogin()
         return view
     }
 
@@ -79,6 +81,23 @@ class LoginFragment : BaseFragment() {
         val number = binding.numberEdit.text.toString().trim()
         val pass = binding.passEdit.text.toString().trim()
         return number to pass
+    }
+
+    /**
+     * 初始化自动登录
+     */
+    private fun initAutoLogin() {
+        viewModel.isAutoLoginLiveData.observe(viewLifecycleOwner) {
+            val isSplash2Login = false
+            if (it && isSplash2Login) {
+                viewModel.doAutoLogin()
+            }
+        }
+        viewModel.isSaveUserPasswordLiveData.observe(viewLifecycleOwner) {
+            val (num, pass) = if (it) viewModel.getUserNumAndPass() else "" to ""
+            binding.numberEdit.setText(num)
+            binding.passEdit.setText(pass)
+        }
     }
 
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.myapplication.broadcastReceiver.EmergencyUnlockReceiver
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
@@ -91,6 +92,8 @@ object DataManager {
         commentStoreRepository = CommentStoreRepository(CommentTaskImp(appDataBase!!))
 
         initSmartRefresh()
+
+        MMKVManager
 //        initData()
     }
 

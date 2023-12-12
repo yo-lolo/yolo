@@ -33,6 +33,7 @@
                 android:textStyle="bold" />
 
             <Switch
+                android:id="@+id/auto_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -66,6 +67,7 @@
                 android:textStyle="bold" />
 
             <Switch
+                android:id="@+id/save_login_mess"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -84,6 +86,7 @@
             android:background="@color/color_e7e7e7" />
 
         <RelativeLayout
+            android:id="@+id/log_manage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="15dp">

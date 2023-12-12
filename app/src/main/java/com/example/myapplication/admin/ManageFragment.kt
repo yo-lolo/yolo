@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.admin.adpter.FilesAdapter
-import com.example.myapplication.databinding.FragmentManagerTestBinding
+import com.example.myapplication.databinding.FragmentManagerBinding
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -24,7 +24,7 @@ import com.example.myapplication.databinding.FragmentManagerTestBinding
  */
 class ManageFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentManagerTestBinding
+    private lateinit var binding: FragmentManagerBinding
     private var filesAdapter = FilesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class ManageFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentManagerTestBinding.inflate(layoutInflater)
+        binding = FragmentManagerBinding.inflate(layoutInflater)
         val view = binding.root
         initView(view)
         return view

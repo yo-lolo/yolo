@@ -68,6 +68,7 @@ class ManageViewModel : BaseViewModel() {
                     newsStoreRepository.updateNewsAuditType(type, newsInfo.id)
                 }.onSuccess {
                     initNews()
+                    ToastUtils.showShort("审核成功")
                 }.onFailure {
                     ToastUtils.showShort("审核失败")
                 }

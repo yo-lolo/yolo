@@ -4,7 +4,6 @@ import android.Manifest
 import android.animation.ValueAnimator
 import android.content.Context
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -12,6 +11,7 @@ import android.widget.Toast
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.example.myapplication.base.BaseActivity
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.MarketActivity
 
@@ -26,11 +26,11 @@ class MainActivity : BaseActivity() {
         initView()
         toMyApplicationPage()
 
-        val uri = Uri.parse("content://com.example.myapplication.provider.BookProvider")
-        contentResolver.query(uri, null, null, null, null, null)
+//        val uri = Uri.parse("content://com.example.myapplication.provider.BookProvider")
+//        contentResolver.query(uri, null, null, null, null, null)
     }
 
-    private fun initView(){
+    private fun initView() {
         //欢迎语动画设置
         ValueAnimator.ofFloat(0.0F, 1.0F).also { animator ->
             animator.repeatMode = ValueAnimator.RESTART
@@ -41,6 +41,9 @@ class MainActivity : BaseActivity() {
         }.start()
     }
 
+    /**
+     * 根据自动登录标识跳转到指定页面
+     */
     private fun toMyApplicationPage() {
         checkPermissions(
             arrayOf(
@@ -52,18 +55,24 @@ class MainActivity : BaseActivity() {
             )
         ) {
             /**
-             * 权限check完成后 执行如下： 1.通过自动登录标识 判断是否要进入登录界面
+             * TODO:权限check完成后 执行如下： 1.通过自动登录标识 判断是否要进入登录界面
              */
-            ActivityUtils.startActivity(MarketActivity::class.java)
+            val bundle = Bundle().apply {
+                putBoolean("autoLogin", MMKVManager.isAutoLogin)
+            }
+            ActivityUtils.startActivity(MarketActivity::class.java, bundle)
             finish()
         }
     }
 
+    /**
+     * 检查权限
+     */
     private fun checkPermissions(
-        permisssions: Array<String>,
+        permissions: Array<String>,
         listener: () -> Unit
     ) {
-        PermissionUtils.permission(*permisssions)
+        PermissionUtils.permission(*permissions)
             .callback(object : PermissionUtils.FullCallback {
                 override fun onGranted(granted: MutableList<String>) {
                     listener.invoke()
@@ -96,10 +105,9 @@ class MainActivity : BaseActivity() {
             })
             .request()
 
-
     }
 
     companion object {
-        val TAG: String = MainActivity::class.java.simpleName
+        val TAG: String = getTag()
     }
 }
