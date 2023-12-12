@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.R
+import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.MineEditLayoutBinding
 import com.example.myapplication.ui.page.mine.MineFragment
@@ -105,7 +106,6 @@ class PromptUseCase() {
     fun promptBigImage(
         path: String
     ) {
-
         val context = ActivityUtils.getTopActivity()
         val customView = context.layoutInflater().inflate(R.layout.big_image_layout, null, false)
 
@@ -122,6 +122,19 @@ class PromptUseCase() {
         alertDialog.show()
         alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         alertDialog.window!!.decorView.setPadding(0, 30, 0, 50)
+    }
+
+    /**
+     * 审核对话框
+     */
+    fun batchAuditPrompt(comments: List<Long>, block: () -> Unit) {
+        if (comments.isEmpty()) {
+            ToastUtils.showShort("至少勾选一个评论")
+            return
+        }
+        prompt("确定审核通过${comments.size}个评论？"){
+            block.invoke()
+        }
     }
 
 }

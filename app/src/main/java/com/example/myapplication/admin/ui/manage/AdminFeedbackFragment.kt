@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.admin.adpter.AdminFeedbacksAdapter
 import com.example.myapplication.admin.vm.ManageViewModel
-import com.example.myapplication.databinding.FragmentTwoBinding
+import com.example.myapplication.databinding.FragmentManageFeedbacksBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.useCase.PromptUseCase
 
 
 class AdminFeedbackFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentTwoBinding
+    private lateinit var binding: FragmentManageFeedbacksBinding
     private val feedbacksAdapter = AdminFeedbacksAdapter()
     private val viewModel by viewModels<ManageViewModel>()
 
@@ -31,7 +31,7 @@ class AdminFeedbackFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTwoBinding.inflate(layoutInflater)
+        binding = FragmentManageFeedbacksBinding.inflate(layoutInflater)
         initView()
         return binding.root
     }

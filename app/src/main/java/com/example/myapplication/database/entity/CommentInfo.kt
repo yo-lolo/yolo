@@ -22,11 +22,13 @@ data class CommentInfo(
     val content: String,
     val time: Long,
     var level: Int = 1,
+    var checked: Boolean = false, //全选字段
     val replyNumber: Long? = null,
     val replyId: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
+    var type : Int = 0
 
     //replyId 为回复的id 默认为空 当level为2时需要传值
     //level有两级 为1时回复的是当前newsId的作者 为2 回复的是评论里面的用户

@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.admin.adpter.AdminNewsListAdapter
 import com.example.myapplication.admin.vm.ManageViewModel
-import com.example.myapplication.databinding.FragmentThreeBinding
+import com.example.myapplication.databinding.FragmentManageNewsBinding
 
 
 class AdiminNewsFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentThreeBinding
+    private lateinit var binding: FragmentManageNewsBinding
     private val newsListAdapter = AdminNewsListAdapter()
     private val viewModel by viewModels<ManageViewModel>()
 
@@ -29,7 +29,7 @@ class AdiminNewsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentThreeBinding.inflate(layoutInflater)
+        binding = FragmentManageNewsBinding.inflate(layoutInflater)
         val view = binding.root
         initView(view)
         viewModel.initNews()

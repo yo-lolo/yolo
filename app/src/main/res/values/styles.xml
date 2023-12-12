@@ -45,7 +45,7 @@
     </style>
 
 
-    <style name="batch_unstall_bottom_btn">
+    <style name="batch_audit_bottom_btn">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>

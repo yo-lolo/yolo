@@ -5,9 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.FeedbackInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
+import com.example.myapplication.useCase.PromptUseCase
 import kotlinx.coroutines.launch
 
 /**
@@ -26,10 +28,15 @@ class ManageViewModel : BaseViewModel() {
 
     var userList = MutableLiveData<List<User>>()
     var feedbacks = MutableLiveData<List<FeedbackInfo>>()
+    var comments = MutableLiveData<List<CommentInfo>>()
     var newsList = MutableLiveData<List<NewsInfo>>()
+
+    //是否已经全部勾选
+    val isAllCheck = MutableLiveData(false)
     private val userStoreRepository = DataManager.userStoreRepository
     private val newsStoreRepository = DataManager.newsStoreRepository
     private val feedbackStoreRepository = DataManager.feedbackStoreRepository
+    private val commentStoreRepository = DataManager.commentStoreRepository
 
     /**
      * 初始化用户数据
@@ -59,6 +66,16 @@ class ManageViewModel : BaseViewModel() {
     }
 
     /**
+     * 初始化评论
+     */
+    fun initComments() {
+        viewModelScope.launch {
+            val data = commentStoreRepository.getAllComment().filter { it.type == 0 }
+            comments.value = data
+        }
+    }
+
+    /**
      * 文章审核
      */
     fun updateNewsAuditType(type: Int, newsInfo: NewsInfo) {
@@ -75,6 +92,60 @@ class ManageViewModel : BaseViewModel() {
             }
 
         }
+    }
+
+    /**
+     * 全部选择逻辑
+     */
+    fun onCheckAll() {
+        launch {
+            val _isAllCheck = isAllCheck.value
+            _isAllCheck!!
+
+            comments.value?.forEach {
+                it.checked = !_isAllCheck
+            }
+
+            //反转是否全选状态
+            isAllCheck.value = !_isAllCheck
+            //触发监听刷新数据
+            comments.value = comments.value
+        }
+    }
+
+
+    /**
+     * 批量审核评论
+     */
+    fun onBatchAuditComments() {
+        val comments = getCheckedData()
+        val commentsId = comments.map { it.id }
+
+        PromptUseCase().batchAuditPrompt(commentsId) {
+            launchSafe {
+                comments.forEach { commentInfo ->
+                    commentStoreRepository.updateCommentType(1, commentInfo.id)
+                }
+                initComments()
+            }
+        }
+    }
+
+
+    fun onCheckChange() {
+        launch {
+            //计算是否全部选中
+            val _isAllCheck = comments.value?.none { !it.checked }
+            if (_isAllCheck != isAllCheck.value) {
+                isAllCheck.value = _isAllCheck
+            }
+        }
+
+    }
+
+
+    fun getCheckedData(): List<CommentInfo> {
+        return comments.value?.filter { it.checked } ?: listOf()
     }
 
 

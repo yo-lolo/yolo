@@ -52,4 +52,9 @@ class CommentTaskImp(
     override fun getCommentsByReplyId(replyId: Long): List<CommentInfo> {
         return commentDao.getCommentsByReplyId(replyId)
     }
+
+    override fun updateCommentType(type: Int, id: Long) {
+        return commentDao.updateCommentType(type, id)
+    }
+
 }

@@ -58,4 +58,10 @@ interface CommentTask {
      * 找回复的所有评论
      */
     fun getCommentsByReplyId(replyId: Long): List<CommentInfo>
+
+    /**
+     * 更新评论审核状态
+     */
+    fun updateCommentType(type: Int, id: Long)
+
 }

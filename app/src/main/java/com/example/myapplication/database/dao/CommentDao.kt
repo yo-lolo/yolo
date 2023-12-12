@@ -45,4 +45,7 @@ interface CommentDao {
     @Query("select * from CommentInfo where replyId = :replyId")
     fun getCommentsByReplyId(replyId: Long): List<CommentInfo>
 
+    @Query("update CommentInfo set type = :type where id = :id")
+    fun updateCommentType(type: Int, id: Long)
+
 }

@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.admin.adpter.AdminUserListAdapter
 import com.example.myapplication.admin.vm.ManageViewModel
-import com.example.myapplication.databinding.FragmentOneBinding
+import com.example.myapplication.databinding.FragmentManageUserBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 
 
 class AdminUserFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentOneBinding
+    private lateinit var binding: FragmentManageUserBinding
     private val userListAdapter = AdminUserListAdapter()
     private val viewModel by viewModels<ManageViewModel>()
 
@@ -29,7 +29,7 @@ class AdminUserFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOneBinding.inflate(layoutInflater)
+        binding = FragmentManageUserBinding.inflate(layoutInflater)
         val view = binding.root
         initView(view)
         return view

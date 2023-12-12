@@ -31,13 +31,13 @@ class CommentStoreRepository(private val commentTask: CommentTask) {
         withContext(Dispatchers.IO) {
             return@withContext commentTask.insertComment(
                 CommentInfo(
-                    newsId,
-                    AppConfig.phoneNumber,
-                    content,
-                    TimeUtil.getCurrentMill(),
-                    level,
-                    replyNumber,
-                    replyId
+                    newsId = newsId,
+                    number = AppConfig.phoneNumber,
+                    content = content,
+                    time = TimeUtil.getCurrentMill(),
+                    level = level,
+                    replyNumber = replyNumber,
+                    replyId =replyId
                 )
             )
         }
@@ -69,5 +69,9 @@ class CommentStoreRepository(private val commentTask: CommentTask) {
 
     suspend fun getCommentsById(id: Long): CommentInfo = withContext(Dispatchers.IO) {
         return@withContext commentTask.getCommentsById(id)
+    }
+
+    suspend fun updateCommentType(type: Int, id: Long) = withContext(Dispatchers.IO) {
+        return@withContext commentTask.updateCommentType(type, id)
     }
 }

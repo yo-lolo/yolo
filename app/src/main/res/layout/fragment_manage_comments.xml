@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/comm_head_layout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/manage_comments"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@android:color/white"
+        android:elevation="5dp">
+
+        <View
+            android:id="@+id/center"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/comments_batch_audit"
+            style="@style/batch_audit_bottom_btn"
+            android:layout_toLeftOf="@id/center"
+            android:layout_width="match_parent"
+            android:drawableTop="@mipmap/audit"
+            android:text="批量审核" />
+
+        <TextView
+            android:id="@+id/comments_select_all"
+            style="@style/batch_audit_bottom_btn"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@id/center"
+            android:drawableTop="@mipmap/icon_select_all"
+            android:text="全选" />
+
+    </RelativeLayout>
+
+</LinearLayout>
