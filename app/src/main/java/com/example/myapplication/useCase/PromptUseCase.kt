@@ -1,23 +1,17 @@
 package com.example.myapplication.useCase
 
 import android.app.AlertDialog
-import android.text.Editable
-import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.R
-import com.example.myapplication.database.entity.CommentInfo
-import com.example.myapplication.database.entity.User
-import com.example.myapplication.databinding.MineEditLayoutBinding
-import com.example.myapplication.ui.page.mine.MineFragment
 import com.example.myapplication.util.GlideImageLoader
-import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.layoutInflater
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 
 /**
@@ -25,7 +19,7 @@ import com.example.myapplication.util.layoutInflater
  * @ProjectName : My Application
  * @Package : com.example.myapplication.useCase
  * @ClassName : PromptUseCase
- * @Description : 文件描述
+ * @Description : 弹窗工具类
  * @Author : yulu
  * @CreateDate : 2023/6/29 14:00
  * @UpdateUser : yulu
@@ -34,19 +28,27 @@ import com.example.myapplication.util.layoutInflater
  */
 class PromptUseCase() {
 
+    /**
+     * 删除弹窗
+     */
     fun deletePrompt(data: String, block: () -> Unit) {
         prompt("确定要删掉${data}吗?") {
             block.invoke()
         }
     }
 
-
+    /**
+     * 移除图片弹窗
+     */
     fun removeImagePrompt(block: () -> Unit) {
         prompt("确认移除已添加图片吗？") {
             block.invoke()
         }
     }
 
+    /**
+     * 退出登陆弹窗
+     */
     fun exitLoginPrompt(block: () -> Unit) {
         prompt("确定要退出登录吗?") {
             block.invoke()
@@ -103,6 +105,9 @@ class PromptUseCase() {
         alertDialog.window!!.decorView.setPadding(70, 0, 70, 0)
     }
 
+    /**
+     * 大图片展示弹窗
+     */
     fun promptBigImage(
         path: String
     ) {
@@ -132,9 +137,35 @@ class PromptUseCase() {
             ToastUtils.showShort("至少勾选一个评论")
             return
         }
-        prompt("确定审核通过${comments.size}个评论？"){
+        prompt("确定审核通过${comments.size}个评论？") {
             block.invoke()
         }
     }
+
+    /**
+     * 展示App简介弹窗
+     */
+    suspend fun showAppIntroductionDialog(
+        title: String,
+        content: String,
+        doNotAskAgainListener: () -> Unit
+    ): Unit =
+        suspendCancellableCoroutine { continuation ->
+            val context = ActivityUtils.getTopActivity()
+            MaterialAlertDialogBuilder(context)
+                .setTitle(title)
+                .setMessage(content)
+                .setPositiveButton("我知道了") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setNegativeButton("不再提醒") { dialog, _ ->
+                    doNotAskAgainListener.invoke()
+                    dialog.dismiss()
+                }
+                .setOnDismissListener {
+                    continuation.resume(Unit)
+                }
+                .show()
+        }
 
 }

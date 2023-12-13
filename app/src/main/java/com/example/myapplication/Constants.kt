@@ -41,4 +41,19 @@ object Constants {
      */
     const val USER_PASSWORD = "user_password"
 
+    /**
+     *  是否展示App简介弹窗
+     */
+    const val APP_INTRODUCTION_DIALOG = "app_introduction_dialog"
+
+    /**
+     * App简介弹窗标题
+     */
+    const val APP_INTRODUCTION_DIALOG_TITLE = "App简介标题"
+
+    /**
+     * App简介弹窗内容
+     */
+    const val APP_INTRODUCTION_DIALOG_CONTENT = "App简介窗内容"
+
 }

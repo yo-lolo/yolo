@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_activity_bg"
+    android:background="@drawable/bg_mine"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
     <com.hanks.htextview.typer.TyperTextView
@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="200dp"
         android:text="欢迎使用 YoLo"
         app:charIncrease="3"
         app:typerSpeed="80" />

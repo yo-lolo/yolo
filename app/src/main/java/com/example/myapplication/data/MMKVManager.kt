@@ -45,6 +45,17 @@ object MMKVManager {
         }
 
     /**
+     *  是否展示App简介弹窗
+     */
+    var isShowAppIntroductionDialog: Boolean
+        get() {
+            return mmkv.getBoolean(Constants.APP_INTRODUCTION_DIALOG, true)
+        }
+        set(value) {
+            mmkv.putBoolean(Constants.APP_INTRODUCTION_DIALOG, value)
+        }
+
+    /**
      * 保存用户的用户名、密码
      */
     fun saveUserNumAndPass(number: String, pass: String) {

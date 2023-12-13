@@ -3,17 +3,19 @@ package com.example.myapplication
 import android.Manifest
 import android.animation.ValueAnimator
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.example.myapplication.base.BaseActivity
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.MarketActivity
+import com.example.myapplication.useCase.PromptUseCase
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
 
@@ -60,8 +62,19 @@ class MainActivity : BaseActivity() {
             val bundle = Bundle().apply {
                 putBoolean("autoLogin", MMKVManager.isAutoLogin)
             }
-            ActivityUtils.startActivity(MarketActivity::class.java, bundle)
-            finish()
+            lifecycleScope.launch {
+                // 在协程内依次执行操作 --- 即在弹窗展示完成后，跳转到指定页面，并结束当前页面
+                if (MMKVManager.isShowAppIntroductionDialog) {
+                    PromptUseCase().showAppIntroductionDialog(
+                        Constants.APP_INTRODUCTION_DIALOG_TITLE,
+                        Constants.APP_INTRODUCTION_DIALOG_CONTENT
+                    ) {
+                        MMKVManager.isShowAppIntroductionDialog = false
+                    }
+                }
+                ActivityUtils.startActivity(MarketActivity::class.java, bundle)
+                finish()
+            }
         }
     }
 
