@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.FragmentSettingBinding
 import com.example.myapplication.isLogin
 import com.example.myapplication.useCase.PromptUseCase
@@ -67,8 +68,7 @@ class SettingFragment : BaseFragment() {
             findNavController().navigate(R.id.goModifyPassFragment)
         }
         binding.msgNotify.setOnCheckedChangeListener { _, isChecked ->
-            //TODO 消息提醒
-            ToastUtils.showShort("消息提醒")
+            MMKVManager.isNotify = isChecked
         }
         binding.userProtocol.setOnClickListener {
             PAPFragment.goPAPFragment(

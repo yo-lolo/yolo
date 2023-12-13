@@ -65,7 +65,6 @@ class LoginViewModel : BaseViewModel() {
                     Log.e(getTag(), it.toString())
                 }
             } else {
-                //TODO 测试使用
                 loginType.value = true
                 ToastUtils.showShort("用户名密码不能为空")
             }
@@ -86,7 +85,7 @@ class LoginViewModel : BaseViewModel() {
                     ToastUtils.showShort("用户名密码错误")
                 }
             } else {
-                //TODO 测试使用
+                //TODO 管理员登录测试使用
                 adminLoginType.value = true
                 ToastUtils.showShort("用户名密码不能为空")
             }

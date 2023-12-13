@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/notify_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -19,7 +20,7 @@
             android:textSize="14dp" />
 
         <TextView
-            android:id="@+id/e_notify_date"
+            android:id="@+id/notify_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"

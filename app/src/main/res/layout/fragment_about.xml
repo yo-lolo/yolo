@@ -26,6 +26,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="应用包名"
+                android:textColor="@color/_5F333333"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/app_packgeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/_FF020F2C"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_e7e7e7" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="应用名称"
                 android:textColor="@color/_5F333333"
                 android:textSize="15sp" />
@@ -70,6 +100,8 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

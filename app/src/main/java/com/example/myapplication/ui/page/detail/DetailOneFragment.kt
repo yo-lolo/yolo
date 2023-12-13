@@ -76,9 +76,9 @@ class DetailOneFragment : BaseFragment() {
 
         val onceName = customView.findViewById<EditText>(R.id.once_name)
         val onceDesc = customView.findViewById<EditText>(R.id.once_desc)
-        var onceCancel = customView.findViewById<TextView>(R.id.once_cancel)
-        var descCount = customView.findViewById<TextView>(R.id.desc_count)
-        var onceOk = customView.findViewById<TextView>(R.id.once_ok)
+        val onceCancel = customView.findViewById<TextView>(R.id.once_cancel)
+        val descCount = customView.findViewById<TextView>(R.id.desc_count)
+        val onceOk = customView.findViewById<TextView>(R.id.once_ok)
         onceOk.setOnClickListener {
             val name = onceName.text.toString().trim()
             val desc = onceDesc.text.toString().trim()

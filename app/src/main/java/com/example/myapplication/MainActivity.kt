@@ -57,10 +57,9 @@ class MainActivity : BaseActivity() {
             )
         ) {
             /**
-             * TODO:权限check完成后 执行如下： 1.通过自动登录标识 判断是否要进入登录界面
+             * 权限check完成后 在协程内依次执行操作 --- 即在弹窗展示完成后，跳转到指定页面，并结束当前页面
              */
             lifecycleScope.launch {
-                // 在协程内依次执行操作 --- 即在弹窗展示完成后，跳转到指定页面，并结束当前页面
                 if (MMKVManager.isShowAppIntroductionDialog) {
                     PromptUseCase().showAppIntroductionDialog(
                         Constants.APP_INTRODUCTION_DIALOG_TITLE,

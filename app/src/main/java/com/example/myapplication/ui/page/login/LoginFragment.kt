@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ActivityUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLoginBinding
@@ -56,7 +57,12 @@ class LoginFragment : BaseFragment() {
         }
         binding.loginBt.setOnClickListener {
             val (number, pass) = numberAndPass()
-            viewModel.checkLogin(number, pass)
+            val isChecked = binding.agreeProtocol.isChecked
+            if (isChecked) {
+                viewModel.checkLogin(number, pass)
+            } else {
+                ToastUtils.showShort("请先同意相关协议")
+            }
         }
 
         viewModel.adminLoginType.observe(viewLifecycleOwner) {
@@ -96,6 +102,7 @@ class LoginFragment : BaseFragment() {
             val (num, pass) = if (it) viewModel.getUserNumAndPass() else "" to ""
             binding.numberEdit.setText(num)
             binding.passEdit.setText(pass)
+            binding.agreeProtocol.isChecked = true
         }
     }
 

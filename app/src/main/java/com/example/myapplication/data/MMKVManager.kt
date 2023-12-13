@@ -66,6 +66,17 @@ object MMKVManager {
             mmkv.putBoolean(Constants.IS_LOGIN, value)
         }
 
+    /**
+     * 判断是否需要消息提醒
+     */
+    var isNotify: Boolean
+        get() {
+            return mmkv.getBoolean(Constants.IS_NOTIFY, false)
+        }
+        set(value) {
+            mmkv.putBoolean(Constants.IS_NOTIFY, value)
+        }
+
 
     /**
      * 保存用户的用户名、密码

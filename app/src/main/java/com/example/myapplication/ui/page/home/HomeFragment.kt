@@ -15,9 +15,10 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
-import com.example.myapplication.data.MMKVManager
+import com.example.myapplication.data.NotifyData
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.isLogin
+import com.example.myapplication.notify.MessNotification
 import com.example.myapplication.pops.SelectBrowserPop
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.util.GlideImageLoader
@@ -53,29 +54,21 @@ class HomeFragment : BaseFragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
+        initTest()
         return view
     }
 
     private fun init(view: View) {
 
         binding.homeWelcomeLayout.visibleOrGone(isLogin())
-        if (isLogin()){
+        if (isLogin()) {
             binding.textPhone.text = AppConfig.phoneNumber.toString()
         }
-
-        // 轮播图片集合
-        val images = listOf(
-            "https://alifei02.cfp.cn/creative/vcg/800/new/VCG21gic19937006.jpg",
-            "https://alifei01.cfp.cn/creative/vcg/800/version23/VCG41157532246.jpg",
-            "https://tenfei04.cfp.cn/creative/vcg/800/version23/VCG41164857181.jpg",
-            "https://alifei05.cfp.cn/creative/vcg/800/version23/VCG41542511145.jpg",
-            "https://tenfei03.cfp.cn/creative/vcg/800/new/VCG41N1090223986.jpg"
-        )
 
         binding.banner.apply {
             setDelayTime(2000) //设置轮播间隔时间
             isAutoPlay(true)  // 设置是否为自动轮播
-            setImages(images) //设置图片网址或地址的集合
+            setImages(AppConfig.BANNER_IMAGES) //设置图片网址或地址的集合
             setImageLoader(GlideImageLoader()) //设置图片加载器
             setBannerAnimation(com.youth.banner.Transformer.Default) //设置轮播的动画效果，内含多种特效
             outlineProvider = object : ViewOutlineProvider() {
@@ -118,10 +111,15 @@ class HomeFragment : BaseFragment() {
 
         context?.let { GlideImageLoader().displayImage(it, R.drawable.world, binding.imageTest) }
 
+    }
+
+    private fun initTest() {
         binding.selectBrowserPop.setOnClickListener {
             browserPop()
         }
-
+        binding.initNotify.setOnClickListener {
+            MessNotification().showNotify(NotifyData("hhhh","www",0))
+        }
     }
 
     private fun browserPop() {

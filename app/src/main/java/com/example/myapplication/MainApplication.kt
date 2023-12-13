@@ -40,3 +40,5 @@ class MainApplication : Application() {
 fun Any.getTag() = Constants.BASE_TAG + this.javaClass.simpleName
 
 fun Any.isLogin() = MMKVManager.isLogin
+
+fun Any.isNotify() = MMKVManager.isNotify

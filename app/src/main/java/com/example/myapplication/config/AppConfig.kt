@@ -34,10 +34,14 @@ object AppConfig {
 
     const val APP_NAME = "YoLo"
 
-    //枚举反馈类型, 1、质量问题，2、使用问题 3、其他
-    enum class FeedbackType(typeId: String, desc: String) {
-        QA_TYPE("1", "质量问题"),
-        USE_TYPE("2", "使用问题"),
-        OTHER_TYPE("3", "其他"),
-    }
+    /**
+     * 轮播图片集合
+     */
+    val BANNER_IMAGES = listOf(
+        "https://alifei02.cfp.cn/creative/vcg/800/new/VCG21gic19937006.jpg",
+        "https://alifei01.cfp.cn/creative/vcg/800/version23/VCG41157532246.jpg",
+        "https://tenfei04.cfp.cn/creative/vcg/800/version23/VCG41164857181.jpg",
+        "https://alifei05.cfp.cn/creative/vcg/800/version23/VCG41542511145.jpg",
+        "https://tenfei03.cfp.cn/creative/vcg/800/new/VCG41N1090223986.jpg"
+    )
 }

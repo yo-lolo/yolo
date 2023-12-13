@@ -75,6 +75,13 @@
                 android:layout_height="wrap_content"
                 android:text="浏览器弹窗"/>
 
+            <Button
+                android:id="@+id/init_notify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="初始化消息通知"/>
+
+
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"

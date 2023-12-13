@@ -54,11 +54,16 @@ object Constants {
     /**
      * App简介弹窗内容
      */
-    const val APP_INTRODUCTION_DIALOG_CONTENT = "App简介窗内容"
+    const val APP_INTRODUCTION_DIALOG_CONTENT = "App简介弹窗内容"
 
     /**
      * 判断是否登录
      */
     const val IS_LOGIN = "is_login"
+
+    /**
+     * 判断是否进行消息提醒
+     */
+    const val IS_NOTIFY = "is_notify"
 
 }

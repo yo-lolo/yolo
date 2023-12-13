@@ -11,13 +11,14 @@ import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.example.myapplication.DataManager
-import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+import com.example.myapplication.broadcastReceiver.MessNotifyReceiver
+import com.example.myapplication.data.NotifyData
 import com.example.myapplication.databinding.LayoutEmergencyNotifyItemBinding
 import com.example.myapplication.util.layoutInflater
 
 
-class TestNotification {
+class MessNotification {
 
     private val context = DataManager.context
     private lateinit var binding: LayoutEmergencyNotifyItemBinding
@@ -29,23 +30,25 @@ class TestNotification {
      * 显示到通知栏
      *
      */
-    fun showNotify() {
+    fun showNotify(notifyData: NotifyData) {
         binding = LayoutEmergencyNotifyItemBinding.inflate(context.layoutInflater())
 
         // 自定义通知布局
         val notificationLayout =
             RemoteViews(context.packageName, R.layout.layout_emergency_notify_item)
+        //给通知布局中的组件设置点击事件
+        notificationLayout.setTextViewText(R.id.notify_title, notifyData.title)
+        notificationLayout.setTextViewText(R.id.notify_content, notifyData.content)
+        // Intent设置自定义的Action、传入data
+        val intentWithAction = Intent().setAction(MessNotifyReceiver.MESS_NOTIFY_ACTION)
+        intentWithAction.putExtra("data",notifyData)
+        intentWithAction.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        // 设置点击时跳转的界面
-        val intent = Intent(context, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        val pendingIntent =
-            PendingIntent.getActivity(
-                context,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(context, 0, intentWithAction, PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getBroadcast(context, 0, intentWithAction, PendingIntent.FLAG_ONE_SHOT)
+        }
 
         // 构建自定义通知布局
         var notifyBuild: NotificationCompat.Builder? = null

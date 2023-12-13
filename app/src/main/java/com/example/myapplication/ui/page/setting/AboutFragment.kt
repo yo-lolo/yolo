@@ -46,6 +46,8 @@ class AboutFragment : BaseFragment() {
         viewBinding.appVersion.text = "V" + AppConfig.VERSION_NAME
 
         viewBinding.appName.text = AppConfig.APP_NAME
+
+        viewBinding.appPackgeName.text = AppConfig.PACKAGE_NAME
     }
 
 }
