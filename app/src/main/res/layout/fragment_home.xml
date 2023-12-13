@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@mipmap/icon_mark_home_bg"
     android:orientation="vertical"
     android:paddingTop="45dp">
@@ -40,9 +40,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/label_welcome"
                     android:layout_marginTop="5dp"
-                    tools:text="191****1234"
                     android:textColor="#ff888888"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    tools:text="191****1234" />
             </LinearLayout>
 
             <LinearLayout
@@ -73,13 +73,13 @@
                 android:id="@+id/select_browser_pop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="浏览器弹窗"/>
+                android:text="浏览器弹窗" />
 
             <Button
                 android:id="@+id/init_notify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="初始化消息通知"/>
+                android:text="初始化消息通知" />
 
 
             <com.youth.banner.Banner

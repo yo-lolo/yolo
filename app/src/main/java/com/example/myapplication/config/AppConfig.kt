@@ -20,19 +20,30 @@ import java.util.IdentityHashMap
  */
 object AppConfig {
 
+    /**
+     * 当前登陆的用户账户
+     */
     var phoneNumber: Long = if (isLogin()) MMKVManager.getUserNumAndPass().first.toLong() else 0
 
     const val IMAGE_OPEN = 0xff
     const val NEWS_IMAGE_OPEN = 1
     const val USER_IMAGE_EDIT = 2
 
-
-
+    /**
+     * 应用信息
+     */
     const val PACKAGE_NAME = "com.example.myapplication"
 
     const val VERSION_NAME = "1.0.0"
 
     const val APP_NAME = "YoLo"
+
+    /**
+     * 管理员登陆的账户密码（固定）
+     */
+    const val ADMIN_NUM = 19956596024
+
+    const val ADMIN_PASS = "123456"
 
     /**
      * 轮播图片集合

@@ -41,7 +41,7 @@ class MessNotification {
         notificationLayout.setTextViewText(R.id.notify_content, notifyData.content)
         // Intent设置自定义的Action、传入data
         val intentWithAction = Intent().setAction(MessNotifyReceiver.MESS_NOTIFY_ACTION)
-        intentWithAction.putExtra("data",notifyData)
+        intentWithAction.putExtra("data", notifyData)
         intentWithAction.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

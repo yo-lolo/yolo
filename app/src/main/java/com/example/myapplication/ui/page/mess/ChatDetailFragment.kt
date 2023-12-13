@@ -7,14 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatDetailBinding
 import com.example.myapplication.ui.page.mine.UserDetailFragment
+import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.JsonUtil
+import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.MessageViewModel
 
 /**
@@ -62,6 +66,31 @@ class ChatDetailFragment : BaseFragment() {
         viewModel.friendUserInfo.observe(viewLifecycleOwner) {
             GlideImageLoader().displayLocalFile(it.image, binding.userIcon)
             binding.userNeck.text = it.neck
+        }
+        binding.goFindChats.setOnClickListener {
+            //todo 查找聊天记录
+            ToastUtils.showShort("查找聊天记录")
+        }
+        binding.clearChats.setOnClickListener {
+            //todo 清除聊天记录
+            PromptUseCase().prompt("确定要清除聊天记录吗？"){
+                ToastUtils.showShort("清除聊天记录")
+            }
+        }
+        binding.switchTop.setOnCheckedChangeListener { _, isChecked ->
+            //todo 置顶聊天
+            ToastUtils.showShort("置顶聊天: $isChecked")
+        }
+        binding.switchMessNotify.setOnCheckedChangeListener { _, isChecked ->
+            //todo 消息免打扰
+            ToastUtils.showShort("消息免打扰: $isChecked")
+        }
+        binding.deleteFriend.visibleOrGone(AppConfig.phoneNumber != number)
+        binding.deleteFriend.setOnClickListener {
+            //todo 删除好友
+            PromptUseCase().prompt("确定要删除好友吗？"){
+                ToastUtils.showShort("删除好友")
+            }
         }
 
     }

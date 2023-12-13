@@ -76,19 +76,19 @@ class LoginViewModel : BaseViewModel() {
      */
     fun checkAdminLogin(number: String, pass: String) {
         launchSafe {
-            if (number.isNotEmpty() && pass.isNotEmpty()) {
-                if (number.toLong() == 19956596024 && pass == "123456") {
-                    ToastUtils.showShort("登陆成功,进入管理员页面")
-                    delay(1000)
-                    adminLoginType.value = true
-                } else {
-                    ToastUtils.showShort("用户名密码错误")
-                }
-            } else {
-                //TODO 管理员登录测试使用
-                adminLoginType.value = true
-                ToastUtils.showShort("用户名密码不能为空")
-            }
+            //TODO 管理员登录测试使用
+            adminLoginType.value = true
+//            if (number.isNotEmpty() && pass.isNotEmpty()) {
+//                if (number.toLong() == AppConfig.ADMIN_NUM && pass == AppConfig.ADMIN_PASS) {
+//                    ToastUtils.showShort("登陆成功,进入管理员页面")
+//                    delay(1000)
+//                    adminLoginType.value = true
+//                } else {
+//                    ToastUtils.showShort("用户名密码错误")
+//                }
+//            } else {
+//                ToastUtils.showShort("用户名密码不能为空")
+//            }
         }
     }
 

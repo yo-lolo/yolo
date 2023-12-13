@@ -46,6 +46,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/go_find_chats"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -77,6 +78,7 @@
                 android:textColor="#3C3C3C"
                 android:textSize="16dp" />
             <Switch
+                android:id="@+id/switch_messNotify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -105,6 +107,7 @@
                 android:textColor="#3C3C3C"
                 android:textSize="16dp" />
             <Switch
+                android:id="@+id/switch_top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -118,6 +121,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/clear_chats"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -129,6 +133,7 @@
         android:textSize="16dp" />
 
     <TextView
+        android:id="@+id/delete_friend"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
