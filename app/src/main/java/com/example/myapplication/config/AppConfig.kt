@@ -1,6 +1,8 @@
 package com.example.myapplication.config
 
 import android.content.Context
+import com.example.myapplication.data.MMKVManager
+import com.example.myapplication.isLogin
 import java.io.File
 import java.util.IdentityHashMap
 
@@ -18,11 +20,7 @@ import java.util.IdentityHashMap
  */
 object AppConfig {
 
-
-    //const val phoneNumber: Long = 44444444444
-    //const val phoneNumber: Long = 22222222222
-    //const val phoneNumber: Long = 11111111111
-    const val phoneNumber: Long = 33333333333
+    var phoneNumber: Long = if (isLogin()) MMKVManager.getUserNumAndPass().first.toLong() else 0
 
     const val IMAGE_OPEN = 0xff
     const val NEWS_IMAGE_OPEN = 1

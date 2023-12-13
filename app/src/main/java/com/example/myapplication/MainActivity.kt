@@ -59,9 +59,6 @@ class MainActivity : BaseActivity() {
             /**
              * TODO:权限check完成后 执行如下： 1.通过自动登录标识 判断是否要进入登录界面
              */
-            val bundle = Bundle().apply {
-                putBoolean("autoLogin", MMKVManager.isAutoLogin)
-            }
             lifecycleScope.launch {
                 // 在协程内依次执行操作 --- 即在弹窗展示完成后，跳转到指定页面，并结束当前页面
                 if (MMKVManager.isShowAppIntroductionDialog) {
@@ -72,7 +69,7 @@ class MainActivity : BaseActivity() {
                         MMKVManager.isShowAppIntroductionDialog = false
                     }
                 }
-                ActivityUtils.startActivity(MarketActivity::class.java, bundle)
+                ActivityUtils.startActivity(MarketActivity::class.java)
                 finish()
             }
         }

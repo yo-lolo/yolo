@@ -10,7 +10,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentMineBinding
+import com.example.myapplication.isLogin
 import com.example.myapplication.util.GlideImageLoader
+import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.MineViewModel
 
 /**
@@ -48,6 +50,7 @@ class MineFragment : BaseFragment() {
             userName.setOnClickListener {
                 findNavController().navigate(R.id.goLoginFragment)
             }
+            mineEdit.visibleOrGone(isLogin())
             mineEdit.setOnClickListener {
                 findNavController().navigate(R.id.goMineEditFragment)
             }
@@ -60,9 +63,6 @@ class MineFragment : BaseFragment() {
             goMineLikes.setOnClickListener {
                 findNavController().navigate(R.id.goMineLikeFragment)
             }
-            goHistory.setOnClickListener {
-                //todo
-            }
             goSetting.setOnClickListener {
                 findNavController().navigate(R.id.goSettingFragment)
             }
@@ -74,6 +74,7 @@ class MineFragment : BaseFragment() {
         viewModel.user.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 homeBinding.userName.text = user.neck
+                homeBinding.userName.isEnabled = false
                 GlideImageLoader().displayLocalFile(user.image, homeBinding.mineTouxiang)
                 homeBinding.mineTouxiang.setOnClickListener {
                     UserDetailFragment.goUserDetailFragment(user.number, findNavController())

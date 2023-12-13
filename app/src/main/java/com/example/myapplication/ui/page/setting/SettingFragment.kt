@@ -4,18 +4,18 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSettingBinding
+import com.example.myapplication.isLogin
 import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.vm.MineViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -32,6 +32,7 @@ import com.example.myapplication.useCase.PromptUseCase
 class SettingFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSettingBinding
+    val viewModel by viewModels<MineViewModel>()
 
     private var alertDialog //单选框
             : AlertDialog? = null
@@ -85,24 +86,20 @@ class SettingFragment : BaseFragment() {
             findNavController().navigate(R.id.goAboutFragment)
         }
         binding.exitLogin.setOnClickListener {
-            //TODO 退出登录
-            PromptUseCase().exitLoginPrompt { ToastUtils.showShort("退出登录") }
-        }
-    }
+            if (isLogin()){
+                PromptUseCase().exitLoginPrompt {
+                    viewModel.logout()
+                    findNavController().navigate(R.id.goLoginFragment)
+                }
+            }else{
+                ToastUtils.showShort("请先登录")
+            }
 
-    companion object {
-        fun goSettingFragment(): Fragment {
-            return SettingFragment()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        initData()
-    }
-
-    private fun initData() {
-
     }
 
 }

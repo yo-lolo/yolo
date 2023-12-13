@@ -77,7 +77,7 @@ class PromptUseCase() {
             .show()
     }
 
-    private fun prompt(
+    fun prompt(
         message: String,
         mPositiveButtonListener: () -> Unit
     ) {

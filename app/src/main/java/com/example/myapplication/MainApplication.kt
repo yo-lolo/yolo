@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.database.AppDataBase
 import com.example.myapplication.imp.UserTaskImp
 import com.example.myapplication.repos.UserStoreRepository
@@ -37,3 +38,5 @@ class MainApplication : Application() {
 }
 
 fun Any.getTag() = Constants.BASE_TAG + this.javaClass.simpleName
+
+fun Any.isLogin() = MMKVManager.isLogin

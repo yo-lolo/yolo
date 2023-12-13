@@ -6,9 +6,8 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
-import com.example.myapplication.data.MineComments
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.data.NewsDataInfo
-import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
 import kotlinx.coroutines.delay
@@ -80,6 +79,13 @@ class MineViewModel : BaseViewModel() {
         } else {
             ToastUtils.showShort("请先登录")
         }
+    }
+
+    /**
+     * 登出
+     */
+    fun logout() {
+        MMKVManager.isLogin = false
     }
 
 

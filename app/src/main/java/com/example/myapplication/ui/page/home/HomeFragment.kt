@@ -15,14 +15,16 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.isLogin
 import com.example.myapplication.pops.SelectBrowserPop
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.util.GlideImageLoader
-import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.createPop
 import com.example.myapplication.util.getBrowserList
 import com.example.myapplication.util.toBrowser
+import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.HomeViewModel
 
 /**
@@ -56,7 +58,10 @@ class HomeFragment : BaseFragment() {
 
     private fun init(view: View) {
 
-        binding.textPhone.text = AppConfig.phoneNumber.toString()
+        binding.homeWelcomeLayout.visibleOrGone(isLogin())
+        if (isLogin()){
+            binding.textPhone.text = AppConfig.phoneNumber.toString()
+        }
 
         // 轮播图片集合
         val images = listOf(
@@ -119,11 +124,11 @@ class HomeFragment : BaseFragment() {
 
     }
 
-    private fun browserPop(){
+    private fun browserPop() {
         val browserList = requireContext().getBrowserList()
         val jumpUrl = "http://www.baidu.com"
 
-        if (browserList.size == 1){
+        if (browserList.size == 1) {
             val uri = Uri.parse(jumpUrl)
             val intent = Intent(Intent.ACTION_VIEW, uri)
             requireContext().startActivity(intent)

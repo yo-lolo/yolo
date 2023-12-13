@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentUserDetailBinding
+import com.example.myapplication.isLogin
 import com.example.myapplication.ui.page.mess.ChatFragment
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
@@ -77,7 +79,11 @@ class UserDetailFragment : BaseFragment() {
             ChatFragment.goChatFragment(findNavController(), number!!)
         }
         binding.addFriend.setOnClickListener {
-            //TODO 用户详情界面添加好友
+            if (isLogin()){
+                viewModel.insertFriend(number!!)
+            }else{
+                ToastUtils.showShort("请先登录")
+            }
         }
         binding.userNews.setOnClickListener {
             MineNewsFragment.goMineNewsFragment(findNavController(), number!!, 1)

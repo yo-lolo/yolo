@@ -13,10 +13,12 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentFeedbackBinding
+import com.example.myapplication.isLogin
 import com.example.myapplication.vm.FeedbackViewModel
 
 /**
@@ -76,7 +78,11 @@ class FeedbackFragment : BaseFragment() {
         binding.feedbackSubmit.setOnClickListener {
             val pictureItems = binding.imageDisplayView.getPhotos().filter { !it.isNullOrBlank() }
             val detail = binding.feedbackPDetail.text.toString().trim()
-            feedbackViewModel.onSubmit(pictureItems, detail)
+            if (isLogin()){
+                feedbackViewModel.onSubmit(pictureItems, detail)
+            }else{
+                ToastUtils.showShort("请先登录")
+            }
         }
 
         binding.apply {

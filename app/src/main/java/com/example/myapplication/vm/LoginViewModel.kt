@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.MainActivity.Companion.TAG
 import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.getTag
 import kotlinx.coroutines.delay
@@ -48,6 +49,8 @@ class LoginViewModel : BaseViewModel() {
                     if (user != null) {
                         if (pass.isNotEmpty() && pass == user.pass) {
                             saveUserNumAndPass(number, pass)
+                            MMKVManager.isLogin = true
+                            AppConfig.phoneNumber = phoneNumber
                             ToastUtils.showShort("登陆成功,进入首页")
                             delay(1000)
                             loginType.value = true

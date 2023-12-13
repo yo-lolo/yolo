@@ -9,8 +9,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
 import com.example.myapplication.base.BaseActivity
+import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivityMarketBinding
+import com.example.myapplication.isLogin
+import com.example.myapplication.useCase.PromptUseCase
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -44,6 +47,17 @@ class MarketActivity : BaseActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
+        // 在此判断用户是否未登出且开启自动登录功能 是的话跳转到登陆界面完成自动登录
+        if (isLogin() && MMKVManager.isAutoLogin) {
+            navController.navigate(
+                R.id.goLoginFragment,
+                Bundle().apply { putBoolean("isMarket2Login", true) })
+        }else if (!isLogin()){
+            // 如果未登录 弹窗询问是否要登录
+            PromptUseCase().prompt("您还未登录，是否要先登录？"){
+                navController.navigate(R.id.goLoginFragment)
+            }
+        }
         //底部tab隐藏控制
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val isMainTab = listOf(

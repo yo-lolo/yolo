@@ -10,10 +10,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNewsDetailBinding
+import com.example.myapplication.isLogin
 import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
@@ -84,7 +86,7 @@ class NewsDetailFragment : BaseFragment() {
                 newsDetailTime.text =
                     TimeUtil.millis2String(newsInfo.time, TimeUtil.dateFormatYMD_CN)
                 newsDetailTitle.text = newsInfo.title
-                // TODO:文章管理，添加更新时间字段
+                // TODO: 文章编辑功能需添加更新时间字段
                 newsDetailUpdateTime.text =
                     "-----     更新于 ${TimeUtil.millis2String(newsInfo.time)}     -----"
             }
@@ -99,11 +101,19 @@ class NewsDetailFragment : BaseFragment() {
             }
         }
         binding.fabLike.setOnClickListener {
-            viewModel.chargeLike(newsId!!)
+            if (isLogin()){
+                viewModel.chargeLike(newsId!!)
+            }else{
+                ToastUtils.showShort("请先登录")
+            }
         }
 
         binding.postComment.setOnClickListener {
-            PostCommentFragment.goPostCommentFragment(newsId!!, findNavController())
+            if (isLogin()){
+                PostCommentFragment.goPostCommentFragment(newsId!!, findNavController())
+            }else{
+                ToastUtils.showShort("请先登录")
+            }
         }
 
         viewModel.contentCount.observe(viewLifecycleOwner) {
@@ -115,7 +125,11 @@ class NewsDetailFragment : BaseFragment() {
         }
 
         binding.addFriend.setOnClickListener {
-            viewModel.insertFriend(newsId!!)
+            if (isLogin()){
+                viewModel.insertFriend(newsId!!)
+            }else{
+                ToastUtils.showShort("请先登录")
+            }
         }
         initCommentList()
 

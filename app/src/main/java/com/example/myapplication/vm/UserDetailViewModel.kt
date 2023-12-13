@@ -2,6 +2,7 @@ package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
@@ -26,14 +27,33 @@ class UserDetailViewModel : BaseViewModel() {
     var isFriend = MutableLiveData<Boolean>(false)
     private val userStoreRepository = DataManager.userStoreRepository
     private val friendsStoreRepository = DataManager.friendsStoreRepository
+    private val newsStoreRepository = DataManager.newsStoreRepository
 
     fun initUserInfo(number: Long) {
         viewModelScope.launch {
             userDetailInfo.value = userStoreRepository.queryUserByNumber(number)
 
+            val friendInfo = friendsStoreRepository.getFriendById(number)
             isFriend.value =
-                friendsStoreRepository.getFriendById(number)
-                    .isNotEmpty() || number == AppConfig.phoneNumber
+                friendInfo.isNotEmpty() && friendInfo[0].tag != 0 || number == AppConfig.phoneNumber
+        }
+    }
+
+    /**
+     * 添加好友
+     */
+    fun insertFriend(newsId: Long) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                friendsStoreRepository.insertFriend(newsId)
+            }.onSuccess {
+                ToastUtils.showLong("已发送好友请求,等待好友验证")
+            }.onFailure {
+                it.message
+                it.printStackTrace()
+                ToastUtils.showLong("好友请求失败，请稍后重试")
+            }
+            initUserInfo(newsId)
         }
     }
 }

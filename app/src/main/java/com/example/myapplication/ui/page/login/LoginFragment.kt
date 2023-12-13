@@ -30,6 +30,7 @@ class LoginFragment : BaseFragment() {
 
     lateinit var binding: FragmentLoginBinding
     private val viewModel by viewModels<LoginViewModel>()
+    private var isMarket2Login: Boolean? = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +39,7 @@ class LoginFragment : BaseFragment() {
     ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         val view = binding.root
+        isMarket2Login = arguments?.getBoolean("isMarket2Login")
         init(view)
         initAutoLogin()
         return view
@@ -49,12 +51,10 @@ class LoginFragment : BaseFragment() {
             findNavController().navigate(R.id.goRegisterFragment)
         }
         binding.managerLoginBt.setOnClickListener {
-            //TODO 管理员登录信息验证
             val (number, pass) = numberAndPass()
             viewModel.checkAdminLogin(number, pass)
         }
         binding.loginBt.setOnClickListener {
-            //Todo 用户信息初始化
             val (number, pass) = numberAndPass()
             viewModel.checkLogin(number, pass)
         }
@@ -88,8 +88,7 @@ class LoginFragment : BaseFragment() {
      */
     private fun initAutoLogin() {
         viewModel.isAutoLoginLiveData.observe(viewLifecycleOwner) {
-            val isSplash2Login = false
-            if (it && isSplash2Login) {
+            if (it && isMarket2Login == true) {
                 viewModel.doAutoLogin()
             }
         }
