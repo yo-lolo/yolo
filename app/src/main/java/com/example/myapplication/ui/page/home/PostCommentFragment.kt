@@ -11,9 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.databinding.FragmentPostCommentBinding
-import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.vm.NewsDetailViewModel
 
 /**

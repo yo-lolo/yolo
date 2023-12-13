@@ -16,7 +16,6 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNewsDetailBinding
 import com.example.myapplication.isLogin
-import com.example.myapplication.ui.adapter.CommentListAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.useCase.PromptUseCase
@@ -39,7 +38,7 @@ import com.example.myapplication.vm.NewsDetailViewModel
 class NewsDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewsDetailBinding
-    private var commentListAdapter = CommentListAdapter()
+    private var commentListAdapter = CommentsAdapter()
     var newsId: Long? = null
     private val viewModel by viewModels<NewsDetailViewModel>()
 

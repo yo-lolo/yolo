@@ -22,7 +22,7 @@ import com.example.myapplication.util.layoutInflater
  * @UpdateDate : 2023/7/28 9:45
  * @UpdateRemark : 更新说明
  */
-class TestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CommentsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var list: Map<CommentInfo, User> = mapOf()
     var goCommentListener: (Long) -> Unit = {}
@@ -54,7 +54,6 @@ class TestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder as TestTwoViewHolder
             holder.setData(
                 list.toList()[position],
-                goCommentListener,
                 goUserDetail,
                 deleteCommentListener
             )
@@ -116,7 +115,6 @@ class TestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun setData(
             pair: Pair<CommentInfo, User>,
-            goCommentListener: (Long) -> Unit,
             goUserDetail: (Long) -> Unit,
             deleteCommentListener: (CommentInfo) -> Unit
         ) {
@@ -127,6 +125,9 @@ class TestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemView.setOnLongClickListener {
                 deleteCommentListener.invoke(commentInfo)
                 true
+            }
+            itemView.setOnClickListener {
+                goUserDetail.invoke(user.number)
             }
         }
     }
