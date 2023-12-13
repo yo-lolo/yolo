@@ -8,6 +8,7 @@ import android.view.VelocityTracker
 import android.view.ViewConfiguration
 import android.widget.LinearLayout
 import android.widget.Scroller
+import com.example.myapplication.getTag
 
 
 /**

@@ -11,6 +11,7 @@ import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.LikeInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
+import com.example.myapplication.getTag
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -161,7 +162,7 @@ class NewsDetailViewModel : BaseViewModel() {
                 commentState.value = true
             }.onFailure {
                 ToastUtils.showShort("评论发布失败,请重试")
-                Log.e("yolo", it.toString())
+                Log.e(getTag(), it.toString())
             }
         }
     }

@@ -9,6 +9,7 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.MainActivity.Companion.TAG
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.data.MMKVManager
+import com.example.myapplication.getTag
 import kotlinx.coroutines.delay
 
 /**
@@ -58,7 +59,7 @@ class LoginViewModel : BaseViewModel() {
                         ToastUtils.showShort("不存在该用户")
                     }
                 }.onFailure {
-                    Log.e("yolo", it.toString())
+                    Log.e(getTag(), it.toString())
                 }
             } else {
                 //TODO 测试使用

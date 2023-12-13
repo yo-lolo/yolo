@@ -137,7 +137,7 @@ class NewsDetailFragment : BaseFragment() {
             UserDetailFragment.goUserDetailFragment(it, findNavController())
         }
         commentListAdapter.deleteCommentListener = {
-            PromptUseCase().deletePrompt("确定要删除这条评论吗") {
+            PromptUseCase().deletePrompt("'${it.content}'这条评论") {
                 viewModel.deleteComment(newsId!!, it)
             }
         }

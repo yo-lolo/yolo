@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.User
+import com.example.myapplication.getTag
 import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -41,7 +42,7 @@ class RegisterViewModel : BaseViewModel() {
                         }.onFailure {
                             registerType.value = false
                             ToastUtils.showShort("注册失败，请重试")
-                            Log.e("yolo", it.toString())
+                            Log.e(getTag(), it.toString())
                         }.onSuccess {
                             ToastUtils.showShort("注册成功，跳转到登陆页面")
                             delay(1000)

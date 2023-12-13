@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.util.Log
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.example.myapplication.getTag
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,7 +26,7 @@ import java.util.*
  * 针对系统异常导致终端进入保护模式且后台无法远程下发模式切换的场景，系统预留应急解锁功能，通过此功能使终端进入生活模式可正常使用。
  */
 object EmergencyUnlock {
-    private val TAG = "yolo"
+    private val TAG = getTag()
 
     /**
      * 校验数字口令
