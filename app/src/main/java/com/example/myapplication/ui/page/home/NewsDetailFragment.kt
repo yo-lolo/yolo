@@ -16,6 +16,7 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNewsDetailBinding
 import com.example.myapplication.isLogin
+import com.example.myapplication.ui.adapter.CommentsAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.useCase.PromptUseCase

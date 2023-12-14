@@ -55,4 +55,10 @@ object AppConfig {
         "https://alifei05.cfp.cn/creative/vcg/800/version23/VCG41542511145.jpg",
         "https://tenfei03.cfp.cn/creative/vcg/800/new/VCG41N1090223986.jpg"
     )
+
+    /**
+     * 搜索标识
+     */
+    const val SEARCH_NEWS = 0
+    const val SEARCH_FRIENDS = 1
 }

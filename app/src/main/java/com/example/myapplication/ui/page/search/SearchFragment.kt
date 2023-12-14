@@ -6,15 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.R
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentAppSearchBinding
 import com.example.myapplication.databinding.LayoutSearchHeadBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
+import com.example.myapplication.ui.adapter.FriendListAdapter
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.ui.page.home.NewsDetailFragment
+import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.vm.AppSearchViewModel
 
 /**
@@ -33,10 +38,8 @@ class SearchFragment : BaseFragment() {
 
     private lateinit var viewBinding: FragmentAppSearchBinding
     private lateinit var searchHeadBinding: LayoutSearchHeadBinding
-
-
+    private var tag: Int? = null
     val viewModel by viewModels<AppSearchViewModel>()
-    private val searchListAdapter = NewsListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +48,8 @@ class SearchFragment : BaseFragment() {
     ): View {
         viewBinding = FragmentAppSearchBinding.inflate(inflater)
         searchHeadBinding = LayoutSearchHeadBinding.inflate(inflater)
+        tag = arguments?.getInt("tag")
+        tag?.let { initAdapter(it) }
         initView()
         return viewBinding.root
     }
@@ -54,36 +59,70 @@ class SearchFragment : BaseFragment() {
         searchHeadBinding.includeBack.backImage.setOnClickListener {
             findNavController().popBackStack()
         }
-
         searchHeadBinding.searchView.searchButtonListener = {
-            viewModel.searchNews(it)
+            viewModel.doSearch(tag, it)
             KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
         }
 
         searchHeadBinding.searchView.searchEditText.setOnEditorActionListener { v, keyCode, event ->
             if (keyCode == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.searchNews(searchHeadBinding.searchView.searchEditText.text.toString())
+                viewModel.doSearch(tag, searchHeadBinding.searchView.searchEditText.text.toString())
                 KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
         }
 
-        viewBinding.appsRecyclew.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter =  EmptyViewAdapter(searchListAdapter)
+        initProgress(viewModel.loadingTaskCount)
+    }
+
+    private fun initAdapter(tag: Int) {
+        if (tag == AppConfig.SEARCH_NEWS) {
+            val adapter = NewsListAdapter()
+            initNewsAdapter(adapter)
+        } else if (tag == AppConfig.SEARCH_FRIENDS) {
+            val adapter = FriendListAdapter()
+            initFriendsAdapter(adapter)
+        }
+    }
+
+    private fun initNewsAdapter(newsAdapter: NewsListAdapter) {
+        viewModel.searchNewsResult.observe(viewLifecycleOwner) {
+            newsAdapter.list = it
+            newsAdapter.notifyDataSetChanged()
         }
 
-        viewModel.searchResult.observe(viewLifecycleOwner) {
-            searchListAdapter.list = it
-            searchListAdapter.notifyDataSetChanged()
-        }
-
-        searchListAdapter.goNewsDetailListener = {
+        newsAdapter.goNewsDetailListener = {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
 
-        initProgress(viewModel.loadingTaskCount)
+        viewBinding.appsRecyclew.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = EmptyViewAdapter(newsAdapter)
+        }
+    }
+
+    private fun initFriendsAdapter(friendsAdapter: FriendListAdapter) {
+        viewModel.searchFriendsResult.observe(viewLifecycleOwner) {
+            friendsAdapter.list = it
+            friendsAdapter.notifyDataSetChanged()
+        }
+
+        friendsAdapter.goUserDetail = {
+            UserDetailFragment.goUserDetailFragment(it, findNavController())
+        }
+
+        viewBinding.appsRecyclew.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = EmptyViewAdapter(friendsAdapter)
+        }
+    }
+
+    companion object {
+        fun goSearchFragment(tag: Int, navController: NavController) {
+            val bundle = Bundle().apply { putInt("tag", tag) }
+            navController.navigate(R.id.goSearchFragment, bundle)
+        }
     }
 
 }

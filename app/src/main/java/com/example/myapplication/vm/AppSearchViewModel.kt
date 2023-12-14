@@ -1,12 +1,13 @@
 package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.data.NewsDataInfo
+import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.NewsInfo
+import com.example.myapplication.database.entity.User
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -25,16 +26,31 @@ class AppSearchViewModel : BaseViewModel() {
     private val newsStoreRepository = DataManager.newsStoreRepository
     private val userStoreRepository = DataManager.userStoreRepository
     private val likeStoreRepository = DataManager.likeStoreRepository
+    private val friendsStoreRepository = DataManager.friendsStoreRepository
 
     /**
      * 查询结果
      */
-    val searchResult = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
+    val searchNewsResult = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
+    val searchFriendsResult = MutableLiveData<Map<FriendInfo, User>>()
+
+
+    /**
+     * 搜索过滤
+     */
+    fun doSearch(tag: Int?, searchText: String) {
+        if (tag == AppConfig.SEARCH_NEWS) {
+            searchNews(searchText)
+        }
+        if (tag == AppConfig.SEARCH_FRIENDS) {
+            searchFriends(searchText)
+        }
+    }
 
     /**
      * 搜索文章
      */
-    fun searchNews(searchText: String) {
+    private fun searchNews(searchText: String) {
         launchSafe {
             val resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
             newsStoreRepository.queryNewsBySearchText(searchText).map { newsInfo ->
@@ -44,8 +60,27 @@ class AppSearchViewModel : BaseViewModel() {
                     .any { it.newsId == newsInfo.id }
                 resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
             }
-            searchResult.value = resultMap.toList()
+            searchNewsResult.value = resultMap.toList()
         }
+    }
 
+    /**
+     * 搜索好友
+     */
+    private fun searchFriends(searchText: String) {
+        launchSafe {
+            // 获取所有已添加的好友
+            val mineFriends =
+                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == 1 }
+            val resultMap = mutableMapOf<FriendInfo, User>()
+            mineFriends.map {
+                val user = userStoreRepository.queryUserByNumber(it.friendNumber)
+                resultMap[it] = user
+            }
+            searchFriendsResult.value = resultMap.toMap().filter {
+                it.value.number.toString().contains(searchText) || it.value.neck.toLowerCase()
+                    .contains(searchText.toLowerCase())
+            }
+        }
     }
 }

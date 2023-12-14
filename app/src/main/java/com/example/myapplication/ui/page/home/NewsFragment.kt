@@ -9,10 +9,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.R
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentNewsBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.NewsListAdapter
+import com.example.myapplication.ui.page.search.SearchFragment
 import com.example.myapplication.vm.HomeViewModel
 
 /**
@@ -55,7 +56,10 @@ class NewsFragment : BaseFragment() {
         }
 
         binding.textSearch.setOnClickListener {
-            findNavController().navigate(R.id.goSearchFragment)
+            SearchFragment.goSearchFragment(
+                AppConfig.SEARCH_NEWS,
+                findNavController()
+            )
         }
 
         binding.newsList.apply {
@@ -63,7 +67,7 @@ class NewsFragment : BaseFragment() {
             adapter = EmptyViewAdapter(newsListAdapter)
         }
 
-        viewModel.newsMapData.observe(viewLifecycleOwner){
+        viewModel.newsMapData.observe(viewLifecycleOwner) {
             newsListAdapter.list = it
             newsListAdapter.notifyDataSetChanged()
         }
