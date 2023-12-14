@@ -74,7 +74,7 @@ class NewsDetailViewModel : BaseViewModel() {
             val friend = friendsStoreRepository.getFriendById(newsInfo.value!!.number)
 
             if (friend.isNotEmpty()) {
-                if (friend[0].tag == 1) {
+                if (friend[0].tag == AppConfig.IS_FRIEND) {
                     isFriend.value = true
                 }
             }

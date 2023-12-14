@@ -35,7 +35,7 @@ class UserDetailViewModel : BaseViewModel() {
 
             val friendInfo = friendsStoreRepository.getFriendById(number)
             isFriend.value =
-                friendInfo.isNotEmpty() && friendInfo[0].tag != 0 || number == AppConfig.phoneNumber
+                friendInfo.isNotEmpty() && friendInfo[0].tag != AppConfig.NOT_FRIEND || number == AppConfig.phoneNumber
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.myapplication.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.myapplication.config.AppConfig
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 
@@ -23,12 +24,10 @@ data class FriendInfo(
     val friendNumber: Long,
     val time: Long,
     val image: String,
-    val tag: Int = 0,
+    val tag: Int = AppConfig.NOT_FRIEND,
     val isTop: Boolean = false,
     val isNotify: Boolean = false
 ) : java.io.Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-
-    // tag: 0 ->未审核 1 ->同意 2 ->不同意
 }

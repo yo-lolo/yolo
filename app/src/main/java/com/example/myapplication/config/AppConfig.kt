@@ -61,4 +61,12 @@ object AppConfig {
      */
     const val SEARCH_NEWS = 0
     const val SEARCH_FRIENDS = 1
+
+    /**
+     * 好友标识
+     * 0-非好友 1-好友
+     */
+    const val NOT_FRIEND = 0
+    const val IS_FRIEND = 1
+
 }

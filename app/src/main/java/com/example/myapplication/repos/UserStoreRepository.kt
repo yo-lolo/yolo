@@ -1,6 +1,7 @@
 package com.example.myapplication.repos
 
 import androidx.lifecycle.MutableLiveData
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.imp.UserTaskImp
 import kotlinx.coroutines.Dispatchers
@@ -56,10 +57,10 @@ class UserStoreRepository(private val userTaskImp: UserTaskImp) {
     }
 
     /**
-     * 通过号码更新用户的密码
+     * 通过号码更新当前用户的密码
      */
-    suspend fun updatePass(number: Long, pass: String) = withContext(Dispatchers.IO) {
-        return@withContext userTaskImp.updatePass(number, pass)
+    suspend fun updatePass(pass: String) = withContext(Dispatchers.IO) {
+        return@withContext userTaskImp.updatePass(AppConfig.phoneNumber, pass)
     }
 
     /**

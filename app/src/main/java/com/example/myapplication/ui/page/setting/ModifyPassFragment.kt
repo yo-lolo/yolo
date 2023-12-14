@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.databinding.FragmentModifyPassBinding
+import com.example.myapplication.util.getEditText
+import com.example.myapplication.vm.MineViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -23,6 +26,8 @@ import com.example.myapplication.databinding.FragmentModifyPassBinding
 class ModifyPassFragment : BaseFragment() {
 
     private lateinit var viewBinding: FragmentModifyPassBinding
+    val viewModel by viewModels<MineViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +44,18 @@ class ModifyPassFragment : BaseFragment() {
             setBackListener {
                 findNavController().popBackStack()
             }
+        }
+
+        viewBinding.sureModifyPwd.setOnClickListener {
+            val oldPwd = viewBinding.inputOldPwd.getEditText()
+            val newPwd = viewBinding.inputNewPwd.getEditText()
+            val newPwdAgain = viewBinding.inputNewPwdAgain.getEditText()
+            viewModel.doModifyPass(oldPwd, newPwd, newPwdAgain)
+        }
+
+        viewModel.doModifyType.observe(viewLifecycleOwner) {
+            if (it)
+                findNavController().popBackStack()
         }
     }
 

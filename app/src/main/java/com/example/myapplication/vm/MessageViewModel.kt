@@ -59,7 +59,7 @@ class MessageViewModel : BaseViewModel() {
                 resultMap[it] = user
             }
             newFriendsMap.value = resultMap.toMap()
-            isRot.value = newFriends.any { it.tag == 0 }
+            isRot.value = newFriends.any { it.tag == AppConfig.NOT_FRIEND }
         }
     }
 
@@ -71,7 +71,7 @@ class MessageViewModel : BaseViewModel() {
             val resultMap = mutableMapOf<Long, MessData>()
             // 获取到已添加成功的好友列表
             val friendTag1 =
-                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == 1 }
+                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == AppConfig.IS_FRIEND }
                     .toMutableList()
             // 1.获取本人的聊天记录 如果不为空 在信息展示的列表中加入本人号码
             val chatSelf = chatStoreRepository.getChatsSelf()
@@ -120,14 +120,14 @@ class MessageViewModel : BaseViewModel() {
 
     /**
      * 同意好友申请
-     * 1.将好友申请的tag更新为1
+     * 1.将好友申请的tag更新为 AppConfig.IS_FRIEND
      * 2.添加好友
      * 3.添加聊天 "我通过了你的朋友验证请求，现在我们可以开始聊天了"
      */
     fun agreeFriend(id: Long, number: Long) {
         launchSafe {
-            friendsStoreRepository.insertFriend(number, 1)
-            friendsStoreRepository.updateFriendTag(id, 1)
+            friendsStoreRepository.insertFriend(number, AppConfig.IS_FRIEND)
+            friendsStoreRepository.updateFriendTag(id, AppConfig.IS_FRIEND)
             chatStoreRepository.insertChat(number, "我通过了你的朋友验证请求，现在我们可以开始聊天了")
             onRefresh(number)
         }

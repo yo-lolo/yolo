@@ -71,7 +71,7 @@ class AppSearchViewModel : BaseViewModel() {
         launchSafe {
             // 获取所有已添加的好友
             val mineFriends =
-                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == 1 }
+                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == AppConfig.IS_FRIEND }
             val resultMap = mutableMapOf<FriendInfo, User>()
             mineFriends.map {
                 val user = userStoreRepository.queryUserByNumber(it.friendNumber)

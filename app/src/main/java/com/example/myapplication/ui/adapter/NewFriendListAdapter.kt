@@ -3,6 +3,7 @@ package com.example.myapplication.ui.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.LayoutNewFriendsItemBinding
@@ -66,11 +67,11 @@ class NewFriendListAdapter : RecyclerView.Adapter<NewFriendListAdapter.FriendLis
             binding.friendName.text = user.neck
             GlideImageLoader().displayLocalFile(user.image, binding.friendIcon)
             when (friend.tag) {
-                0 -> {
+                AppConfig.NOT_FRIEND -> {
                     binding.agreeFriend.visibility = View.VISIBLE
                     binding.alreadyCheck.visibility = View.GONE
                 }
-                1 -> {
+                AppConfig.IS_FRIEND -> {
                     binding.agreeFriend.visibility = View.GONE
                     binding.alreadyCheck.visibility = View.VISIBLE
                     binding.alreadyCheck.text = "已添加"

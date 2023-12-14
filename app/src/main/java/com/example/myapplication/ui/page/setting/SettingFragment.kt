@@ -68,6 +68,7 @@ class SettingFragment : BaseFragment() {
             findNavController().navigate(R.id.goModifyPassFragment)
         }
         binding.msgNotify.setOnCheckedChangeListener { _, isChecked ->
+            //Todo: 消息通知（信息通知，文章审核通过通知）
             MMKVManager.isNotify = isChecked
         }
         binding.userProtocol.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.example.myapplication.vm
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
@@ -10,6 +11,7 @@ import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
+import com.example.myapplication.getTag
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -35,6 +37,7 @@ class MineViewModel : BaseViewModel() {
     var resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
     var imagePath = MutableLiveData<String>("")
     val editState = MutableLiveData<Boolean>(false)
+    var doModifyType = MutableLiveData(false)
 
     /**
      * 初始化用户数据，默认为当前用户
@@ -86,6 +89,44 @@ class MineViewModel : BaseViewModel() {
      */
     fun logout() {
         MMKVManager.isLogin = false
+    }
+
+    /**
+     * 修改密码
+     */
+    fun doModifyPass(oldPwd: String, newPwd: String, newPwdAgain: String) {
+        launchSafe {
+            val user = userStoreRepository.queryUserByNumber(AppConfig.phoneNumber)
+            if (oldPwd.isNotEmpty() && newPwd.isNotEmpty() && newPwdAgain.isNotEmpty()) {
+                if (newPwd == newPwdAgain && newPwd.length in 6..14) {
+                    if (user.pass == oldPwd) {
+                        if (oldPwd != newPwd) {
+                            kotlin.runCatching {
+                                kotlin.runCatching {
+                                    userStoreRepository.updatePass(newPwd)
+                                }.onFailure {
+                                    doModifyType.value = false
+                                    ToastUtils.showShort("密码修改失败，请重试")
+                                    Log.e(getTag(), it.toString())
+                                }.onSuccess {
+                                    ToastUtils.showShort("密码修改成功")
+                                    delay(1000)
+                                    doModifyType.value = true
+                                }
+                            }
+                        } else {
+                            ToastUtils.showShort("新密码不能与旧密码一致")
+                        }
+                    } else {
+                        ToastUtils.showShort("原密码错误")
+                    }
+                } else {
+                    ToastUtils.showShort("新密码不一致或格式不正确")
+                }
+            } else {
+                ToastUtils.showShort("请完成填写")
+            }
+        }
     }
 
 

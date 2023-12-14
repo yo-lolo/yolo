@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentFriendBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.FriendListAdapter
@@ -61,7 +62,7 @@ class FriendsFragment : BaseFragment() {
         }
 
         viewModel.mineFriendsMap.observe(viewLifecycleOwner) { friends ->
-            friendListAdapter.list = friends.filter { it.key.tag == 1 }
+            friendListAdapter.list = friends.filter { it.key.tag == AppConfig.IS_FRIEND }
             friendListAdapter.notifyDataSetChanged()
         }
 

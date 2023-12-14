@@ -72,7 +72,11 @@ fun TextView.unClick(disable: Boolean) {
     }
 }
 
-fun EditText.setText(str: String) {
+fun EditText.setEditText(str: String) {
     this.text = Editable.Factory.getInstance().newEditable(str)
+}
+
+fun EditText.getEditText(): String {
+    return this.text.toString().trim()
 }
 
