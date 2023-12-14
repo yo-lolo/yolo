@@ -8,11 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentMessBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.MessListAdapter
+import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.MessageViewModel
 
 /**
@@ -44,7 +46,6 @@ class MessageFragment : BaseFragment() {
     ): View {
         binding = FragmentMessBinding.inflate(layoutInflater)
         initView()
-        viewModel.initMess()
         return binding.root
     }
 
@@ -52,11 +53,6 @@ class MessageFragment : BaseFragment() {
     fun initView() {
         binding.include.headLayout.apply {
             setTitle("信息")
-        }
-        val linearLayoutManager = object : LinearLayoutManager(context) {
-            override fun canScrollVertically(): Boolean {
-                return false
-            }
         }
         binding.messList.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -80,5 +76,20 @@ class MessageFragment : BaseFragment() {
         binding.goFriends.setOnClickListener {
             findNavController().navigate(R.id.goFriendsFragment)
         }
+
+        binding.friendSearch.setOnClickListener {
+            //todo 好友搜索
+            ToastUtils.showShort("好友搜索")
+        }
+
+        viewModel.isRot.observe(viewLifecycleOwner) {
+            binding.newFriendRot.visibleOrGone(it)
+        }
+    }
+
+    override fun onResume() {
+        viewModel.initMess()
+        viewModel.initNewFriends()
+        super.onResume()
     }
 }

@@ -11,7 +11,7 @@
         layout="@layout/comm_head_layout" />
 
     <TextView
-        android:id="@+id/text_search"
+        android:id="@+id/friend_search"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginHorizontal="7dp"
@@ -50,9 +50,11 @@
                 android:textSize="15dp" />
 
             <View
+                android:id="@+id/new_friend_rot"
                 android:layout_width="7dp"
                 android:layout_height="7dp"
                 android:layout_alignParentEnd="true"
+                android:visibility="gone"
                 android:background="@drawable/mess_red_rot_bg"
                 android:gravity="center"
                 android:layout_marginTop="7dp"

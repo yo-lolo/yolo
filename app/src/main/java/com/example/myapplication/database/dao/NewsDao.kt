@@ -37,4 +37,7 @@ interface NewsDao {
 
     @Query("update NewsInfo set type = :type where id = :id")
     fun updateNewsAuditType(type: Int, id: Long)
+
+    @Query("select * from NewsInfo where title like '%' || :searchText || '%'  or content like  '%' || :searchText || '%'  ")
+    fun queryNewsBySearchText(searchText: String): List<NewsInfo>
 }

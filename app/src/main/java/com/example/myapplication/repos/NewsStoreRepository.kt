@@ -79,4 +79,11 @@ class NewsStoreRepository(private val newsTaskImp: NewsTaskImp) {
         return@withContext newsTaskImp.updateNewsAuditType(type, id)
     }
 
+    /**
+     * news模糊查询
+     */
+    suspend fun queryNewsBySearchText(searchText: String): List<NewsInfo> = withContext(Dispatchers.IO) {
+        return@withContext newsTaskImp.queryNewsBySearchText(searchText)
+    }
+
 }

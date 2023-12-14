@@ -2,6 +2,11 @@ package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.DataManager
+import com.example.myapplication.base.BaseViewModel
+import com.example.myapplication.config.AppConfig
+import com.example.myapplication.data.NewsDataInfo
+import com.example.myapplication.database.entity.NewsInfo
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -15,19 +20,32 @@ import androidx.lifecycle.ViewModel
  * @UpdateDate : 2023/6/29 16:09
  * @UpdateRemark : 更新说明
  */
-class AppSearchViewModel : ViewModel() {
+class AppSearchViewModel : BaseViewModel() {
 
-    /**
-     * 当前加载任务计数
-     */
-    val loadingTaskCount = MutableLiveData(0)
+    private val newsStoreRepository = DataManager.newsStoreRepository
+    private val userStoreRepository = DataManager.userStoreRepository
+    private val likeStoreRepository = DataManager.likeStoreRepository
 
     /**
      * 查询结果
      */
-    val searchResult = MutableLiveData<List<String>>()
+    val searchResult = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
 
-    fun searchApp(name: String) {
+    /**
+     * 搜索文章
+     */
+    fun searchNews(searchText: String) {
+        launchSafe {
+            val resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
+            newsStoreRepository.queryNewsBySearchText(searchText).map { newsInfo ->
+                val user = userStoreRepository.queryUserByNumber(newsInfo.number)
+                val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
+                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                    .any { it.newsId == newsInfo.id }
+                resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
+            }
+            searchResult.value = resultMap.toList()
+        }
 
     }
 }

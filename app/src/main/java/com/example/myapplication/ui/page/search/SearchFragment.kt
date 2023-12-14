@@ -10,12 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentAppSearchBinding
 import com.example.myapplication.databinding.LayoutSearchHeadBinding
-import com.example.myapplication.ui.adapter.AppSeachAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
-import com.example.myapplication.util.SoftInputUtil
+import com.example.myapplication.ui.adapter.NewsListAdapter
+import com.example.myapplication.ui.page.home.NewsDetailFragment
 import com.example.myapplication.vm.AppSearchViewModel
 
 /**
@@ -32,12 +31,12 @@ import com.example.myapplication.vm.AppSearchViewModel
  */
 class SearchFragment : BaseFragment() {
 
-    lateinit var viewBinding: FragmentAppSearchBinding
-    lateinit var searchHeadBinding: LayoutSearchHeadBinding
+    private lateinit var viewBinding: FragmentAppSearchBinding
+    private lateinit var searchHeadBinding: LayoutSearchHeadBinding
 
 
     val viewModel by viewModels<AppSearchViewModel>()
-    private val searchListAdapter = AppSeachAdapter()
+    private val searchListAdapter = NewsListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +46,6 @@ class SearchFragment : BaseFragment() {
         viewBinding = FragmentAppSearchBinding.inflate(inflater)
         searchHeadBinding = LayoutSearchHeadBinding.inflate(inflater)
         initView()
-        initData()
         return viewBinding.root
     }
 
@@ -58,13 +56,13 @@ class SearchFragment : BaseFragment() {
         }
 
         searchHeadBinding.searchView.searchButtonListener = {
-            viewModel.searchApp(it)
+            viewModel.searchNews(it)
             KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
         }
 
         searchHeadBinding.searchView.searchEditText.setOnEditorActionListener { v, keyCode, event ->
             if (keyCode == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.searchApp(searchHeadBinding.searchView.searchEditText.text.toString())
+                viewModel.searchNews(searchHeadBinding.searchView.searchEditText.text.toString())
                 KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
                 return@setOnEditorActionListener true
             }
@@ -76,24 +74,16 @@ class SearchFragment : BaseFragment() {
             adapter =  EmptyViewAdapter(searchListAdapter)
         }
 
-        /*searchHeadBinding.searchView.searchEditText.addTextChangedListener(afterTextChanged = { text ->
-            viewBinding.recommentApps.visibility =
-                if (text.isNullOrBlank()) View.VISIBLE else View.GONE
-        })*/
-
-        searchListAdapter.fragmentLifecycle = viewLifecycleOwner.lifecycle
-
         viewModel.searchResult.observe(viewLifecycleOwner) {
             searchListAdapter.list = it
             searchListAdapter.notifyDataSetChanged()
         }
 
+        searchListAdapter.goNewsDetailListener = {
+            NewsDetailFragment.goNewsDetailFragment(it, findNavController())
+        }
 
         initProgress(viewModel.loadingTaskCount)
-    }
-
-    private fun initData() {
-
     }
 
 }

@@ -46,7 +46,7 @@
                         android:id="@+id/feedback_appName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="自定义SELF APP"
+                        android:text="@string/app_name"
                         android:textColor="#3C3C3C"
                         android:textSize="13dp" />
 
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="THIS IS A DESCRIBE FOR APP"
+                        android:text="@string/app_describe"
                         android:textColor="#888888"
                         android:textSize="10dp" />
                 </LinearLayout>

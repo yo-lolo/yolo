@@ -46,4 +46,8 @@ class NewsTaskImp(
         return newsDao.updateNewsAuditType(type, id)
     }
 
+    override fun queryNewsBySearchText(searchText: String): List<NewsInfo> {
+        return newsDao.queryNewsBySearchText(searchText)
+    }
+
 }

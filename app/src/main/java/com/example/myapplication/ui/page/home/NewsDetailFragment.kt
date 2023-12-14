@@ -63,7 +63,6 @@ class NewsDetailFragment : BaseFragment() {
             setBackListener {
                 findNavController().popBackStack()
             }
-            setMenuListener {}
             setHeadLayoutColor()
         }
         viewModel.userInfo.observe(viewLifecycleOwner) { user ->

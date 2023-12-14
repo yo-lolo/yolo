@@ -48,4 +48,9 @@ interface NewsTask {
      * 更新审核状态
      */
     fun updateNewsAuditType(type: Int,id: Long)
+
+    /**
+     * news模糊查询
+     */
+    fun queryNewsBySearchText(searchText: String): List<NewsInfo>
 }

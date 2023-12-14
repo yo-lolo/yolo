@@ -31,8 +31,8 @@ class MessageViewModel : BaseViewModel() {
     var chatsMap = MutableLiveData<Map<ChatInfo, ChatData>>()
     var newFriendsMap = MutableLiveData<Map<FriendInfo, User>>()
     var friendUserInfo = MutableLiveData<User>()
-    var friendTag1: MutableList<FriendInfo> = mutableListOf()
     var chatFriendsMap = MutableLiveData<Map<Long, MessData>>()
+    var isRot = MutableLiveData<Boolean>()
 
     fun initFriendsData() {
         launchSafe {
@@ -47,6 +47,9 @@ class MessageViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * 初始化新朋友
+     */
     fun initNewFriends() {
         launchSafe {
             val newFriends = friendsStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
@@ -56,14 +59,18 @@ class MessageViewModel : BaseViewModel() {
                 resultMap[it] = user
             }
             newFriendsMap.value = resultMap.toMap()
+            isRot.value = newFriends.any { it.tag == 0 }
         }
     }
 
+    /**
+     * 初始化聊天记录
+     */
     fun initMess() {
         launchSafe {
             val resultMap = mutableMapOf<Long, MessData>()
             // 获取到已添加成功的好友列表
-            friendTag1 =
+            val friendTag1 =
                 friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == 1 }
                     .toMutableList()
             // 1.获取本人的聊天记录 如果不为空 在信息展示的列表中加入本人号码
