@@ -13,6 +13,7 @@ import com.example.myapplication.databinding.FragmentMineCommentsBinding
 import com.example.myapplication.databinding.FragmentMineLikesBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.MineCommentListAdapter
+import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.ui.page.home.NewsDetailFragment
 import com.example.myapplication.ui.page.home.PostCommentFragment
 import com.example.myapplication.vm.MineCommentsViewModel
@@ -33,12 +34,8 @@ class MineLikeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMineLikesBinding
     val viewModel by viewModels<MineCommentsViewModel>()
-    private val commentsMineAdapter = MineCommentListAdapter()
+    private val newsListAdapter = NewsListAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.initLikes()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,26 +55,25 @@ class MineLikeFragment : BaseFragment() {
             setHeadLayoutColor()
         }
 
-        viewModel.commentsNewsMap.observe(viewLifecycleOwner) {
-            commentsMineAdapter.list = it
-            commentsMineAdapter.notifyDataSetChanged()
+        viewModel.likesNewsMap.observe(viewLifecycleOwner) {
+            newsListAdapter.list = it
+            newsListAdapter.notifyDataSetChanged()
         }
 
         binding.mineLikes.apply {
-            adapter = EmptyViewAdapter(commentsMineAdapter)
+            adapter = EmptyViewAdapter(newsListAdapter)
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
-        commentsMineAdapter.goCommentListener = { newsId, commentId ->
-            PostCommentFragment.goPostCommentFragment(newsId, findNavController(), commentId)
-        }
-        commentsMineAdapter.goNewsDetailListener = {
+        newsListAdapter.goNewsDetailListener = {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
-        commentsMineAdapter.goUserDetailListener = {
-            UserDetailFragment.goUserDetailFragment(it, findNavController())
-        }
         initProgress(viewModel.loadingTaskCount)
+    }
+
+    override fun onResume() {
+        viewModel.initLikes()
+        super.onResume()
     }
 
 }

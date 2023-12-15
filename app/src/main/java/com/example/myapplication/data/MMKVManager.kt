@@ -67,11 +67,11 @@ object MMKVManager {
         }
 
     /**
-     * 判断是否需要消息提醒
+     * 判断是否需要消息提醒(默认开启：true)
      */
     var isNotify: Boolean
         get() {
-            return mmkv.getBoolean(Constants.IS_NOTIFY, false)
+            return mmkv.getBoolean(Constants.IS_NOTIFY, true)
         }
         set(value) {
             mmkv.putBoolean(Constants.IS_NOTIFY, value)

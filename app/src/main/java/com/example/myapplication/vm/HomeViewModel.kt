@@ -30,11 +30,12 @@ class HomeViewModel : BaseViewModel() {
     var newsMapData = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
     var imagePath = MutableLiveData<String>("")
     var tagText = MutableLiveData<String>("")
-    var resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
+
     var newsPostState = MutableLiveData<Boolean>(false)
 
     fun initData() {
         launchSafe(false) {
+            val resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
             newsStoreRepository.getNews().map { newsInfo ->
                 val user = userStoreRepository.queryUserByNumber(newsInfo.number)
                 val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size

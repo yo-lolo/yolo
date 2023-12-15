@@ -15,6 +15,7 @@ import com.example.myapplication.R
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.FragmentSettingBinding
 import com.example.myapplication.isLogin
+import com.example.myapplication.isNotify
 import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.vm.MineViewModel
 
@@ -64,11 +65,12 @@ class SettingFragment : BaseFragment() {
             })
         }
 
+        binding.msgNotify.isChecked = isNotify()
+
         binding.modifyPassword.setOnClickListener {
             findNavController().navigate(R.id.goModifyPassFragment)
         }
         binding.msgNotify.setOnCheckedChangeListener { _, isChecked ->
-            //Todo: 消息通知（信息通知，文章审核通过通知）
             MMKVManager.isNotify = isChecked
         }
         binding.userProtocol.setOnClickListener {

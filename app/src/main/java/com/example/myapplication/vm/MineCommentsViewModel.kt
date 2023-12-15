@@ -2,11 +2,11 @@ package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.data.MineComments
+import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
@@ -33,14 +33,17 @@ class MineCommentsViewModel : BaseViewModel() {
     var user = MutableLiveData<User>()
     val news = MutableLiveData<List<NewsInfo>>()
     val commentsNewsMap = MutableLiveData<Map<CommentInfo, MineComments>>()
-    var resultMap = mutableMapOf<CommentInfo, MineComments>()
+    val likesNewsMap = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
 
 
+    /**
+     * 初始化我的评论展示
+     */
     fun initComments(number: Long = AppConfig.phoneNumber) {
         viewModelScope.launch {
+            val resultMap = mutableMapOf<CommentInfo, MineComments>()
             user.value = userStoreRepository.queryUserByNumber(number)
             news.value = newsStoreRepository.getNewsByNumber(number)
-
             commentStoreRepository.getCommentsByNumber(number).map {
                 var user: User? = null
                 var newsUser: User? = null
@@ -66,11 +69,26 @@ class MineCommentsViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * 初始化我的点赞
+     */
     fun initLikes() {
+
         viewModelScope.launch {
-            var newsIdsByLike =
+            val resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
+            val newsIdsByLike =
                 likeStoreRepository.getLikesMine(AppConfig.phoneNumber).map { it.newsId }
-            var resultMap = mutableMapOf<Long, String>()
+            val newsList = newsIdsByLike.map { newsId ->
+                newsStoreRepository.getNewsById(newsId)
+            }
+            newsList.map { newsInfo ->
+                val user = userStoreRepository.queryUserByNumber(newsInfo.number)
+                val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
+                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                    .any { it.newsId == newsInfo.id }
+                resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
+            }
+            likesNewsMap.value = resultMap.toList()
         }
     }
 

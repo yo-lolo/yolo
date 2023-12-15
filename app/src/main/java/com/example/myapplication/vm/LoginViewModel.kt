@@ -53,6 +53,7 @@ class LoginViewModel : BaseViewModel() {
                             AppConfig.phoneNumber = phoneNumber
                             ToastUtils.showShort("登陆成功,进入首页")
                             delay(1000)
+                            initMessNotify() // 初始化消息通知
                             loginType.value = true
 
                         } else {
@@ -90,6 +91,16 @@ class LoginViewModel : BaseViewModel() {
 //                ToastUtils.showShort("用户名密码不能为空")
 //            }
         }
+    }
+
+    /**
+     * 初始化消息通知
+     * 通知信息缓存（审核通过，消息发送成功，好友申请发送成功）
+     * Todo: 登录成功后需要初始化消息通知（信息通知，文章审核通过通知，好友申请通知三种）
+     * 信息通知要判断是否开启消息免打扰，若开启则拦截（即删除缓存信息）
+     */
+    private fun initMessNotify() {
+
     }
 
     /**
