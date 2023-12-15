@@ -179,6 +179,6 @@ class ScrollerLinearLayout @JvmOverloads constructor(
     }
 
     companion object {
-        const val TAG = "ScrollerLinearLayout_YOLO"
+        const val TAG = "ScrollerLinearLayout"
     }
 }

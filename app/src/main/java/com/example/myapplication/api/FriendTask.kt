@@ -27,7 +27,7 @@ interface FriendTask {
     /**
      * 删除好友
      */
-    fun deleteFriend(friendInfo: FriendInfo)
+    fun deleteFriend(number: Long, friendNumber: Long)
 
     /**
      * 获取当前帐号所有的好友
@@ -37,7 +37,7 @@ interface FriendTask {
     /**
      * 获取好友信息
      */
-    fun getFriendById(number: Long, friendNumber: Long): List<FriendInfo>
+    fun getFriendById(number: Long, friendNumber: Long): FriendInfo
 
     /**
      * 获取该账号的好友请求列表中的好友信息
@@ -53,4 +53,14 @@ interface FriendTask {
      * 更新请求列表好友信息的tag
      */
     fun updateFriendTag(id: Long, tag: Int)
+
+    /**
+     * 更新好友置顶状态
+     */
+    fun updateFriendTopState(number: Long, friendNumber: Long, isTop: Boolean)
+
+    /**
+     * 更新好友通知状态
+     */
+    fun updateFriendNotifyState(number: Long, friendNumber: Long, isNotify: Boolean)
 }

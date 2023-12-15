@@ -48,4 +48,9 @@ interface ChatTask {
      * 获取自己的的聊天记录
      */
     fun getChatsSelf(phoneNumber: Long): List<ChatInfo>
+
+    /**
+     * 清空两个账号之间的所有记录
+     */
+    fun clearChats(number: Long, friendNumber: Long)
 }

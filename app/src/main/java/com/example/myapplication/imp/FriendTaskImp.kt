@@ -26,15 +26,15 @@ class FriendTaskImp(
         return friendDao.insertFriend(friendInfo)
     }
 
-    override fun deleteFriend(friendInfo: FriendInfo) {
-        friendDao.deleteFriend(friendInfo)
+    override fun deleteFriend(number: Long, friendNumber: Long) {
+        friendDao.deleteFriend(number, friendNumber)
     }
 
     override fun getFriendsById(number: Long): List<FriendInfo> {
         return friendDao.getFriendsById(number)
     }
 
-    override fun getFriendById(number: Long, friendNumber: Long): List<FriendInfo> {
+    override fun getFriendById(number: Long, friendNumber: Long): FriendInfo {
         return friendDao.getFriendById(number, friendNumber)
     }
 
@@ -48,5 +48,13 @@ class FriendTaskImp(
 
     override fun updateFriendTag(id: Long, tag: Int) {
         friendDao.updateFriendTag(id, tag)
+    }
+
+    override fun updateFriendTopState(number: Long, friendNumber: Long, isTop: Boolean) {
+        friendDao.updateFriendTopState(number, friendNumber, isTop)
+    }
+
+    override fun updateFriendNotifyState(number: Long, friendNumber: Long, isNotify: Boolean) {
+        friendDao.updateFriendNotifyState(number, friendNumber, isNotify)
     }
 }

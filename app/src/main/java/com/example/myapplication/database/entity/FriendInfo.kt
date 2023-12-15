@@ -26,7 +26,7 @@ data class FriendInfo(
     val image: String,
     val tag: Int = AppConfig.NOT_FRIEND,
     val isTop: Boolean = false,
-    val isNotify: Boolean = false
+    val isNotify: Boolean = true
 ) : java.io.Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

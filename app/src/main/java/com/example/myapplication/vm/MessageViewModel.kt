@@ -1,6 +1,7 @@
 package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
+import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
@@ -9,6 +10,7 @@ import com.example.myapplication.data.MessData
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.User
+import kotlinx.coroutines.delay
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -30,9 +32,12 @@ class MessageViewModel : BaseViewModel() {
     var mineFriendsMap = MutableLiveData<Map<FriendInfo, User>>()
     var chatsMap = MutableLiveData<Map<ChatInfo, ChatData>>()
     var newFriendsMap = MutableLiveData<Map<FriendInfo, User>>()
-    var friendUserInfo = MutableLiveData<User>()
     var chatFriendsMap = MutableLiveData<Map<Long, MessData>>()
+
+    var friendUserInfo = MutableLiveData<User>()
     var isRot = MutableLiveData<Boolean>()
+    var friendInfo = MutableLiveData<FriendInfo>()
+    var deleteFriendState = MutableLiveData<Boolean>(false)
 
     fun initFriendsData() {
         launchSafe {
@@ -71,7 +76,8 @@ class MessageViewModel : BaseViewModel() {
             val resultMap = mutableMapOf<Long, MessData>()
             // 获取到已添加成功的好友列表
             val friendTag1 =
-                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == AppConfig.IS_FRIEND }
+                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+                    .filter { it.tag == AppConfig.IS_FRIEND }
                     .toMutableList()
             // 1.获取本人的聊天记录 如果不为空 在信息展示的列表中加入本人号码
             val chatSelf = chatStoreRepository.getChatsSelf()
@@ -93,6 +99,7 @@ class MessageViewModel : BaseViewModel() {
 
     fun initChats(friendNumber: Long) {
         launchSafe {
+            friendInfo.value = friendsStoreRepository.getFriendById(friendNumber)
             friendUserInfo.value = userStoreRepository.queryUserByNumber(friendNumber)
             // fix:给自己发送消息时的逻辑问题
             val resultMap = mutableMapOf<ChatInfo, ChatData>()
@@ -131,7 +138,10 @@ class MessageViewModel : BaseViewModel() {
         launchSafe {
             friendsStoreRepository.insertFriend(number, AppConfig.IS_FRIEND)
             friendsStoreRepository.updateFriendTag(id, AppConfig.IS_FRIEND)
-            chatStoreRepository.insertChat(number, "我通过了你的朋友验证请求，现在我们可以开始聊天了")
+            chatStoreRepository.insertChat(
+                number,
+                "我通过了你的朋友验证请求，现在我们可以开始聊天了"
+            )
             onRefresh(number)
         }
     }
@@ -140,6 +150,60 @@ class MessageViewModel : BaseViewModel() {
         initFriendsData()
         initNewFriends()
         initChats(friendNumber)
+    }
+
+    /**
+     * 删除好友
+     * 两边都要删除好友和聊天记录
+     */
+    fun deleteFriend(friendNumber: Long) {
+        launchSafe {
+            kotlin.runCatching {
+                friendsStoreRepository.deleteFriend(friendNumber)
+                chatStoreRepository.clearChats(friendNumber)
+            }.onFailure {
+                ToastUtils.showShort("删除好友失败")
+            }.onSuccess {
+                ToastUtils.showShort("删除好友成功")
+                delay(1000)
+                deleteFriendState.value = true
+            }
+        }
+    }
+
+    /**
+     * 更新好友置顶状态
+     */
+    fun updateFriendTopState(friendNumber: Long, isTop: Boolean) {
+        launchSafe {
+            kotlin.runCatching {
+                friendsStoreRepository.updateFriendTopState(friendNumber, isTop)
+            }.onFailure {
+                ToastUtils.showShort("置顶状态设置失败，请重试")
+            }
+        }
+    }
+
+    /**
+     * 清除聊天记录
+     */
+    fun clearChats(friendNumber: Long) {
+        //todo 清除聊天记录
+        ToastUtils.showShort("清除聊天记录")
+    }
+
+    /**
+     * 更新好友通知状态
+     */
+    fun updateFriendNotifyState(friendNumber: Long, isNotify: Boolean) {
+        launchSafe {
+            kotlin.runCatching {
+                friendsStoreRepository.updateFriendNotifyState(friendNumber, isNotify)
+            }.onFailure {
+                ToastUtils.showShort("通知状态设置失败，请重试")
+            }
+        }
+
     }
 
 

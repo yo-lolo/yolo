@@ -23,14 +23,14 @@ interface FriendDao {
     @Insert
     fun insertFriend(friendInfo: FriendInfo): Long
 
-    @Delete
-    fun deleteFriend(friendInfo: FriendInfo)
+    @Query("delete from FriendInfo where number = :number and friendNumber=:friendNumber or number = :friendNumber and friendNumber = :number")
+    fun deleteFriend(number: Long, friendNumber: Long)
 
     @Query("select * from FriendInfo where number = :number")
     fun getFriendsById(number: Long): List<FriendInfo>
 
     @Query("select * from FriendInfo where number = :number and friendNumber= :friendNumber")
-    fun getFriendById(number: Long, friendNumber: Long): List<FriendInfo>
+    fun getFriendById(number: Long, friendNumber: Long): FriendInfo
 
     @Query("select * from FriendInfo where number = :friendNumber and friendNumber= :number")
     fun getNewFriendById(number: Long, friendNumber: Long): FriendInfo
@@ -40,4 +40,10 @@ interface FriendDao {
 
     @Query("update FriendInfo set tag = :tag where id = :id")
     fun updateFriendTag(id: Long, tag: Int)
+
+    @Query("update FriendInfo set isTop = :isTop where number = :number and friendNumber = :friendNumber")
+    fun updateFriendTopState(number: Long, friendNumber: Long, isTop: Boolean)
+
+    @Query("update FriendInfo set isNotify = :isNotify where number = :number and friendNumber = :friendNumber")
+    fun updateFriendNotifyState(number: Long, friendNumber: Long, isNotify: Boolean)
 }

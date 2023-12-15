@@ -46,4 +46,8 @@ class ChatTaskImp(
         return chatDao.getChatsSelf(phoneNumber)
     }
 
+    override fun clearChats(number: Long, friendNumber: Long) {
+        return chatDao.clearChats(number, friendNumber)
+    }
+
 }

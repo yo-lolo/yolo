@@ -32,10 +32,13 @@ class UserDetailViewModel : BaseViewModel() {
     fun initUserInfo(number: Long) {
         viewModelScope.launch {
             userDetailInfo.value = userStoreRepository.queryUserByNumber(number)
-
             val friendInfo = friendsStoreRepository.getFriendById(number)
-            isFriend.value =
-                friendInfo.isNotEmpty() && friendInfo[0].tag != AppConfig.NOT_FRIEND || number == AppConfig.phoneNumber
+            if (friendInfo != null) {
+                isFriend.value = friendInfo.tag == AppConfig.IS_FRIEND
+            }
+            if (number == AppConfig.phoneNumber) {
+                isFriend.value = true
+            }
         }
     }
 
@@ -49,8 +52,6 @@ class UserDetailViewModel : BaseViewModel() {
             }.onSuccess {
                 ToastUtils.showLong("已发送好友请求,等待好友验证")
             }.onFailure {
-                it.message
-                it.printStackTrace()
                 ToastUtils.showLong("好友请求失败，请稍后重试")
             }
             initUserInfo(newsId)

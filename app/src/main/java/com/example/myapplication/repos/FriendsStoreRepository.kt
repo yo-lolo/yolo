@@ -41,8 +41,8 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
     /**
      * 删除好友
      */
-    suspend fun deleteFriend(friendInfo: FriendInfo) = withContext(Dispatchers.IO) {
-        return@withContext friendTaskImp.deleteFriend(friendInfo)
+    suspend fun deleteFriend(friendNumber: Long) = withContext(Dispatchers.IO) {
+        return@withContext friendTaskImp.deleteFriend(AppConfig.phoneNumber, friendNumber)
     }
 
     /**
@@ -55,7 +55,7 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
     /**
      * 获取好友信息
      */
-    suspend fun getFriendById(friendNumber: Long): List<FriendInfo> =
+    suspend fun getFriendById(friendNumber: Long): FriendInfo =
         withContext(Dispatchers.IO) {
             return@withContext friendTaskImp.getFriendById(AppConfig.phoneNumber, friendNumber)
         }
@@ -82,5 +82,29 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
     suspend fun updateFriendTag(id: Long, tag: Int) = withContext(Dispatchers.IO) {
         return@withContext friendTaskImp.updateFriendTag(id, tag)
     }
+
+    /**
+     * 更新好友置顶状态
+     */
+    suspend fun updateFriendTopState(friendNumber: Long, isTop: Boolean) =
+        withContext(Dispatchers.IO) {
+            return@withContext friendTaskImp.updateFriendTopState(
+                AppConfig.phoneNumber,
+                friendNumber,
+                isTop
+            )
+        }
+
+    /**
+     * 更新好友通知状态
+     */
+    suspend fun updateFriendNotifyState(friendNumber: Long, isNotify: Boolean) =
+        withContext(Dispatchers.IO) {
+            return@withContext friendTaskImp.updateFriendNotifyState(
+                AppConfig.phoneNumber,
+                friendNumber,
+                isNotify
+            )
+        }
 
 }

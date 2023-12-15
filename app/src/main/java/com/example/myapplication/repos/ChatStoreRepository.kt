@@ -74,4 +74,11 @@ class ChatStoreRepository(private val chatTaskImp: ChatTaskImp) {
         return@withContext chatTaskImp.getLastChatBT2(number, AppConfig.phoneNumber)
     }
 
+    /**
+     * 清空两个账号之间的所有记录
+     */
+    suspend fun clearChats(friendNumber: Long) = withContext(Dispatchers.IO) {
+        return@withContext chatTaskImp.clearChats(AppConfig.phoneNumber, friendNumber)
+    }
+
 }

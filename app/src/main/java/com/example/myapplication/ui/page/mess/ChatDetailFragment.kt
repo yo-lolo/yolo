@@ -7,18 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
-import com.example.myapplication.database.entity.ChatInfo
-import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatDetailBinding
 import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.ui.page.search.SearchFragment
 import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.util.GlideImageLoader
-import com.example.myapplication.util.JsonUtil
 import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.MessageViewModel
 
@@ -61,6 +57,8 @@ class ChatDetailFragment : BaseFragment() {
             setTitle("聊天详情")
             setBackListener { findNavController().popBackStack() }
         }
+        binding.selfGoneLayout.visibleOrGone(number != AppConfig.phoneNumber)
+        binding.deleteFriend.visibleOrGone(AppConfig.phoneNumber != number)
         binding.userIcon.setOnClickListener {
             UserDetailFragment.goUserDetailFragment(number!!, findNavController())
         }
@@ -68,29 +66,33 @@ class ChatDetailFragment : BaseFragment() {
             GlideImageLoader().displayLocalFile(it.image, binding.userIcon)
             binding.userNeck.text = it.neck
         }
+        viewModel.friendInfo.observe(viewLifecycleOwner) {
+            binding.switchTop.isChecked = it.isTop
+            binding.switchMessNotify.isChecked = !it.isNotify
+        }
         binding.goFindChats.setOnClickListener {
             SearchFragment.goSearchFragment(AppConfig.SEARCH_CHATS, findNavController(), number!!)
         }
         binding.clearChats.setOnClickListener {
-            //todo 清除聊天记录
             PromptUseCase().prompt("确定要清除聊天记录吗？") {
-                ToastUtils.showShort("清除聊天记录")
+                viewModel.clearChats(number!!)
             }
         }
         binding.switchTop.setOnCheckedChangeListener { _, isChecked ->
-            //todo 置顶聊天
-            ToastUtils.showShort("置顶聊天: $isChecked")
+            viewModel.updateFriendTopState(number!!, isChecked)
         }
         binding.switchMessNotify.setOnCheckedChangeListener { _, isChecked ->
-            //todo 消息免打扰
-            ToastUtils.showShort("消息免打扰: $isChecked")
+            viewModel.updateFriendNotifyState(number!!, !isChecked)
         }
-        binding.deleteFriend.visibleOrGone(AppConfig.phoneNumber != number)
         binding.deleteFriend.setOnClickListener {
-            //todo 删除好友
             PromptUseCase().prompt("确定要删除好友吗？") {
-                ToastUtils.showShort("删除好友")
+                viewModel.deleteFriend(number!!)
             }
+        }
+
+        viewModel.deleteFriendState.observe(viewLifecycleOwner) {
+            if (it)
+                findNavController().navigate(R.id.goMessFragment)
         }
 
     }

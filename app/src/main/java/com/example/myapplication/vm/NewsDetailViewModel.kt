@@ -73,18 +73,20 @@ class NewsDetailViewModel : BaseViewModel() {
             }
             val friend = friendsStoreRepository.getFriendById(newsInfo.value!!.number)
 
-            if (friend.isNotEmpty()) {
-                if (friend[0].tag == AppConfig.IS_FRIEND) {
+            if (friend != null)
+                if (friend.tag == AppConfig.IS_FRIEND) {
                     isFriend.value = true
                 }
-            }
-
             initComment(newsId)
             initLike(newsId)
 
         }
     }
 
+
+    /**
+     * 初始化所有评论
+     */
     fun initComment(newsId: Long) {
 
         launchTest {
@@ -120,13 +122,16 @@ class NewsDetailViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * 初始化点赞
+     */
     fun initLike(newsId: Long) {
         viewModelScope.launch {
-            val ss = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+            val likes = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
                 .filter { it.newsId == newsId }
-            if (ss.isNotEmpty())
-                likeInfo.value = ss[0]
-            isLike.value = ss.isNotEmpty()
+            if (likes.isNotEmpty())
+                likeInfo.value = likes[0]
+            isLike.value = likes.isNotEmpty()
         }
     }
 

@@ -38,4 +38,7 @@ interface ChatDao {
 
     @Query("select * from ChatInfo where number = :phoneNumber and friendNumber = :phoneNumber")
     fun getChatsSelf(phoneNumber: Long): List<ChatInfo>
+
+    @Query("delete from ChatInfo where number = :number and friendNumber=:friendNumber or number = :friendNumber and friendNumber = :number")
+    fun clearChats(number: Long, friendNumber: Long)
 }
