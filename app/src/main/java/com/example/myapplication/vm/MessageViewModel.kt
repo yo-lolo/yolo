@@ -111,6 +111,9 @@ class MessageViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * 发送聊天
+     */
     fun insertChat(friendNumber: Long, content: String) {
         launchSafe {
             chatStoreRepository.insertChat(friendNumber, content)

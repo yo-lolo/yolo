@@ -15,6 +15,7 @@ import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.databinding.FragmentChatDetailBinding
 import com.example.myapplication.ui.page.mine.UserDetailFragment
+import com.example.myapplication.ui.page.search.SearchFragment
 import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.JsonUtil
@@ -68,12 +69,11 @@ class ChatDetailFragment : BaseFragment() {
             binding.userNeck.text = it.neck
         }
         binding.goFindChats.setOnClickListener {
-            //todo 查找聊天记录
-            ToastUtils.showShort("查找聊天记录")
+            SearchFragment.goSearchFragment(AppConfig.SEARCH_CHATS, findNavController(), number!!)
         }
         binding.clearChats.setOnClickListener {
             //todo 清除聊天记录
-            PromptUseCase().prompt("确定要清除聊天记录吗？"){
+            PromptUseCase().prompt("确定要清除聊天记录吗？") {
                 ToastUtils.showShort("清除聊天记录")
             }
         }
@@ -88,7 +88,7 @@ class ChatDetailFragment : BaseFragment() {
         binding.deleteFriend.visibleOrGone(AppConfig.phoneNumber != number)
         binding.deleteFriend.setOnClickListener {
             //todo 删除好友
-            PromptUseCase().prompt("确定要删除好友吗？"){
+            PromptUseCase().prompt("确定要删除好友吗？") {
                 ToastUtils.showShort("删除好友")
             }
         }

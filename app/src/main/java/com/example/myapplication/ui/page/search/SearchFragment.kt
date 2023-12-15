@@ -18,9 +18,10 @@ import com.example.myapplication.databinding.LayoutSearchHeadBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.FriendListAdapter
 import com.example.myapplication.ui.adapter.NewsListAdapter
+import com.example.myapplication.ui.adapter.SearchChatsAdapter
 import com.example.myapplication.ui.page.home.NewsDetailFragment
 import com.example.myapplication.ui.page.mine.UserDetailFragment
-import com.example.myapplication.vm.AppSearchViewModel
+import com.example.myapplication.vm.SearchViewModel
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -39,7 +40,8 @@ class SearchFragment : BaseFragment() {
     private lateinit var viewBinding: FragmentAppSearchBinding
     private lateinit var searchHeadBinding: LayoutSearchHeadBinding
     private var tag: Int? = null
-    val viewModel by viewModels<AppSearchViewModel>()
+    private var friendNumber: Long? = null
+    val viewModel by viewModels<SearchViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +51,7 @@ class SearchFragment : BaseFragment() {
         viewBinding = FragmentAppSearchBinding.inflate(inflater)
         searchHeadBinding = LayoutSearchHeadBinding.inflate(inflater)
         tag = arguments?.getInt("tag")
+        friendNumber = arguments?.getLong("friendNumber")
         tag?.let { initAdapter(it) }
         initView()
         return viewBinding.root
@@ -60,13 +63,17 @@ class SearchFragment : BaseFragment() {
             findNavController().popBackStack()
         }
         searchHeadBinding.searchView.searchButtonListener = {
-            viewModel.doSearch(tag, it)
+            viewModel.doSearch(tag, it, friendNumber)
             KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
         }
 
         searchHeadBinding.searchView.searchEditText.setOnEditorActionListener { v, keyCode, event ->
             if (keyCode == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.doSearch(tag, searchHeadBinding.searchView.searchEditText.text.toString())
+                viewModel.doSearch(
+                    tag,
+                    searchHeadBinding.searchView.searchEditText.text.toString(),
+                    friendNumber
+                )
                 KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
                 return@setOnEditorActionListener true
             }
@@ -80,9 +87,14 @@ class SearchFragment : BaseFragment() {
         if (tag == AppConfig.SEARCH_NEWS) {
             val adapter = NewsListAdapter()
             initNewsAdapter(adapter)
-        } else if (tag == AppConfig.SEARCH_FRIENDS) {
+        }
+        if (tag == AppConfig.SEARCH_FRIENDS) {
             val adapter = FriendListAdapter()
             initFriendsAdapter(adapter)
+        }
+        if (tag == AppConfig.SEARCH_CHATS) {
+            val adapter = SearchChatsAdapter()
+            initChatsAdapter(adapter)
         }
     }
 
@@ -118,9 +130,26 @@ class SearchFragment : BaseFragment() {
         }
     }
 
+    private fun initChatsAdapter(chatsAdapter: SearchChatsAdapter) {
+        viewModel.searchChatsResult.observe(viewLifecycleOwner) {
+            chatsAdapter.list = it
+            chatsAdapter.notifyDataSetChanged()
+        }
+
+        viewBinding.appsRecyclew.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = EmptyViewAdapter(chatsAdapter)
+        }
+    }
+
     companion object {
-        fun goSearchFragment(tag: Int, navController: NavController) {
-            val bundle = Bundle().apply { putInt("tag", tag) }
+        fun goSearchFragment(tag: Int, navController: NavController, friendNumber: Long? = null) {
+            val bundle = Bundle().apply {
+                putInt("tag", tag)
+                if (friendNumber != null) {
+                    putLong("friendNumber", friendNumber)
+                }
+            }
             navController.navigate(R.id.goSearchFragment, bundle)
         }
     }

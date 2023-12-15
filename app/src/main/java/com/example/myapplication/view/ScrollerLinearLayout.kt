@@ -168,13 +168,11 @@ class ScrollerLinearLayout @JvmOverloads constructor(
      * 最多只允许有两个子布局
      */
     private fun childViewWidth(): Int {
-        Log.e(TAG, "childCount ${this.childCount}")
         return if (this.childCount > 1) {
             val expandChild = this.getChildAt(1) as LinearLayout
             if (expandChild.measuredWidth != 0){
                 expandWidth = expandChild.measuredWidth
             }
-            Log.e(TAG, "expandWidth $expandWidth")
             expandWidth
         } else
             0

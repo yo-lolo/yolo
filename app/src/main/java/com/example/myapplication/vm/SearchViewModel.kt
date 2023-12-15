@@ -2,9 +2,12 @@ package com.example.myapplication.vm
 
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.DataManager
+import com.example.myapplication.DataManager.chatStoreRepository
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
+import com.example.myapplication.data.ChatData
 import com.example.myapplication.data.NewsDataInfo
+import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
@@ -21,7 +24,7 @@ import com.example.myapplication.database.entity.User
  * @UpdateDate : 2023/6/29 16:09
  * @UpdateRemark : 更新说明
  */
-class AppSearchViewModel : BaseViewModel() {
+class SearchViewModel : BaseViewModel() {
 
     private val newsStoreRepository = DataManager.newsStoreRepository
     private val userStoreRepository = DataManager.userStoreRepository
@@ -33,17 +36,21 @@ class AppSearchViewModel : BaseViewModel() {
      */
     val searchNewsResult = MutableLiveData<List<Pair<NewsInfo, NewsDataInfo>>>()
     val searchFriendsResult = MutableLiveData<Map<FriendInfo, User>>()
+    var searchChatsResult = MutableLiveData<Map<ChatInfo, User>>()
 
 
     /**
      * 搜索过滤
      */
-    fun doSearch(tag: Int?, searchText: String) {
+    fun doSearch(tag: Int?, searchText: String, friendNumber: Long?) {
         if (tag == AppConfig.SEARCH_NEWS) {
             searchNews(searchText)
         }
         if (tag == AppConfig.SEARCH_FRIENDS) {
             searchFriends(searchText)
+        }
+        if (tag == AppConfig.SEARCH_CHATS) {
+            searchChats(searchText, friendNumber)
         }
     }
 
@@ -71,7 +78,8 @@ class AppSearchViewModel : BaseViewModel() {
         launchSafe {
             // 获取所有已添加的好友
             val mineFriends =
-                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber).filter { it.tag == AppConfig.IS_FRIEND }
+                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+                    .filter { it.tag == AppConfig.IS_FRIEND }
             val resultMap = mutableMapOf<FriendInfo, User>()
             mineFriends.map {
                 val user = userStoreRepository.queryUserByNumber(it.friendNumber)
@@ -82,5 +90,26 @@ class AppSearchViewModel : BaseViewModel() {
                     .contains(searchText.toLowerCase())
             }
         }
+    }
+
+    /**
+     * 搜索聊天记录
+     */
+    private fun searchChats(searchText: String, friendNumber: Long?) {
+        launchSafe {
+            val resultMap = mutableMapOf<ChatInfo, User>()
+            val chats = if (AppConfig.phoneNumber != friendNumber) {
+                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber!!)
+                    .filter { it.friendNumber != it.number }
+            } else {
+                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+            }
+            chats.filter { it.content.toLowerCase().contains(searchText.toLowerCase()) }.map {
+                val user = userStoreRepository.queryUserByNumber(it.number)
+                resultMap[it] = user
+            }
+            searchChatsResult.value = resultMap
+        }
+
     }
 }
