@@ -72,7 +72,7 @@ class MineFragment : BaseFragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
-            if (user != null) {
+            if (isLogin() && user != null) {
                 homeBinding.userName.text = user.neck
                 homeBinding.userName.isEnabled = false
                 GlideImageLoader().displayLocalFile(user.image, homeBinding.mineTouxiang)
