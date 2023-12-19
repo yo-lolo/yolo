@@ -87,7 +87,7 @@ class NewsDetailViewModel : BaseViewModel() {
     /**
      * 初始化所有评论
      */
-    fun initComment(newsId: Long) {
+    private fun initComment(newsId: Long) {
 
         launchTest {
             // 获取该文章的所有评论
@@ -125,7 +125,7 @@ class NewsDetailViewModel : BaseViewModel() {
     /**
      * 初始化点赞
      */
-    fun initLike(newsId: Long) {
+    private fun initLike(newsId: Long) {
         viewModelScope.launch {
             val likes = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
                 .filter { it.newsId == newsId }

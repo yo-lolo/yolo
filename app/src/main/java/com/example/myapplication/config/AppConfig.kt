@@ -66,8 +66,18 @@ object AppConfig {
     /**
      * 好友标识
      * 0-非好友 1-好友
+     * @sample NOT_FRIEND 非好友标识
+     * @sample IS_FRIEND 好友标识
      */
     const val NOT_FRIEND = 0
     const val IS_FRIEND = 1
+
+    /**
+     * 通知标识
+     * 信息通知，文章审核通知，好友申请通知
+     */
+    const val MESS_NOTIFY = 0
+    const val AUDIT_NOTIFY = 1
+    const val FRIEND_APPLY_NOTIFY = 2
 
 }

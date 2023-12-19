@@ -15,7 +15,7 @@ import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
-import com.example.myapplication.data.NotifyData
+import com.example.myapplication.database.entity.NotifyInfo
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.isLogin
 import com.example.myapplication.notify.MessNotification
@@ -118,7 +118,7 @@ class HomeFragment : BaseFragment() {
             browserPop()
         }
         binding.initNotify.setOnClickListener {
-            MessNotification().showNotify(NotifyData("hhhh","www",0))
+            MessNotification().showNotify(NotifyInfo(AppConfig.MESS_NOTIFY,"www","0"))
         }
     }
 

@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.broadcastReceiver.MessNotifyReceiver
-import com.example.myapplication.data.NotifyData
+import com.example.myapplication.database.entity.NotifyInfo
 import com.example.myapplication.databinding.LayoutEmergencyNotifyItemBinding
 import com.example.myapplication.util.layoutInflater
 
@@ -30,7 +30,7 @@ class MessNotification {
      * 显示到通知栏
      *
      */
-    fun showNotify(notifyData: NotifyData) {
+    fun showNotify(notifyData: NotifyInfo) {
         binding = LayoutEmergencyNotifyItemBinding.inflate(context.layoutInflater())
 
         // 自定义通知布局
@@ -58,7 +58,7 @@ class MessNotification {
             val notificationChannel =
                 NotificationChannel(
                     channelId,
-                    "YoLo通知",
+                    "FISH-APP通知",
                     NotificationManager.IMPORTANCE_HIGH
                 )
             notificationChannel.lockscreenVisibility = Notification.VISIBILITY_SECRET

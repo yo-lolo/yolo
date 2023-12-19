@@ -18,7 +18,7 @@ import com.example.myapplication.database.entity.*
  * @UpdateRemark : 更新说明
  */
 @Database(
-    entities = [User::class, FeedbackInfo::class, ChatInfo::class, CommentInfo::class, FriendInfo::class, LikeInfo::class, NewsInfo::class],
+    entities = [User::class, FeedbackInfo::class, ChatInfo::class, CommentInfo::class, FriendInfo::class, LikeInfo::class, NewsInfo::class, NotifyInfo::class],
     version = 1,
     exportSchema = false
 )
@@ -30,4 +30,5 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun FriendDao(): FriendDao
     abstract fun LikeDao(): LikeDao
     abstract fun NewsDao(): NewsDao
+    abstract fun NotifyDao(): NotifyDao
 }

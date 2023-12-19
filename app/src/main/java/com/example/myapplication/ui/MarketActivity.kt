@@ -9,11 +9,16 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
 import com.example.myapplication.base.BaseActivity
+import com.example.myapplication.config.AppConfig
 import com.example.myapplication.data.MMKVManager
+import com.example.myapplication.database.entity.ChatInfo
+import com.example.myapplication.database.entity.NotifyInfo
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivityMarketBinding
 import com.example.myapplication.isLogin
+import com.example.myapplication.ui.page.mess.ChatFragment
 import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.JsonUtil
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -52,9 +57,9 @@ class MarketActivity : BaseActivity() {
             navController.navigate(
                 R.id.goLoginFragment,
                 Bundle().apply { putBoolean("isMarket2Login", true) })
-        }else if (!isLogin()){
+        } else if (!isLogin()) {
             // 如果未登录 弹窗询问是否要登录
-            PromptUseCase().prompt("您还未登录，是否要先登录？"){
+            PromptUseCase().prompt("您还未登录，是否要先登录？") {
                 navController.navigate(R.id.goLoginFragment)
             }
         }
@@ -67,6 +72,28 @@ class MarketActivity : BaseActivity() {
                 R.id.mineFragment
             ).contains(destination.id)
             binding.bottomNav.visibility = if (isMainTab) View.VISIBLE else View.GONE
+        }
+    }
+
+    fun initNotifyIntent() {
+        val data = intent.getSerializableExtra("data") as NotifyInfo?
+        when (data?.tag) {
+            AppConfig.MESS_NOTIFY -> {
+                val chatInfo = JsonUtil.fromJson(data.jsonData, ChatInfo::class.java)
+                chatInfo?.number?.let { ChatFragment.goChatFragment(navController, it) }
+            }
+
+            AppConfig.AUDIT_NOTIFY -> {
+                navController.navigate(R.id.goMineNewsFragment)
+            }
+
+            AppConfig.FRIEND_APPLY_NOTIFY -> {
+                navController.navigate(R.id.goNewFriendsFragment)
+            }
+
+            else -> {
+                //do nothing
+            }
         }
     }
 }
