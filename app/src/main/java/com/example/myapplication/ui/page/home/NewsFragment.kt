@@ -76,9 +76,20 @@ class NewsFragment : BaseFragment() {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
 
-        binding.newRefresh.setFooterHeight(0f)
+        binding.refreshLayout.apply {
+            setEnableRefresh(true)
+            setOnRefreshListener{
+                viewModel.initData()
+            }
+            setEnableLoadMore(false)
+        }
 
-        initProgress(viewModel.loadingTaskCount)
+        viewModel.loadingTaskCount.observe(viewLifecycleOwner) { loading ->
+            if (loading > 0) {
+                binding.refreshLayout.finishRefresh()
+            }
+        }
+
     }
 
     override fun onResume() {

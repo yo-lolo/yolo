@@ -34,7 +34,7 @@ class HomeViewModel : BaseViewModel() {
     var newsPostState = MutableLiveData<Boolean>(false)
 
     fun initData() {
-        launchSafe(false) {
+        launchSafe {
             val resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
             newsStoreRepository.getNews().map { newsInfo ->
                 val user = userStoreRepository.queryUserByNumber(newsInfo.number)

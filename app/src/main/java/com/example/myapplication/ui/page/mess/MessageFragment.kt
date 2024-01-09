@@ -88,7 +88,22 @@ class MessageFragment : BaseFragment() {
         viewModel.isRot.observe(viewLifecycleOwner) {
             binding.newFriendRot.visibleOrGone(it)
         }
+
+        binding.refreshLayout.apply {
+            setEnableRefresh(true)
+            setOnRefreshListener{
+                viewModel.initMess()
+            }
+            setEnableLoadMore(false)
+        }
+        viewModel.loadingTaskCount.observe(viewLifecycleOwner) { loading ->
+            if (loading > 0) {
+                binding.refreshLayout.finishRefresh()
+            }
+        }
+
     }
+
 
     override fun onResume() {
         viewModel.initMess()
