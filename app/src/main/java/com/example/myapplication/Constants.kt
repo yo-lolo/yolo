@@ -16,7 +16,7 @@ object Constants {
     /**
      * app 日志 TAG
      */
-    const val BASE_TAG = "YOLO_APP"
+    const val BASE_TAG = "YOLO_APP_"
 
     const val MSG_FROM_CLIENT = 1
     const val MSG_FROM_SERVICE = 1

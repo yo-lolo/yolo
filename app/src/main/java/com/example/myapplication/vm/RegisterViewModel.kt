@@ -2,16 +2,14 @@ package com.example.myapplication.vm
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.getTag
 import com.example.myapplication.util.TimeUtil
+import com.example.myapplication.util.ValidatorUtil
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -34,7 +32,7 @@ class RegisterViewModel : BaseViewModel() {
     fun register(number: String, pass: String, pass2: String) {
         launchSafe {
             if (number.isNotEmpty() && pass.isNotEmpty() && pass.isNotEmpty()) {
-                if (number.length == 11) {
+                if (toCheckPhoneNum(number)) {
                     var phoneNumber = number.toLong()
                     if (pass == pass2 && pass.length in 6..14) {
                         kotlin.runCatching {
@@ -57,6 +55,17 @@ class RegisterViewModel : BaseViewModel() {
             } else {
                 ToastUtils.showShort("用户名密码不能为空")
             }
+        }
+    }
+
+    /**
+     * 校验手机号码
+     */
+    private fun toCheckPhoneNum(phoneNum: String): Boolean {
+        return if (phoneNum.isEmpty()) {
+            false
+        } else {
+            ValidatorUtil.isMobile(phoneNum)
         }
     }
 }
