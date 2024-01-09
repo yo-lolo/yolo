@@ -104,4 +104,9 @@ dependencies {
 
     //基于 mMap 内存映射的移动端通用 key-value 组件
     implementation('com.tencent:mmkv:1.2.13')
+
+    // 内存泄露检测工具
+    // debugImplementation because LeakCanary should only run in debug builds.
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+
 }

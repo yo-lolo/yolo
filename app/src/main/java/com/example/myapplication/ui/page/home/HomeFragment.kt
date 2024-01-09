@@ -79,11 +79,10 @@ class HomeFragment : BaseFragment() {
             }
             clipToOutline = true
             start() // 开始轮播
-        }
-
-        // 轮播图的监听方法
-        binding.banner.setOnBannerListener {
-            ToastUtils.showShort("你点击了第${it + 1}张轮播图")
+            setOnBannerListener {
+                // 轮播图点击监听
+                browserPop(AppConfig.BANNER_IMAGES[it])
+            }
         }
 
         // 初始化Recycler
@@ -114,17 +113,16 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initTest() {
-        binding.selectBrowserPop.setOnClickListener {
-            browserPop()
-        }
         binding.initNotify.setOnClickListener {
-            MessNotification().showNotify(NotifyInfo(AppConfig.MESS_NOTIFY,"www","0"))
+            MessNotification().showNotify(NotifyInfo(AppConfig.MESS_NOTIFY, "www", "0"))
         }
     }
 
-    private fun browserPop() {
+    /**
+     * 指定浏览器打开
+     */
+    private fun browserPop(jumpUrl: String) {
         val browserList = requireContext().getBrowserList()
-        val jumpUrl = "http://www.baidu.com"
 
         if (browserList.size == 1) {
             val uri = Uri.parse(jumpUrl)
