@@ -36,7 +36,7 @@ class MainApplication : Application() {
     private fun initSpeedyLog(appContext: Context) {
         //写入拦截,可自定义写入/上传操作
         val speedyLogConfig = SpeedyLogConfig.Build(appContext)
-            .path(appContext.getExternalFilesDir(null)?.absolutePath + Constants.LOG_PATH) //日志目录,一般不要动安卓10限制了外部目录访问了
+            .path(appContext.getExternalFilesDir(null)?.absolutePath + "/" + Constants.LOG_PATH) //日志目录,一般不要动安卓10限制了外部目录访问了
             .buffSize(128 * 1024) //buff大小
             .delay(100) //延迟写入时间
             .day(30) //日志保留30天,默认无限制
