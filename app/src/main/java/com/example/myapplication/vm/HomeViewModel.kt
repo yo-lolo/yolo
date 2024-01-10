@@ -8,6 +8,8 @@ import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.NewsInfo
+import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import kotlinx.coroutines.delay
 
 /**
@@ -55,7 +57,11 @@ class HomeViewModel : BaseViewModel() {
         tagText.value = tag
     }
 
+    /**
+     * 发布文章
+     */
     fun onSubmit(title: String, content: String) {
+        SpeedyLog.d(getTag(),"onSubmit >>> 发布文章")
         if (title.isNotEmpty() && content.isNotEmpty() && tagText.value!!.isNotEmpty()) {
             launchSafe {
                 kotlin.runCatching {
@@ -66,6 +72,7 @@ class HomeViewModel : BaseViewModel() {
                         tagText.value!!
                     )
                 }.onSuccess {
+                    SpeedyLog.d(getTag(),"<<< 发布成功，待管理员审核")
                     ToastUtils.showShort("发布成功，待管理员审核")
                     delay(1000)
                     newsPostState.value = true

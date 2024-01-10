@@ -1,6 +1,8 @@
 package com.example.myapplication.data
 
 import com.example.myapplication.Constants
+import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import com.tencent.mmkv.MMKV
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -33,6 +35,7 @@ object MMKVManager {
             return mmkv.getBoolean(Constants.SETTING_IS_SAVE_PASSWORD, false)
         }
         set(value) {
+            SpeedyLog.d(getTag(), "是否保存密码 : $value")
             mmkv.putBoolean(Constants.SETTING_IS_SAVE_PASSWORD, value)
         }
 
@@ -44,6 +47,7 @@ object MMKVManager {
             return mmkv.getBoolean(Constants.SETTING_IS_AUTO_LOGIN, false)
         }
         set(value) {
+            SpeedyLog.d(getTag(), "是否自动登录 : $value")
             mmkv.putBoolean(Constants.SETTING_IS_AUTO_LOGIN, value)
         }
 
@@ -55,6 +59,7 @@ object MMKVManager {
             return mmkv.getBoolean(Constants.APP_INTRODUCTION_DIALOG, true)
         }
         set(value) {
+            SpeedyLog.d(getTag(), "是否展示App简介弹窗 : $value")
             mmkv.putBoolean(Constants.APP_INTRODUCTION_DIALOG, value)
         }
 
@@ -66,6 +71,7 @@ object MMKVManager {
             return mmkv.getBoolean(Constants.IS_LOGIN, false)
         }
         set(value) {
+            SpeedyLog.d(getTag(), "是否登录 : $value")
             mmkv.putBoolean(Constants.IS_LOGIN, value)
         }
 
@@ -77,20 +83,23 @@ object MMKVManager {
             return mmkv.getBoolean(Constants.IS_NOTIFY, true)
         }
         set(value) {
+            SpeedyLog.d(getTag(), "是否需要消息提醒 : $value")
             mmkv.putBoolean(Constants.IS_NOTIFY, value)
         }
 
     /**
-     *
+     * 日志文件名称
      */
     var LogFileName: String
         get() {
             val format = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             val nowDate = format.format(Date())
             val defaultLogFileName = "${nowDate}_log.txt"
-            return mmkv.getString(Constants.LAST_WRITE_X_LOG_FILE_NAME_KEY, defaultLogFileName) ?: defaultLogFileName
+            return mmkv.getString(Constants.LAST_WRITE_X_LOG_FILE_NAME_KEY, defaultLogFileName)
+                ?: defaultLogFileName
         }
         set(value) {
+            SpeedyLog.d(getTag(), "设置日志文件名称 : $value")
             mmkv.getString(Constants.LAST_WRITE_X_LOG_FILE_NAME_KEY, value)
         }
 

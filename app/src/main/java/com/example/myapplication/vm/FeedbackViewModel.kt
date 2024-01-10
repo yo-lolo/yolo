@@ -6,6 +6,8 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.FeedbackInfo
+import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.util.JsonUtil
 import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.delay
@@ -28,7 +30,11 @@ class FeedbackViewModel : BaseViewModel() {
     var type = MutableLiveData("0")
     private val feedbackStoreRepository = DataManager.feedbackStoreRepository
 
+    /**
+     * 提交反馈
+     */
     fun onSubmit(pictureItems: List<String>, desc: String) {
+        SpeedyLog.d(getTag(),"onSubmit >>> 提交反馈")
         val jsonPicture = JsonUtil.toJson(pictureItems)
         if (!type.value.equals("0") && desc.isNotEmpty() && pictureItems.isNotEmpty()) {
             launchSafe {
@@ -44,9 +50,11 @@ class FeedbackViewModel : BaseViewModel() {
                     )
                 }.onSuccess {
                     ToastUtils.showShort("反馈成功")
+                    SpeedyLog.d(getTag(),"<<< 反馈成功")
                     delay(1000)
                     commentSuccess.value = true
                 }.onFailure {
+                    SpeedyLog.d(getTag(),"<<< 反馈失败")
                     ToastUtils.showShort("反馈失败")
                 }
             }

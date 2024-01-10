@@ -34,9 +34,10 @@ class LoginViewModel : BaseViewModel() {
     val isSaveUserPasswordLiveData = MutableLiveData(MMKVManager.isSavePass)
 
     /**
-     * 检查用户登录信息
+     * 进行用户登录
      */
-    fun checkLogin(number: String, pass: String) {
+    fun doUserLogin(number: String, pass: String) {
+        SpeedyLog.d(getTag(),"doUserLogin >>> 进行用户登录")
         launchSafe {
             if (number.isNotEmpty() && pass.isNotEmpty()) {
                 val phoneNumber = number.toLong()
@@ -49,6 +50,7 @@ class LoginViewModel : BaseViewModel() {
                             saveUserNumAndPass(number, pass)
                             MMKVManager.isLogin = true
                             AppConfig.phoneNumber = phoneNumber
+                            SpeedyLog.d(getTag(),"<<< 用户登录成功")
                             ToastUtils.showShort("登陆成功,进入首页")
                             delay(1000)
                             initMessNotify() // 初始化消息通知
@@ -71,9 +73,10 @@ class LoginViewModel : BaseViewModel() {
     }
 
     /**
-     * 检查管理员登录信息
+     * 进行管理员登录
      */
-    fun checkAdminLogin(number: String, pass: String) {
+    fun doAdminLogin(number: String, pass: String) {
+        SpeedyLog.d(getTag(),"doAdminLogin >>> 进行管理员登录")
         launchSafe {
             //TODO 管理员登录测试使用
             adminLoginType.value = true
@@ -124,7 +127,7 @@ class LoginViewModel : BaseViewModel() {
      */
     fun doAutoLogin() {
         val (num, pass) = getUserNumAndPass()
-        checkLogin(num, pass)
+        doUserLogin(num, pass)
     }
 
 

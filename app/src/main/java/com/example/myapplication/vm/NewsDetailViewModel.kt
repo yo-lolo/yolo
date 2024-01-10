@@ -49,11 +49,13 @@ class NewsDetailViewModel : BaseViewModel() {
      * 添加好友
      */
     fun insertFriend(newsId: Long) {
+        SpeedyLog.d(getTag(),"insertFriend >>> 添加好友")
         viewModelScope.launch {
             kotlin.runCatching {
                 val info = newsStoreRepository.getNewsById(newsId)
                 friendsStoreRepository.insertFriend(info.number)
             }.onSuccess {
+                SpeedyLog.d(getTag(),"<<< 已发送好友请求,等待好友验证")
                 ToastUtils.showLong("已发送好友请求,等待好友验证")
             }
             initData(newsId)
@@ -176,14 +178,17 @@ class NewsDetailViewModel : BaseViewModel() {
      * 评论删除逻辑
      */
     fun deleteComment(newsId: Long, commentInfo: CommentInfo) {
+        SpeedyLog.d(getTag(),"deleteComment >>> 评论删除")
         if (AppConfig.phoneNumber == commentInfo.number || commentInfo.newsId == newsId) {
             viewModelScope.launch {
                 kotlin.runCatching {
                     commentStoreRepository.deleteCommentById(commentInfo.id)
                 }.onSuccess {
+                    SpeedyLog.d(getTag(), "<<< 删除评论成功")
                     ToastUtils.showShort("删除评论成功")
                     initData(newsId) //更新数据
                 }.onFailure {
+                    SpeedyLog.d(getTag(), "<<< 删除评论失败")
                     ToastUtils.showShort("删除评论失败,请重试")
                 }
             }

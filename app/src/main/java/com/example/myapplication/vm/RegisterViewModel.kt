@@ -29,7 +29,11 @@ class RegisterViewModel : BaseViewModel() {
 
     var registerType = MutableLiveData(false)
 
+    /**
+     * 注册用户
+     */
     fun register(number: String, pass: String, pass2: String) {
+        SpeedyLog.d(getTag(),"register >>> 注册用户")
         launchSafe {
             if (number.isNotEmpty() && pass.isNotEmpty() && pass.isNotEmpty()) {
                 if (toCheckPhoneNum(number)) {
@@ -39,9 +43,11 @@ class RegisterViewModel : BaseViewModel() {
                             userStoreRepository.insertUser(User(phoneNumber, pass, TimeUtil.getCurrentMill()))
                         }.onFailure {
                             registerType.value = false
+                            SpeedyLog.d(getTag(),"<<< 注册失败")
                             ToastUtils.showShort("注册失败，请重试")
                             SpeedyLog.d(getTag(), it.toString())
                         }.onSuccess {
+                            SpeedyLog.d(getTag(),"<<< 注册成功")
                             ToastUtils.showShort("注册成功，跳转到登陆页面")
                             delay(1000)
                             registerType.value = true

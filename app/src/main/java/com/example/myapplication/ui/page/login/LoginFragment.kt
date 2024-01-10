@@ -52,13 +52,13 @@ class LoginFragment : BaseFragment() {
         }
         binding.managerLoginBt.setOnClickListener {
             val (number, pass) = numberAndPass()
-            viewModel.checkAdminLogin(number, pass)
+            viewModel.doAdminLogin(number, pass)
         }
         binding.loginBt.setOnClickListener {
             val (number, pass) = numberAndPass()
             val isChecked = binding.agreeProtocol.isChecked
             if (isChecked) {
-                viewModel.checkLogin(number, pass)
+                viewModel.doUserLogin(number, pass)
             } else {
                 ToastUtils.showShort("请先同意相关协议")
             }
