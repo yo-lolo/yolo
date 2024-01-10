@@ -105,6 +105,10 @@ class HeadLayout @JvmOverloads constructor(
         bindView(rightContainer, childView)
     }
 
+    fun setRightViewClickListener(listener: OnClickListener) {
+        rightContainer.setOnClickListener(listener)
+    }
+
     fun bindView(parent: ViewGroup, childLayoutId: Int) {
         bindView(parent, LayoutInflater.from(context).inflate(childLayoutId, parent, false))
     }

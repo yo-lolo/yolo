@@ -134,6 +134,16 @@
         android:name="com.example.myapplication.ui.page.setting.LoginSettingFragment"
         android:label="LoginSettingFragment" />
 
+    <fragment
+        android:id="@+id/LogManageFragment"
+        android:name="com.example.myapplication.ui.page.setting.LogManageFragment"
+        android:label="LogManageFragment" />
+
+    <fragment
+        android:id="@+id/LogViewFragment"
+        android:name="com.example.myapplication.ui.page.setting.LogViewFragment"
+        android:label="LogViewFragment" />
+
     <action
         android:id="@+id/goHomeFragment"
         app:destination="@id/homeFragment" />
@@ -227,5 +237,13 @@
     <action
         android:id="@+id/goLoginSettingFragment"
         app:destination="@id/LoginSettingFragment" />
+
+    <action
+        android:id="@+id/goLogManageFragment"
+        app:destination="@id/LogManageFragment" />
+
+    <action
+        android:id="@+id/goLogViewFragment"
+        app:destination="@id/LogViewFragment" />
 
 </navigation>

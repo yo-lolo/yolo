@@ -1,12 +1,12 @@
 package com.example.myapplication.vm
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.util.ValidatorUtil
 import kotlinx.coroutines.delay
@@ -40,7 +40,7 @@ class RegisterViewModel : BaseViewModel() {
                         }.onFailure {
                             registerType.value = false
                             ToastUtils.showShort("注册失败，请重试")
-                            Log.e(getTag(), it.toString())
+                            SpeedyLog.d(getTag(), it.toString())
                         }.onSuccess {
                             ToastUtils.showShort("注册成功，跳转到登陆页面")
                             delay(1000)

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/comm_head_layout" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/log_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="15dp"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical">
+
+        <TextView
+            android:id="@+id/log_view_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/_FF020F2C"
+            android:textSize="12dp"
+            tools:text="25555555555" />
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

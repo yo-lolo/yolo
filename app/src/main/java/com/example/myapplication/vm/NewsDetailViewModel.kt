@@ -1,6 +1,5 @@
 package com.example.myapplication.vm
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
@@ -12,6 +11,7 @@ import com.example.myapplication.database.entity.LikeInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -167,7 +167,7 @@ class NewsDetailViewModel : BaseViewModel() {
                 commentState.value = true
             }.onFailure {
                 ToastUtils.showShort("评论发布失败,请重试")
-                Log.e(getTag(), it.toString())
+                SpeedyLog.d(getTag(), it.toString())
             }
         }
     }

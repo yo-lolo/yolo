@@ -2,6 +2,9 @@ package com.example.myapplication.data
 
 import com.example.myapplication.Constants
 import com.tencent.mmkv.MMKV
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -75,6 +78,20 @@ object MMKVManager {
         }
         set(value) {
             mmkv.putBoolean(Constants.IS_NOTIFY, value)
+        }
+
+    /**
+     *
+     */
+    var LogFileName: String
+        get() {
+            val format = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val nowDate = format.format(Date())
+            val defaultLogFileName = "${nowDate}_log.txt"
+            return mmkv.getString(Constants.LAST_WRITE_X_LOG_FILE_NAME_KEY, defaultLogFileName) ?: defaultLogFileName
+        }
+        set(value) {
+            mmkv.getString(Constants.LAST_WRITE_X_LOG_FILE_NAME_KEY, value)
         }
 
 

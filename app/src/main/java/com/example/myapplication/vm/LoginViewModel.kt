@@ -1,9 +1,6 @@
 package com.example.myapplication.vm
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.MainActivity.Companion.TAG
@@ -11,6 +8,7 @@ import com.example.myapplication.base.BaseViewModel
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import kotlinx.coroutines.delay
 
 /**
@@ -63,7 +61,7 @@ class LoginViewModel : BaseViewModel() {
                         ToastUtils.showShort("不存在该用户")
                     }
                 }.onFailure {
-                    Log.e(getTag(), it.toString())
+                    SpeedyLog.d(getTag(), it.toString())
                 }
             } else {
                 loginType.value = true
@@ -107,7 +105,7 @@ class LoginViewModel : BaseViewModel() {
      * 保存用户名和密码
      */
     fun saveUserNumAndPass(number: String, password: String) {
-        Log.e(TAG, "saveUserNameAndPassword >>> 保存用户名和密码 用户名: $number, 密码: $password")
+        SpeedyLog.d(TAG, "saveUserNameAndPassword >>> 保存用户名和密码 用户名: $number, 密码: $password")
         MMKVManager.saveUserNumAndPass(number, password)
     }
 

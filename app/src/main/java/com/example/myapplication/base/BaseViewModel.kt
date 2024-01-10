@@ -1,13 +1,13 @@
 package com.example.myapplication.base
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ThreadUtils.runOnUiThread
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.example.myapplication.util.TimeUtil
+import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.util.getLoadingPopup
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -40,7 +40,7 @@ open class BaseViewModel : ViewModel() {
                 if (it is IOException) {
                     ToastUtils.showShort("网络连接失败，请稍后再试")
                 }
-                Log.e("", it.toString())
+                SpeedyLog.d(getTag(), it.toString())
             }
         }
     }
@@ -56,10 +56,10 @@ open class BaseViewModel : ViewModel() {
                 if (it is IOException) {
                     ToastUtils.showShort("网络连接失败，请稍后再试")
                 }
-                Log.e("", it.toString())
+                SpeedyLog.d("", it.toString())
             }.onSuccess {
                 endTime = TimeUtils.getNowMills()
-                Log.e("time_during", "${endTime - time}")
+                SpeedyLog.d("time_during", "${endTime - time}")
             }
         }
     }

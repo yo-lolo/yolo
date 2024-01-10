@@ -1,12 +1,12 @@
 package com.ctq.sphone.market.base
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
+import com.example.myapplication.getTag
 import com.example.myapplication.view.ProgressDialog
 
 
@@ -25,6 +25,8 @@ import com.example.myapplication.view.ProgressDialog
 open class BaseFragment : Fragment() {
 
     lateinit var progressDialog: ProgressDialog
+
+    protected val TAG = (this as Any).getTag()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,6 +1,5 @@
 package com.example.myapplication.vm
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
@@ -12,6 +11,7 @@ import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -107,7 +107,7 @@ class MineViewModel : BaseViewModel() {
                                 }.onFailure {
                                     doModifyType.value = false
                                     ToastUtils.showShort("密码修改失败，请重试")
-                                    Log.e(getTag(), it.toString())
+                                    SpeedyLog.d(getTag(), it.toString())
                                 }.onSuccess {
                                     ToastUtils.showShort("密码修改成功")
                                     delay(1000)

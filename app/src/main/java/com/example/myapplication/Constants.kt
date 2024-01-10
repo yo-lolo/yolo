@@ -66,4 +66,14 @@ object Constants {
      */
     const val IS_NOTIFY = "is_notify"
 
+    /**
+     * 上次写入日志文件名称的 key
+     */
+    const val LAST_WRITE_X_LOG_FILE_NAME_KEY = "LAST_WRITE_X_LOG_FILE_NAME_KEY"
+
+    /**
+     * log路径名
+     */
+    const val LOG_PATH = "My_Application"
+
 }

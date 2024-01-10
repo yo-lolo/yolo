@@ -1,13 +1,10 @@
 package com.example.myapplication
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import androidx.room.Room
 import com.example.myapplication.data.MMKVManager
-import com.example.myapplication.database.AppDataBase
-import com.example.myapplication.imp.UserTaskImp
-import com.example.myapplication.repos.UserStoreRepository
+import com.example.myapplication.log.SpeedyLog
+import com.example.myapplication.log.SpeedyLogConfig
 import com.tencent.mmkv.MMKV
 
 /**
@@ -33,6 +30,23 @@ class MainApplication : Application() {
 
     fun init(context: Context) {
         DataManager.init(context)
+        initSpeedyLog(context)
+    }
+
+    private fun initSpeedyLog(appContext: Context) {
+        //写入拦截,可自定义写入/上传操作
+        val speedyLogConfig = SpeedyLogConfig.Build(appContext)
+            .path(appContext.getExternalFilesDir(null)?.absolutePath + Constants.LOG_PATH) //日志目录,一般不要动安卓10限制了外部目录访问了
+            .buffSize(128 * 1024) //buff大小
+            .delay(100) //延迟写入时间
+            .day(30) //日志保留30天,默认无限制
+            .methodCount(1) //打印调用方法名 大于0支持打印调用方法栈
+            .debug(true) //true会输出控制台,上线可关掉
+            .writeData { _, _, _ ->
+                false //false会继续执行写入, true不继续执行
+            }
+            .build()
+        SpeedyLog.init(speedyLogConfig)
     }
 
 }

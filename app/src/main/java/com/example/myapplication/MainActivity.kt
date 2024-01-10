@@ -5,7 +5,6 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.ActivityUtils
@@ -13,6 +12,7 @@ import com.blankj.utilcode.util.PermissionUtils
 import com.example.myapplication.base.BaseActivity
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.ui.MarketActivity
 import com.example.myapplication.useCase.PromptUseCase
 import kotlinx.coroutines.launch
@@ -100,12 +100,12 @@ class MainActivity : BaseActivity() {
                         Handler().postDelayed({ // 如果是被永久拒绝就跳转到应用权限系统设置页面
                             PermissionUtils.launchAppDetailsSettings()
                         }, 1000)
-                        Log.i(
+                        SpeedyLog.d(
                             TAG,
                             deniedForever.toString() + "权限被永久拒绝，请前往设置界面允许权限"
                         )
                     } else {
-                        Log.i(
+                        SpeedyLog.d(
                             TAG,
                             denied.toString() + "权限获取失败"
                         )

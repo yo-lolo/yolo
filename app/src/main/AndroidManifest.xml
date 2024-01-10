@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:name=".MainApplication"
@@ -54,6 +56,16 @@
             android:authorities="com.example.myapplication.provider.BookProvider"
             android:permission="com.ryg.PROVIDER"
             android:process=":provider"/>
+
+        <provider
+            android:name="com.example.myapplication.provider.ShareFileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/hl_share_public_file_paths" />
+        </provider>
     </application>
 
 </manifest>
