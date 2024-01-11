@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
@@ -18,9 +17,11 @@ import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.NotifyInfo
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.isLogin
+import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.notify.MessNotification
 import com.example.myapplication.pops.SelectBrowserPop
 import com.example.myapplication.ui.adapter.NewsListAdapter
+import com.example.myapplication.util.FilePicker
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.createPop
 import com.example.myapplication.util.getBrowserList
@@ -45,6 +46,7 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
     private var newsListAdapter = NewsListAdapter()
     val viewModel by viewModels<HomeViewModel>()
+    private val filePicker = FilePicker(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -116,6 +118,27 @@ class HomeFragment : BaseFragment() {
         binding.initNotify.setOnClickListener {
             MessNotification().showNotify(NotifyInfo(AppConfig.MESS_NOTIFY, "www", "0"))
         }
+        binding.filePick.setOnClickListener {
+            pickFile(false, FilePicker.IPickResult { isCancel, uris ->
+                SpeedyLog.d(TAG,"isCancel: $isCancel, uris: ${uris.toString()}")
+                uris.forEach {
+                    GlideImageLoader().displayImageUri(it,binding.imageTest)
+                }
+            })
+        }
+
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == FilePicker.PICK_FILE_REQUEST_CODE) {
+            filePicker.onActivityResult(resultCode, data)
+        }
+    }
+
+    private fun pickFile(isMultipleChoose: Boolean, iPickResult: FilePicker.IPickResult) {
+        filePicker.launch(isMultipleChoose, iPickResult)
     }
 
     /**

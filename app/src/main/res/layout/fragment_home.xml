@@ -75,6 +75,12 @@
                 android:layout_height="wrap_content"
                 android:text="初始化消息通知" />
 
+            <Button
+                android:id="@+id/file_pick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="file_pick" />
+
 
             <com.youth.banner.Banner
                 android:id="@+id/banner"
