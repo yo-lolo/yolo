@@ -13,6 +13,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
@@ -46,7 +47,8 @@ class DetailOneFragment : BaseFragment() {
 
     private fun initView(view: View) {
         binding.onceList.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+//            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = EmptyViewAdapter(onceListAdapter)
         }
         binding.fab.setOnClickListener {

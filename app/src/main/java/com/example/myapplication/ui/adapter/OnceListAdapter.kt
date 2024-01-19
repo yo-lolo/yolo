@@ -2,9 +2,9 @@ package com.example.myapplication.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.databinding.LayoutOnceListItemBinding
 import com.example.myapplication.util.layoutInflater
+import java.util.Random
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -65,7 +65,7 @@ class OnceListAdapter : RecyclerView.Adapter<OnceListAdapter.OnceListViewHolder>
             deleteListener: (Int, String) -> Unit
         ) {
             binding.onceName.text = data
-            binding.descText.text = "这里是对${data}的一段描述".repeat(2)
+            binding.descText.text = "这里是对${data}的一段描述".repeat(Random().nextInt(6) + 1)
             binding.onceItem.setOnLongClickListener {
                 deleteListener.invoke(position, data)
                 true
