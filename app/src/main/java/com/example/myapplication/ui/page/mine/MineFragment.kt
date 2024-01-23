@@ -60,6 +60,9 @@ class MineFragment : BaseFragment() {
             goMineNews.setOnClickListener {
                 MineNewsFragment.goMineNewsFragment(findNavController())
             }
+            goLogManage.setOnClickListener {
+                findNavController().navigate(R.id.goLogManageFragment)
+            }
             goMineLikes.setOnClickListener {
                 findNavController().navigate(R.id.goMineLikeFragment)
             }

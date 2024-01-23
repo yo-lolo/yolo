@@ -173,6 +173,43 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/go_log_manage"
+            style="@style/appMineLayout">
+
+            <ImageView
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:background="@mipmap/log_manage_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="62dp"
+                android:text="日志管理"
+                android:textColor="@color/color_3c3c3c"
+                android:textSize="13sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="19dp"
+                android:background="@mipmap/arrow_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/go_setting"

@@ -125,16 +125,17 @@ class HomeFragment : BaseFragment() {
             MessNotification().showNotify(NotifyInfo(AppConfig.MESS_NOTIFY, "www", "0"))
         }
         binding.filePick.setOnClickListener {
-            pickFile(false, FilePicker.IPickResult { isCancel, uris ->
-                SpeedyLog.d(TAG, "isCancel: $isCancel, uris: ${uris.toString()}")
+            pickFile(false) { isCancel, uris ->
+                SpeedyLog.d(TAG, "isCancel: $isCancel, uris: $uris")
                 uris.forEach {
                     GlideImageLoader().displayImageUri(it, binding.imageTest)
                 }
-            })
+            }
         }
         binding.fingerCheck.setOnClickListener {
             FingerprintTool.getInstance(requireContext())
                 .checkFinger(requireActivity() as AppCompatActivity) { des ->
+                    SpeedyLog.d(des)
                     ToastUtils.showShort(des)
                 }
         }

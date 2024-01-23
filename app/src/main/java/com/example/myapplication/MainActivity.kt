@@ -50,10 +50,8 @@ class MainActivity : BaseActivity() {
         checkPermissions(
             arrayOf(
                 Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN
+                Manifest.permission.READ_EXTERNAL_STORAGE
             )
         ) {
             /**

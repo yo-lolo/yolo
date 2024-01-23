@@ -89,7 +89,13 @@ object DataManager {
         initNotifyListener()
 
         MMKVManager
-//        initData()
+
+        launchScope.launch {
+            if (userStoreRepository.getUsers().isEmpty()){
+                initData()
+            }
+        }
+
     }
 
     /**

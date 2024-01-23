@@ -96,8 +96,8 @@ public class FingerprintTool {
                         @Override
                         public void onSucceed() {
                             //验证成功
-                            Log.i(TAG, "验证成功");
-                            callback.onFingerCheckCallback("验证成功");
+                            Log.i(TAG, "指纹验证成功");
+                            callback.onFingerCheckCallback("指纹验证成功");
 
                         }
 
