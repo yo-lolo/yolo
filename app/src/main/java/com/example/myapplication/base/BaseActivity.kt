@@ -1,7 +1,6 @@
 package com.example.myapplication.base
 
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ImmersionBar
 

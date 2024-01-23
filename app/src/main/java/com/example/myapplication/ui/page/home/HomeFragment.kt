@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
@@ -28,6 +31,9 @@ import com.example.myapplication.util.getBrowserList
 import com.example.myapplication.util.toBrowser
 import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.HomeViewModel
+import com.example.yolo_sdk.biometric.FingerprintCallback
+import com.example.yolo_sdk.biometric.IFingerCallback
+import com.example.yolo_sdk.tools.FingerprintTool
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -120,13 +126,18 @@ class HomeFragment : BaseFragment() {
         }
         binding.filePick.setOnClickListener {
             pickFile(false, FilePicker.IPickResult { isCancel, uris ->
-                SpeedyLog.d(TAG,"isCancel: $isCancel, uris: ${uris.toString()}")
+                SpeedyLog.d(TAG, "isCancel: $isCancel, uris: ${uris.toString()}")
                 uris.forEach {
-                    GlideImageLoader().displayImageUri(it,binding.imageTest)
+                    GlideImageLoader().displayImageUri(it, binding.imageTest)
                 }
             })
         }
-
+        binding.fingerCheck.setOnClickListener {
+            FingerprintTool.getInstance(requireContext())
+                .checkFinger(requireActivity() as AppCompatActivity) { des ->
+                    ToastUtils.showShort(des)
+                }
+        }
     }
 
 

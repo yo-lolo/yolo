@@ -35,15 +35,15 @@ class CommentsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == LEVEL_ONE_VIEW) {
-            TestOneViewHolder(parent)
+            FirstViewHolder(parent)
         } else {
-            TestTwoViewHolder(parent)
+            SecondViewHolder(parent)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == LEVEL_ONE_VIEW) {
-            holder as TestOneViewHolder
+            holder as FirstViewHolder
             holder.setData(
                 list.toList()[position],
                 goCommentListener,
@@ -51,7 +51,7 @@ class CommentsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 deleteCommentListener
             )
         } else {
-            holder as TestTwoViewHolder
+            holder as SecondViewHolder
             holder.setData(
                 list.toList()[position],
                 goUserDetail,
@@ -73,7 +73,7 @@ class CommentsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return list.size
     }
 
-    class TestOneViewHolder(
+    class FirstViewHolder(
         var parent: ViewGroup,
         val binding: LayoutTestItemBinding = LayoutTestItemBinding.inflate(
             parent.context.layoutInflater(), parent, false
@@ -106,7 +106,7 @@ class CommentsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    class TestTwoViewHolder(
+    class SecondViewHolder(
         var parent: ViewGroup,
         val binding: LayoutTestTwoItemBinding = LayoutTestTwoItemBinding.inflate(
             parent.context.layoutInflater(), parent, false

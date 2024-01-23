@@ -81,6 +81,12 @@
                 android:layout_height="wrap_content"
                 android:text="file_pick" />
 
+            <Button
+                android:id="@+id/finger_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="finger_check" />
+
 
             <com.youth.banner.Banner
                 android:id="@+id/banner"

@@ -5,10 +5,11 @@ plugins {
 
 android {
     namespace 'com.example.yolo_sdk'
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
-        minSdk 24
+        minSdkVersion 24
+        targetSdkVersion 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -32,7 +33,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
+    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.6.0')
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     testImplementation 'junit:junit:4.13.2'

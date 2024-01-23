@@ -73,7 +73,7 @@ class SlideDeleteRecyclerView @JvmOverloads constructor(
     private var mScrollMode = 0
 
     //当前RecyclerView被上层viewGroup分发到事件，所有事件都会通过dispatchTouchEvent给到
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         //
         mGestureDetector.onTouchEvent(ev)
         return super.dispatchTouchEvent(ev)
