@@ -67,4 +67,4 @@ fun Any.isNotify() = MMKVManager.isNotify
 /**
  * 判断是否提示请先登录
  */
-fun Any.chargeToastLogin(listener: () -> Unit) = if (isLogin()) listener else ToastUtils.showShort("请先登录")
+fun Any.chargeToastLogin(listener: () -> Unit) = if (isLogin()) listener.invoke() else ToastUtils.showShort("请先登录")
