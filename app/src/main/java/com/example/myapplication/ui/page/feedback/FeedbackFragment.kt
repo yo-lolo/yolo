@@ -6,19 +6,15 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.chargeToastLogin
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.FragmentFeedbackBinding
-import com.example.myapplication.isLogin
 import com.example.myapplication.vm.FeedbackViewModel
 
 /**
@@ -78,10 +74,8 @@ class FeedbackFragment : BaseFragment() {
         binding.feedbackSubmit.setOnClickListener {
             val pictureItems = binding.imageDisplayView.getPhotos().filter { !it.isNullOrBlank() }
             val detail = binding.feedbackPDetail.text.toString().trim()
-            if (isLogin()){
+            chargeToastLogin {
                 feedbackViewModel.onSubmit(pictureItems, detail)
-            }else{
-                ToastUtils.showShort("请先登录")
             }
         }
 

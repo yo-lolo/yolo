@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.chargeToastLogin
 import com.example.myapplication.databinding.FragmentMineBinding
 import com.example.myapplication.isLogin
 import com.example.myapplication.util.GlideImageLoader
@@ -55,22 +55,30 @@ class MineFragment : BaseFragment() {
                 findNavController().navigate(R.id.goMineEditFragment)
             }
             goMineComment.setOnClickListener {
-                findNavController().navigate(R.id.goMineCommentsFragment)
+                chargeToastLogin {
+                    findNavController().navigate(R.id.goMineCommentsFragment)
+                }
             }
             goMineNews.setOnClickListener {
-                MineNewsFragment.goMineNewsFragment(findNavController())
+                chargeToastLogin {
+                    MineNewsFragment.goMineNewsFragment(findNavController())
+                }
             }
             goLogManage.setOnClickListener {
                 findNavController().navigate(R.id.goLogManageFragment)
             }
             goMineLikes.setOnClickListener {
-                findNavController().navigate(R.id.goMineLikeFragment)
+                chargeToastLogin {
+                    findNavController().navigate(R.id.goMineLikeFragment)
+                }
             }
             goSetting.setOnClickListener {
                 findNavController().navigate(R.id.goSettingFragment)
             }
             goFeedback.setOnClickListener {
-                findNavController().navigate(R.id.goFeedbackFragment)
+                chargeToastLogin {
+                    findNavController().navigate(R.id.goFeedbackFragment)
+                }
             }
         }
 

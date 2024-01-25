@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.app.Application
 import android.content.Context
+import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.log.SpeedyLogConfig
@@ -53,6 +54,17 @@ class MainApplication : Application() {
 
 fun Any.getTag() = Constants.BASE_TAG + this.javaClass.simpleName
 
+/**
+ * 是否登录
+ */
 fun Any.isLogin() = MMKVManager.isLogin
 
+/**
+ * 是否通知
+ */
 fun Any.isNotify() = MMKVManager.isNotify
+
+/**
+ * 判断是否提示请先登录
+ */
+fun Any.chargeToastLogin(listener: () -> Unit) = if (isLogin()) listener else ToastUtils.showShort("请先登录")

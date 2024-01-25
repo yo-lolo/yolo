@@ -10,12 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
+import com.example.myapplication.chargeToastLogin
 import com.example.myapplication.databinding.FragmentNewsDetailBinding
-import com.example.myapplication.isLogin
 import com.example.myapplication.ui.adapter.CommentsAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
@@ -100,18 +99,14 @@ class NewsDetailFragment : BaseFragment() {
             }
         }
         binding.fabLike.setOnClickListener {
-            if (isLogin()){
+            chargeToastLogin {
                 viewModel.chargeLike(newsId!!)
-            }else{
-                ToastUtils.showShort("请先登录")
             }
         }
 
         binding.postComment.setOnClickListener {
-            if (isLogin()){
+            chargeToastLogin {
                 PostCommentFragment.goPostCommentFragment(newsId!!, findNavController())
-            }else{
-                ToastUtils.showShort("请先登录")
             }
         }
 
@@ -124,10 +119,8 @@ class NewsDetailFragment : BaseFragment() {
         }
 
         binding.addFriend.setOnClickListener {
-            if (isLogin()){
+            chargeToastLogin {
                 viewModel.insertFriend(newsId!!)
-            }else{
-                ToastUtils.showShort("请先登录")
             }
         }
         initCommentList()

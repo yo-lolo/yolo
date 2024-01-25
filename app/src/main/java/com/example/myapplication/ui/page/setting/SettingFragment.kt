@@ -9,12 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.chargeToastLogin
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.FragmentSettingBinding
-import com.example.myapplication.isLogin
 import com.example.myapplication.isNotify
 import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.vm.MineViewModel
@@ -89,15 +88,12 @@ class SettingFragment : BaseFragment() {
             findNavController().navigate(R.id.goAboutFragment)
         }
         binding.exitLogin.setOnClickListener {
-            if (isLogin()){
+            chargeToastLogin {
                 PromptUseCase().exitLoginPrompt {
                     viewModel.logout()
                     findNavController().navigate(R.id.goLoginFragment)
                 }
-            }else{
-                ToastUtils.showShort("请先登录")
             }
-
         }
     }
 
