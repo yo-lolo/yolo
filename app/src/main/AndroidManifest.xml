@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.myapplication">
     <!-- 申明网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 申明权限 操作SD卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
@@ -23,8 +23,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication"
-        tools:targetApi="31">
+        android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".admin.ManageActivity"
             android:exported="true" />
@@ -55,13 +54,13 @@
             android:name=".provider.BookProvider"
             android:authorities="com.example.myapplication.provider.BookProvider"
             android:permission="com.ryg.PROVIDER"
-            android:process=":provider"/>
+            android:process=":provider" />
 
         <provider
             android:name="com.example.myapplication.provider.ShareFileProvider"
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/hl_share_public_file_paths" />
