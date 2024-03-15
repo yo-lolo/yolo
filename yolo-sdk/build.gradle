@@ -10,14 +10,13 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 32
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true //是否启动混淆true:打开;false:关闭
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -27,6 +26,47 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all {
+            def suffixName = isSdk.toBoolean() ? "-sdk" : ""
+            outputFileName = "yolo-${variant.buildType.name}${suffixName}-${version_name}.aar"
+        }
+    }
+}
+
+
+tasks.whenTaskAdded { Task task ->
+    // 注意：如果是有多个 flavor，则为 merge“Flavor”DebugNativeLibs 的形式
+    String taskName = task.name
+
+    if (taskName.matches('^pre.*[(Debug)|(Release)]Embed$')) {
+        // fataar 编译之前需要清除之前的编译产物，否则会有问题
+        Task cleanTask = project.getTasksByName('clean', false).first()
+        task.dependsOn(cleanTask)
+        task.mustRunAfter(cleanTask)
+    }
+
+    if (taskName.matches('^assemble.*[(Debug)|(Release)]$')) {
+        task.doLast {
+            println "------------------- ${taskName} end -------------------"
+
+            // 将打包生成的 aar 复制到 demo 的 libs 文件夹中
+            def buildType = taskName.toLowerCase().split('assemble').last()
+
+            def suffixName = isSdk.toBoolean() ? "-sdk" : ""
+            def buildAarName = "yolo-${buildType}${suffixName}-${version_name}.aar"
+
+            def outputAar = new File(project.buildDir, "outputs/aar/$buildAarName")
+            def appLibs = new File(project(':yolo-sdk').projectDir, "libs")
+
+            println "------------ 开始拷贝 ${outputAar} 到 ${appLibs} 下  ----------"
+            copy {
+                from outputAar
+                into appLibs
+            }
+        }
     }
 }
 
@@ -40,3 +80,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+task deleteOldJar(type: Delete){
+    delete 'build/libs/yolo.jar'
+}
+
+task exportJar(type: Copy) {
+    from('build/intermediates/aar_main_jar/release')//从该目录下加载要打包的文件
+    into('build/libs/')//jar包的保存目录
+    include('classes.jar')//设置过滤，只打包classes文件
+    rename('classes.jar', 'yolo.jar')
+}
+exportJar.dependsOn(build)

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.2.1" type="baseline" client="gradle" dependencies="false" name="AGP (7.2.1)" variant="all" version="7.2.1">
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `checkSupport`"
+        errorLine1="        FingerManager.SupportResult fingerSupport = FingerManager.checkSupport(mContext);"
+        errorLine2="                                                                  ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="54"
+            column="67"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 28 (current min is 24): `DEVICE_UNSUPPORTED`"
+        errorLine1="            case DEVICE_UNSUPPORTED:"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="56"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 28 (current min is 24): `SUPPORT_WITHOUT_DATA`"
+        errorLine1="            case SUPPORT_WITHOUT_DATA:"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="60"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 28 (current min is 24): `SUPPORT`"
+        errorLine1="            case SUPPORT:"
+        errorLine2="                 ~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="64"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `updateFingerData`"
+        errorLine1="        FingerManager.updateFingerData(mContext);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="75"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `build`"
+        errorLine1="            FingerManager.build().setApplication(activity.getApplication())"
+        errorLine2="                          ~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="81"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `setApplication`"
+        errorLine1="            FingerManager.build().setApplication(activity.getApplication())"
+        errorLine2="                                  ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="81"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `setTitle`"
+        errorLine1="                    .setTitle(&quot;指纹验证&quot;)"
+        errorLine2="                     ~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="82"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `setDes`"
+        errorLine1="                    .setDes(&quot;请按下指纹&quot;)"
+        errorLine2="                     ~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="83"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `setNegativeText`"
+        errorLine1="                    .setNegativeText(&quot;取消&quot;)"
+        errorLine2="                     ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="84"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `setFingerCallback`"
+        errorLine1="                    .setFingerCallback(new SimpleFingerCallback() {"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="85"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `create`"
+        errorLine1="                    .create()"
+        errorLine2="                     ~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="124"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `startListener`"
+        errorLine1="                    .startListener(activity);"
+        errorLine2="                     ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="125"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 28 (current min is 24): `hasFingerprintChang`"
+        errorLine1="        if (FingerManager.hasFingerprintChang(mContext)) {"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="135"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="OldTargetApi"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
+        errorLine1="        targetSdkVersion 32"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="12"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.8.0 is available: 1.10.0"
+        errorLine1="    implementation &apos;com.google.android.material:material:1.8.0&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="40"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="SupportAnnotationUsage"
+        message="The API level is already known to be at least 28 here from outer annotations"
+        errorLine1="    @RequiresApi(Build.VERSION_CODES.P)"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/biometric/BiometricPromptImpl28.java"
+            line="37"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="SupportAnnotationUsage"
+        message="The API level is already known to be at least 28 here from outer annotations"
+        errorLine1="    @RequiresApi(Build.VERSION_CODES.P)"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/biometric/BiometricPromptImpl28.java"
+            line="64"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="SupportAnnotationUsage"
+        message="The API level is already known to be at least 28 here from outer annotations"
+        errorLine1="    @RequiresApi(api = Build.VERSION_CODES.M)"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/biometric/FingerManager.java"
+            line="93"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; SDK_INT is always >= 24"
+        errorLine1="                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/biometric/CipherHelper.java"
+            line="139"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; SDK_INT is always >= 28 from outer annotation (`@RequiresApi(28)`)"
+        errorLine1="    @RequiresApi(api = Build.VERSION_CODES.M)"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/biometric/FingerManager.java"
+            line="93"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="Do not place Android context classes in static fields (static reference to `FingerprintTool` which has field `mContext` pointing to `Context`); this is a memory leak"
+        errorLine1="    private static volatile FingerprintTool sInstance = null;"
+        errorLine2="            ~~~~~~">
+        <location
+            file="src/main/java/com/example/yolo_sdk/tools/FingerprintTool.java"
+            line="32"
+            column="13"/>
+    </issue>
+
+</issues>
