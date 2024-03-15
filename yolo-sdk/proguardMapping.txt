@@ -1,0 +1,88 @@
+# compiler: R8
+# compiler_version: 3.2.60
+# common_typos_disable
+# {"id":"com.android.tools.r8.mapping","version":"2.0"}
+# pg_map_id: 587447f
+# pg_map_hash: SHA-256 587447f88f65fd8060d35c04ac14566844ac90c20d1781f65a5f39615978a08e
+com.example.yolo_sdk.biometric.BiometricPromptImpl28 -> com.example.yolo_sdk.biometric.BiometricPromptImpl28:
+    1:11:void <init>(androidx.appcompat.app.AppCompatActivity,com.example.yolo_sdk.biometric.FingerManagerBuilder):38:48 -> <init>
+    12:21:void <init>(androidx.appcompat.app.AppCompatActivity,com.example.yolo_sdk.biometric.FingerManagerBuilder):47:56 -> <init>
+    1:1:com.example.yolo_sdk.biometric.IFingerCallback access$000(com.example.yolo_sdk.biometric.BiometricPromptImpl28):27:27 -> access$000
+    1:1:androidx.appcompat.app.AppCompatActivity access$100(com.example.yolo_sdk.biometric.BiometricPromptImpl28):27:27 -> access$100
+    1:14:void authenticate(android.os.CancellationSignal):67:80 -> authenticate
+    15:81:void authenticate(android.os.CancellationSignal):79:145 -> authenticate
+com.example.yolo_sdk.biometric.BiometricPromptImpl28$1 -> com.example.yolo_sdk.biometric.BiometricPromptImpl28$1:
+    1:1:void <init>(com.example.yolo_sdk.biometric.BiometricPromptImpl28):48:48 -> <init>
+com.example.yolo_sdk.biometric.BiometricPromptImpl28$2 -> com.example.yolo_sdk.biometric.BiometricPromptImpl28$2:
+    1:1:void <init>(com.example.yolo_sdk.biometric.BiometricPromptImpl28,android.os.CancellationSignal):80:80 -> <init>
+    1:11:void onAuthenticationError(int,java.lang.CharSequence):84:94 -> onAuthenticationError
+    1:3:void onAuthenticationFailed():138:140 -> onAuthenticationFailed
+    1:3:void onAuthenticationHelp(int,java.lang.CharSequence):100:102 -> onAuthenticationHelp
+    1:24:void onAuthenticationSucceeded(android.hardware.biometrics.BiometricPrompt$AuthenticationResult):107:130 -> onAuthenticationSucceeded
+com.example.yolo_sdk.biometric.CipherHelper -> com.example.yolo_sdk.biometric.CipherHelper:
+    1:12:void <init>():52:63 -> <init>
+    1:5:javax.crypto.Cipher createCipher():83:87 -> createCipher
+    1:21:void createKey(android.content.Context,boolean):127:147 -> createKey
+    1:8:com.example.yolo_sdk.biometric.CipherHelper getInstance():68:75 -> getInstance
+    1:17:boolean initCipher(javax.crypto.Cipher):97:113 -> initCipher
+    18:18:boolean initCipher(javax.crypto.Cipher):110:110 -> initCipher
+com.example.yolo_sdk.biometric.FingerManager -> com.example.yolo_sdk.biometric.FingerManager:
+    1:1:com.example.yolo_sdk.biometric.FingerManagerBuilder build():159:159 -> build
+    1:9:com.example.yolo_sdk.biometric.FingerManager$SupportResult checkSupport(android.content.Context):66:74 -> checkSupport
+    1:2:void createImpl(androidx.appcompat.app.AppCompatActivity):87:88 -> createImpl
+    1:8:com.example.yolo_sdk.biometric.FingerManager getInstance():44:51 -> getInstance
+    9:10:com.example.yolo_sdk.biometric.FingerManager getInstance(com.example.yolo_sdk.biometric.FingerManagerBuilder):55:56 -> getInstance
+    1:6:boolean hasFingerprintChang(android.content.Context):130:135 -> hasFingerprintChang
+    1:2:boolean hasFingerprintData(android.content.Context):154:155 -> hasFingerprintData
+    1:2:boolean isHardwareDetected(android.content.Context):144:145 -> isHardwareDetected
+    1:2:void startListener(androidx.appcompat.app.AppCompatActivity):82:83 -> startListener
+    3:17:void startListener():96:110 -> startListener
+    1:3:void updateFingerData(android.content.Context):119:121 -> updateFingerData
+com.example.yolo_sdk.biometric.FingerManager$SupportResult -> com.example.yolo_sdk.biometric.FingerManager$SupportResult:
+    1:1:com.example.yolo_sdk.biometric.FingerManager$SupportResult[] $values():37:37 -> $values
+    1:3:void <clinit>():38:40 -> <clinit>
+    4:4:void <clinit>():37:37 -> <clinit>
+    1:1:void <init>(java.lang.String,int):37:37 -> <init>
+    1:1:com.example.yolo_sdk.biometric.FingerManager$SupportResult valueOf(java.lang.String):37:37 -> valueOf
+    1:1:com.example.yolo_sdk.biometric.FingerManager$SupportResult[] values():37:37 -> values
+com.example.yolo_sdk.biometric.FingerManagerBuilder -> com.example.yolo_sdk.biometric.FingerManagerBuilder:
+    1:5:com.example.yolo_sdk.biometric.FingerManager create():84:88 -> create
+    6:6:com.example.yolo_sdk.biometric.FingerManager create():85:85 -> create
+    1:1:android.app.Application getApplication():43:43 -> getApplication
+    1:1:java.lang.String getDes():61:61 -> getDes
+    1:1:com.example.yolo_sdk.biometric.IFingerCallback getFingerCallback():79:79 -> getFingerCallback
+    1:1:java.lang.String getNegativeText():70:70 -> getNegativeText
+    1:1:java.lang.String getTitle():52:52 -> getTitle
+    1:1:com.example.yolo_sdk.biometric.FingerManagerBuilder setApplication(android.app.Application):38:38 -> setApplication
+    1:1:com.example.yolo_sdk.biometric.FingerManagerBuilder setDes(java.lang.String):56:56 -> setDes
+    1:1:com.example.yolo_sdk.biometric.FingerManagerBuilder setFingerCallback(com.example.yolo_sdk.biometric.IFingerCallback):74:74 -> setFingerCallback
+    1:1:com.example.yolo_sdk.biometric.FingerManagerBuilder setNegativeText(java.lang.String):65:65 -> setNegativeText
+    1:1:com.example.yolo_sdk.biometric.FingerManagerBuilder setTitle(java.lang.String):47:47 -> setTitle
+com.example.yolo_sdk.biometric.SharePreferenceUtil -> com.example.yolo_sdk.biometric.SharePreferenceUtil:
+    1:1:int getFingerSupportState(android.content.Context):61:61 -> getFingerSupportState
+    1:1:android.content.SharedPreferences getSharedPreferences(android.content.Context):29:29 -> getSharedPreferences
+    1:1:boolean isEnableFingerDataChange(android.content.Context):41:41 -> isEnableFingerDataChange
+    1:1:boolean isFingerDataChange(android.content.Context):51:51 -> isFingerDataChange
+    1:3:void saveEnableFingerDataChange(android.content.Context,java.lang.Boolean):34:36 -> saveEnableFingerDataChange
+    1:3:void saveFingerDataChange(android.content.Context,java.lang.Boolean):45:47 -> saveFingerDataChange
+    1:3:void setFingerSupportState(android.content.Context,int):55:57 -> setFingerSupportState
+com.example.yolo_sdk.tools.FingerprintTool -> com.example.yolo_sdk.tools.FingerprintTool:
+    1:3:void <init>(android.content.Context):47:49 -> <init>
+    1:1:java.lang.String access$000():30:30 -> access$000
+    1:49:int checkFinger(androidx.appcompat.app.AppCompatActivity,com.example.yolo_sdk.biometric.FingerprintCallback):79:127 -> checkFinger
+    1:1:int checkFingerSupport():131:131 -> checkFingerSupport
+    1:8:com.example.yolo_sdk.tools.FingerprintTool getInstance(android.content.Context):37:44 -> getInstance
+    1:1:boolean hasChangeFingerData():135:135 -> hasChangeFingerData
+    1:12:void initFingerprint():54:65 -> initFingerprint
+    13:13:void initFingerprint():62:62 -> initFingerprint
+    14:14:void initFingerprint():58:58 -> initFingerprint
+    1:1:void updateFingerData():75:75 -> updateFingerData
+com.example.yolo_sdk.tools.FingerprintTool$1 -> com.example.yolo_sdk.tools.FingerprintTool$1:
+    1:1:void <init>(com.example.yolo_sdk.tools.FingerprintTool,com.example.yolo_sdk.biometric.FingerprintCallback):85:85 -> <init>
+    1:2:void onCancel():113:114 -> onCancel
+    1:2:void onChange():120:121 -> onChange
+    1:2:void onError(int,java.lang.String):88:89 -> onError
+    1:2:void onFailed():107:108 -> onFailed
+    1:2:void onSucceed():99:100 -> onSucceed
+com.example.yolo_sdk.tools.FingerprintTool$2 -> com.example.yolo_sdk.tools.FingerprintTool$2:
+    1:1:void <clinit>():55:55 -> <clinit>
