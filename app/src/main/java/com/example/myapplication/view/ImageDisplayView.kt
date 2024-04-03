@@ -6,13 +6,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.UriUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.databinding.LayoutImageDisplayViewBinding
+import com.example.myapplication.getTag
+import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.ui.adapter.ImageDisplayAdapter
 import com.example.myapplication.useCase.PromptUseCase
 
@@ -93,6 +92,7 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
                 // 解析数据
                 val uri = data.data
                 val photoPath = UriUtils.uri2File(uri).absolutePath
+                SpeedyLog.d(context.getTag(), "选中的图片路径为$photoPath")
                 // 将图片路径添加到集合中
                 list.add(list.size - 1, photoPath)
                 // 配置适配器的数据

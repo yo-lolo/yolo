@@ -91,16 +91,17 @@
         <LinearLayout
             android:id="@+id/add_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:paddingVertical="15dp"
+            android:padding="10dp"
             android:background="@color/color_FFFFFF"
             android:gravity="center">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/image_show"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:riv_corner_radius="5dp"
                 android:scaleType="centerInside"
                 android:src="@mipmap/icon_image_add" />
         </LinearLayout>

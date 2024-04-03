@@ -37,13 +37,13 @@ class TestStoreRepository(private val appDataBase: AppDataBase) {
 
     suspend fun insertNews() = withContext(Dispatchers.IO) {
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(33333333333, 1693216150214, "美食", 0, "痞老板的小宝贝", "痞老板的小宝贝","/storage/emulated/0/Pictures/yolo/img-168853985155810d910fa18f90d0e292897f52b664c800496091f38f5a0e57230a1e861732dde.jpg"))
+            .insertNews(NewsInfo(33333333333, 1693216150214, "美食", 0, "痞老板的小宝贝", "痞老板的小宝贝","/storage/emulated/0/Pictures/weibo/img-1710208715803b58540dc5982971d485aa2e292cda0438257c5dff7753dc9a2780be1247da2b7.jpg"))
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(44444444444, 1693216494020, "其他", 0, "冒菜我的爱", "大冤种(梦想成为蟹老板版)","/storage/emulated/0/DCIM/tb_image_share_1688742034263.jpg"))
+            .insertNews(NewsInfo(44444444444, 1693216494020, "其他", 0, "冒菜我的爱", "大冤种(梦想成为蟹老板版)","/storage/emulated/0/Pictures/WeiXin/mmexport1709193038438.jpg"))
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(11111111111, 1693216624968, "其他", 0, "我姓付，我幸福！", "章鱼哥的迷妹","/storage/emulated/0/DCIM/Camera/IMG_20230708_144951.jpg"))
+            .insertNews(NewsInfo(11111111111, 1693216624968, "其他", 0, "我姓付，我幸福！", "章鱼哥的迷妹","/storage/emulated/0/DCIM/Screenshots/Screenshot_2024-02-29-16-03-55-280_com.taobao.idlefish.jpg"))
         appDataBase.NewsDao()
-            .insertNews(NewsInfo(22222222222, 1693216787020, "出行", 0, "我的小五月", "五月五月，我的好猫咪","/storage/emulated/0/Pictures/weibo/img-16889617830213389a2ae2deeb951e435596fb97f9cb2624c09a6b53818e904ff48d8bc840b3b.jpg"))
+            .insertNews(NewsInfo(22222222222, 1693216787020, "出行", 0, "我的小五月", "五月五月，我的好猫咪","/storage/emulated/0/Pictures/WeiXin/mmexport1709695731798.jpg"))
     }
 
 }
