@@ -4,7 +4,7 @@ import android.widget.TextView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.elvishew.xlog.XLog
+import com.example.myapplication.log.SpeedyLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -48,7 +48,7 @@ fun LifecycleOwner.readFileEachLineToTextView(file: File, textView: TextView) {
 				} while (readLength != -1)
 			}
 		} catch (e: java.lang.Exception) {
-			XLog.e("读取日志文件出错")
+			SpeedyLog.e("读取日志文件出错")
 		}
 	}
 }

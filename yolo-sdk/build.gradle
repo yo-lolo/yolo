@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'com.example.yolo_sdk'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 32
+        targetSdkVersion 33
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
