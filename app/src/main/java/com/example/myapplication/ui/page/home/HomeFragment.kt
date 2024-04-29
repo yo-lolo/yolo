@@ -4,11 +4,13 @@ import android.content.Intent
 import android.graphics.Outline
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +20,7 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.NotifyInfo
+import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.isLogin
 import com.example.myapplication.log.SpeedyLog
@@ -26,14 +29,14 @@ import com.example.myapplication.pops.SelectBrowserPop
 import com.example.myapplication.ui.adapter.NewsListAdapter
 import com.example.myapplication.util.FilePicker
 import com.example.myapplication.util.GlideImageLoader
+import com.example.myapplication.util.JsonUtil
 import com.example.myapplication.util.createPop
 import com.example.myapplication.util.getBrowserList
 import com.example.myapplication.util.toBrowser
 import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.HomeViewModel
-import com.example.yolo_sdk.biometric.FingerprintCallback
-import com.example.yolo_sdk.biometric.IFingerCallback
 import com.example.yolo_sdk.tools.FingerprintTool
+import com.google.gson.Gson
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -52,6 +55,8 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
     private var newsListAdapter = NewsListAdapter()
     val viewModel by viewModels<HomeViewModel>()
+    private var mHandler: Handler? = null
+    private var mThread: Thread? = null
     private val filePicker = FilePicker(this)
 
     override fun onCreateView(
@@ -102,6 +107,29 @@ class HomeFragment : BaseFragment() {
         newsListAdapter.goNewsDetailListener = {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
+
+        mHandler = object : Handler() {
+            override fun handleMessage(msg: Message) {
+                super.handleMessage(msg)
+                if (msg.what == 0) {
+                    // 在主线程中拿到消息
+                    val weather = msg.obj.toString()
+                    SpeedyLog.d("fan", "---主线程收到了天气数据---$weather");
+                    // 解析JSON 将JSON格式复杂的字符串解析成Java对象
+                    val weatherBean = JsonUtil.fromJson(weather, User::class.java)
+                    SpeedyLog.d("fan", "---解析后的数据---" + weatherBean.toString());
+                }
+            }
+        }
+
+        mThread = Thread {
+            val message = Message.obtain()
+            message.what = 0
+            message.obj = "11"
+            mHandler?.handleMessage(message)
+        }
+
+        mThread?.start()
 
         viewModel.newsMapData.observe(viewLifecycleOwner) { newsDataList ->
             newsListAdapter.list = newsDataList.take(2)
@@ -165,6 +193,7 @@ class HomeFragment : BaseFragment() {
             requireContext().startActivity(intent)
             return
         }
+
         SelectBrowserPop(requireContext(), browserList).apply {
             this.onSelectBrowser = {
                 if (jumpUrl != null) {
@@ -179,6 +208,12 @@ class HomeFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         viewModel.initData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mHandler?.removeCallbacksAndMessages(null)
+        mThread?.interrupt()
     }
 
 }
