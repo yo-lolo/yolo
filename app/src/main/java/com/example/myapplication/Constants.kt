@@ -74,6 +74,11 @@ object Constants {
     /**
      * log路径名
      */
-    const val LOG_PATH = "My_Application"
+    const val LogFilesDir = "/log"
+
+    /**
+     * 崩溃捕捉后的存储位置
+     */
+    const val CrashFilesDir = "/crash"
 
 }

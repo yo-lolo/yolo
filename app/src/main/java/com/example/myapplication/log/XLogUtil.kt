@@ -36,12 +36,21 @@ import java.util.*
 object XLogUtil {
 
     /**
-     * 默认 XLog 日志保存文件夹的路径： sdcard/Android/data/包名/files/XLog
+     * 默认 XLog 日志保存文件夹的路径： sdcard/Android/data/包名/files/log
      */
     val defaultLogFolderPath: String by lazy {
 
         val externalFilesDir = DataManager.context.getExternalFilesDir(null)
-        File(externalFilesDir, Constants.LOG_PATH).absolutePath
+        File(externalFilesDir, Constants.LogFilesDir).absolutePath
+    }
+
+    /**
+     * 默认 XCrash日志保存文件夹的路径： sdcard/Android/data/包名/files/crash
+     */
+    val defaultCrashFolderPath: String by lazy {
+
+        val externalFilesDir = DataManager.context.getExternalFilesDir(null)
+        File(externalFilesDir, Constants.CrashFilesDir).absolutePath
     }
 
     /**

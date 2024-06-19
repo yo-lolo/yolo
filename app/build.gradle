@@ -111,4 +111,6 @@ dependencies {
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 
     implementation 'com.elvishew:xlog:1.10.1'
+
+    implementation('com.iqiyi.xcrash:xcrash-android-lib:3.1.0')
 }

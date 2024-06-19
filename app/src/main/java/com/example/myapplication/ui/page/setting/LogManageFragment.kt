@@ -83,8 +83,9 @@ class LogManageFragment : BaseFragment() {
     private fun doShareAppLog() {
         val logFolders = mutableListOf<File>()
         val appLogFolder = File(XLogUtil.defaultLogFolderPath)
+        val xCrashFileFolder = File(XLogUtil.defaultCrashFolderPath)
         logFolders.add(appLogFolder)
-
+        logFolders.add(xCrashFileFolder)
         val externalFilesDir = requireContext().getExternalFilesDir(null)
         val logZipFile = File(externalFilesDir, "log.zip")
 
