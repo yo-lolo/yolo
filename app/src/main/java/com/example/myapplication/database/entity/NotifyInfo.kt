@@ -2,7 +2,7 @@ package com.example.myapplication.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
  * @ProjectName :

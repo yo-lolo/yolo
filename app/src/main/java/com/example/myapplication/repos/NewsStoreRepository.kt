@@ -1,6 +1,6 @@
 package com.example.myapplication.repos
 
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.imp.NewsTaskImp
 import com.example.myapplication.util.TimeUtil

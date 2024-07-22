@@ -5,8 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
-import com.example.myapplication.config.AppConfig
-import com.example.myapplication.database.entity.FriendInfo
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.database.entity.User
 import kotlinx.coroutines.launch
 

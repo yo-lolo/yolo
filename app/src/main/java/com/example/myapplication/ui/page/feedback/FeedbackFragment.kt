@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.chargeToastLogin
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentFeedbackBinding
 import com.example.myapplication.vm.FeedbackViewModel
 

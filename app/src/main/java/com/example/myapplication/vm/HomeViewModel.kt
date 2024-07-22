@@ -1,11 +1,10 @@
 package com.example.myapplication.vm
 
-import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.example.myapplication.DataManager
 import com.example.myapplication.base.BaseViewModel
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.data.NewsDataInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.getTag

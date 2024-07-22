@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentChatDetailBinding
 import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.ui.page.search.SearchFragment

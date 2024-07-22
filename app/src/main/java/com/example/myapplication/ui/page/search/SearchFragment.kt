@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentAppSearchBinding
 import com.example.myapplication.databinding.LayoutSearchHeadBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter

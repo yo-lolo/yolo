@@ -5,7 +5,6 @@ import android.graphics.Outline
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,8 @@ import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
+import com.example.myapplication.database.entity.LikeInfo
 import com.example.myapplication.database.entity.NotifyInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.FragmentHomeBinding
@@ -36,7 +36,6 @@ import com.example.myapplication.util.toBrowser
 import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.HomeViewModel
 import com.example.yolo_sdk.tools.FingerprintTool
-import com.google.gson.Gson
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -113,11 +112,11 @@ class HomeFragment : BaseFragment() {
                 super.handleMessage(msg)
                 if (msg.what == 0) {
                     // 在主线程中拿到消息
-                    val weather = msg.obj.toString()
-                    SpeedyLog.d("fan", "---主线程收到了天气数据---$weather");
+                    val test = msg.obj.toString()
+                    SpeedyLog.d("fan", "---主线程收到了天气数据---$test");
                     // 解析JSON 将JSON格式复杂的字符串解析成Java对象
-                    val weatherBean = JsonUtil.fromJson(weather, User::class.java)
-                    SpeedyLog.d("fan", "---解析后的数据---" + weatherBean.toString());
+                    val testBean = JsonUtil.fromJson(test, LikeInfo::class.java)
+                    SpeedyLog.d("fan", "---解析后的数据---" + testBean.toString());
                 }
             }
         }
@@ -125,7 +124,7 @@ class HomeFragment : BaseFragment() {
         mThread = Thread {
             val message = Message.obtain()
             message.what = 0
-            message.obj = "11"
+            message.obj = JsonUtil.toJson(LikeInfo(11111, 22222, 2222))
             mHandler?.handleMessage(message)
         }
 

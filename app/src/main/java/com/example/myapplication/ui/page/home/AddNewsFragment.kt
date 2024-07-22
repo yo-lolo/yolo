@@ -1,7 +1,6 @@
 package com.example.myapplication.ui.page.home
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -11,16 +10,10 @@ import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.UriUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.R
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentAddNewsBinding
-import com.example.myapplication.getTag
-import com.example.myapplication.log.SpeedyLog
-import com.example.myapplication.useCase.PromptUseCase
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.vm.HomeViewModel
 

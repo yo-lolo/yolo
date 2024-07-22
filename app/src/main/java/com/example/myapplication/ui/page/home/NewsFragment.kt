@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentNewsBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.NewsListAdapter

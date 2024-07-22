@@ -1,7 +1,6 @@
 package com.example.myapplication.repos
 
-import androidx.lifecycle.MutableLiveData
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.imp.UserTaskImp
 import kotlinx.coroutines.Dispatchers

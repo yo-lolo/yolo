@@ -3,7 +3,7 @@ package com.example.myapplication.ui.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.database.entity.FriendInfo
 import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.LayoutNewFriendsItemBinding

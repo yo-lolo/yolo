@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentMineNewsBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.NewsListAdapter

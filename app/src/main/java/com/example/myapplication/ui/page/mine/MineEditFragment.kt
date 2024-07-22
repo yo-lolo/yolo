@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.UriUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.MineEditLayoutBinding
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil

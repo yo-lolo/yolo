@@ -1,8 +1,7 @@
 package com.example.myapplication.repos
 
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.database.entity.FriendInfo
-import com.example.myapplication.database.entity.User
 import com.example.myapplication.imp.FriendTaskImp
 import com.example.myapplication.util.TimeUtil
 import kotlinx.coroutines.Dispatchers

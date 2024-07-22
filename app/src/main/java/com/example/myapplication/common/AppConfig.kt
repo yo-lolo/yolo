@@ -1,10 +1,7 @@
-package com.example.myapplication.config
+package com.example.myapplication.common
 
-import android.content.Context
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.isLogin
-import java.io.File
-import java.util.IdentityHashMap
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -49,11 +46,11 @@ object AppConfig {
      * 轮播图片集合
      */
     val BANNER_IMAGES = listOf(
-        "https://alifei02.cfp.cn/creative/vcg/800/new/VCG21gic19937006.jpg",
-        "https://alifei01.cfp.cn/creative/vcg/800/version23/VCG41157532246.jpg",
-        "https://tenfei04.cfp.cn/creative/vcg/800/version23/VCG41164857181.jpg",
-        "https://alifei05.cfp.cn/creative/vcg/800/version23/VCG41542511145.jpg",
-        "https://tenfei03.cfp.cn/creative/vcg/800/new/VCG41N1090223986.jpg"
+        "https://cdn.pixabay.com/photo/2024/07/18/22/39/ai-generated-8905163_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/07/16/08/15/ai-generated-8898676_1280.png",
+        "https://cdn.pixabay.com/photo/2024/07/17/00/26/ai-generated-8900260_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/07/18/22/39/ai-generated-8905162_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/07/13/20/02/cheeseburger-8893011_1280.png"
     )
 
     /**

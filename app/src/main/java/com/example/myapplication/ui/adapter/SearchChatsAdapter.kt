@@ -1,13 +1,10 @@
 package com.example.myapplication.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.config.AppConfig
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.User
-import com.example.myapplication.databinding.LayoutChatListItemBinding
 import com.example.myapplication.databinding.LayoutSearchChatsItemBinding
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil

@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.UriUtils
 import com.example.myapplication.DataManager
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.LayoutImageDisplayViewBinding
 import com.example.myapplication.getTag
 import com.example.myapplication.log.SpeedyLog

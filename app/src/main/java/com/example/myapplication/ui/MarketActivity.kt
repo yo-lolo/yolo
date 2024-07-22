@@ -1,19 +1,16 @@
 package com.example.myapplication.ui
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
 import com.example.myapplication.base.BaseActivity
-import com.example.myapplication.config.AppConfig
+import com.example.myapplication.common.AppConfig
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.database.entity.ChatInfo
 import com.example.myapplication.database.entity.NotifyInfo
-import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivityMarketBinding
 import com.example.myapplication.isLogin
 import com.example.myapplication.ui.page.mess.ChatFragment
