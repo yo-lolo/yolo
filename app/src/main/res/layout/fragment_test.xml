@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.page.home.TestFragment">
+
+
+    <ImageView
+        android:id="@+id/picker_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/init_notify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="初始化消息通知" />
+
+    <Button
+        android:id="@+id/file_pick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="本地文件选择" />
+
+    <Button
+        android:id="@+id/finger_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="指纹验证" />
+
+    <Button
+        android:id="@+id/write_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="写sim卡短信" />
+
+    <Button
+        android:id="@+id/read_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="读sim卡短信" />
+
+    <Button
+        android:id="@+id/get_sim_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取联系人列表" />
+
+
+    <Button
+        android:id="@+id/insert_simContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="插入联系人" />
+
+    <Button
+        android:id="@+id/delete_simContact1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="根据id 删除对应记录" />
+
+    <Button
+        android:id="@+id/delete_simContact2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="根据用户名和电话号码定位联系人并删除" />
+
+
+</LinearLayout>

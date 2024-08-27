@@ -51,14 +51,17 @@ public class FingerprintTool {
 
 
     public void initFingerprint() {
+        Log.i(TAG, "initFingerprint()");
         FingerManager.SupportResult fingerSupport = FingerManager.checkSupport(mContext);
         switch (fingerSupport) {
             case DEVICE_UNSUPPORTED:
                 //设备不支持指纹
+                Log.i(TAG, "设备不支持指纹");
                 SharePreferenceUtil.setFingerSupportState(mContext, 1);
                 break;
             case SUPPORT_WITHOUT_DATA:
                 //没有录入指纹
+                Log.i(TAG, "没有录入指纹");
                 SharePreferenceUtil.setFingerSupportState(mContext, 2);
                 break;
             case SUPPORT:
@@ -76,6 +79,7 @@ public class FingerprintTool {
     }
 
     public int checkFinger(AppCompatActivity activity, FingerprintCallback callback) {
+        Log.i(TAG, "checkFinger()");
         if (SharePreferenceUtil.getFingerSupportState(mContext) == 0) {
             updateFingerData();
             FingerManager.build().setApplication(activity.getApplication())
@@ -123,6 +127,10 @@ public class FingerprintTool {
                     })
                     .create()
                     .startListener(activity);
+        }else if (SharePreferenceUtil.getFingerSupportState(mContext) == 1){
+            callback.onFingerCheckCallback("设备不支持指纹");
+        }else if (SharePreferenceUtil.getFingerSupportState(mContext) == 2){
+            callback.onFingerCheckCallback("设备没有录入指纹");
         }
         return SharePreferenceUtil.getFingerSupportState(mContext);
     }

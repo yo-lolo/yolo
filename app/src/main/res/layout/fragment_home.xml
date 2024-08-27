@@ -70,22 +70,10 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/init_notify"
+                android:id="@+id/to_text_page"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="初始化消息通知" />
-
-            <Button
-                android:id="@+id/file_pick"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="本地文件选择" />
-
-            <Button
-                android:id="@+id/finger_check"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="指纹验证" />
+                android:text="To Test Page" />
 
 
             <com.youth.banner.Banner
@@ -108,6 +96,7 @@
                     android:id="@+id/image_test"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:src="@mipmap/zdxlz_icon"
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp" />
 

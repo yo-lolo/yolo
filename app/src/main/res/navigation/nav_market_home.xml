@@ -43,6 +43,10 @@
         android:name="com.example.myapplication.ui.page.home.NewsFragment"
         android:label="NewsFragment" />
     <fragment
+        android:id="@+id/testFragment"
+        android:name="com.example.myapplication.ui.page.home.TestFragment"
+        android:label="TestFragment" />
+    <fragment
         android:id="@+id/newsDetailFragment"
         android:name="com.example.myapplication.ui.page.home.NewsDetailFragment"
         android:label="NewsDetailFragment" />
@@ -180,6 +184,9 @@
     <action
         android:id="@+id/goNewsFragment"
         app:destination="@id/newsFragment" />
+    <action
+        android:id="@+id/goTestFragment"
+        app:destination="@id/testFragment" />
     <action
         android:id="@+id/goNewsDetailFragment"
         app:destination="@id/newsDetailFragment" />

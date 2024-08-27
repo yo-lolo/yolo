@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.page.home
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Outline
 import android.net.Uri
@@ -15,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
+import com.example.myapplication.Constants
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.common.AppConfig
@@ -36,6 +38,9 @@ import com.example.myapplication.util.toBrowser
 import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.HomeViewModel
 import com.example.yolo_sdk.tools.FingerprintTool
+import com.hjq.permissions.OnPermissionCallback
+import com.hjq.permissions.Permission
+import com.hjq.permissions.XXPermissions
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -54,9 +59,6 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
     private var newsListAdapter = NewsListAdapter()
     val viewModel by viewModels<HomeViewModel>()
-    private var mHandler: Handler? = null
-    private var mThread: Thread? = null
-    private val filePicker = FilePicker(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,11 +68,14 @@ class HomeFragment : BaseFragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         val view = binding.root
         init(view)
-        initTest()
         return view
     }
 
     private fun init(view: View) {
+
+        binding.toTextPage.setOnClickListener {
+            findNavController().navigate(R.id.goTestFragment)
+        }
 
         binding.homeWelcomeLayout.visibleOrGone(isLogin())
         if (isLogin()) {
@@ -107,28 +112,7 @@ class HomeFragment : BaseFragment() {
             NewsDetailFragment.goNewsDetailFragment(it, findNavController())
         }
 
-        mHandler = object : Handler() {
-            override fun handleMessage(msg: Message) {
-                super.handleMessage(msg)
-                if (msg.what == 0) {
-                    // 在主线程中拿到消息
-                    val test = msg.obj.toString()
-                    SpeedyLog.d("fan", "---主线程收到了天气数据---$test");
-                    // 解析JSON 将JSON格式复杂的字符串解析成Java对象
-                    val testBean = JsonUtil.fromJson(test, LikeInfo::class.java)
-                    SpeedyLog.d("fan", "---解析后的数据---" + testBean.toString());
-                }
-            }
-        }
 
-        mThread = Thread {
-            val message = Message.obtain()
-            message.what = 0
-            message.obj = JsonUtil.toJson(LikeInfo(11111, 22222, 2222))
-            mHandler?.handleMessage(message)
-        }
-
-        mThread?.start()
 
         viewModel.newsMapData.observe(viewLifecycleOwner) { newsDataList ->
             newsListAdapter.list = newsDataList.take(2)
@@ -147,38 +131,6 @@ class HomeFragment : BaseFragment() {
 
     }
 
-    private fun initTest() {
-        binding.initNotify.setOnClickListener {
-            MessNotification().showNotify(NotifyInfo(AppConfig.MESS_NOTIFY, "www", "0"))
-        }
-        binding.filePick.setOnClickListener {
-            pickFile(false) { isCancel, uris ->
-                SpeedyLog.d(TAG, "isCancel: $isCancel, uris: $uris")
-                uris.forEach {
-                    GlideImageLoader().displayImageUri(it, binding.imageTest)
-                }
-            }
-        }
-        binding.fingerCheck.setOnClickListener {
-            FingerprintTool.getInstance(requireContext())
-                .checkFinger(requireActivity() as AppCompatActivity) { des ->
-                    SpeedyLog.d(des)
-                    ToastUtils.showShort(des)
-                }
-        }
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == FilePicker.PICK_FILE_REQUEST_CODE) {
-            filePicker.onActivityResult(resultCode, data)
-        }
-    }
-
-    private fun pickFile(isMultipleChoose: Boolean, iPickResult: FilePicker.IPickResult) {
-        filePicker.launch(isMultipleChoose, iPickResult)
-    }
 
     /**
      * 指定浏览器打开
@@ -211,8 +163,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mHandler?.removeCallbacksAndMessages(null)
-        mThread?.interrupt()
     }
 
 }
