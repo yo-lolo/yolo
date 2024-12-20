@@ -13,7 +13,7 @@ import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentChatDetailBinding
 import com.example.myapplication.ui.page.mine.UserDetailFragment
 import com.example.myapplication.ui.page.search.SearchFragment
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.MessageViewModel
@@ -74,7 +74,7 @@ class ChatDetailFragment : BaseFragment() {
             SearchFragment.goSearchFragment(AppConfig.SEARCH_CHATS, findNavController(), number!!)
         }
         binding.clearChats.setOnClickListener {
-            PromptUseCase().prompt("确定要清除聊天记录吗？") {
+            PromptUtils().prompt("确定要清除聊天记录吗？") {
                 viewModel.clearChats(number!!)
             }
         }
@@ -85,7 +85,7 @@ class ChatDetailFragment : BaseFragment() {
             viewModel.updateFriendNotifyState(number!!, !isChecked)
         }
         binding.deleteFriend.setOnClickListener {
-            PromptUseCase().prompt("确定要删除好友吗？") {
+            PromptUtils().prompt("确定要删除好友吗？") {
                 viewModel.deleteFriend(number!!)
             }
         }

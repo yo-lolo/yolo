@@ -1,4 +1,4 @@
-package com.example.myapplication.useCase
+package com.example.myapplication.util
 
 import android.app.AlertDialog
 import android.view.View
@@ -26,7 +26,7 @@ import kotlin.coroutines.resume
  * @UpdateDate : 2023/6/29 14:00
  * @UpdateRemark : 更新说明
  */
-class PromptUseCase() {
+class PromptUtils() {
 
     /**
      * 删除弹窗

@@ -14,7 +14,7 @@ import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.ui.MarketActivity
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
@@ -55,9 +55,7 @@ class MainActivity : BaseActivity() {
                 Manifest.permission.READ_MEDIA_VIDEO,
                 Manifest.permission.READ_MEDIA_AUDIO,
                 Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.POST_NOTIFICATIONS,
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.WRITE_CONTACTS
+                Manifest.permission.POST_NOTIFICATIONS
             )
         ) {
             /**
@@ -65,7 +63,7 @@ class MainActivity : BaseActivity() {
              */
             lifecycleScope.launch {
                 if (MMKVManager.isShowAppIntroductionDialog) {
-                    PromptUseCase().showAppIntroductionDialog(
+                    PromptUtils().showAppIntroductionDialog(
                         Constants.APP_INTRODUCTION_DIALOG_TITLE,
                         Constants.APP_INTRODUCTION_DIALOG_CONTENT
                     ) {
@@ -96,18 +94,11 @@ class MainActivity : BaseActivity() {
                     denied: MutableList<String>
                 ) {
                     if (deniedForever.size > 0) {
-                        Toast.makeText(
-                            MainActivity@ this as Context,
-                            "权限被永久拒绝，即将跳转权限设置界面，同意后可以正常使用",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        SpeedyLog.d(TAG, "权限被永久拒绝，即将跳转权限设置界面，同意后可以正常使用")
                         Handler().postDelayed({ // 如果是被永久拒绝就跳转到应用权限系统设置页面
                             PermissionUtils.launchAppDetailsSettings()
                         }, 1000)
-                        SpeedyLog.d(
-                            TAG,
-                            deniedForever.toString() + "权限被永久拒绝，请前往设置界面允许权限"
-                        )
+                        SpeedyLog.d(TAG, deniedForever.toString() + "权限被永久拒绝，请前往设置界面允许权限")
                     } else {
                         SpeedyLog.d(
                             TAG,

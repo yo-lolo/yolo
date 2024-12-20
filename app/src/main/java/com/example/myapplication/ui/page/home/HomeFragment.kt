@@ -1,46 +1,29 @@
 package com.example.myapplication.ui.page.home
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Outline
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
-import com.example.myapplication.Constants
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.example.myapplication.common.AppConfig
-import com.example.myapplication.database.entity.LikeInfo
-import com.example.myapplication.database.entity.NotifyInfo
-import com.example.myapplication.database.entity.User
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.isLogin
-import com.example.myapplication.log.SpeedyLog
-import com.example.myapplication.notify.MessNotification
-import com.example.myapplication.pops.SelectBrowserPop
+import com.example.myapplication.util.SelectBrowserPop
 import com.example.myapplication.ui.adapter.NewsListAdapter
-import com.example.myapplication.util.FilePicker
 import com.example.myapplication.util.GlideImageLoader
-import com.example.myapplication.util.JsonUtil
 import com.example.myapplication.util.createPop
 import com.example.myapplication.util.getBrowserList
 import com.example.myapplication.util.toBrowser
 import com.example.myapplication.util.visibleOrGone
 import com.example.myapplication.vm.HomeViewModel
-import com.example.yolo_sdk.tools.FingerprintTool
-import com.hjq.permissions.OnPermissionCallback
-import com.hjq.permissions.Permission
-import com.hjq.permissions.XXPermissions
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd

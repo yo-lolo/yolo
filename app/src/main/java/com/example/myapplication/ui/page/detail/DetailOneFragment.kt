@@ -1,7 +1,5 @@
 package com.example.myapplication.ui.page.detail
 
-import android.app.VoiceInteractor.Prompt
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +9,14 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.ActivityUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.ctq.sphone.market.base.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDetailOneBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.adapter.OnceListAdapter
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 import com.example.myapplication.vm.DetailOneViewModel
 
 class DetailOneFragment : BaseFragment() {
@@ -55,7 +50,7 @@ class DetailOneFragment : BaseFragment() {
             initAddOnceView()
         }
         onceListAdapter.deleteListener = { position, data ->
-            PromptUseCase().deletePrompt(data) {
+            PromptUtils().deletePrompt(data) {
                 onceListAdapter.list.removeAt(position)
                 notifyData()
             }

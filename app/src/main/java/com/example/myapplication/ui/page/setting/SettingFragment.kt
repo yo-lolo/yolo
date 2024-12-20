@@ -15,7 +15,7 @@ import com.example.myapplication.chargeToastLogin
 import com.example.myapplication.data.MMKVManager
 import com.example.myapplication.databinding.FragmentSettingBinding
 import com.example.myapplication.isNotify
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 import com.example.myapplication.vm.MineViewModel
 
 /**
@@ -89,7 +89,7 @@ class SettingFragment : BaseFragment() {
         }
         binding.exitLogin.setOnClickListener {
             chargeToastLogin {
-                PromptUseCase().exitLoginPrompt {
+                PromptUtils().exitLoginPrompt {
                     viewModel.logout()
                     findNavController().navigate(R.id.goLoginFragment)
                 }

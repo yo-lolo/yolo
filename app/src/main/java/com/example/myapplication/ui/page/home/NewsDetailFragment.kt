@@ -18,7 +18,7 @@ import com.example.myapplication.databinding.FragmentNewsDetailBinding
 import com.example.myapplication.ui.adapter.CommentsAdapter
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
 import com.example.myapplication.ui.page.mine.UserDetailFragment
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.TimeUtil
 import com.example.myapplication.vm.NewsDetailViewModel
@@ -143,7 +143,7 @@ class NewsDetailFragment : BaseFragment() {
             UserDetailFragment.goUserDetailFragment(it, findNavController())
         }
         commentListAdapter.deleteCommentListener = {
-            PromptUseCase().deletePrompt("'${it.content}'这条评论") {
+            PromptUtils().deletePrompt("'${it.content}'这条评论") {
                 viewModel.deleteComment(newsId!!, it)
             }
         }

@@ -1,4 +1,4 @@
-package com.example.myapplication.common.net;
+package com.example.myapplication.net;
 
 import android.app.Application;
 

@@ -1,23 +1,18 @@
-package com.example.myapplication.pops
+package com.example.myapplication.util
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ResolveInfo
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.databinding.PopSelectBrowserBinding
-import com.example.myapplication.util.getAppIcon
-import com.example.myapplication.util.getAppName
 import com.lxj.xpopup.core.BottomPopupView
 
 

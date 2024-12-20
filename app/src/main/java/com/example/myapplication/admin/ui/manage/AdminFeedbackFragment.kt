@@ -13,7 +13,7 @@ import com.example.myapplication.admin.adpter.AdminFeedbacksAdapter
 import com.example.myapplication.admin.vm.ManageViewModel
 import com.example.myapplication.databinding.FragmentManageFeedbacksBinding
 import com.example.myapplication.ui.adapter.EmptyViewAdapter
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 
 
 class AdminFeedbackFragment : BaseFragment() {
@@ -55,7 +55,7 @@ class AdminFeedbackFragment : BaseFragment() {
         }
 
         feedbacksAdapter.showBigImageListener = {
-            PromptUseCase().promptBigImage(it)
+            PromptUtils().promptBigImage(it)
         }
     }
 

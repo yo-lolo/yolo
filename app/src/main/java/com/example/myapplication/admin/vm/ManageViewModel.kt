@@ -9,7 +9,7 @@ import com.example.myapplication.database.entity.CommentInfo
 import com.example.myapplication.database.entity.FeedbackInfo
 import com.example.myapplication.database.entity.NewsInfo
 import com.example.myapplication.database.entity.User
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 import kotlinx.coroutines.launch
 
 /**
@@ -121,7 +121,7 @@ class ManageViewModel : BaseViewModel() {
         val comments = getCheckedData()
         val commentsId = comments.map { it.id }
 
-        PromptUseCase().batchAuditPrompt(commentsId) {
+        PromptUtils().batchAuditPrompt(commentsId) {
             launchSafe {
                 comments.forEach { commentInfo ->
                     commentStoreRepository.updateCommentType(1, commentInfo.id)

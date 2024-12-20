@@ -13,7 +13,7 @@ import com.example.myapplication.databinding.LayoutImageDisplayViewBinding
 import com.example.myapplication.getTag
 import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.ui.adapter.ImageDisplayAdapter
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -59,7 +59,7 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
         }
 
         imageDisplayAdapter.showImageListener = {
-            PromptUseCase().promptBigImage(it)
+            PromptUtils().promptBigImage(it)
         }
     }
 
@@ -78,7 +78,7 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
     }
 
     fun dialog(position: Int) {
-        PromptUseCase().removeImagePrompt {
+        PromptUtils().removeImagePrompt {
             list.removeAt(position)
             notifyData()
         }

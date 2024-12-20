@@ -14,7 +14,7 @@ import com.example.myapplication.database.entity.NotifyInfo
 import com.example.myapplication.databinding.ActivityMarketBinding
 import com.example.myapplication.isLogin
 import com.example.myapplication.ui.page.mess.ChatFragment
-import com.example.myapplication.useCase.PromptUseCase
+import com.example.myapplication.util.PromptUtils
 import com.example.myapplication.util.JsonUtil
 
 /**
@@ -56,7 +56,7 @@ class MarketActivity : BaseActivity() {
                 Bundle().apply { putBoolean("isMarket2Login", true) })
         } else if (!isLogin()) {
             // 如果未登录 弹窗询问是否要登录
-            PromptUseCase().prompt("您还未登录，是否要先登录？") {
+            PromptUtils().prompt("您还未登录，是否要先登录？") {
                 navController.navigate(R.id.goLoginFragment)
             }
         }

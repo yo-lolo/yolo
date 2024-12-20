@@ -20,12 +20,9 @@ import com.example.myapplication.database.entity.NotifyInfo
 import com.example.myapplication.databinding.FragmentTestBinding
 import com.example.myapplication.log.SpeedyLog
 import com.example.myapplication.notify.MessNotification
-import com.example.myapplication.util.EmptyUtil
 import com.example.myapplication.util.FilePicker
 import com.example.myapplication.util.GlideImageLoader
 import com.example.myapplication.util.JsonUtil
-import com.example.myapplication.util.SimContacts
-import com.example.myapplication.util.SimSmsUtil
 import com.example.yolo_sdk.tools.FingerprintTool
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
@@ -38,8 +35,6 @@ class TestFragment : Fragment() {
     private var mHandler: Handler? = null
     private var mThread: Thread? = null
     private val filePicker = FilePicker(this)
-    private val smsUtil = SimSmsUtil()
-    private var id: String = "";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,42 +70,6 @@ class TestFragment : Fragment() {
                     SpeedyLog.d(des)
                     ToastUtils.showShort(des)
                 }
-        }
-        binding.writeSms.setOnClickListener {
-            val pdu ="0891683108200505F004000830302180635480064F60597D0021".toByteArray()
-            smsUtil.writeSMStoIcc(byteArrayOf(), pdu, 3)
-        }
-        binding.readSms.setOnClickListener {
-            val smsLists = smsUtil.smsList
-            SpeedyLog.d(TAG, smsLists.toString())
-        }
-        binding.getSimContacts.setOnClickListener {
-            val simContacts = smsUtil.getSimContactsList(activity)
-            if (simContacts.size < 1) {
-                ToastUtils.showShort("联系人列表为空")
-            } else {
-                for (mSimContact in simContacts) {
-                    id = mSimContact._id
-                    SpeedyLog.d(TAG, mSimContact.toString())
-                }
-            }
-        }
-        binding.insertSimContact.setOnClickListener {
-            smsUtil.simInsertByList(
-                activity,
-                listOf(SimContacts("yu", "20001021"))
-            )
-        }
-        binding.deleteSimContact1.setOnClickListener {
-            if (!EmptyUtil.isEmpty(id)) {
-                smsUtil.deleteSimContactById(activity, id)
-            } else {
-                ToastUtils.showShort("id不能为空")
-            }
-        }
-        binding.deleteSimContact2.setOnClickListener {
-            val result = smsUtil.deleteSimContactByNameAndPhone(activity, "yu", "20001021")
-            ToastUtils.showShort(if (result) "删除成功" else "删除失败")
         }
     }
 
