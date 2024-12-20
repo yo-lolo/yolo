@@ -1,6 +1,6 @@
 package com.example.myapplication.common
 
-import com.example.myapplication.data.MMKVManager
+import com.example.myapplication.base.cache.MMKVManager
 import com.example.myapplication.isLogin
 
 /**

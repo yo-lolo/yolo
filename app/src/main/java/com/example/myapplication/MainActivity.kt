@@ -2,18 +2,17 @@ package com.example.myapplication
 
 import android.Manifest
 import android.animation.ValueAnimator
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.PermissionUtils
-import com.example.myapplication.base.BaseActivity
-import com.example.myapplication.data.MMKVManager
+import com.example.myapplication.base.baseUi.BaseActivity
+import com.example.myapplication.common.Constants
+import com.example.myapplication.base.cache.MMKVManager
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.log.SpeedyLog
-import com.example.myapplication.ui.MarketActivity
+import com.example.myapplication.base.log.SpeedyLog
+import com.example.myapplication.shareLifeUser.MarketActivity
 import com.example.myapplication.util.PromptUtils
 import kotlinx.coroutines.launch
 
@@ -27,9 +26,6 @@ class MainActivity : BaseActivity() {
         setContentView(activityMainBinding.root)
         initView()
         toMyApplicationPage()
-
-//        val uri = Uri.parse("content://com.example.myapplication.provider.BookProvider")
-//        contentResolver.query(uri, null, null, null, null, null)
     }
 
     private fun initView() {

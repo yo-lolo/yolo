@@ -6,15 +6,15 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.myapplication.ui.page.home.HomeFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/mineFragment"
-        android:name="com.example.myapplication.ui.page.mine.MineFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mine.MineFragment"
         android:label="MineFragment" />
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.myapplication.ui.page.detail.DetailFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.detail.DetailFragment"
         android:label="DetailFragment" />
 
     <fragment
@@ -24,128 +24,128 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.myapplication.ui.page.search.SearchFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.search.SearchFragment"
         android:label="SearchFragment" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.myapplication.ui.page.setting.SettingFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.setting.SettingFragment"
         android:label="SettingFragment" />
     <fragment
         android:id="@+id/feedbackFragment"
-        android:name="com.example.myapplication.ui.page.feedback.FeedbackFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.feedback.FeedbackFragment"
         android:label="FeedbackFragment" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.myapplication.ui.page.login.LoginFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.example.myapplication.ui.page.home.NewsFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.home.NewsFragment"
         android:label="NewsFragment" />
     <fragment
         android:id="@+id/testFragment"
-        android:name="com.example.myapplication.ui.page.home.TestFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.home.TestFragment"
         android:label="TestFragment" />
     <fragment
         android:id="@+id/newsDetailFragment"
-        android:name="com.example.myapplication.ui.page.home.NewsDetailFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.home.NewsDetailFragment"
         android:label="NewsDetailFragment" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.myapplication.ui.page.register.RegisterFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.register.RegisterFragment"
         android:label="RegisterFragment" />
     <fragment
         android:id="@+id/managerFragment"
-        android:name="com.example.myapplication.admin.ManageFragment"
+        android:name="com.example.myapplication.shareLifeAdmin.ManageFragment"
         android:label="ManagerFragment" />
     <fragment
         android:id="@+id/pAPFragment"
-        android:name="com.example.myapplication.ui.page.setting.PAPFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.setting.PAPFragment"
         android:label="PAPFragment" />
 
     <fragment
         android:id="@+id/messFragment"
-        android:name="com.example.myapplication.ui.page.mess.MessageFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mess.MessageFragment"
         android:label="MessageFragment" />
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.myapplication.ui.page.mess.ChatFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mess.ChatFragment"
         android:label="ChatFragment" />
 
     <fragment
         android:id="@+id/chatDetailFragment"
-        android:name="com.example.myapplication.ui.page.mess.ChatDetailFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mess.ChatDetailFragment"
         android:label="ChatDetailFragment" />
 
     <fragment
         android:id="@+id/postCommentFragment"
-        android:name="com.example.myapplication.ui.page.home.PostCommentFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.home.PostCommentFragment"
         android:label="PostCommentFragment" />
 
     <fragment
         android:id="@+id/addNewsFragment"
-        android:name="com.example.myapplication.ui.page.home.AddNewsFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.home.AddNewsFragment"
         android:label="AddNewsFragment" />
 
     <fragment
         android:id="@+id/newFriendsFragment"
-        android:name="com.example.myapplication.ui.page.mess.NewFriendsFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mess.NewFriendsFragment"
         android:label="NewFriendsFragment" />
 
     <fragment
         android:id="@+id/userDetailFragment"
-        android:name="com.example.myapplication.ui.page.mine.UserDetailFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mine.UserDetailFragment"
         android:label="UserDetailFragment" />
 
     <fragment
         android:id="@+id/FriendsFragment"
-        android:name="com.example.myapplication.ui.page.mess.FriendsFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mess.FriendsFragment"
         android:label="FriendsFragment" />
 
     <fragment
         android:id="@+id/MineEditFragment"
-        android:name="com.example.myapplication.ui.page.mine.MineEditFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mine.MineEditFragment"
         android:label="MineEditFragment" />
 
     <fragment
         android:id="@+id/MineNewsFragment"
-        android:name="com.example.myapplication.ui.page.mine.MineNewsFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mine.MineNewsFragment"
         android:label="MineNewsFragment" />
 
     <fragment
         android:id="@+id/MineCommentsFragment"
-        android:name="com.example.myapplication.ui.page.mine.MineCommentsFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mine.MineCommentsFragment"
         android:label="MineCommentsFragment" />
 
     <fragment
         android:id="@+id/MineLikeFragment"
-        android:name="com.example.myapplication.ui.page.mine.MineLikeFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.mine.MineLikeFragment"
         android:label="MineLikeFragment" />
 
     <fragment
         android:id="@+id/AboutFragment"
-        android:name="com.example.myapplication.ui.page.setting.AboutFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.setting.AboutFragment"
         android:label="AboutFragment" />
 
     <fragment
         android:id="@+id/ModifyPassFragment"
-        android:name="com.example.myapplication.ui.page.setting.ModifyPassFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.setting.ModifyPassFragment"
         android:label="ModifyPassFragment" />
 
     <fragment
         android:id="@+id/LoginSettingFragment"
-        android:name="com.example.myapplication.ui.page.setting.LoginSettingFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.setting.LoginSettingFragment"
         android:label="LoginSettingFragment" />
 
     <fragment
         android:id="@+id/LogManageFragment"
-        android:name="com.example.myapplication.ui.page.setting.LogManageFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.setting.LogManageFragment"
         android:label="LogManageFragment" />
 
     <fragment
         android:id="@+id/LogViewFragment"
-        android:name="com.example.myapplication.ui.page.setting.LogViewFragment"
+        android:name="com.example.myapplication.shareLifeUser.ui.setting.LogViewFragment"
         android:label="LogViewFragment" />
 
     <action

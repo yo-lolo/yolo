@@ -11,8 +11,8 @@ import com.example.myapplication.DataManager
 import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.LayoutImageDisplayViewBinding
 import com.example.myapplication.getTag
-import com.example.myapplication.log.SpeedyLog
-import com.example.myapplication.ui.adapter.ImageDisplayAdapter
+import com.example.myapplication.base.log.SpeedyLog
+import com.example.myapplication.shareLifeUser.adapter.ImageDisplayAdapter
 import com.example.myapplication.util.PromptUtils
 
 /**
@@ -42,7 +42,7 @@ class ImageDisplayView(context: Context, attributeSet: AttributeSet? = null) :
         viewBinding =
             LayoutImageDisplayViewBinding.inflate(LayoutInflater.from(context), this, true)
         viewBinding.displayImageRecyclew.apply {
-            layoutManager = DataManager.GridLayoutManagerNotScroll(4)
+            layoutManager = DataManager.gridLayoutManagerNotScroll(4)
             adapter = imageDisplayAdapter
         }
 

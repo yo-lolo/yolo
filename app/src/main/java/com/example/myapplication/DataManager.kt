@@ -2,17 +2,29 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.IntentFilter
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import com.example.myapplication.broadcastReceiver.MessNotifyReceiver
-import com.example.myapplication.data.MMKVManager
-import com.example.myapplication.database.AppDataBase
-import com.example.myapplication.imp.*
-import com.example.myapplication.notify.MessNotification
-import com.example.myapplication.repos.*
+import com.example.myapplication.base.cache.MMKVManager
+import com.example.myapplication.base.database.AppDataBase
+import com.example.myapplication.receiver.MessNotifyReceiver
+import com.example.myapplication.common.Constants
+import com.example.myapplication.core.imp.ChatTaskImp
+import com.example.myapplication.core.imp.CommentTaskImp
+import com.example.myapplication.core.imp.FeedbackTaskImp
+import com.example.myapplication.core.imp.FriendTaskImp
+import com.example.myapplication.core.imp.LikeTaskImp
+import com.example.myapplication.core.imp.NewsTaskImp
+import com.example.myapplication.core.imp.UserTaskImp
+import com.example.myapplication.core.repos.ChatStoreRepository
+import com.example.myapplication.core.repos.CommentStoreRepository
+import com.example.myapplication.core.repos.FeedbackStoreRepository
+import com.example.myapplication.core.repos.FriendsStoreRepository
+import com.example.myapplication.core.repos.LikeStoreRepository
+import com.example.myapplication.core.repos.NewsStoreRepository
+import com.example.myapplication.core.repos.TestStoreRepository
+import com.example.myapplication.core.repos.UserStoreRepository
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
@@ -136,7 +148,7 @@ object DataManager {
         return linearlayoutManager
     }
 
-    fun GridLayoutManagerNotScroll(spanCount: Int): GridLayoutManager {
+    fun gridLayoutManagerNotScroll(spanCount: Int): GridLayoutManager {
         val gridLayoutManager: GridLayoutManager = object : GridLayoutManager(context, spanCount) {
             override fun canScrollVertically(): Boolean {
                 return false

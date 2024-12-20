@@ -2,16 +2,9 @@ package com.example.myapplication.util
 
 import android.content.Context
 import android.net.Uri
-import android.os.Build
-import android.view.RoundedCorner
 import android.widget.ImageView
-import androidx.annotation.RequiresApi
-import coil.request.DefaultRequestOptions
-import coil.transform.RoundedCornersTransformation
 import com.blankj.utilcode.util.UriUtils
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.myapplication.DataManager
 import com.example.myapplication.R
 import com.youth.banner.loader.ImageLoader

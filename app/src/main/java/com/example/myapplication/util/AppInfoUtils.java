@@ -28,7 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.example.myapplication.log.SpeedyLog;
+import com.example.myapplication.base.log.SpeedyLog;
 
 import java.io.FileInputStream;
 import java.io.IOException;

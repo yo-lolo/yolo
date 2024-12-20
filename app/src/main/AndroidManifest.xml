@@ -32,9 +32,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".admin.ManageActivity"
+            android:name=".shareLifeAdmin.ManageActivity"
             android:exported="true" />
-
 
         <activity
             android:name=".MainActivity"
@@ -50,28 +49,9 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.MarketActivity"
+            android:name=".shareLifeUser.MarketActivity"
             android:exported="true" />
 
-        <service
-            android:name=".service.MessengerService"
-            android:process=":remote" />
-
-        <provider
-            android:name=".provider.BookProvider"
-            android:authorities="com.example.myapplication.provider.BookProvider"
-            android:permission="com.ryg.PROVIDER"
-            android:process=":provider" />
-
-        <provider
-            android:name="com.example.myapplication.provider.ShareFileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/hl_share_public_file_paths" />
-        </provider>
     </application>
 
 </manifest>

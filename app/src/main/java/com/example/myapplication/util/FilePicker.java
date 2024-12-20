@@ -5,7 +5,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import androidx.fragment.app.Fragment;
-import com.example.myapplication.log.SpeedyLog;
+import com.example.myapplication.base.log.SpeedyLog;
 import java.util.ArrayList;
 import java.util.List;
 

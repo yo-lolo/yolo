@@ -3,9 +3,10 @@ package com.example.myapplication
 import android.app.Application
 import android.content.Context
 import com.blankj.utilcode.util.ToastUtils
-import com.example.myapplication.data.MMKVManager
-import com.example.myapplication.log.SpeedyLog
-import com.example.myapplication.log.SpeedyLogConfig
+import com.example.myapplication.common.Constants
+import com.example.myapplication.base.cache.MMKVManager
+import com.example.myapplication.base.log.SpeedyLog
+import com.example.myapplication.base.log.SpeedyLogConfig
 import com.example.myapplication.util.AppInfoUtils
 import com.tencent.mmkv.MMKV
 import xcrash.ICrashCallback
@@ -39,6 +40,9 @@ class MainApplication : Application() {
         initXCrash(context)
     }
 
+    /**
+     * 初始化日志
+     */
     private fun initSpeedyLog(appContext: Context) {
         //写入拦截,可自定义写入/上传操作
         val speedyLogConfig = SpeedyLogConfig.Build(appContext)
@@ -55,6 +59,9 @@ class MainApplication : Application() {
         SpeedyLog.init(speedyLogConfig)
     }
 
+    /**
+     * 初始化崩溃日志
+     */
     private fun initXCrash(appContext: Context) {
         // callback for java crash, native crash and ANR
         val callback = ICrashCallback { logPath: String?, emergency: String? ->
@@ -104,6 +111,9 @@ class MainApplication : Application() {
 
 }
 
+/**
+ * 获取日志TAG
+ */
 fun Any.getTag() = Constants.BASE_TAG + this.javaClass.simpleName
 
 /**
