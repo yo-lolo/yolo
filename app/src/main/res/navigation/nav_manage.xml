@@ -18,7 +18,7 @@
         android:label="RegisterFragment" />
     <fragment
         android:id="@+id/managerFragment"
-        android:name="com.example.myapplication.shareLifeAdmin.ManageFragment"
+        android:name="com.example.myapplication.shareLifeAdmin.ui.manage.ManageFragment"
         android:label="ManagerFragment" />
 
     <fragment

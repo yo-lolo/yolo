@@ -6,7 +6,7 @@
         android:title="管理" />
     <item
         android:id="@+id/adminFragment"
-        android:icon="@mipmap/admin_manage"
-        android:title="我的" />
+        android:icon="@mipmap/mess_icon"
+        android:title="消息" />
 
 </menu>

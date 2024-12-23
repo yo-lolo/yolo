@@ -29,7 +29,7 @@ class AdminFragment : Fragment() {
 
     private fun initView(view: View){
         binding.include.headLayout.apply {
-            setTitle("管理员")
+            setTitle("消息")
         }
     }
 }

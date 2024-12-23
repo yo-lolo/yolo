@@ -64,7 +64,6 @@ class MarketActivity : BaseActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val isMainTab = listOf(
                 R.id.homeFragment,
-                R.id.detailFragment,
                 R.id.messFragment,
                 R.id.mineFragment
             ).contains(destination.id)

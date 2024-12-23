@@ -1,4 +1,4 @@
-package com.example.myapplication.shareLifeAdmin
+package com.example.myapplication.shareLifeAdmin.ui.manage
 
 import android.os.Bundle
 import android.view.LayoutInflater
