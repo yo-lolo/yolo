@@ -81,4 +81,12 @@ object Constants {
      */
     const val CrashFilesDir = "/crash"
 
+    /**
+     * 搜索的TAG
+     */
+    const val SEARCH_TAG = "search_tag"
+    const val RECEIVER = "receiver"
+    const val ACCOUNT = "account"
+
+
 }

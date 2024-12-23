@@ -13,6 +13,7 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.example.myapplication.base.baseUi.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.common.AppConfig
+import com.example.myapplication.common.Constants
 import com.example.myapplication.databinding.FragmentAppSearchBinding
 import com.example.myapplication.databinding.LayoutSearchHeadBinding
 import com.example.myapplication.shareLifeUser.adapter.EmptyViewAdapter
@@ -40,7 +41,7 @@ class SearchFragment : BaseFragment() {
     private lateinit var viewBinding: FragmentAppSearchBinding
     private lateinit var searchHeadBinding: LayoutSearchHeadBinding
     private var tag: Int? = null
-    private var friendNumber: Long? = null
+    private var receiver: Long? = null
     val viewModel by viewModels<SearchViewModel>()
 
     override fun onCreateView(
@@ -50,8 +51,8 @@ class SearchFragment : BaseFragment() {
     ): View {
         viewBinding = FragmentAppSearchBinding.inflate(inflater)
         searchHeadBinding = LayoutSearchHeadBinding.inflate(inflater)
-        tag = arguments?.getInt("tag")
-        friendNumber = arguments?.getLong("friendNumber")
+        tag = arguments?.getInt(Constants.SEARCH_TAG)
+        receiver = arguments?.getLong(Constants.RECEIVER)
         tag?.let { initAdapter(it) }
         initView()
         return viewBinding.root
@@ -63,7 +64,7 @@ class SearchFragment : BaseFragment() {
             findNavController().popBackStack()
         }
         searchHeadBinding.searchView.searchButtonListener = {
-            viewModel.doSearch(tag, it, friendNumber)
+            viewModel.doSearch(tag, it, receiver)
             KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
         }
 
@@ -72,7 +73,7 @@ class SearchFragment : BaseFragment() {
                 viewModel.doSearch(
                     tag,
                     searchHeadBinding.searchView.searchEditText.text.toString(),
-                    friendNumber
+                    receiver
                 )
                 KeyboardUtils.hideSoftInput(searchHeadBinding.searchView)
                 return@setOnEditorActionListener true
@@ -143,11 +144,11 @@ class SearchFragment : BaseFragment() {
     }
 
     companion object {
-        fun goSearchFragment(tag: Int, navController: NavController, friendNumber: Long? = null) {
+        fun goSearchFragment(tag: Int, navController: NavController, receiver: Long? = null) {
             val bundle = Bundle().apply {
-                putInt("tag", tag)
-                if (friendNumber != null) {
-                    putLong("friendNumber", friendNumber)
+                putInt(Constants.SEARCH_TAG, tag)
+                if (receiver != null) {
+                    putLong(Constants.RECEIVER, receiver)
                 }
             }
             navController.navigate(R.id.goSearchFragment, bundle)

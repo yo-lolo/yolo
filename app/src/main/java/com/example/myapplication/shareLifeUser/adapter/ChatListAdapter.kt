@@ -61,7 +61,7 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
             val friend = chatData.friend
             GlideImageLoader().displayLocalFile(me.image, binding.rightIcon)
             GlideImageLoader().displayLocalFile(friend.image, binding.leftIcon)
-            if (chat.sendTag == AppConfig.phoneNumber) {
+            if (chat.sendTag == AppConfig.account) {
                 binding.leftChat.visibility = View.GONE
                 binding.rightChat.visibility = View.VISIBLE
                 binding.rightContent.text = chat.content

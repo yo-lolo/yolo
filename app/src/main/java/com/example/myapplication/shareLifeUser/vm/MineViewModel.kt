@@ -42,14 +42,14 @@ class MineViewModel : BaseViewModel() {
     /**
      * 初始化用户数据，默认为当前用户
      */
-    fun initData(number: Long = AppConfig.phoneNumber) {
+    fun initData(number: Long = AppConfig.account) {
         viewModelScope.launch {
             user.value = userStoreRepository.queryUserByNumber(number)
             newsStoreRepository.getNews().filter { it.type == 1 && it.number == number }
                 .map { newsInfo ->
                     val user = userStoreRepository.queryUserByNumber(newsInfo.number)
                     val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
-                    val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                    val likeState = likeStoreRepository.getLikesMine(AppConfig.account)
                         .any { it.newsId == newsInfo.id }
                     resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
                 }
@@ -69,7 +69,7 @@ class MineViewModel : BaseViewModel() {
             viewModelScope.launch {
                 kotlin.runCatching {
                     userStoreRepository.updateUserInfo(
-                        AppConfig.phoneNumber, neck, address, sign, imagePath.value!!
+                        AppConfig.account, neck, address, sign, imagePath.value!!
                     )
                 }.onFailure {
                     ToastUtils.showShort("保存失败")
@@ -96,7 +96,7 @@ class MineViewModel : BaseViewModel() {
      */
     fun doModifyPass(oldPwd: String, newPwd: String, newPwdAgain: String) {
         launchSafe {
-            val user = userStoreRepository.queryUserByNumber(AppConfig.phoneNumber)
+            val user = userStoreRepository.queryUserByNumber(AppConfig.account)
             if (oldPwd.isNotEmpty() && newPwd.isNotEmpty() && newPwdAgain.isNotEmpty()) {
                 if (newPwd == newPwdAgain && newPwd.length in 6..14) {
                     if (user.pass == oldPwd) {

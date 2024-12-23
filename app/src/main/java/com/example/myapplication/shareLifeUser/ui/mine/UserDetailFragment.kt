@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.base.baseUi.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.chargeToastLogin
+import com.example.myapplication.common.Constants
 import com.example.myapplication.databinding.FragmentUserDetailBinding
 import com.example.myapplication.shareLifeUser.ui.mess.ChatFragment
 import com.example.myapplication.util.GlideImageLoader
@@ -31,13 +32,13 @@ import com.example.myapplication.shareLifeUser.vm.UserDetailViewModel
 class UserDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUserDetailBinding
-    var number: Long? = null
+    var account: Long? = null
     val viewModel by viewModels<UserDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        number = arguments?.getLong("number")
-        viewModel.initUserInfo(number!!)
+        account = arguments?.getLong(Constants.ACCOUNT)
+        viewModel.initUserInfo(account!!)
     }
 
     override fun onCreateView(
@@ -74,22 +75,22 @@ class UserDetailFragment : BaseFragment() {
         }
 
         binding.goChat.setOnClickListener {
-            ChatFragment.goChatFragment(findNavController(), number!!)
+            ChatFragment.goChatFragment(findNavController(), account!!)
         }
         binding.addFriend.setOnClickListener {
             chargeToastLogin {
-                viewModel.insertFriend(number!!)
+                viewModel.insertFriend(account!!)
             }
         }
         binding.userNews.setOnClickListener {
-            MineNewsFragment.goMineNewsFragment(findNavController(), number!!, 1)
+            MineNewsFragment.goMineNewsFragment(findNavController(), account!!, 1)
         }
     }
 
     companion object {
-        fun goUserDetailFragment(number: Long, navController: NavController) {
+        fun goUserDetailFragment(account: Long, navController: NavController) {
             var args = Bundle().apply {
-                putLong("number", number)
+                putLong(Constants.ACCOUNT, account)
             }
             navController.navigate(R.id.goUserDetailFragment, args)
         }

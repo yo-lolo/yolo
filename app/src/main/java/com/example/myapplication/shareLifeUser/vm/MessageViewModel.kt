@@ -41,7 +41,7 @@ class MessageViewModel : BaseViewModel() {
 
     fun initFriendsData() {
         launchSafe {
-            val mineFriends = friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+            val mineFriends = friendsStoreRepository.getFriendsById(AppConfig.account)
             val resultMap = mutableMapOf<FriendInfo, User>()
             mineFriends.map {
                 val user = userStoreRepository.queryUserByNumber(it.friendNumber)
@@ -57,7 +57,7 @@ class MessageViewModel : BaseViewModel() {
      */
     fun initNewFriends() {
         launchSafe {
-            val newFriends = friendsStoreRepository.getAllFriendRequests(AppConfig.phoneNumber)
+            val newFriends = friendsStoreRepository.getAllFriendRequests(AppConfig.account)
             val resultMap = mutableMapOf<FriendInfo, User>()
             newFriends.map {
                 val user = userStoreRepository.queryUserByNumber(it.number)
@@ -76,14 +76,14 @@ class MessageViewModel : BaseViewModel() {
             val resultMap = mutableMapOf<Long, MessData>()
             // 获取到已添加成功的好友列表
             val friendTag1 =
-                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+                friendsStoreRepository.getFriendsById(AppConfig.account)
                     .filter { it.tag == AppConfig.IS_FRIEND }
                     .toMutableList()
             // 1.获取本人的聊天记录 如果不为空 在信息展示的列表中加入本人号码
             val chatSelf = chatStoreRepository.getChatsSelf()
             val newList = friendTag1.map { it.friendNumber }.toMutableList()
             if (chatSelf.isNotEmpty()) {
-                newList.add(AppConfig.phoneNumber)
+                newList.add(AppConfig.account)
             }
             // 2.在map映射中赋予resultMap的key与value key为对象的号码,value是一个List集合，包含了最后一条信息的时间和内容
             newList.map { number ->
@@ -103,14 +103,14 @@ class MessageViewModel : BaseViewModel() {
             friendUserInfo.value = userStoreRepository.queryUserByNumber(friendNumber)
             // fix:给自己发送消息时的逻辑问题
             val resultMap = mutableMapOf<ChatInfo, ChatData>()
-            val chats = if (AppConfig.phoneNumber != friendNumber) {
-                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
-                    .filter { it.friendNumber != it.number }
+            val chats = if (AppConfig.account != friendNumber) {
+                chatStoreRepository.getChatsById(AppConfig.account, friendNumber)
+                    .filter { it.receiver != it.sender }
             } else {
-                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+                chatStoreRepository.getChatsById(AppConfig.account, friendNumber)
             }
             chats.map { chatInfo ->
-                val me = userStoreRepository.queryUserByNumber(AppConfig.phoneNumber)
+                val me = userStoreRepository.queryUserByNumber(AppConfig.account)
                 val friend = userStoreRepository.queryUserByNumber(friendNumber)
                 resultMap[chatInfo] = ChatData(me, friend)
             }

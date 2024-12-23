@@ -62,7 +62,7 @@ class HomeFragment : BaseFragment() {
 
         binding.homeWelcomeLayout.visibleOrGone(isLogin())
         if (isLogin()) {
-            binding.textPhone.text = AppConfig.phoneNumber.toString()
+            binding.textPhone.text = AppConfig.account.toString()
         }
 
         binding.banner.apply {

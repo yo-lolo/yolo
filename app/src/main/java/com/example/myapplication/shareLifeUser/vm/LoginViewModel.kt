@@ -49,7 +49,7 @@ class LoginViewModel : BaseViewModel() {
                         if (pass.isNotEmpty() && pass == user.pass) {
                             saveUserNumAndPass(number, pass)
                             MMKVManager.isLogin = true
-                            AppConfig.phoneNumber = phoneNumber
+                            AppConfig.account = phoneNumber
                             SpeedyLog.d(getTag(),"<<< 用户登录成功")
                             ToastUtils.showShort("登陆成功,进入首页")
                             delay(1000)

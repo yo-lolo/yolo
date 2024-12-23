@@ -41,7 +41,7 @@ class SearchViewModel : BaseViewModel() {
     /**
      * 搜索过滤
      */
-    fun doSearch(tag: Int?, searchText: String, friendNumber: Long?) {
+    fun doSearch(tag: Int?, searchText: String, receiver: Long?) {
         if (tag == AppConfig.SEARCH_NEWS) {
             searchNews(searchText)
         }
@@ -49,7 +49,7 @@ class SearchViewModel : BaseViewModel() {
             searchFriends(searchText)
         }
         if (tag == AppConfig.SEARCH_CHATS) {
-            searchChats(searchText, friendNumber)
+            searchChats(searchText, receiver)
         }
     }
 
@@ -62,7 +62,7 @@ class SearchViewModel : BaseViewModel() {
             newsStoreRepository.queryNewsBySearchText(searchText).map { newsInfo ->
                 val user = userStoreRepository.queryUserByNumber(newsInfo.number)
                 val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
-                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                val likeState = likeStoreRepository.getLikesMine(AppConfig.account)
                     .any { it.newsId == newsInfo.id }
                 resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
             }
@@ -77,7 +77,7 @@ class SearchViewModel : BaseViewModel() {
         launchSafe {
             // 获取所有已添加的好友
             val mineFriends =
-                friendsStoreRepository.getFriendsById(AppConfig.phoneNumber)
+                friendsStoreRepository.getFriendsById(AppConfig.account)
                     .filter { it.tag == AppConfig.IS_FRIEND }
             val resultMap = mutableMapOf<FriendInfo, User>()
             mineFriends.map {
@@ -94,17 +94,17 @@ class SearchViewModel : BaseViewModel() {
     /**
      * 搜索聊天记录
      */
-    private fun searchChats(searchText: String, friendNumber: Long?) {
+    private fun searchChats(searchText: String, receiver: Long?) {
         launchSafe {
             val resultMap = mutableMapOf<ChatInfo, User>()
-            val chats = if (AppConfig.phoneNumber != friendNumber) {
-                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber!!)
-                    .filter { it.friendNumber != it.number }
+            val chats = if (AppConfig.account != receiver) {
+                chatStoreRepository.getChatsById(AppConfig.account, receiver!!)
+                    .filter { it.receiver != it.sender }
             } else {
-                chatStoreRepository.getChatsById(AppConfig.phoneNumber, friendNumber)
+                chatStoreRepository.getChatsById(AppConfig.account, receiver)
             }
             chats.filter { it.content.toLowerCase().contains(searchText.toLowerCase()) }.map {
-                val user = userStoreRepository.queryUserByNumber(it.number)
+                val user = userStoreRepository.queryUserByNumber(it.sender)
                 resultMap[it] = user
             }
             searchChatsResult.value = resultMap

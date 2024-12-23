@@ -27,18 +27,18 @@ interface ChatDao {
     @Delete
     fun deleteChat(chatInfo: ChatInfo)
 
-    @Query("select * from ChatInfo where number in (:number,:friendNumber) and friendNumber in (:number,:friendNumber) order by time asc")
+    @Query("select * from ChatInfo where sender in (:number,:friendNumber) and receiver in (:number,:friendNumber) order by time asc")
     fun getChatsById(number: Long, friendNumber: Long): List<ChatInfo>
 
-    @Query("select * from ChatInfo where (number = :number and friendNumber =:friendNumber) or number = :friendNumber and friendNumber =:number order by time desc limit 1")
+    @Query("select * from ChatInfo where (sender = :number and receiver =:friendNumber) or sender = :friendNumber and receiver =:number order by time desc limit 1")
     fun getLastChatBT2(number: Long, friendNumber: Long): ChatInfo
 
-    @Query("select * from ChatInfo where number = :number group by friendNumber")
+    @Query("select * from ChatInfo where sender = :number group by receiver")
     fun getChatFriends(number: Long): List<ChatInfo>
 
-    @Query("select * from ChatInfo where number = :phoneNumber and friendNumber = :phoneNumber")
+    @Query("select * from ChatInfo where sender = :phoneNumber and receiver = :phoneNumber")
     fun getChatsSelf(phoneNumber: Long): List<ChatInfo>
 
-    @Query("delete from ChatInfo where number = :number and friendNumber=:friendNumber or number = :friendNumber and friendNumber = :number")
+    @Query("delete from ChatInfo where sender = :number and receiver=:friendNumber or sender = :friendNumber and receiver = :number")
     fun clearChats(number: Long, friendNumber: Long)
 }

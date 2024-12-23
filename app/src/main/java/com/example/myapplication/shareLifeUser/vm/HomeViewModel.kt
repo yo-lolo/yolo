@@ -40,7 +40,7 @@ class HomeViewModel : BaseViewModel() {
             newsStoreRepository.getNews().map { newsInfo ->
                 val user = userStoreRepository.queryUserByNumber(newsInfo.number)
                 val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
-                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                val likeState = likeStoreRepository.getLikesMine(AppConfig.account)
                     .any { it.newsId == newsInfo.id }
                 resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
             }

@@ -39,7 +39,7 @@ class MineCommentsViewModel : BaseViewModel() {
     /**
      * 初始化我的评论展示
      */
-    fun initComments(number: Long = AppConfig.phoneNumber) {
+    fun initComments(number: Long = AppConfig.account) {
         viewModelScope.launch {
             val resultMap = mutableMapOf<CommentInfo, MineComments>()
             user.value = userStoreRepository.queryUserByNumber(number)
@@ -77,14 +77,14 @@ class MineCommentsViewModel : BaseViewModel() {
         viewModelScope.launch {
             val resultMap = mutableMapOf<NewsInfo, NewsDataInfo>()
             val newsIdsByLike =
-                likeStoreRepository.getLikesMine(AppConfig.phoneNumber).map { it.newsId }
+                likeStoreRepository.getLikesMine(AppConfig.account).map { it.newsId }
             val newsList = newsIdsByLike.map { newsId ->
                 newsStoreRepository.getNewsById(newsId)
             }
             newsList.map { newsInfo ->
                 val user = userStoreRepository.queryUserByNumber(newsInfo.number)
                 val likeCount = likeStoreRepository.getLikesByNewId(newsInfo.id).size
-                val likeState = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+                val likeState = likeStoreRepository.getLikesMine(AppConfig.account)
                     .any { it.newsId == newsInfo.id }
                 resultMap[newsInfo] = NewsDataInfo(user, likeCount, likeState)
             }

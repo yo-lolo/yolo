@@ -35,7 +35,7 @@ class UserDetailViewModel : BaseViewModel() {
             if (friendInfo != null) {
                 isFriend.value = friendInfo.tag == AppConfig.IS_FRIEND
             }
-            if (number == AppConfig.phoneNumber) {
+            if (number == AppConfig.account) {
                 isFriend.value = true
             }
         }

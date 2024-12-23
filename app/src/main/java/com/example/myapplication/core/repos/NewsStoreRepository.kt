@@ -33,7 +33,7 @@ class NewsStoreRepository(private val newsTaskImp: NewsTaskImp) {
     ): Long = withContext(Dispatchers.IO) {
         return@withContext newsTaskImp.insertNews(
             NewsInfo(
-                AppConfig.phoneNumber,
+                AppConfig.account,
                 TimeUtil.getCurrentMill(),
                 tag,
                 type = 0,

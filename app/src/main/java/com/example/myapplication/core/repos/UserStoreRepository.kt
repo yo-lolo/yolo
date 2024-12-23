@@ -59,7 +59,7 @@ class UserStoreRepository(private val userTaskImp: UserTaskImp) {
      * 通过号码更新当前用户的密码
      */
     suspend fun updatePass(pass: String) = withContext(Dispatchers.IO) {
-        return@withContext userTaskImp.updatePass(AppConfig.phoneNumber, pass)
+        return@withContext userTaskImp.updatePass(AppConfig.account, pass)
     }
 
     /**

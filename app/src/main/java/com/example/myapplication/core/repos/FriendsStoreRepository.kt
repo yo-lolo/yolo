@@ -28,7 +28,7 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
     suspend fun insertFriend(authorNumber: Long, tag: Int = 0): Long = withContext(Dispatchers.IO) {
         return@withContext friendTaskImp.insertFriend(
             FriendInfo(
-                AppConfig.phoneNumber,
+                AppConfig.account,
                 authorNumber,
                 TimeUtil.getCurrentMill(),
                 "",
@@ -41,7 +41,7 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
      * 删除好友
      */
     suspend fun deleteFriend(friendNumber: Long) = withContext(Dispatchers.IO) {
-        return@withContext friendTaskImp.deleteFriend(AppConfig.phoneNumber, friendNumber)
+        return@withContext friendTaskImp.deleteFriend(AppConfig.account, friendNumber)
     }
 
     /**
@@ -56,7 +56,7 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
      */
     suspend fun getFriendById(friendNumber: Long): FriendInfo =
         withContext(Dispatchers.IO) {
-            return@withContext friendTaskImp.getFriendById(AppConfig.phoneNumber, friendNumber)
+            return@withContext friendTaskImp.getFriendById(AppConfig.account, friendNumber)
         }
 
     /**
@@ -88,7 +88,7 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
     suspend fun updateFriendTopState(friendNumber: Long, isTop: Boolean) =
         withContext(Dispatchers.IO) {
             return@withContext friendTaskImp.updateFriendTopState(
-                AppConfig.phoneNumber,
+                AppConfig.account,
                 friendNumber,
                 isTop
             )
@@ -100,7 +100,7 @@ class FriendsStoreRepository(private val friendTaskImp: FriendTaskImp) {
     suspend fun updateFriendNotifyState(friendNumber: Long, isNotify: Boolean) =
         withContext(Dispatchers.IO) {
             return@withContext friendTaskImp.updateFriendNotifyState(
-                AppConfig.phoneNumber,
+                AppConfig.account,
                 friendNumber,
                 isNotify
             )

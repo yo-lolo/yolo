@@ -41,7 +41,7 @@ class FeedbackViewModel : BaseViewModel() {
                 kotlin.runCatching {
                     feedbackStoreRepository.insertFeedBack(
                         FeedbackInfo(
-                            AppConfig.phoneNumber,
+                            AppConfig.account,
                             type.value!!,
                             desc,
                             TimeUtil.getCurrentMill(),

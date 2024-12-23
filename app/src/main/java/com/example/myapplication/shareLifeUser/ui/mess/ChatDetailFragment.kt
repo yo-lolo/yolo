@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.base.baseUi.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.common.AppConfig
+import com.example.myapplication.common.Constants
 import com.example.myapplication.databinding.FragmentChatDetailBinding
 import com.example.myapplication.shareLifeUser.ui.mine.UserDetailFragment
 import com.example.myapplication.shareLifeUser.ui.search.SearchFragment
@@ -33,12 +34,12 @@ import com.example.myapplication.shareLifeUser.vm.MessageViewModel
 class ChatDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentChatDetailBinding
-    var number: Long? = null
+    var receiver: Long? = null
     val viewModel by viewModels<MessageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        number = arguments?.getLong("friendNumber")
-        viewModel.initChats(number!!)
+        receiver = arguments?.getLong(Constants.RECEIVER)
+        viewModel.initChats(receiver!!)
         super.onCreate(savedInstanceState)
     }
 
@@ -57,10 +58,10 @@ class ChatDetailFragment : BaseFragment() {
             setTitle("聊天详情")
             setBackListener { findNavController().popBackStack() }
         }
-        binding.selfGoneLayout.visibleOrGone(number != AppConfig.phoneNumber)
-        binding.deleteFriend.visibleOrGone(AppConfig.phoneNumber != number)
+        binding.selfGoneLayout.visibleOrGone(receiver != AppConfig.account)
+        binding.deleteFriend.visibleOrGone(AppConfig.account != receiver)
         binding.userIcon.setOnClickListener {
-            UserDetailFragment.goUserDetailFragment(number!!, findNavController())
+            UserDetailFragment.goUserDetailFragment(receiver!!, findNavController())
         }
         viewModel.friendUserInfo.observe(viewLifecycleOwner) {
             GlideImageLoader().displayLocalFile(it.image, binding.userIcon)
@@ -71,22 +72,22 @@ class ChatDetailFragment : BaseFragment() {
             binding.switchMessNotify.isChecked = !it.isNotify
         }
         binding.goFindChats.setOnClickListener {
-            SearchFragment.goSearchFragment(AppConfig.SEARCH_CHATS, findNavController(), number!!)
+            SearchFragment.goSearchFragment(AppConfig.SEARCH_CHATS, findNavController(), receiver!!)
         }
         binding.clearChats.setOnClickListener {
             PromptUtils().prompt("确定要清除聊天记录吗？") {
-                viewModel.clearChats(number!!)
+                viewModel.clearChats(receiver!!)
             }
         }
         binding.switchTop.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.updateFriendTopState(number!!, isChecked)
+            viewModel.updateFriendTopState(receiver!!, isChecked)
         }
         binding.switchMessNotify.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.updateFriendNotifyState(number!!, !isChecked)
+            viewModel.updateFriendNotifyState(receiver!!, !isChecked)
         }
         binding.deleteFriend.setOnClickListener {
             PromptUtils().prompt("确定要删除好友吗？") {
-                viewModel.deleteFriend(number!!)
+                viewModel.deleteFriend(receiver!!)
             }
         }
 
@@ -103,7 +104,7 @@ class ChatDetailFragment : BaseFragment() {
             navController: NavController
         ) {
             val args = Bundle().apply {
-                putLong("friendNumber", friendNumber)
+                putLong(Constants.RECEIVER, friendNumber)
             }
             navController.navigate(R.id.goChatDetailFragment, args)
         }

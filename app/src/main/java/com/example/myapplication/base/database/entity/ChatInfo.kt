@@ -2,8 +2,6 @@ package com.example.myapplication.base.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.Gson
-import com.google.gson.JsonParseException
 
 /**
  * @Copyright : China Telecom Quantum Technology Co.,Ltd
@@ -19,12 +17,12 @@ import com.google.gson.JsonParseException
  */
 @Entity
 data class ChatInfo(
-    val number: Long,
-    val friendNumber: Long,
+    val sender: Long,
+    val receiver: Long,
     val sendTag: Long,
     val time: Long,
     val content: String,
-    val is_read: Boolean = false
+    val isRead: Boolean = false
 ) :java.io.Serializable{
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

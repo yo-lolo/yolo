@@ -70,7 +70,7 @@ class NewsDetailViewModel : BaseViewModel() {
             val news = newsStoreRepository.getNewsById(newsId)
             newsInfo.value = news
             userInfo.value = userStoreRepository.queryUserByNumber(news.number)
-            if (AppConfig.phoneNumber == newsInfo.value!!.number) {
+            if (AppConfig.account == newsInfo.value!!.number) {
                 isFriend.value = true
             }
             val friend = friendsStoreRepository.getFriendById(newsInfo.value!!.number)
@@ -129,7 +129,7 @@ class NewsDetailViewModel : BaseViewModel() {
      */
     private fun initLike(newsId: Long) {
         viewModelScope.launch {
-            val likes = likeStoreRepository.getLikesMine(AppConfig.phoneNumber)
+            val likes = likeStoreRepository.getLikesMine(AppConfig.account)
                 .filter { it.newsId == newsId }
             if (likes.isNotEmpty())
                 likeInfo.value = likes[0]
@@ -179,7 +179,7 @@ class NewsDetailViewModel : BaseViewModel() {
      */
     fun deleteComment(newsId: Long, commentInfo: CommentInfo) {
         SpeedyLog.d(getTag(),"deleteComment >>> 评论删除")
-        if (AppConfig.phoneNumber == commentInfo.number || commentInfo.newsId == newsId) {
+        if (AppConfig.account == commentInfo.number || commentInfo.newsId == newsId) {
             viewModelScope.launch {
                 kotlin.runCatching {
                     commentStoreRepository.deleteCommentById(commentInfo.id)
@@ -227,7 +227,7 @@ class NewsDetailViewModel : BaseViewModel() {
         viewModelScope.launch {
             likeStoreRepository.insertLike(
                 LikeInfo(
-                    AppConfig.phoneNumber,
+                    AppConfig.account,
                     newInfo.id,
                     newInfo.number
                 )

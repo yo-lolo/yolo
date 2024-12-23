@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.base.baseUi.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.common.AppConfig
+import com.example.myapplication.common.Constants
 import com.example.myapplication.databinding.FragmentMineNewsBinding
 import com.example.myapplication.shareLifeUser.adapter.EmptyViewAdapter
 import com.example.myapplication.shareLifeUser.adapter.NewsListAdapter
@@ -41,8 +42,8 @@ class MineNewsFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         arguments?.apply {
-            number = getLong("number")
-            tag = getInt("tag")
+            number = getLong(Constants.ACCOUNT)
+            tag = getInt(Constants.SEARCH_TAG)
         }
         viewModel.initData(number!!)
         super.onCreate(savedInstanceState)
@@ -89,12 +90,12 @@ class MineNewsFragment : BaseFragment() {
          */
         fun goMineNewsFragment(
             navController: NavController,
-            number: Long = AppConfig.phoneNumber,
+            number: Long = AppConfig.account,
             tag: Int = 0
         ) {
             val args = Bundle().apply {
-                putLong("number", number)
-                putInt("tag", tag)
+                putLong(Constants.ACCOUNT, number)
+                putInt(Constants.SEARCH_TAG, tag)
             }
             navController.navigate(R.id.goMineNewsFragment, args)
         }

@@ -77,7 +77,7 @@ class MarketActivity : BaseActivity() {
         when (data?.tag) {
             AppConfig.MESS_NOTIFY -> {
                 val chatInfo = JsonUtil.fromJson(data.jsonData, ChatInfo::class.java)
-                chatInfo?.number?.let { ChatFragment.goChatFragment(navController, it) }
+                chatInfo?.sender?.let { ChatFragment.goChatFragment(navController, it) }
             }
 
             AppConfig.AUDIT_NOTIFY -> {

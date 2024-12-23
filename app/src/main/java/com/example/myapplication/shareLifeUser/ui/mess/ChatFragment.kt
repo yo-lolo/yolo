@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.KeyboardUtils
 import com.example.myapplication.base.baseUi.BaseFragment
 import com.example.myapplication.R
+import com.example.myapplication.common.Constants
 import com.example.myapplication.databinding.FragmentChatBinding
 import com.example.myapplication.shareLifeUser.adapter.ChatListAdapter
 import com.example.myapplication.shareLifeUser.ui.mine.UserDetailFragment
@@ -40,7 +41,7 @@ class ChatFragment : BaseFragment() {
     var friendNumber: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        friendNumber = arguments?.getLong("friendNumber")
+        friendNumber = arguments?.getLong(Constants.RECEIVER)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         viewModel.initChats(friendNumber!!)
         //fix:解决软键盘遮挡布局的问题
@@ -105,7 +106,7 @@ class ChatFragment : BaseFragment() {
 
         fun goChatFragment(navController: NavController, friendNumber: Long) {
             val args = Bundle().apply {
-                putLong("friendNumber", friendNumber)
+                putLong(Constants.RECEIVER, friendNumber)
             }
             navController.navigate(R.id.goChatFragment, args)
         }

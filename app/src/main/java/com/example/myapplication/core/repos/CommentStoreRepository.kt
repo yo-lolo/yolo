@@ -32,7 +32,7 @@ class CommentStoreRepository(private val commentTask: CommentTask) {
             return@withContext commentTask.insertComment(
                 CommentInfo(
                     newsId = newsId,
-                    number = AppConfig.phoneNumber,
+                    number = AppConfig.account,
                     content = content,
                     time = TimeUtil.getCurrentMill(),
                     level = level,

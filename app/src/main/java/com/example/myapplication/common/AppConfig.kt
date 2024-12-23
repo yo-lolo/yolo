@@ -20,7 +20,7 @@ object AppConfig {
     /**
      * 当前登陆的用户账户
      */
-    var phoneNumber: Long = if (isLogin()) MMKVManager.getUserNumAndPass().first.toLong() else 0
+    var account: Long = if (isLogin()) MMKVManager.getUserNumAndPass().first.toLong() else 0
 
     const val IMAGE_OPEN = 0xff
     const val NEWS_IMAGE_OPEN = 1

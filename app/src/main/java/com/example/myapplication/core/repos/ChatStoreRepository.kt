@@ -28,9 +28,9 @@ class ChatStoreRepository(private val chatTaskImp: ChatTaskImp) {
         withContext(Dispatchers.IO) {
             return@withContext chatTaskImp.insertChat(
                 ChatInfo(
-                    AppConfig.phoneNumber,
+                    AppConfig.account,
                     friendNumber,
-                    AppConfig.phoneNumber,
+                    AppConfig.account,
                     TimeUtil.getCurrentMill(),
                     content
                 )
@@ -57,7 +57,7 @@ class ChatStoreRepository(private val chatTaskImp: ChatTaskImp) {
      */
     suspend fun getChatsSelf(): List<ChatInfo> =
         withContext(Dispatchers.IO) {
-            return@withContext chatTaskImp.getChatsSelf(AppConfig.phoneNumber)
+            return@withContext chatTaskImp.getChatsSelf(AppConfig.account)
         }
 
     /**
@@ -71,14 +71,14 @@ class ChatStoreRepository(private val chatTaskImp: ChatTaskImp) {
      * 获取两个账号之间的最后一条记录
      */
     suspend fun getLastChatBT2(number: Long): ChatInfo = withContext(Dispatchers.IO) {
-        return@withContext chatTaskImp.getLastChatBT2(number, AppConfig.phoneNumber)
+        return@withContext chatTaskImp.getLastChatBT2(number, AppConfig.account)
     }
 
     /**
      * 清空两个账号之间的所有记录
      */
     suspend fun clearChats(friendNumber: Long) = withContext(Dispatchers.IO) {
-        return@withContext chatTaskImp.clearChats(AppConfig.phoneNumber, friendNumber)
+        return@withContext chatTaskImp.clearChats(AppConfig.account, friendNumber)
     }
 
 }
