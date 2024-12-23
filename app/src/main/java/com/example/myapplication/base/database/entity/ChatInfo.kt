@@ -22,7 +22,7 @@ data class ChatInfo(
     val sendTag: Long,
     val time: Long,
     val content: String,
-    val isRead: Boolean = false
+    val isRead: Boolean = false //已读状态
 ) :java.io.Serializable{
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

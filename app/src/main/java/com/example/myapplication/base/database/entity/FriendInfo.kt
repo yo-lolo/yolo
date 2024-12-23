@@ -18,8 +18,8 @@ import com.example.myapplication.common.AppConfig
  */
 @Entity
 data class FriendInfo(
-    val number: Long,
-    val friendNumber: Long,
+    val number: Long, //自己的ID
+    val friendNumber: Long, //朋友的ID
     val time: Long,
     val image: String,
     val tag: Int = AppConfig.NOT_FRIEND,
@@ -27,5 +27,5 @@ data class FriendInfo(
     val isNotify: Boolean = true
 ) : java.io.Serializable {
     @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
+    var id: Long = 0 //主键ID
 }

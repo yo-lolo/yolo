@@ -38,12 +38,12 @@ class ChatFragment : BaseFragment() {
     private lateinit var binding: FragmentChatBinding
     private val chatListAdapter = ChatListAdapter()
     val viewModel by viewModels<MessageViewModel>()
-    var friendNumber: Long? = null
+    var receiver: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        friendNumber = arguments?.getLong(Constants.RECEIVER)
+        receiver = arguments?.getLong(Constants.RECEIVER)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-        viewModel.initChats(friendNumber!!)
+        viewModel.initChats(receiver!!)
         //fix:解决软键盘遮挡布局的问题
         KeyboardUtils.fixAndroidBug5497(requireActivity())
         super.onCreate(savedInstanceState)
@@ -67,7 +67,7 @@ class ChatFragment : BaseFragment() {
                 setBackListener { findNavController().popBackStack() }
                 setMenuListener {
                     ChatDetailFragment.goChatDetailFragment(
-                        friendNumber!!,
+                        receiver!!,
                         findNavController()
                     )
                 }
@@ -94,7 +94,7 @@ class ChatFragment : BaseFragment() {
 
         binding.chatSubmit.setOnClickListener {
             val content = binding.chatContent.text.toString().trim()
-            viewModel.insertChat(friendNumber!!, content)
+            viewModel.insertChat(receiver!!, content)
             binding.chatContent.text.clear()
         }
 

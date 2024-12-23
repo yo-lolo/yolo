@@ -24,12 +24,12 @@ class ChatStoreRepository(private val chatTaskImp: ChatTaskImp) {
     /**
      * 添加聊天
      */
-    suspend fun insertChat(friendNumber: Long, content: String): Long =
+    suspend fun insertChat(receiver: Long, content: String): Long =
         withContext(Dispatchers.IO) {
             return@withContext chatTaskImp.insertChat(
                 ChatInfo(
                     AppConfig.account,
-                    friendNumber,
+                    receiver,
                     AppConfig.account,
                     TimeUtil.getCurrentMill(),
                     content
@@ -47,9 +47,9 @@ class ChatStoreRepository(private val chatTaskImp: ChatTaskImp) {
     /**
      * 获取两个账号之间的聊天记录
      */
-    suspend fun getChatsById(number: Long, friendNumber: Long): List<ChatInfo> =
+    suspend fun getChatsById(number: Long, receiver: Long): List<ChatInfo> =
         withContext(Dispatchers.IO) {
-            return@withContext chatTaskImp.getChatsById(number, friendNumber)
+            return@withContext chatTaskImp.getChatsById(number, receiver)
         }
 
     /**
