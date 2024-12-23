@@ -27,15 +27,6 @@ object AppConfig {
     const val USER_IMAGE_EDIT = 2
 
     /**
-     * 应用信息
-     */
-    const val PACKAGE_NAME = "com.example.myapplication"
-
-    const val VERSION_NAME = "1.0.0"
-
-    const val APP_NAME = "YoLo"
-
-    /**
      * 管理员登陆的账户密码（固定）
      */
     const val ADMIN_NUM = 19956596024

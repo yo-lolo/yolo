@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.AppUtils
 import com.example.myapplication.base.baseUi.BaseFragment
-import com.example.myapplication.common.AppConfig
 import com.example.myapplication.databinding.FragmentAboutBinding
 
 /**
@@ -43,11 +43,11 @@ class AboutFragment : BaseFragment() {
             }
         }
 
-        viewBinding.appVersion.text = "V" + AppConfig.VERSION_NAME
+        viewBinding.appVersion.text = "V" + AppUtils.getAppVersionName()
 
-        viewBinding.appName.text = AppConfig.APP_NAME
+        viewBinding.appName.text = AppUtils.getAppName()
 
-        viewBinding.appPackgeName.text = AppConfig.PACKAGE_NAME
+        viewBinding.appPackgeName.text = AppUtils.getAppPackageName()
     }
 
 }
